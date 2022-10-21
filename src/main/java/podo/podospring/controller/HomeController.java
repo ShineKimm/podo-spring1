@@ -27,6 +27,5 @@ public class HomeController {
     //test444
     //test55
     //test55
-    //테스트 입니다
     //test66
 }
