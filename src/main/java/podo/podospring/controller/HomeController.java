@@ -27,9 +27,6 @@ public class HomeController {
     //test444
     //test55
     //test55
-<<<<<<< HEAD
-    //테스트 입니다 
-=======
+    //테스트 입니다
     //test66
->>>>>>> feature
 }
