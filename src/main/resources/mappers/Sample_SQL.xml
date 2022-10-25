@@ -5,7 +5,7 @@
 
 	<select id="selectTest" parameterType="hashmap" resultType="hashmap">
 		select *
-		from HP_BOARD
+		from tb_test
 		<!-- SELECT '100' AS CO_DIV, 'TEST' CO_NAME -->
 	</select>
 </mapper>

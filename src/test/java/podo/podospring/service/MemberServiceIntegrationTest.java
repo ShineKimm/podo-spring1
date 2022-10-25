@@ -1,5 +1,6 @@
 package podo.podospring.service;
 
+import java.sql.SQLException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +23,7 @@ public class MemberServiceIntegrationTest {
 
     @Test
     @Commit
-    void 회원가입() {
+    void 회원가입() throws SQLException {
         //given
         Member member = new Member();
         member.setName("hello");
@@ -34,7 +35,7 @@ public class MemberServiceIntegrationTest {
     }
 
     @Test
-    public void 중복_회원_예외() {
+    public void 중복_회원_예외() throws SQLException {
         //given
         Member member1 = new Member();
         member1.setName("spring");

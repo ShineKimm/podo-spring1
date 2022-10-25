@@ -1,5 +1,6 @@
 package podo.podospring.service;
 
+import java.sql.SQLException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,10 +24,11 @@ class MemberServiceTest {
     @AfterEach
     public void afterEach() {
         memberRepository.clearStore();
+
     }
 
     @Test
-    void 회원가입() {
+    void 회원가입() throws SQLException {
         //given
         Member member = new Member();
         member.setName("hello");
@@ -38,13 +40,13 @@ class MemberServiceTest {
     }
 
     @Test
-    public void 중복_회원_예외() {
+    public void 중복_회원_예외() throws SQLException {
         //given
         Member member1 = new Member();
-        member1.setName("spring");
+        member1.setName("spring11");
 
         Member member2 = new Member();
-        member2.setName("spring");
+        member2.setName("spring22");
         //when
         memberService.join(member1);
         IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
