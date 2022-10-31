@@ -1,0 +1,93 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<div id="scrollmenuwrap">
+    <div id="scrollmenu2">
+        <div class="menuBox">
+
+            <ul class="subMenu ul1">
+                <li><a href="/reservation/reservation.asp">실시간예약</a></li>
+                <li><a href="/reservation/reserCheck.asp">예약확인/취소</a></li>
+            </ul>
+
+            <ul class="subMenu ul2">
+                <li><a href="/guide/reserGuide.asp">예약안내</a></li>
+                <li><a href="/guide/fee.asp">이용요금</a></li>
+                <li><a href="/guide/break.asp">위약안내</a></li>
+                <li><a href="/guide/etiquette.asp">에티켓</a></li>
+                <li><a href="/guide/inquiry.asp">예약/기타문의</a></li>
+            </ul>
+
+            <ul class="subMenu ul3">
+                <li><a href="/club/intro.asp">클럽소개</a></li>
+                <li><a href="/club/greeting.asp">인사말</a></li>
+                <li><a href="/club/location.asp">오시는길</a></li>
+            </ul>
+
+            <ul class="subMenu ul4">
+                <li><a href="/course/intro.asp">코스소개</a></li>
+                <!--<li><a href="/course/o1.asp">아웃코스</a></li>
+                <li><a href="/course/i1.asp">인코스</a></li>-->
+                <li><a href="/board/list.asp?type=5">코스갤러리</a></li>
+            </ul>
+
+            <ul class="subMenu ul5">
+                <li><a href="/fac/fac01.asp">클럽하우스</a></li>
+                <li><a href="/fac/fac02.asp">레스토랑</a></li>
+                <li><a href="/fac/fac03.asp">프로샵</a></li>
+                <li><a href="/fac/fac04.asp">락카</a></li>
+            </ul>
+
+            <ul class="subMenu ul6">
+                <li><a href="/board/list.asp?type=1">공지사항</a></li>
+                <li><a href="/board/list.asp?type=2">이벤트</a></li>
+                <li><a href="/board/list.asp?type=3">보도자료</a></li>
+                <li><a href="/board/list.asp?type=4">자료실</a></li>
+                <li><a href="/board/Honor.asp">홀인원</a></li>
+                <li><a href="/reservation/joinList.asp">조인게시판</a></li>
+                <li><a href="/board/list.asp?type=7">명예의 전당</a></li>
+            </ul>
+        </div>
+
+        <div class="menuLine"></div>
+<%--        <%--%>
+<%--            If Session("MS_NUM") = "" Then--%>
+<%--        %>--%>
+        <div class="subMenuLink">
+            <ul class="menuLinkBox" onclick="location.href='/member/login.asp'">
+                <li class="icon"><img src="/static/images/menuIcon01.png" alt=""></li>
+                <li class="title">로그인</li>
+                <li class="txt">새로워진 포도CC를 <br>
+                    만나보세요</li>
+            </ul>
+            <div class="line"></div>
+            <ul class="menuLinkBox" onclick="location.href='/member/join01.asp'">
+                <li class="icon"><img src="/static/images/menuIcon02.png" alt=""></li>
+                <li class="title">회원가입</li>
+                <li class="txt">회원가입 하면 더 <br>
+                    많은 혜택을</li>
+            </ul>
+        </div>
+<%--        <%--%>
+<%--            Else--%>
+<%--        %>--%>
+<%--        <div class="subMenuLink">--%>
+<%--            <ul class="menuLinkBox" onclick="doLogout()">--%>
+<%--                <li class="icon"><img src="/images/menuIcon01.png" alt=""></li>--%>
+<%--                <li class="title">로그아웃</li>--%>
+<%--                <li class="txt">새로워진 포도CC를 <br>--%>
+<%--                    만나보세요</li>--%>
+<%--            </ul>--%>
+<%--            <div class="line"></div>--%>
+<%--            <ul class="menuLinkBox" onclick="location.href='/member/modify.asp'">--%>
+<%--                <li class="icon"><img src="/images/menuIcon03.png" alt=""></li>--%>
+<%--                <li class="title">정보수정</li>--%>
+<%--                <li class="txt">더 좋은 서비스로 <br>--%>
+<%--                    보답 하겠습니다</li>--%>
+<%--            </ul>--%>
+<%--        </div>--%>
+<%--        <%--%>
+<%--            End If--%>
+<%--        %>--%>
+    </div>
+</div>

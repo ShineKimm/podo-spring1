@@ -43,7 +43,7 @@ function mAjax(sUrl, params, method, proYn, fnSuccess) {
 
   var fnError = function(jqXHR, textStatus, errorThrown) {
     progressStop();
-    alert("서버와의 통신에 오류가 있습니다. 잠시 후 다시 시도하여 주세요.");
+    //alert("서버와의 통신에 오류가 있습니다. 잠시 후 다시 시도하여 주세요.");
   };
 
   if(method == "GET") {
@@ -259,7 +259,7 @@ function phoneNumberFormat(phone, div) {
 function progressStart() {
 	$.preloader.start({
         modal: true,
-        src : "/images/sprites.png"
+        src : "images/sprites.png"
     });
 }
 

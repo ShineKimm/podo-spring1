@@ -23,5 +23,6 @@ public class SampleServiceImpl implements SampleService {
 	public List<HashMap<String, Object>> selectTest(Map<String, Object> params) {
 		return sampleDAO.selectTest(params);
 	}
+
 	
 }

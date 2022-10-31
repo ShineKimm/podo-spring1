@@ -44,4 +44,11 @@ public class MemberController {
         model.addAttribute("members",members);
         return "members/memberList";
     }
+
+//    @GetMapping("/board/list")
+//    public String notice(Model model) {
+//        System.out.println("공지사항 컨트롤러");
+//
+//        return "board/list";
+//    }
 }
