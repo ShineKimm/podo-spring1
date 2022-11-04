@@ -20,13 +20,16 @@ dependencies {
 	implementation 'javax.servlet:jstl'
 	//implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	runtimeOnly 'com.h2database:h2'
+//	runtimeOnly 'com.h2database:h2'
 
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 	runtimeOnly 'mysql:mysql-connector-java:8.0.30'
 //	implementation 'org.projectlombok:lombok'
 
 	implementation group: 'javax.inject', name: 'javax.inject', version: '1'
+
+	implementation 'org.apache.logging.log4j:log4j-api:2.19.0'
+	implementation 'org.apache.logging.log4j:log4j-core:2.19.0'
 }
 
 tasks.named('test') {

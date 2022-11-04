@@ -27,11 +27,11 @@
             <li class=""><a href="javascript:alert('준비중입니다.')"><img src="/images/sns_i.png" alt=""></a></li>
         </ul>-->
         <ul class="termsBox">
-            <li class=""><a href="/member/clause.asp">사이트 이용약관</a></li>
+            <li class=""><a href="/member/clause">사이트 이용약관</a></li>
             <li class="bar"></li>
-            <li class=""><a href="/member/policy.asp">개인정보처리방침</a></li>
+            <li class=""><a href="/member/policy">개인정보처리방침</a></li>
             <li class="bar"></li>
-            <li class=""><a href="/member/email.asp">이메일무단수집거부</a></li>
+            <li class=""><a href="/member/email">이메일무단수집거부</a></li>
         </ul>
         <p class="addBox">
             경상북도 김천시 구성면 남김천대로 2532    예약문의 : 054-420-0200    대표전화 : 054-420-0200    대표 FAX : 054-420-0239 <br>

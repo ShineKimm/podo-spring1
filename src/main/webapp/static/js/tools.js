@@ -89,7 +89,8 @@ function mAjax(sUrl, params, method, proYn, fnSuccess) {
           if(proYn) {
             progressStop();
           }
-    			var obj = JSON.parse(data);
+    			//var obj = JSON.parse(data);
+    			var obj = data;
     			fnSuccess(obj);
     		}
     		, "error" : fnError
@@ -259,7 +260,7 @@ function phoneNumberFormat(phone, div) {
 function progressStart() {
 	$.preloader.start({
         modal: true,
-        src : "images/sprites.png"
+        src : "/static/images/sprites.png"
     });
 }
 

@@ -8,14 +8,14 @@
 
     /*For i = 0 To UBound(spmobrwz)
         If InStr(agent,spmobrwz(i)) > 0 Then
-    Response.Redirect("/mobile/index.asp")
+    Response.Redirect("/mobile/index")
     Exit For
     End If
     Next*/
 %>
 
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" />
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -71,7 +71,7 @@
       });
 
       function doLogout() {
-        var sUrl = "/controller/MemberController.asp";
+        var sUrl = "/controller/MemberController";
         var params = {};
 
         params["method"] = "doLogout";
@@ -80,7 +80,7 @@
           if(data.resultCode == "0000") {
             alert("로그아웃 되었습니다.");
 
-            location.href = "/index.asp";
+            location.href = "/index";
           }
         });
       }
@@ -92,7 +92,7 @@
       }
 
       function sessionCheck() {
-        // var sUrl = "/controller/SessionManager.asp";
+        // var sUrl = "/controller/SessionManager";
         // var params = {"method" : "sessionConfirm"};
         //
         // mAjax(sUrl, params, "POST", false, function(data) {
@@ -105,15 +105,19 @@
 
       function deleteMember() {
 
+        if(<%=(String)session.getAttribute("MS_NUM") == "" %>) {
+          alert("로그인 후 이용 가능합니다.");
+          location.href = "/members/login";
+          return;
+        }
 
-
-        <%--if("<%=Session("ms_num")%>" == "") {--%>
+        <%--if("<%=session.getAttribute("ms_num")%>" == "") {--%>
         <%--  alert("로그인 후 이용 가능합니다.");--%>
-        <%--  location.href = "/members/login.asp";--%>
+        <%--  location.href = "/members/login";--%>
         <%--  return;--%>
         <%--}--%>
 
-        var sUrl = "/controller/MemberController.asp";
+        var sUrl = "/controller/MemberController";
         var params = {};
 
         params["method"] = "doDeleteMemeber";
@@ -124,7 +128,7 @@
             if(data.resultCode == "0000") {
               alert("회원 탈퇴 되었습니다.");
 
-              location.href = "/index.asp";
+              location.href = "/index";
             }
           });
         }
@@ -160,31 +164,30 @@
 <div class="siteAll"><div class="toggleMenu"><span></span></div></div>
 <div id="header">
     <div class="subHeader">
-        <a href="../index.jsp" class="logoBox" id="logo"></a>
+        <a href="../index" class="logoBox" id="logo"></a>
         <ul class="mainList">
-            <li onclick="location.href='/reservation/reservation.asp'">인터넷예약</li>
-            <li onclick="location.href='/guide/reserGuide.asp'">이용안내</li>
-            <li onclick="location.href='/club/intro.asp'">클럽소개</li>
-            <li onclick="location.href='/course/intro.asp'">코스소개</li>
-            <li onclick="location.href='/fac/fac01.asp'">시설안내</li>
-            <li onclick="location.href='/board/list.asp?type=1.asp'">정보마당</li>
+            <li onclick="location.href='/reservation/reservation'">인터넷예약</li>
+            <li onclick="location.href='/guide/reserGuide'">이용안내</li>
+            <li onclick="location.href='/club/intro'">클럽소개</li>
+            <li onclick="location.href='/course/intro'">코스소개</li>
+            <li onclick="location.href='/fac/fac01'">시설안내</li>
+            <li onclick="location.href='/board/list?type=1'">정보마당</li>
         </ul>
-        <!--#include virtual="/include/submenu.asp"-->
         <%@ include file="../include/submenu.jsp" %>
 
         <ul class="rightBtn">
             <li class="topJoin">
 <%--                <%If Session("MS_NUM") = "" Then%>--%>
 <%--                <a href="https://www.serenitycc.co.kr" class="podo">세레니티</a>--%>
-<%--                <a href="/member/login.asp" class="topLogin" id="login"></a>--%>
+<%--                <a href="/member/login" class="topLogin" id="login"></a>--%>
 <%--                <%Else%>--%>
 <%--                <a href="https://www.serenitycc.co.kr" class="podo">세레니티</a>--%>
-<%--                <a href="/member/modify.asp" class="topLogin" id="login"></a>--%>
+<%--                <a href="/member/modify" class="topLogin" id="login"></a>--%>
 <%--                <%End If%>--%>
+
             </li>
         </ul>
     </div>
-    <!--#include virtual="/include/topmenu.asp"-->
     <%@ include file="../include/topmenu.jsp" %>
 </div>
 

@@ -14,90 +14,92 @@
   </select>
 
   <select id="getBoardList" parameterType="hashmap" resultType="hashmap">
-    select IDX
-    , TITLE
-    , INPUT_STAFF
-    , INPUT_DATETIME
-    , VIEW_CNT
-    from HP_BOARD
-    where IDX BETWEEN 100 and 105
-
-<!--    SELECT H.CO_DIV																																				"-->
-<!--    		 , H.TYPE																																					"-->
-<!--    		 , H.IDX																																					"-->
-<!--    		 , H.TITLE																																				"-->
-<!--    		 , H.BOARD_DIV																																		"-->
-<!--    		 , H.JOIN_STATUS																																	"-->
-<!--    		 , CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) AS CONTENT										"-->
-<!--    		 , H.BK_DAY																																				"-->
-<!--    		 , H.BK_TIME																																			"-->
-<!--    		 , H.BK_PERSON																																		"-->
-<!--    		 , H.BK_FIRST_PHONE																																"-->
-<!--    		 , CAST(AES_DECRYPT(UNHEX(H.BK_MID_PHONE),'JBOG') AS CHAR)												"-->
-<!--    		 , H.BK_LAST_PHONE																																"-->
-<!--    		 , H.LINK																																					"-->
-<!--    If sType = "6" Then-->
-<!--    		 , IFNULL(NULLIF(U.MS_NAME, ''), '') AS WRITER_NAME																"-->
-<!--    Else-->
-<!--    		 , IFNULL(NULLIF(U.USER_NAME, ''), '관리자') AS WRITER_NAME												 "-->
-<!--    End If-->
-<!--    		 , DATE_FORMAT(H.INPUT_DATETIME, '%Y.%m.%d') 	AS INPUT_DATETIME										"-->
-<!--    	 		 , IFNULL(NULLIF(D.FILE_NAME1, ''), '') 			AS FILE_NAME1												"-->
-<!--    	 		 , IFNULL(NULLIF(D.FILE_PATH1, ''), '') 			AS FILE_PATH1												"-->
-<!--    	 		 , IFNULL(NULLIF(D.FILE_NAME2, ''), '') 			AS FILE_NAME2												"-->
-<!--    	 		 , IFNULL(NULLIF(D.FILE_PATH2, ''), '') 			AS FILE_PATH2												"-->
-<!--    	 		 , IFNULL(NULLIF(D.FILE_NAME3, ''), '') 			AS FILE_NAME3												"-->
-<!--    	 		 , IFNULL(NULLIF(D.FILE_PATH3, ''), '') 			AS FILE_PATH3												"-->
-<!--    		 , IFNULL(NULLIF(D.ATTACH_CNT, 0), 0) 				AS ATTACH_CNT												"-->
-<!--    		 , H.VIEW_CNT																																			"-->
-<!--    		 , H.DEL_DIV																																			"-->
-<!--      FROM HP_BOARD H																																			"-->
-<!--    If sType = "6" Then-->
-<!--      LEFT OUTER JOIN MS_MAININFO U																												"-->
-<!--        ON H.INPUT_STAFF = U.MS_NUM																												"-->
-<!--    Else-->
-<!--      LEFT OUTER JOIN USER_INFO U																													"-->
-<!--        ON H.INPUT_STAFF = U.USER_STAFF																										"-->
-<!--    End If-->
-<!--      LEFT OUTER JOIN (																																		"-->
-<!--    		SELECT CO_DIV																																			"-->
-<!--    		 		 , TYPE																																				"-->
-<!--    		 		 , IDX																																				"-->
-<!--    		 		 , IFNULL(NULLIF(FILE_NAME1, ''), '') AS FILE_NAME1														"-->
-<!--    		 		 , IFNULL(NULLIF(FILE_PATH1, ''), '') AS FILE_PATH1														"-->
-<!--    		 		 , IFNULL(NULLIF(FILE_NAME2, ''), '') AS FILE_NAME2														"-->
-<!--    		 		 , IFNULL(NULLIF(FILE_PATH2, ''), '') AS FILE_PATH2														"-->
-<!--    	 			, IFNULL(NULLIF(FILE_NAME3, ''), '') 	AS FILE_NAME3												"-->
-<!--    	 			, IFNULL(NULLIF(FILE_PATH3, ''), '') 	AS FILE_PATH3												"-->
-<!--    		 		 , IF(IFNULL(NULLIF(FILE_NAME2, ''), '') = '', 0, 1)													"-->
-<!--    		 		 + IF(IFNULL(NULLIF(FILE_NAME3, ''), '') = '', 0, 1) AS ATTACH_CNT 						"-->
-<!--    	    FROM HP_BOARD_ATTACH																														"-->
-<!--      ) D																																									"-->
-<!--        ON H.CO_DIV = D.CO_DIV																														"-->
-<!--       AND H.TYPE   = D.TYPE																															"-->
-<!--       AND H.IDX    = D.IDX																																"-->
-<!--     WHERE H.CO_DIV = '" & coDiv & "'																											"-->
-<!--       AND H.TYPE = '" & sType & "'																												"-->
-<!--    If adminYn <> "Y" Then-->
-<!--    		 AND H.DEL_DIV = '0'							                              										"-->
-<!--    End If-->
-<!--    If boardDiv <> "" Then-->
-<!--    		 AND H.BOARD_DIV = '" & boardDiv & "'		                              							"-->
-<!--    End If-->
-<!--    If stDate <> "" And edDate <> "" Then-->
-<!--    		 AND H.BK_DAY BETWEEN '" & stDate & "' AND '" & edDate & "'		            					"-->
-<!--    End If-->
-<!--    If searchText <> "" Then-->
-<!--    If searchOption = "title" Then-->
-<!--       AND H.TITLE LIKE '%" & searchText & "%'																						"-->
-<!--    ElseIf searchOption = "content" Then-->
-<!--       AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE '%" & searchText & "%'	"-->
-<!--    ElseIf searchOption = "writer" Then-->
-<!--       AND U.USER_NAME = '" & searchText & "'																							"-->
-<!--    End If-->
-<!--    End If-->
-<!--     ORDER BY H.IDX DESC																																	"-->
-<!--     LIMIT " & startCnt & ", " & pageCnt & "																							"-->
+    SELECT H.CO_DIV
+    , H.TYPE
+    , H.IDX
+    , H.TITLE
+    , H.BOARD_DIV
+    , H.JOIN_STATUS
+    , CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) AS CONTENT
+    , H.BK_DAY
+    , H.BK_TIME
+    , H.BK_PERSON
+    , H.BK_FIRST_PHONE
+    , CAST(AES_DECRYPT(UNHEX(H.BK_MID_PHONE),'JBOG') AS CHAR)
+    , H.BK_LAST_PHONE
+    , H.LINK
+    <choose>
+      <when test='sType == "6"'>
+        , IFNULL(NULLIF(U.MS_NAME, ''), '') AS WRITER_NAME
+      </when>
+      <otherwise>
+        , IFNULL(NULLIF(U.USER_NAME, ''), '관리자') AS WRITER_NAME
+      </otherwise>
+    </choose>
+    , DATE_FORMAT(H.INPUT_DATETIME, '%Y.%m.%d') 	AS INPUT_DATETIME
+    , IFNULL(NULLIF(D.FILE_NAME1, ''), '') 			AS FILE_NAME1
+    , IFNULL(NULLIF(D.FILE_PATH1, ''), '') 			AS FILE_PATH1
+    , IFNULL(NULLIF(D.FILE_NAME2, ''), '') 			AS FILE_NAME2
+    , IFNULL(NULLIF(D.FILE_PATH2, ''), '') 			AS FILE_PATH2
+    , IFNULL(NULLIF(D.FILE_NAME3, ''), '') 			AS FILE_NAME3
+    , IFNULL(NULLIF(D.FILE_PATH3, ''), '') 			AS FILE_PATH3
+    , IFNULL(NULLIF(D.ATTACH_CNT, 0), 0) 				AS ATTACH_CNT
+    , H.VIEW_CNT
+    , H.DEL_DIV
+    FROM HP_BOARD H
+    <choose>
+      <when test='sType == "6"'>
+        LEFT OUTER JOIN MS_MAININFO U
+        ON H.INPUT_STAFF = U.MS_NUM
+      </when>
+      <otherwise>
+        LEFT OUTER JOIN USER_INFO U
+        ON H.INPUT_STAFF = U.USER_STAFF
+      </otherwise>
+    </choose>
+    LEFT OUTER JOIN (
+    SELECT CO_DIV
+    , TYPE
+    , IDX
+    , IFNULL(NULLIF(FILE_NAME1, ''), '') AS FILE_NAME1
+    , IFNULL(NULLIF(FILE_PATH1, ''), '') AS FILE_PATH1
+    , IFNULL(NULLIF(FILE_NAME2, ''), '') AS FILE_NAME2
+    , IFNULL(NULLIF(FILE_PATH2, ''), '') AS FILE_PATH2
+    , IFNULL(NULLIF(FILE_NAME3, ''), '') 	AS FILE_NAME3
+    , IFNULL(NULLIF(FILE_PATH3, ''), '') 	AS FILE_PATH3
+    , IF(IFNULL(NULLIF(FILE_NAME2, ''), '') = '', 0, 1)
+    + IF(IFNULL(NULLIF(FILE_NAME3, ''), '') = '', 0, 1) AS ATTACH_CNT
+    FROM HP_BOARD_ATTACH
+    ) D
+    ON H.CO_DIV = D.CO_DIV
+    AND H.TYPE   = D.TYPE
+    AND H.IDX    = D.IDX
+    WHERE H.CO_DIV = ${coDiv}
+    AND H.TYPE = ${type}
+    <if test='adminYn != "Y"'>
+      AND H.DEL_DIV = '0'
+    </if>
+    <if test='boardDiv != null and !boardDiv.equals("")'>
+      AND H.BOARD_DIV = ${boardDiv}
+    </if>
+    <if test='stDate != null and !stDate.equals("") and edDate != null and !edDate.equals("")'>
+      AND H.BK_DAY BETWEEN ${stDate} AND ${edDate}
+    </if>
+    <if test='searchText != null and !searchText.equals("") '>
+      <choose>
+        <when test='searchOption == "title"'>
+          AND H.TITLE LIKE ${searchText}
+        </when>
+        <when test='searchOption == "content"'>
+          AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE ${searchText}
+        </when>
+        <when test='searchOption == "writer"'>
+          AND U.USER_NAME = ${searchText}
+        </when>
+      </choose>
+    </if>
+    ORDER BY H.IDX DESC
+    LIMIT ${startCnt}, ${pageCnt}
   </select>
 
 

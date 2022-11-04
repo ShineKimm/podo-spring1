@@ -21,7 +21,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/static/js/common.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
@@ -34,10 +34,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
 
-    <script src="/js/jquery.preloaders.js"></script>
-    <script src="/js/tools.js"></script>
-    <script src="/js/globals.js"></script>
-    <script src="/js/wow.js"></script>
+    <script src="/static/js/jquery.preloaders.js"></script>
+    <script src="/static/js/tools.js"></script>
+    <script src="/static/js/globals.js"></script>
+    <script src="/static/js/wow.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.5/flickity.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.5/flickity.pkgd.min.js"></script>
@@ -132,7 +132,7 @@
       }
 
       function sessionCheck() {
-        var sUrl = "/controller/SessionManager.asp";
+        var sUrl = "/controller/SessionManager";
         var params = {"method" : "sessionConfirm"};
 
         mAjax(sUrl, params, "POST", false, function(data) {
@@ -144,7 +144,7 @@
       }
 
       function initCalendar(selector, year, month) {
-        var sUrl = "/controller/ReservationController.asp";
+        var sUrl = "/controller/ReservationController";
         var params = {};
 
         params["method"] = "getCalendar";
@@ -286,7 +286,7 @@
             var bbsTitle = "이벤트";
         }*/
 
-        var sUrl = "/controller/BoardController.asp";
+        var sUrl = "/controller/getBoardList";
         var params = {};
 
         params["method"] = "getBoardList";
@@ -305,7 +305,7 @@
 
               var notice = ""
               notice += "<li>	";
-              notice += " <img src='/images/main/bg_blank.png'>";
+              notice += " <img src='/static/images/main/bg_blank.png'>";
               notice += " <div class='slideText'>	";
               notice += " <h1> 등록된 공지사항이 없습니다. </h1>	";
               notice += " <h4> - </h4>	"
@@ -334,12 +334,12 @@
 
               var notice = ""
 
-              var link = "/board/view.asp?type=1&idx=" + rows[i].IDX;
+              var link = "/board/view?type=1&idx=" + rows[i].IDX;
               var title = rows[i].TITLE;
               var inputDate = rows[i].INPUT_DATETIME;
 
               notice += "<li>	";
-              notice += " <img src='/images/main/bg_blank.png'>";
+              notice += " <img src='/static/images/main/bg_blank.png'>";
               notice += " <div class='slideText'>	";
               notice += " <h1> " + title + " </h1>	";
               notice += " <h4> " + inputDate + " </h4>	"
@@ -367,7 +367,7 @@
       }
 
       function doLogout() {
-        var sUrl = "/controller/MemberController.asp";
+        var sUrl = "/controller/MemberController";
         var params = {};
 
         params["method"] = "doLogout";
@@ -376,7 +376,7 @@
           if(data.resultCode == "0000") {
             alert("로그아웃 되었습니다.");
 
-            location.href = "/index.asp";
+            location.href = "/index";
           }
         });
       }
@@ -388,7 +388,7 @@
 
     </script>
 
-    <form id="resv_info" method="POST" action="/reservation/reservation.asp">
+    <form id="resv_info" method="POST" action="/reservation/reservation">
         <input type="hidden" name="BK_DAY" id="BK_DAY">
     </form>
 
@@ -401,31 +401,31 @@
             <!--메뉴-->
             <div class="header">
 
-                <a href="index.asp" class="logoBox" id="logo"></a>
+                <a href="index" class="logoBox" id="logo"></a>
 
                 <ul class="mainList">
-                    <li onclick="location.href='/reservation/reservation.asp'">인터넷예약</li>
-                    <li onclick="location.href='/guide/reserGuide.asp'">이용안내</li>
-                    <li onclick="location.href='/club/intro.asp'">클럽소개</li>
-                    <li onclick="location.href='/course/intro.asp'">코스소개</li>
-                    <li onclick="location.href='/fac/fac01.asp'">시설안내</li>
-                    <li onclick="location.href='/board/list.asp?type=1.asp'">정보마당</li>
+                    <li onclick="location.href='/reservation/reservation'">인터넷예약</li>
+                    <li onclick="location.href='/guide/reserGuide'">이용안내</li>
+                    <li onclick="location.href='/club/intro'">클럽소개</li>
+                    <li onclick="location.href='/course/intro'">코스소개</li>
+                    <li onclick="location.href='/fac/fac01'">시설안내</li>
+                    <li onclick="location.href='/board/list?type=1'">정보마당</li>
                 </ul>
-                <!--#include virtual="/include/submenu.asp"-->
+                <!--#include virtual="/include/submenu"-->
 
                 <ul class="rightBtn">
                     <li class="topJoin">
 <%--                        <%If Session("MS_NUM") = "" Then%>
                         <a href="https://www.serenitycc.co.kr" class="podo">세레니티</a>
-                        <a href="/member/login.asp" class="topLogin" id="login"></a>
+                        <a href="/member/login" class="topLogin" id="login"></a>
                         <%Else%>
                         <a href="https://www.serenitycc.co.kr" class="podo">세레니티</a>
-                        <a href="/member/modify.asp" class="topLogin" id="login"></a>
+                        <a href="/member/modify" class="topLogin" id="login"></a>
                         <%End If%>--%>
                     </li>
                 </ul>
             </div>
-            <!--#include virtual="/include/topmenu.asp"-->
+            <!--#include virtual="/include/topmenu"-->
 
         </div>
 
@@ -435,50 +435,50 @@
             <h4>포도CC 그린피 안내 및 이벤트</h4>
             <div class="slider2" height="400px">
                 <div>
-                    <p><a href="http://www.band.us/@podocc"><img src="/images/220805_밴드_bn.jpg" title="밴드오픈"></a></p>
-                    <p><a href="/board/view.asp?type=2&idx=4"><img src="/images/220719_bn.jpg" title="홀인원이벤트"></a></p>
-                    <p><a href="/board/view.asp?type=1&idx=63"><img src="/images/220627_bn.jpg" title="캐디피인상안내"></a></p>
+                    <p><a href="http://www.band.us/@podocc"><img src="/static/images/220805_밴드_bn.jpg" title="밴드오픈"></a></p>
+                    <p><a href="/board/view?type=2&idx=4"><img src="/static/images/220719_bn.jpg" title="홀인원이벤트"></a></p>
+                    <p><a href="/board/view?type=1&idx=63"><img src="/static/images/220627_bn.jpg" title="캐디피인상안내"></a></p>
                 </div>
                 <div>
-                    <p><a href="/board/view.asp?type=1&idx=68"><img src="/images/220808_10월그린피_bn.jpg" title="10월 그린피"></a></p>
-                    <p><a href="/board/view.asp?type=1&idx=69"><img src="/images/220808_10월패키지_bn.jpg" title="10월 1박2일"></a></p>
-                    <p><a href="/board/view.asp?type=1&idx=70"><img src="/images/220808_10월골프대회_bn.jpg" title="10월골프대회"></a></p>
+                    <p><a href="/board/view?type=1&idx=68"><img src="/static/images/220808_10월그린피_bn.jpg" title="10월 그린피"></a></p>
+                    <p><a href="/board/view?type=1&idx=69"><img src="/static/images/220808_10월패키지_bn.jpg" title="10월 1박2일"></a></p>
+                    <p><a href="/board/view?type=1&idx=70"><img src="/static/images/220808_10월골프대회_bn.jpg" title="10월골프대회"></a></p>
                 </div>
                 <div>
-                    <p><a href="/board/view.asp?type=1&idx=73"><img src="/images/221011_10월골프대회_bn.jpg" title="10월 골프대회"></a></p>
-                    <p><a href="/board/view.asp?type=1&idx=71"><img src="/images/220913g_bn.jpg" title="11월 그린피"></a></p>
-                    <p><a href="/board/view.asp?type=1&idx=72"><img src="/images/220913p_bn.jpg" title="11월 1박2일"></a></p>
+                    <p><a href="/board/view?type=1&idx=73"><img src="/static/images/221011_10월골프대회_bn.jpg" title="10월 골프대회"></a></p>
+                    <p><a href="/board/view?type=1&idx=71"><img src="/static/images/220913g_bn.jpg" title="11월 그린피"></a></p>
+                    <p><a href="/board/view?type=1&idx=72"><img src="/static/images/220913p_bn.jpg" title="11월 1박2일"></a></p>
                 </div>
                 <div>
-                    <p><a href="/board/view.asp?type=1&idx=8"><img src="/images/210423_2.jpg" title="김천 포도CC 시행의건"></a></p>
-                    <p><a href="/board/view.asp?type=1&idx=23"><img src="/images/210705_bn.jpg" alt="대체공휴일"></a></p>
-                    <p><a href="/board/view.asp?type=1&idx=37"><img src="/images/211011_bn.jpg" alt="9홀추가"></a></p>
+                    <p><a href="/board/view?type=1&idx=8"><img src="/static/images/210423_2.jpg" title="김천 포도CC 시행의건"></a></p>
+                    <p><a href="/board/view?type=1&idx=23"><img src="/static/images/210705_bn.jpg" alt="대체공휴일"></a></p>
+                    <p><a href="/board/view?type=1&idx=37"><img src="/static/images/211011_bn.jpg" alt="9홀추가"></a></p>
                 </div>
                 <div>
-                    <p><a href="/board/view.asp?type=1&idx=18"><img src="/images/210603_2_bn.jpg" alt="9홀코스오픈"></a></p>
-                    <p><a href="#"><img src="/images/no-img.jpg" title="이미지 없을때"></a>
-                    <p><a href="#"><img src="/images/no-img.jpg" title="이미지 없을때"></a>
+                    <p><a href="/board/view?type=1&idx=18"><img src="/static/images/210603_2_bn.jpg" alt="9홀코스오픈"></a></p>
+                    <p><a href="#"><img src="/static/images/no-img.jpg" title="이미지 없을때"></a>
+                    <p><a href="#"><img src="/static/images/no-img.jpg" title="이미지 없을때"></a>
                 </div>
             </div>
-            <div class="popX"><a href="javascript:closePopupNotToday();">오늘하루안보기</a><span onclick="$('#mainPop').hide()"><img src="/images/x-box.png"></span></div>
+            <div class="popX"><a href="javascript:closePopupNotToday();">오늘하루안보기</a><span onclick="$('#mainPop').hide()"><img src="/static/images/x-box.png"></span></div>
         </div>
         <!--메인팝업 end-->
 
         <div class="hero-slider">
             <div class="columns">
                 <div class="hero-image" >
-                    <img src="/images/main/mainBg01.jpg" alt="">
+                    <img src="/static/images/main/mainBg01.jpg" alt="">
                 </div>
             </div>
             <div class="columns">
                 <div class="hero-image" >
-                    <img src="/images/main/mainBg01.jpg" alt="">
+                    <img src="/static/images/main/mainBg01.jpg" alt="">
                 </div>
             </div>
         </div><!-- hero-slider End -->
         <div class="mainCont">
             <div class="leftTxtBox">
-                <img src="/images/main/mainTxt.png" alt="" class="leftTxt text-focus-in" >
+                <img src="/static/images/main/mainTxt.png" alt="" class="leftTxt text-focus-in" >
             </div>
             <div class="rightCalBox">
                 <div class="rightCal"></div>
@@ -589,7 +589,7 @@
             </script>
 
             <div class="secondBottom">
-                <a href="/club/intro.asp" class="clubIntroBtn fromTopIn" data-scroll="toggle(.fromTopIn, .fromTopOut)">
+                <a href="/club/intro" class="clubIntroBtn fromTopIn" data-scroll="toggle(.fromTopIn, .fromTopOut)">
                     <button id="js-trigger-overlay" type="button">클럽소개 자세히보기 <span class="arrow_btn arrow-left"></span></button>
                 </a>
             </div>
@@ -603,7 +603,7 @@
                 <div class="courseIntro fromTopIn" data-scroll="toggle(.fromTopIn, .fromTopOut)" id="mainCourseMore">
                     <span class="miniTitle">자연친화적 클래식 골프코스 </span>
                     <span class="title">OUT COURSE</span>
-                    <!--<a href="/course/intro.asp">코스안내 자세히 보기 < </a>-->
+                    <!--<a href="/course/intro">코스안내 자세히 보기 < </a>-->
                 </div>
             </div>
 
@@ -615,7 +615,7 @@
                     컨트리클럽을 원하는 고객들에게 특별한 경험과<br>
                     분위기로 더욱 만족을 드릴 것입니다.
                 </p>
-                <a href="/course/intro.asp">코스안내 자세히 보기 </a>
+                <a href="/course/intro">코스안내 자세히 보기 </a>
             </div>
         </li>
 
@@ -624,7 +624,7 @@
                 <div class="courseIntro fromTopIn" data-scroll="toggle(.fromTopIn, .fromTopOut)" id="mainCourseMore2">
                     <span class="miniTitle">전통적인 스타일 골프클럽</span>
                     <span class="title">IN COURSE</span>
-                    <!--<a href="/course/intro.asp">코스안내 자세히 보기 < </a>-->
+                    <!--<a href="/course/intro">코스안내 자세히 보기 < </a>-->
                 </div>
             </div>
 
@@ -636,9 +636,9 @@
                     특별한 컨트리클럽이 지금 귀하의 도전과 사랑을<br>
                     기다리고 있습니다.
                 </p>
-                <a href="/course/intro.asp">코스안내 자세히 보기 </a>
+                <a href="/course/intro">코스안내 자세히 보기 </a>
             </div>
-        </li>
+        </li>-
 
         <li class="mainCourseBox">
             <div class="courseIntroBox box3">
@@ -708,5 +708,4 @@
       });
     </script>
 
-<%--
-<%@ include file="/webapp/WEB-INF/views/include/footer.jsp" %>--%>
+<%@ include file="./include/footer.jsp" %>

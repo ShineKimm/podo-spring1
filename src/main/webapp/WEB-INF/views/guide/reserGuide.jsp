@@ -12,11 +12,11 @@
 <div id="wrap">
     <div class="navbarWrap">
         <ul class="navbarBox">
-            <li class="on" onclick="location.href='/guide/reserGuide.asp'">예약안내</li>
-            <li class="" onclick="location.href='/guide/fee.asp'">이용요금</li>
-            <li class="" onclick="location.href='/guide/break.asp'">위약안내</li>
-            <li class="" onclick="location.href='/guide/etiquette.asp'">에티켓</li>
-            <li class="" onclick="location.href='/guide/inquiry.asp'">예약/기타문의</li>
+            <li class="on" onclick="location.href='/guide/reserGuide'">예약안내</li>
+            <li class="" onclick="location.href='/guide/fee'">이용요금</li>
+            <li class="" onclick="location.href='/guide/break'">위약안내</li>
+            <li class="" onclick="location.href='/guide/etiquette'">에티켓</li>
+            <li class="" onclick="location.href='/guide/inquiry'">예약/기타문의</li>
 
             <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 이용안내 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 예약안내</li>
         </ul>
@@ -68,8 +68,8 @@
                 </table>
 
                 <div class="btnBox">
-                    <a href="/reservation/reservation.asp" class="motion">예약하기</a>
-                    <a href="/index.asp" class="whiteBtn">취소하기</a>
+                    <a href="/reservation/reservation" class="motion">예약하기</a>
+                    <a href="/index" class="whiteBtn">취소하기</a>
                 </div>
                 <div class="margin50"></div>
             </div>

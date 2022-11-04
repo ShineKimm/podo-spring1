@@ -103,7 +103,7 @@
 
 		genImage = new Image();
 		//genImage.src=opts.src;
-		genImage.src = scriptFolder + '/static/images/sprites.png';
+		genImage.src = scriptFolder + 'images/sprites.png';
 
 		genImage.onload=function (){
 

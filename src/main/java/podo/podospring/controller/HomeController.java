@@ -3,15 +3,11 @@ package podo.podospring.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import podo.podospring.service.BoardService;
-import podo.podospring.service.SampleService;
 
 @Controller
 public class HomeController {
@@ -39,15 +35,5 @@ public class HomeController {
 
         return "board/t_board";
     }
-//    @ResponseBody
-//    @RequestMapping("/t_board_list")
-//    public List<HashMap<String, Object>> homePost(HashMap<String, Object> hashMap) {
-//
-//        System.out.println("홈포스트");
-//        List<HashMap<String, Object>> result = sampleService.selectTest(hashMap);
-//
-//        return result;
-//    }
-
 
 }

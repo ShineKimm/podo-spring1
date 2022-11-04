@@ -14,7 +14,7 @@ public class BoardDAO extends AbstractDAO {
         List<HashMap<String, Object>> list = selectList("board.boardList", params);
         return list;
     }
-
+    @SuppressWarnings("unchecked")
     public List<HashMap<String, Object>> getBoardList(Map<String, Object> params) {
         List<HashMap<String, Object>> list = selectList("board.getBoardList", params);
         return list;
