@@ -1,12 +1,9 @@
 package podo.podospring.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.Map;
 
 import java.util.List;
 import java.util.Optional;
-import podo.podospring.dao.Member;
 import podo.podospring.repository.MemberRepository;
 
 //@Transactional
@@ -42,5 +39,9 @@ public class MemberService {
 
     public Optional<Member> findOne(Long memberId) {
         return memberRepository.findById(memberId);
+    }
+
+    public Map<String, Object> doLogin(Map<String, Object> params) {
+        return null;
     }
 }

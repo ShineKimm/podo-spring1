@@ -1,0 +1,11 @@
+<mapper namespace="admin">
+
+  <select id="doLogin" parameterType="hashmap" resultType="hashmap">
+    SELECT COUNT(*) AS CNT
+    FROM USER_INFO
+    WHERE USER_STAFF = #{id}
+    AND IFNULL(NULLIF(USER_DEL, ''), 'N') != 'Y'
+
+  </select>
+
+</mapper>
