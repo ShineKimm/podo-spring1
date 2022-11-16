@@ -32,7 +32,7 @@
     var sUrl = "/controller/BoardController";
     var params = {};
 
-    params["method"] = "getJoinCalendar";
+    //params["method"] = "getJoinCalendar";
     params["coDiv"] = globals.coDiv;
     params["selYm"] = year + month;
 

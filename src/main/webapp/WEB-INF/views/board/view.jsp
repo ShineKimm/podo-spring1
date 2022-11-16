@@ -35,10 +35,10 @@
   }
 
   function doSearchDetail() {
-    var sUrl = "/controller/getBoardList";
+    var sUrl = "/getBoardList";
     var params = {};
 
-    params["method"] = "getBoardDetail";
+    //params["method"] = "getBoardDetail";
     params["coDiv"] = globals.coDiv;
     params["type"] = mType;
     params["idx"] = mIdx;

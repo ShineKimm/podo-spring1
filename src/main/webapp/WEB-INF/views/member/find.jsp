@@ -34,7 +34,7 @@
     var sUrl = "/controller/MemberController";
     var params = {};
 
-    params["method"] = "doFindId";
+    //params["method"] = "doFindId";
     params["coDiv"] = globals.coDiv;
 
     var name = $("#txtIdName").val();
@@ -62,7 +62,7 @@
     var sUrl = "/controller/MemberController";
     var params = {};
 
-    params["method"] = "doFindPw";
+    //params["method"] = "doFindPw";
     params["coDiv"] = globals.coDiv;
 
     var name = $("#txtPwName").val();

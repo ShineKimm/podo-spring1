@@ -10,11 +10,6 @@ import podo.podospring.common.dao.AbstractDAO;
 public class BoardDAO extends AbstractDAO {
 
     @SuppressWarnings("unchecked")
-    public List<HashMap<String, Object>> boardList(Map<String, Object> params) {
-        List<HashMap<String, Object>> list = selectList("board.boardList", params);
-        return list;
-    }
-    @SuppressWarnings("unchecked")
     public List<HashMap<String, Object>> getBoardList(Map<String, Object> params) {
         List<HashMap<String, Object>> list = selectList("board.getBoardList", params);
         return list;

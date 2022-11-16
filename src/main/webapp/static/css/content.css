@@ -312,7 +312,7 @@ b{font-weight:bold;font-size:inherit;}
 .joinTable td.viewTitle { text-align: left; overflow: hidden; white-space: nowrap;text-overflow: ellipsis; padding: 5px 20px;}
 .joinTable tr.bg_reply td{ background-color: #f6f6f6;position: relative; background-clip: padding-box;}
 .joinTable tr.bg_reply .reply{ text-align: left; overflow: hidden; white-space: nowrap;text-overflow: ellipsis; padding-left: 90px; cursor: pointer;}
-.joinTable tr.bg_reply .reply::before{ content: ''; background: url(../images/reply.png) center center no-repeat; width: 29px; height: 24px; display: inline-block; position: absolute; top:7px; left: 50px;}
+.joinTable tr.bg_reply .reply::before{ content: ''; background: url(/static/images/reply.png) center center no-repeat; width: 29px; height: 24px; display: inline-block; position: absolute; top:7px; left: 50px;}
 .joinTable tr.bg_reply .reply b{ font-weight: 400;}
 .joinTable .new{ display: inline-block; border-radius: 30px; background-color: #f06019; color: #fff; text-align: center; padding: 2px 5px; font-size:10px; vertical-align: middle; margin: 0 6px;}
 .joinTable .border0{ border-left:0;}

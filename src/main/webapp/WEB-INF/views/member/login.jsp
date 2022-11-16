@@ -1,9 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
+
 <script language="javascript">
   $(document).ready(function() {
-    if("<%=(String)session.getAttribute ("MS_NUM")%>" != "") {
+    if(<%=session.getAttribute ("MS_NUM") != null %>) {
       alert("이미 로그인이 되어있습니다.");
       location.href="/index";
     }
@@ -33,7 +34,7 @@
   });
 
   function doLogin() {
-    var sUrl = "/controller/MemberController";
+    var sUrl = "/doLogin";
     var params = {};
     var page = "<%=request.getParameter("page")%>";
 
@@ -54,7 +55,7 @@
       return;
     }
 
-    params["method"] = "doLogin";
+    // params["method"] = "doLogin";
     params["coDiv"] = globals.coDiv;
     params["id"] = id;
     params["pw"] = pw;
@@ -71,7 +72,7 @@
           setCookie("chkSaveId", "", 365);
         }
         alert(data.resultName + "회원님 환영합니다.")
-        location.href = page;
+        location.href = "/index";
       } else {
         alert(data.resultMessage);
       }

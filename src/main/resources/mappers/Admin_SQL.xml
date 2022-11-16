@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-</beans>
+<mapper namespace="admin">
+
+  <select id="AdminDoLogin" parameterType="hashmap" resultType="hashmap">
+    SELECT COUNT(*) AS CNT
+    FROM USER_INFO
+    WHERE USER_STAFF = #{id}
+      AND IFNULL(NULLIF(USER_DEL, ''), 'N') != 'Y'
+
+  </select>
+
+</mapper>

@@ -14,7 +14,7 @@
   });
 
   function init() {
-    if(<%=(String)session.getAttribute("MS_NUM")%> == "") {
+    if(<%=session.getAttribute ("MS_NUM") != null %>) {
       alert("로그인 후 이용 가능합니다.");
       location.href = "/member/login?page=/reservation/joinList";
       return;
@@ -128,7 +128,7 @@
     var sUrl = "/controller/BoardController";
     var params = {};
 
-    params["method"] = "getBoardDetail";
+    //params["method"] = "getBoardDetail";
     params["coDiv"] = globals.coDiv;
     params["type"] = mType;
     params["idx"] = mIdx;

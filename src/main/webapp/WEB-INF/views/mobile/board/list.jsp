@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
-<link rel="stylesheet" type="text/css" href="/mobile/css/animate.css">
-<script src="/mobile/js/wow.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/mobile/css/animate.css">
+<script src="/static/mobile/js/wow.js"></script>
 <script type="text/javascript">
 	/* 컨텐츠 fade in */
 	wow = new WOW(
@@ -39,7 +39,7 @@
 	});
 
 	function init() {
-		mType = "<%=Request("type")%>";
+		mType = "<%=request.getParameter("type")%>";
 
 		$("#txtTitle").html(title[mType]);
 		$("#type" + mType).addClass("on");
@@ -54,10 +54,10 @@
 	}
 
 	function doSearch() {
-		var sUrl = "/controller/BoardController.asp";
+		var sUrl = "/controller/BoardController";
 		var params = {};
 
-		params["method"] = "getBoardList";
+		//params["method"] = "getBoardList";
 
 		params["coDiv"] = globals.coDiv;
 		params["type"] = mType;
@@ -85,7 +85,7 @@
 						template += "<div class='galleryBox fadeBox fadeInUp'>			";
 						template += "	<div class='gallBoxCont'>																																						";
 						template += "	<a href='javascript:onClickRow({0})'>																																						";
-						template += "		<div class='galImg'><img src='{1}/{2}' onerror='this.src=\"/mobile/images/introImg1.jpg\"'></div>																															";
+						template += "		<div class='galImg'><img src='{1}/{2}' onerror='this.src=\"/static/mobile/images/introImg1.jpg\"'></div>																															";
 						template += "			<div class='gallery'>																																						";
 						template += "				<div class='gallTitle'>{3}</div>																															";
 						template += "				<p class='gallDate'>{4}</p>																																		";
@@ -166,18 +166,18 @@
 		var type = rows[i].TYPE;
 		var idx = rows[i].IDX;
 
-		location.href = String.format("/mobile/board/view.asp?type={0}&idx={1}", type, idx);
+		location.href = String.format("/mobile/board/view?type={0}&idx={1}", type, idx);
 	}
 
 </script>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="" id="type1"><a href="/mobile/board/list.asp?type=1">공지사항</a></li>
-		<li class="" id="type2"><a href="/mobile/board/list.asp?type=2">이벤트</a></li>
-        <li class="" id="type3"><a href="/mobile/board/list.asp?type=3">보도자료</a></li>
-		<li class="" ><a href="/mobile/board/honor.asp">홀인원</a></li>
-		<li class="" id="type6"><a href="/mobile/board/joinList.asp">조인게시판</a></li>
-		<li class="" id="type7"><a href="/mobile/board/list.asp?type=7">명예의 전당</a></li>
+		<li class="" id="type1"><a href="/mobile/board/list?type=1">공지사항</a></li>
+		<li class="" id="type2"><a href="/mobile/board/list?type=2">이벤트</a></li>
+        <li class="" id="type3"><a href="/mobile/board/list?type=3">보도자료</a></li>
+		<li class="" ><a href="/mobile/board/honor">홀인원</a></li>
+		<li class="" id="type6"><a href="/mobile/board/joinList">조인게시판</a></li>
+		<li class="" id="type7"><a href="/mobile/board/list?type=7">명예의 전당</a></li>
 	</ul>
 </div>
 

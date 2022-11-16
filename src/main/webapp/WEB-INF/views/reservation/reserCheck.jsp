@@ -14,7 +14,7 @@
   function init() {
     if("<%=session.getAttribute("ms_num")%>" == "") {
       alert("로그인 후 이용 가능합니다.");
-      location.href = "/member/login.asp";
+      location.href = "/member/login";
       return;
     }
 
@@ -67,10 +67,10 @@
   }
 
   function doSearch() {
-    var sUrl = "/controller/ReservationController.asp";
+    var sUrl = "/controller/ReservationController";
     var params = {};
 
-    params["method"] = "getReservationList";
+    //params["method"] = "getReservationList";
     params["coDiv"] = globals.coDiv;
     params["msNum"] = "<%=session.getAttribute("ms_num")%>";
 
@@ -141,10 +141,10 @@
 
     if (ans == true) {
 
-      var sUrl = "/controller/ReservationController.asp";
+      var sUrl = "/controller/ReservationController";
       var params = {};
 
-      params["method"] = "blDeleteReservation";
+      //params["method"] = "blDeleteReservation";
       params["coDiv"] = globals.coDiv;
       params["msNum"] = "<%=session.getAttribute("ms_num")%>";
       params["day"] = rows[i].BK_DAY;
@@ -178,10 +178,10 @@
 
     if (ans == true) {
 
-      var sUrl = "/controller/ReservationController.asp";
+      var sUrl = "/controller/ReservationController";
       var params = {};
 
-      params["method"] = "cancelReservation";
+      //params["method"] = "cancelReservation";
       params["coDiv"] = globals.coDiv;
       params["msNum"] = "<%=session.getAttribute("ms_num")%>";
       params["day"] = rows[i].BK_DAY;
@@ -277,7 +277,7 @@
 
 </script>
 
-<form id="form_change" action="/reservation/reservation.asp" method="post">
+<form id="form_change" action="/reservation/reservation" method="post">
     <input type="hidden" name="OLD_BK_DAY" 					id="BK_DAY" >
     <input type="hidden" name="OLD_BK_COS" 					id="BK_COS" >
     <input type="hidden" name="OLD_BK_COS_NM" 			id="BK_COS_NM" >
@@ -297,8 +297,8 @@
 <div id="wrap">
     <div class="navbarWrap">
         <ul class="navbarBox">
-            <li class="" onclick="location.href='/reservation/reservation.asp'">실시간예약</li>
-            <li class="on" onclick="location.href='/reservation/reserCheck.asp'">예약확인/취소</li>
+            <li class="" onclick="location.href='/reservation/reservation'">실시간예약</li>
+            <li class="on" onclick="location.href='/reservation/reserCheck'">예약확인/취소</li>
             <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 인터넷예약 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 예약확인/취소</li>
         </ul>
     </div>

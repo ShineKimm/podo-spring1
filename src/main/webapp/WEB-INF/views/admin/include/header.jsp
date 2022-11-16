@@ -27,7 +27,7 @@
         var sUrl = "/Controller/AdminController";
         var params = {};
 
-        params["method"] = "doLogout";
+        //params["method"] = "doLogout";
 
         mAjax(sUrl, params, "POST", true, function(data) {
           // if(data.resultCode == "0000") {

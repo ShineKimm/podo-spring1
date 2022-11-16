@@ -1,17 +1,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
+<script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script>
 
   var chkId = false;
   var chkPw = false;
   var chkPwConfirm = false;
-  var certifyYn = false;
+  // var certifyYn = false;
+  var certifyYn = "Y";
   var certifyKey = "";
+  var getIP = "";
+
 
   $(document).ready(function() {
 
+    getClientIP();
     doSearchArea();
 
     $("#txtPw").change(function() {
@@ -61,10 +66,10 @@
   })
 
   function doSignUp() {
-    var sUrl = "/controller/MemberController";
-    var params = {};
 
-    params["method"] = "doSignUp";
+    var sUrl = "/doSignUp";
+    var params = {};
+    //params["method"] = "doSignUp";
 
     var name = $("#txtName").val();
     var id = $("#txtId").val();
@@ -148,14 +153,16 @@
     params["phone1"] = phone1;
     params["phone2"] = phone2;
     params["phone3"] = phone3;
-    params["mkt1"] = "<%=Request.Form("chkAgree3")%>";
-    params["mkt2"] = "<%=Request.Form("chkAgree4")%>";
-    params["mkt3"] = "<%=Request.Form("chkAgree5")%>";
+    params["mkt1"] = "<%=request.getParameter("chkAgree3")%>";
+    params["mkt2"] = "<%=request.getParameter("chkAgree4")%>";
+    params["mkt3"] = "<%=request.getParameter("chkAgree5")%>";
     params["birth"] = birth;
     params["chkMail"] = chkMail;
     params["chkBirth"] = chkBirth;
     params["homeAddress1"] = homeAddress1;
     params["email"] = email;
+
+    params["ip"] = getIP;
 
     mAjax(sUrl, params, "POST", true, function(data) {
       if(data.resultCode == "0000") {
@@ -169,10 +176,10 @@
   }
 
   function chkDuplicateId() {
-    var sUrl = "/controller/MemberController";
+    var sUrl = "/chkDuplicateId";
     var params = {};
 
-    params["method"] = "chkDuplicateId";
+    //params["method"] = "chkDuplicateId";
 
     var id = $("#txtId").val();
 
@@ -223,10 +230,10 @@
   }
 
   function doCertification() {
-    var sUrl = "/controller/MemberController";
+    var sUrl = "/doCertification";
     var params = {};
 
-    params["method"] = "doCertification";
+    //params["method"] = "doCertification";
 
     var phone1 = $("#txtPhone").val().substr(0,3);
     var phone2 = $("#txtPhone").val().substr(3,4);
@@ -332,24 +339,26 @@
   }
 
   function doSearchArea() {
-    var sUrl = "/controller/CommonController";
+    var sUrl = "/getCommonCode";
     var params = {};
 
-    params["method"] = "getCommonCode";
+    //params["method"] = "getCommonCode";
     params["coDiv"] = globals.coDiv;
     params["division"] = "003";
 
     mAjax(sUrl, params, "POST", true, function(data) {
-      if(data.resultCode == "0000") {
-        rows = data.rows;
+      if(data[0].resultCode == "0000") {
+        //rows 실행이 안됨 확인필요
+        rows = data[0].rows;
+
         var tbody = $("#txtHomeAddress1");
         tbody.empty();
 
         tbody.append("<option value=''>지역선택</option>")
 
-        for(i=0; i<rows.length; i++) {
+        for(i=0; i<data.length; i++) {
 
-          var col1 = $("<option value='" + rows[i].CD_CODE + "'>" + rows[i].CD_TITLE1 + "</option>");
+          var col1 = $("<option value='" + data[i].CD_CODE + "'>" + data[i].CD_TITLE1 + "</option>");
 
           tbody.append(col1)
         }
@@ -416,6 +425,17 @@
     return 0;
   }
 
+  //ip 가져오기
+  async function getClientIP() {
+    try {
+      const response = await axios.get('https://api.ipify.org?format=json');
+      getIP = response.data.ip;
+      console.log(getIP);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 </script>
 <div class="middleBg6 zoomImg">
 </div>
@@ -463,11 +483,11 @@
                 <tr>
                     <th>성별</th>
                     <td title="성별구분">
-                        <input value="1" name="chkSex" type="radio">
-                        <label for="ctl00_Content_UserSexType1">남자</label>
+                        <input value="1" name="chkSex" id="male" type="radio">
+                        <label for="male">남자</label>
                         &nbsp;
-                        <input value="2" name="chkSex" type="radio">
-                        <label for="">여자</label>
+                        <input value="2" name="chkSex" id="female" type="radio">
+                        <label for="female">여자</label>
                     </td>
                 </tr>
                 <tr>
@@ -500,10 +520,10 @@
                     <td title="생년월일">
                         <input name="txtBirth" type="text" id="txtBirth" class="w150" maxlength="8" onkeydown="onlyNumber(this)" placeholder="ex ) 19810101">&nbsp;&nbsp;
                         <input value="1" name="chkBirth" type="radio" id="UserBirthType1">
-                        <label for="chkBirth">양력</label>
+                        <label for="UserBirthType1">양력</label>
                         &nbsp;
                         <input value="2" name="chkBirth" type="radio" id="UserBirthType2">
-                        <label for="chkBirth">음력</label>
+                        <label for="UserBirthType2">음력</label>
                     </td>
                 </tr>
                 <tr>
@@ -517,7 +537,7 @@
                     <th>휴대폰번호</th>
                     <td>
                         <input name="txtPhone" type="text" id="txtPhone" class="w150" maxlength="11" title="휴대폰번호" placeholder="- 하이픈 없이 입력">
-                        <a href="javascript:doCertification()" id="btnSend" class="motion commonBtn">인증번호 전송</a>
+                        <a <%--href="javascript:doCertification()"--%> id="btnSend" class="motion commonBtn">인증번호 전송</a>
                         <input name="txtCerCode" type="text" id="txtCerCode" class="w150" maxlength="6" title="인증번호" placeholder="인증번호 입력">
                         <a href="javascript:doConfirmCertification()" id="btnConfirm" class="motion commonBtn">확인</a>
                     </td>
@@ -525,11 +545,11 @@
                 <tr>
                     <th>문자 메시지 수신여부</th>
                     <td>
-                        <input value="Y" name="chkSms" type="radio">
-                        <label for="chkSms">동의</label>
+                        <input value="Y" name="chkSms" type="radio" id="agreeChkSms1">
+                        <label for="agreeChkSms1">동의</label>
                         &nbsp;
-                        <input value="N" name="chkSms" type="radio">
-                        <label for="chkSms">거부</label>
+                        <input value="N" name="chkSms" type="radio" id="agreeChkSms2">
+                        <label for="agreeChkSms2">거부</label>
                         <p class="sub_txt">* 수신거부할 경우 예약 확인을 제외한 모든 메시지(그린피 할인, 공지사항 등)를 수신할 수 없습니다.</p>
                     </td>
                 </tr>

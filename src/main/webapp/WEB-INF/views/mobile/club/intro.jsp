@@ -3,9 +3,9 @@
 <%@ include file="../include/header.jsp" %>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="on" ><a href="/mobile/club/intro.asp">클럽소개</a></li>
-		<li class="" ><a href="/mobile/club/greeting.asp">인사말</a></li>
-		<li class="" ><a href="/mobile/club/location.asp">오시는길</a></li>
+		<li class="on" ><a href="/mobile/club/intro">클럽소개</a></li>
+		<li class="" ><a href="/mobile/club/greeting">인사말</a></li>
+		<li class="" ><a href="/mobile/club/location">오시는길</a></li>
 	</ul>
 </div>
 
@@ -21,7 +21,7 @@
 		그 누구도 상상하지 못했던 아주 특별한 컨셉의 컨트리클럽이 지금 귀하의 도전과 사랑을 기다리고 있습니다.
 	</div> 
 	<br>
-	<img src="/mobile/images/introImg1.jpg" alt="" class="introImg">
+	<img src="/static/mobile/images/introImg1.jpg" alt="" class="introImg">
 
 	<div class="commonDot">클럽개요</div>
 		<div class="calTxt">

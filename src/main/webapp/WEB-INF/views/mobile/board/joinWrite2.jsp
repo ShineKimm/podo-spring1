@@ -4,10 +4,10 @@
 
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="" ><a href="/mobile/board/list.asp">공지사항</a></li>
-		<li class="" ><a href="/mobile/board/event.asp">이벤트</a></li>
-		<li class="" ><a href="/mobile/board/honor.asp">홀인원</a></li>
-		<li class="on" ><a href="/mobile/board/joinList.asp">조인게시판</a></li>
+		<li class="" ><a href="/mobile/board/list">공지사항</a></li>
+		<li class="" ><a href="/mobile/board/event">이벤트</a></li>
+		<li class="" ><a href="/mobile/board/honor">홀인원</a></li>
+		<li class="on" ><a href="/mobile/board/joinList">조인게시판</a></li>
 	</ul>
 </div>
 
@@ -42,8 +42,8 @@
 	<div class="cl_b padding5"></div>
     	
 	<div class="btnBox">
-		<a href="/mobile/board/joinList.asp" class="cancel">취소</a>
-		<a href="/mobile/board/joinList.asp" class="motion">등록</a>
+		<a href="/mobile/board/joinList" class="cancel">취소</a>
+		<a href="/mobile/board/joinList" class="motion">등록</a>
 	</div>
 	
 </div>

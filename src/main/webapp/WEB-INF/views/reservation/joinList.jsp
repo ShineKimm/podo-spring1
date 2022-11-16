@@ -15,8 +15,7 @@
   });
 
   function init() {
-    if(<%=(String)session.getAttribute("MS_NUM") == "" %>) {
-    <%--if("<%=session.getAttribute("ms_num")%>" == "") {--%>
+    if(<%=session.getAttribute("MS_NUM") == null %>) {
       alert("로그인 후 이용 가능합니다.");
       location.href = "/mobile/member/login?page=/mobile/board/joinList";
       return;
@@ -39,10 +38,10 @@
   }
 
   function doSearch() {
-    var sUrl = "/controller/getBoardList";
+    var sUrl = "/getBoardList";
     var params = {};
 
-    params["method"] = "getJoinList";
+    // params["method"] = "getJoinList";
 
     params["coDiv"] = globals.coDiv;
     params["type"] = "6";

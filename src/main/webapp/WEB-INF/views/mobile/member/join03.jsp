@@ -1,8 +1,10 @@
-<!-- #include virtual='/mobile/include/header.asp' -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../include/header.jsp" %>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="on" ><a href="/mobile/member/join01.asp">회원가입</a></li>
-		<li class="" ><a href="/mobile/member/login.asp">로그인</a></li>
+		<li class="on" ><a href="/mobile/member/join01">회원가입</a></li>
+		<li class="" ><a href="/mobile/member/login">로그인</a></li>
 	</ul>
 </div>
 
@@ -23,8 +25,8 @@
 
 
 	<div class="btnBox">
-		<a href="/mobile/member/login.asp" class="motion">로그인하기</a>
-		<a href="/mobile/index.asp" class="cancel">메인으로</a>
+		<a href="/mobile/member/login" class="motion">로그인하기</a>
+		<a href="/mobile/index" class="cancel">메인으로</a>
 	</div>
 
 </div>	

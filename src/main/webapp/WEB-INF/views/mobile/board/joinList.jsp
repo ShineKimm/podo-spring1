@@ -18,7 +18,7 @@
 	function init() {
 		if("<%=session.getAttribute("ms_num")%>" == "") {
 			alert("로그인 후 이용 가능합니다.");
-			location.href = "/mobile/member/login.asp?page=/mobile/board/joinList.asp";
+			location.href = "/mobile/member/login?page=/mobile/board/joinList";
 			return;
 		}
 
@@ -39,10 +39,10 @@
 	}
 
 	function doSearch() {
-		var sUrl = "/controller/BoardController.asp";
+		var sUrl = "/controller/BoardController";
 		var params = {};
 
-		params["method"] = "getJoinList";
+		//params["method"] = "getJoinList";
 
 		params["coDiv"] = globals.coDiv;
 		params["type"] = "6";
@@ -139,18 +139,18 @@
 		var idx = rows[i].IDX;
 		var seq = rows[i].SEQ;
 
-		location.href = String.format("/mobile/board/joinView.asp?idx={0}&seq={1}", idx, seq);
+		location.href = String.format("/mobile/board/joinView?idx={0}&seq={1}", idx, seq);
 	}
 
 </script>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="" ><a href="/mobile/board/list.asp?type=1">공지사항</a></li>
-		<li class="" ><a href="/mobile/board/list.asp?type=2">이벤트</a></li>
-		<li class="" ><a href="/mobile/board/list.asp?type=3">보도자료</a></li>
-		<li class="" ><a href="/mobile/board/honor.asp">홀인원</a></li>
-		<li class="on" ><a href="/mobile/board/joinList.asp">조인게시판</a></li>
-		<li class="" ><a href="/mobile/board/list.asp?type=7">명예의 전당</a></li>
+		<li class="" ><a href="/mobile/board/list?type=1">공지사항</a></li>
+		<li class="" ><a href="/mobile/board/list?type=2">이벤트</a></li>
+		<li class="" ><a href="/mobile/board/list?type=3">보도자료</a></li>
+		<li class="" ><a href="/mobile/board/honor">홀인원</a></li>
+		<li class="on" ><a href="/mobile/board/joinList">조인게시판</a></li>
+		<li class="" ><a href="/mobile/board/list?type=7">명예의 전당</a></li>
 	</ul>
 </div>
 
@@ -186,7 +186,7 @@
 	</div>
 
 	<div class="btnBox">
-		<a href="/mobile/board/joinWrite.asp?action=I" class="motion">글쓰기</a>
+		<a href="/mobile/board/joinWrite?action=I" class="motion">글쓰기</a>
 	</div>
 	
 </div>	

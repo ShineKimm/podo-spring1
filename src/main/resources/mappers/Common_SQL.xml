@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="common">
+
+  <select id="getCommonCode" parameterType="hashmap" resultType="hashmap">
+    SELECT CO_DIV
+         , CD_DIVISION
+         , CD_CODE
+         , CD_TITLE1
+         , CD_TITLE2
+         , CD_TITLE3
+    FROM CD_COMMON
+    WHERE CO_DIV = '${coDiv}'
+      AND CD_DIVISION = '${division}'
+      AND CD_USEYN = 'Y'
+  </select>
+
+</mapper>

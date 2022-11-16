@@ -1,4 +1,6 @@
-<!-- #include virtual='/mobile/include/header.asp' -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../include/header.jsp" %>
 <script>
 
 	$(document).ready(function() {
@@ -29,10 +31,10 @@
 	}
 
 	function doFindId() {
-		var sUrl = "/controller/MemberController.asp";
+		var sUrl = "/controller/MemberController";
 		var params = {};
 
-		params["method"] = "doFindId";
+		//params["method"] = "doFindId";
 		params["coDiv"] = globals.coDiv;
 
 		var name = $("#txtIdName").val();
@@ -57,10 +59,10 @@
 	}
 
 	function doFindPw() {
-		var sUrl = "/controller/MemberController.asp";
+		var sUrl = "/controller/MemberController";
 		var params = {};
 
-		params["method"] = "doFindPw";
+		//params["method"] = "doFindPw";
 		params["coDiv"] = globals.coDiv;
 
 		var name = $("#txtPwName").val();
@@ -87,8 +89,8 @@
 </script>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="" ><a href="/mobile/member/find.asp">아이디찾기</a></li>
-		<li class="on" ><a href="/mobile/member/find2.asp">비밀번호찾기</a></li>
+		<li class="" ><a href="/mobile/member/find">아이디찾기</a></li>
+		<li class="on" ><a href="/mobile/member/find2">비밀번호찾기</a></li>
 	</ul>
 </div>
 

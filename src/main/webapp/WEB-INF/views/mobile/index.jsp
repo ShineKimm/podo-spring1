@@ -1,8 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../include/header.jsp" %>
-<link rel="stylesheet" type="text/css" href="/mobile/css/main.css">
-
+<%@ include file="./include/header.jsp" %>
+<link rel="stylesheet" type="text/css" href="/static/mobile/css/main.css">
 <script>
 	var selectType = "1";
 
@@ -15,61 +14,61 @@
 	  }
 
 	function getMainNotice(paraType) {
-
-
-		var sUrl = "/controller/BoardController.asp";
-		var params = {};
-
-		params["method"] = "getBoardList";
-
-		params["coDiv"]    = globals.coDiv;
-		params["type"]     = paraType;
-		params["startCnt"] = 0;
-		params["pageCnt"]  = 3;
-
-		$("#type"+selectType).removeClass("on");
-		$("#type"+paraType).addClass("on");
-
-		selectType = paraType;
-
-		mAjax(sUrl, params, "POST", false, function(data) {
-			if(data.resultCode == "0000") {
-
-				var rows = data.rows;
-
-				if (rows.length == 0) {
-
-					var notice = ""
-				    notice += "<dl>	";
-				    notice += " <dt>등록된 글이 없습니다.</dt>";
-				    notice += " <dd>-</dd>	";
-				    notice += " </dl>	";
-
-				    $("#mainNotice").empty().append(notice);
-					return;
-				}
-
-				$("#mainNotice").empty();
-
-			    for(i=0; i<rows.length; i++) {
-
-					var notice = ""
-
-					var link = "/mobile/board/view.asp?type=" + rows[i].TYPE + "&idx=" + rows[i].IDX;
-					var title = rows[i].TITLE;
-					var inputDate = rows[i].INPUT_DATETIME;
-
-				    notice += "<dl onclick=\"location.href='" + link + "'\">	";
-				    notice += " <dt>" + title + "</dt>";
-				    notice += " <dd>" + inputDate + "</dd>	";
-				    notice += " </dl>	";
-					$("#mainNotice").append(notice);
-
-			    }
-			} else {
-				alert(data.resultMessage);
-			}
-		});
+		//
+		//
+		// var sUrl = "/controller/BoardController";
+		// var params = {};
+		//
+		// params["method"] = "getBoardList";
+		//
+		// params["coDiv"]    = globals.coDiv;
+		// params["type"]     = paraType;
+		// params["startCnt"] = 0;
+		// params["pageCnt"]  = 3;
+		//
+		// $("#type"+selectType).removeClass("on");
+		// $("#type"+paraType).addClass("on");
+		//
+		// selectType = paraType;
+		//
+		// mAjax(sUrl, params, "POST", false, function(data) {
+		// 	if(data.resultCode == "0000") {
+		//
+		// 		var rows = data.rows;
+		//
+		// 		if (rows.length == 0) {
+		//
+		// 			var notice = ""
+		// 		    notice += "<dl>	";
+		// 		    notice += " <dt>등록된 글이 없습니다.</dt>";
+		// 		    notice += " <dd>-</dd>	";
+		// 		    notice += " </dl>	";
+		//
+		// 		    $("#mainNotice").empty().append(notice);
+		// 			return;
+		// 		}
+		//
+		// 		$("#mainNotice").empty();
+		//
+		// 	    for(i=0; i<rows.length; i++) {
+		//
+		// 			var notice = ""
+		//
+		// 			var link = "/mobile/board/view?type=" + rows[i].TYPE + "&idx=" + rows[i].IDX;
+		// 			var title = rows[i].TITLE;
+		// 			var inputDate = rows[i].INPUT_DATETIME;
+		//
+		// 		    notice += "<dl onclick=\"location.href='" + link + "'\">	";
+		// 		    notice += " <dt>" + title + "</dt>";
+		// 		    notice += " <dd>" + inputDate + "</dd>	";
+		// 		    notice += " </dl>	";
+		// 			$("#mainNotice").append(notice);
+		//
+		// 	    }
+		// 	} else {
+		// 		alert(data.resultMessage);
+		// 	}
+		// });
 	}
 </script>
 <!--
@@ -97,14 +96,14 @@
 		</div>
 		<div class="mainBtnWrap">
 			<ul>
-				<li class="on" onclick="location.href='/mobile/reservation/reservation.asp'"><p><img src="/mobile/images/calendar_w.svg"></p>인터넷예약</li>
-				<li onclick="location.href='/mobile/club/intro.asp'"><p><img src="/mobile/images/m_icon1.svg"></p>클럽소개</li>
-				<li onclick="location.href='/mobile/guide/guide.asp'"><p><img src="/mobile/images/m_icon2.svg"></p>이용안내</li>					
+				<li class="on" onclick="location.href='./mobile/reservation/reservation'"><p><img src="/static/mobile/images/calendar_w.svg"></p>인터넷예약</li>
+				<li onclick="location.href='/mobile/club/intro'"><p><img src="/static/mobile/images/m_icon1.svg"></p>클럽소개</li>
+				<li onclick="location.href='/mobile/guide/guide'"><p><img src="/static/mobile/images/m_icon2.svg"></p>이용안내</li>
 			</ul>
 			<ul>
-				<li onclick="location.href='/mobile/course/intro.asp'"><p><img src="/mobile/images/m_icon3.svg"></p>코스소개</li>
-				<li onclick="location.href='/mobile/facil/clubhouse.asp'"><p><img src="/mobile/images/m_icon4.svg"></p>시설안내</li>
-				<li onclick="location.href='/mobile/board/list.asp?type=1'"><p><img src="/mobile/images/m_icon5.svg"></p>정보마당</li>
+				<li onclick="location.href='/mobile/course/intro'"><p><img src="/static/mobile/images/m_icon3.svg"></p>코스소개</li>
+				<li onclick="location.href='/mobile/facil/clubhouse'"><p><img src="/static/mobile/images/m_icon4.svg"></p>시설안내</li>
+				<li onclick="location.href='/mobile/board/list?type=1'"><p><img src="/static/mobile/images/m_icon5.svg"></p>정보마당</li>
 			</ul>
 		</div>
 	</div>
@@ -112,24 +111,25 @@
 		<div class="mainSlide">
 			<div class="bx-wrapper">
 				<ul class="slider">
-                   <li><a href="http://www.band.us/@podocc"><img src="/mobile/images/main/220805_밴드_mo.jpg" title="밴드오픈"></a></li>
-                   <li><a href="/mobile/board/view.asp?type=2&idx=4"><img src="/mobile/images/main/220719_mo.jpg" title="홀인원이벤트"></a></li>
-                    <li><a href="/mobile/board/view.asp?type=1&idx=63"><img src="/mobile/images/main/220627_mo.jpg" title="캐디피인상안내"></a></li>
-                    <li><a href="/mobile/board/view.asp?type=1&idx=68"><img src="/mobile/images/main/220808_10월그린피_mo.jpg" title="10월그린피"></a></li>
-					<li><a href="/mobile/board/view.asp?type=1&idx=69"><img src="/mobile/images/main/220808_10월패키지_mo.jpg" title="10월1박2일"></a></li>
-                    <li><a href="/mobile/board/view.asp?type=1&idx=70"><img src="/mobile/images/main/220808_10월골프대회_mo.jpg" title="10월골프대회"></a></li>
-                    <li><a href="/mobile/board/view.asp?type=1&idx=73"><img src="/mobile/images/main/221011_10월골프대회_mo.jpg" title="10월골프대회"></a></li>
-                   <li><a href="/mobile/board/view.asp?type=1&idx=71"><img src="/mobile/images/main/220913g_mo.jpg" title="11월그린피"></a></li>
-					<li><a href="/mobile/board/view.asp?type=1&idx=72"><img src="/mobile/images/main/220913p_mo.jpg" title="11월1박2일"></a></li>
-                    <!--<li><a href="/mobile/board/view.asp?type=1&idx=60"><img src="/mobile/images/main/220620_mo.jpg" title="11월골프대회"></a></li>-->
-					<li><a href="/mobile/board/view.asp?type=1&idx=23"><img src="/mobile/images/main/210705_mo.jpg" title="대체공휴일"></a></li>
-					<li><a href="/mobile/board/view.asp?type=1&idx=8"><img src="/mobile/images/main/210415_mo.jpg" title="시행의건"></a></li>
-					<li><a href="/mobile/board/view.asp?type=1&idx=18"><img src="/mobile/images/main/210603_2_mo.png" alt="9홀추가"></a></li>
-					<li><a href="/mobile/board/view.asp?type=1&idx=37"><img src="/mobile/images/main/211011_mo.jpg" alt="9홀추가"></a></li>
-					<li><a href="/mobile/board/view.asp?type=1&idx=3"><img src="/mobile/images/main/bn_banner01.png" title="카트료"></a></li>
-					
+                   <li><a href="http://www.band.us/@podocc"><img src="/static/mobile/images/main/220805_밴드_mo.jpg" title="밴드오픈"></a></li>
+                   <li><a href="/mobile/board/view?type=2&idx=4"><img src="/static/mobile/images/main/220719_mo.jpg" title="홀인원이벤트"></a></li>
+                    <li><a href="/mobile/board/view?type=1&idx=63"><img src="/static/mobile/images/main/220627_mo.jpg" title="캐디피인상안내"></a></li>
+                    <li><a href="/mobile/board/view?type=1&idx=68"><img src="/static/mobile/images/main/220808_10월그린피_mo.jpg" title="10월그린피"></a></li>
+					<li><a href="/mobile/board/view?type=1&idx=69"><img src="/static/mobile/images/main/220808_10월패키지_mo.jpg" title="10월1박2일"></a></li>
+                    <li><a href="/mobile/board/view?type=1&idx=70"><img src="/static/mobile/images/main/220808_10월골프대회_mo.jpg" title="10월골프대회"></a></li>
+                    <li><a href="/mobile/board/view?type=1&idx=73"><img src="/static/mobile/images/main/221011_10월골프대회_mo.jpg" title="10월골프대회"></a></li>
+                   <li><a href="/mobile/board/view?type=1&idx=71"><img src="/static/mobile/images/main/220913g_mo.jpg" title="11월그린피"></a></li>
+					<li><a href="/mobile/board/view?type=1&idx=72"><img src="/static/mobile/images/main/220913p_mo.jpg" title="11월1박2일"></a></li>
+                    <!--<li><a href="/mobile/board/view?type=1&idx=60"><img src="/static/mobile/images/main/220620_mo.jpg" title="11월골프대회"></a></li>-->
+					<li><a href="/mobile/board/view?type=1&idx=23"><img src="/static/mobile/images/main/210705_mo.jpg" title="대체공휴일"></a></li>
+					<li><a href="/mobile/board/view?type=1&idx=8"><img src="/static/mobile/images/main/210415_mo.jpg" title="시행의건"></a></li>
+					<li><a href="/mobile/board/view?type=1&idx=18"><img src="/static/mobile/images/main/210603_2_mo.png" alt="9홀추가"></a></li>
+					<li><a href="/mobile/board/view?type=1&idx=37"><img src="/static/mobile/images/main/211011_mo.jpg" alt="9홀추가"></a></li>
+					<li><a href="/mobile/board/view?type=1&idx=3"><img src="/static/mobile/images/main/bn_banner01.png" title="카트료"></a></li>
+
 				</ul>
 				<script>
+
 					$('.slider').bxSlider({
 						mode:'horizontal',
 						speed : 200,
@@ -141,7 +141,7 @@
 						autoHover:true
 					});
 				</script>
-			</div>			
+			</div>
 		</div>
 		
 		<div class="mainBoard">
@@ -180,5 +180,5 @@
 		</div>
 	</div>
 
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="./include/footer.jsp" %>
 	

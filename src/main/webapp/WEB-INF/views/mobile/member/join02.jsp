@@ -1,4 +1,6 @@
-<!-- #include virtual='/mobile/include/header.asp' -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../include/header.jsp" %>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script>
 
@@ -58,10 +60,10 @@
 	})
 
 	function doSignUp() {
-		var sUrl = "/controller/MemberController.asp";
+		var sUrl = "/doSignUp";
 		var params = {};
 
-		params["method"] = "doSignUp";
+		//params["method"] = "doSignUp";
 
 		var name = $("#txtName").val();
 		var id = $("#txtId").val();
@@ -145,9 +147,9 @@
 		params["phone1"] = phone1;
 		params["phone2"] = phone2;
 		params["phone3"] = phone3;
-		params["mkt1"] = "<%=Request.Form("chkAgree3")%>";
-		params["mkt2"] = "<%=Request.Form("chkAgree4")%>";
-		params["mkt3"] = "<%=Request.Form("chkAgree5")%>";
+		params["mkt1"] = "<%=request.getParameter("chkAgree3")%>";
+		params["mkt2"] = "<%=request.getParameter("chkAgree4")%>";
+		params["mkt3"] = "<%=request.getParameter("chkAgree5")%>";
 		params["birth"] = birth;
 		params["chkMail"] = chkMail;
 		params["chkBirth"] = chkBirth;
@@ -158,7 +160,7 @@
 			if(data.resultCode == "0000") {
 				alert("회원가입 되었습니다.");
 
-	      location.href = "/mobile/member/login.asp";
+	      location.href = "/mobile/member/login";
 			} else {
 				alert(data.resultMessage);
 			}
@@ -166,10 +168,10 @@
 	}
 
 	function chkDuplicateId() {
-		var sUrl = "/controller/MemberController.asp";
+		var sUrl = "/chkDuplicateId";
 		var params = {};
 
-		params["method"] = "chkDuplicateId";
+		//params["method"] = "chkDuplicateId";
 
 		var id = $("#txtId").val();
 
@@ -220,10 +222,10 @@
 	}
 
 	function doCertification() {
-		var sUrl = "/controller/MemberController.asp";
+		var sUrl = "/controller/MemberController";
 		var params = {};
 
-		params["method"] = "doCertification";
+		//params["method"] = "doCertification";
 
 		var phone1 = $("#txtPhone").val().substr(0,3);
 		var phone2 = $("#txtPhone").val().substr(3,4);
@@ -256,7 +258,7 @@
 				alert("인증번호가 발송되었습니다.");
 			} else if (data.resultCode == "9999") {
 				alert(data.resultMessage);
-				location.href = "find.asp";
+				location.href = "find";
 			} else {
 				alert(data.resultMessage);
 			}
@@ -329,10 +331,10 @@
 	}
 
 	function doSearchArea() {
-		var sUrl = "/controller/CommonController.asp";
+		var sUrl = "/getCommonCode";
 		var params = {};
 
-		params["method"] = "getCommonCode";
+		//params["method"] = "getCommonCode";
 		params["coDiv"] = globals.coDiv;
 		params["division"] = "003";
 
@@ -416,8 +418,8 @@
 </script>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="on" ><a href="/mobile/member/join01.asp">회원가입</a></li>
-		<li class="" ><a href="/mobile/member/login.asp">로그인</a></li>
+		<li class="on" ><a href="/mobile/member/join01">회원가입</a></li>
+		<li class="" ><a href="/mobile/member/login">로그인</a></li>
 	</ul>
 </div>
 
@@ -549,8 +551,8 @@
 	
 	<div class="btnBox">
 		<a href="javascript:doSignUp();" class="motion">회원가입</a>
-		<a href="/mobile/index.asp" class="cancel">취소</a>
+		<a href="/mobile/index" class="cancel">취소</a>
 	</div>
 
 </div>	
-<!-- #include virtual='/mobile/include/footer.asp' -->
+<%@ include file="../include/footer.jsp" %>

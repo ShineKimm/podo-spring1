@@ -36,10 +36,10 @@
 	}
 
 	function doSearchDetail() {
-		var sUrl = "/controller/BoardController.asp";
+		var sUrl = "/controller/BoardController";
 		var params = {};
 
-		params["method"] = "getBoardDetail";
+		//params["method"] = "getBoardDetail";
 		params["coDiv"] = globals.coDiv;
 		params["type"] = mType;
 		params["idx"] = mIdx;
@@ -105,12 +105,12 @@
 </script>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="" id="type1"><a href="/mobile/board/list.asp?type=1">공지사항</a></li>
-		<li class="" id="type2"><a href="/mobile/board/list.asp?type=2">이벤트</a></li>
-		<li class="" id="type3"><a href="/mobile/board/list.asp?type=3">보도자료</a></li>
-		<li class="" ><a href="/mobile/board/honor.asp">홀인원</a></li>
-		<li class="" id="type6"><a href="/mobile/board/joinList.asp">조인게시판</a></li>
-		<li class="" id="type7"><a href="/mobile/board/list.asp?type=7">명예의 전당</a></li>
+		<li class="" id="type1"><a href="/mobile/board/list?type=1">공지사항</a></li>
+		<li class="" id="type2"><a href="/mobile/board/list?type=2">이벤트</a></li>
+		<li class="" id="type3"><a href="/mobile/board/list?type=3">보도자료</a></li>
+		<li class="" ><a href="/mobile/board/honor">홀인원</a></li>
+		<li class="" id="type6"><a href="/mobile/board/joinList">조인게시판</a></li>
+		<li class="" id="type7"><a href="/mobile/board/list?type=7">명예의 전당</a></li>
 	</ul>
 </div>
 
@@ -147,7 +147,7 @@
 			</tbody>
 	</table>
 	<div class="btnBox">
-		<a href="/mobile/board/list.asp?type=<%=Request("type")%>" class="cancel">목록</a>
+		<a href="/mobile/board/list?type=<%=Request("type")%>" class="cancel">목록</a>
 	</div>
 
 	

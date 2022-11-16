@@ -109,7 +109,7 @@
     var sUrl = "/controller/BoardController";
     var params = {};
 
-    params["method"] = "getBoardDetail";
+    //params["method"] = "getBoardDetail";
     params["coDiv"] = globals.coDiv;
     params["type"] = mType;
     params["idx"] = mIdx;

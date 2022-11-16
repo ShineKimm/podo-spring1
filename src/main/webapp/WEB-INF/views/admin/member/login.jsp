@@ -50,7 +50,7 @@
       });
 
       function doLogin() {
-        var sUrl = "/controller/AdminController";
+        var sUrl = "/adminDoLogin";
         var params = {};
         <%--var page = "<%=Request("page")%>";--%>
         var page = "<%=request.getParameter("page")%>";
@@ -72,7 +72,7 @@
           return;
         }
 
-        params["method"] = "doLogin";
+        //params["method"] = "doLogin";
         params["id"] = id;
         params["pw"] = pw;
 

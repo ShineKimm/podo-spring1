@@ -3,16 +3,6 @@
 
 <mapper namespace="board">
 
-  <select id="boardList" parameterType="hashmap" resultType="hashmap">
-    select IDX
-         , TITLE
-         , INPUT_STAFF
-         , INPUT_DATETIME
-         , VIEW_CNT
-    from HP_BOARD
-    where IDX BETWEEN 100 and 105
-  </select>
-
   <select id="getBoardList" parameterType="hashmap" resultType="hashmap">
     SELECT H.CO_DIV
     , H.TYPE

@@ -17,7 +17,7 @@
 	function init() {
 		if("<%=session.getAttribute("ms_num")%>" == "") {
 			alert("로그인 후 이용 가능합니다.");
-			location.href = "/member/login.asp?page=/mobile/board/joinList.asp";
+			location.href = "/member/login?page=/mobile/board/joinList";
 			return;
 		}
 
@@ -126,10 +126,10 @@
 	}
 
 	function doSearchDetail() {
-		var sUrl = "/controller/BoardController.asp";
+		var sUrl = "/controller/BoardController";
 		var params = {};
 
-		params["method"] = "getBoardDetail";
+		//params["method"] = "getBoardDetail";
 		params["coDiv"] = globals.coDiv;
 		params["type"] = mType;
 		params["idx"] = mIdx;
@@ -162,7 +162,7 @@
 	}
 
 	function writeBoard() {
-		var sUrl = "/controller/BoardController.asp";
+		var sUrl = "/controller/BoardController";
 
 		$("#method").val("writeBoard");
 		$("#coDiv").val(globals.coDiv);
@@ -203,7 +203,7 @@
 			if(data.resultCode == "0000") {
 				alert("작성한 글이 정상적으로 등록되었습니다.");
 
-				location.href = "/mobile/board/joinList.asp";
+				location.href = "/mobile/board/joinList";
 			} else {
 				alert(data.resultMessage);
 			}
@@ -214,10 +214,10 @@
 
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="" ><a href="/mobile/board/list.asp?type=1">공지사항</a></li>
-		<li class="" ><a href="/mobile/board/list.asp?type=2">이벤트</a></li>
-		<li class="" ><a href="/mobile/board/honor.asp">홀인원</a></li>
-		<li class="on" ><a href="/mobile/board/joinList.asp">조인게시판</a></li>
+		<li class="" ><a href="/mobile/board/list?type=1">공지사항</a></li>
+		<li class="" ><a href="/mobile/board/list?type=2">이벤트</a></li>
+		<li class="" ><a href="/mobile/board/honor">홀인원</a></li>
+		<li class="on" ><a href="/mobile/board/joinList">조인게시판</a></li>
 	</ul>
 </div>
 

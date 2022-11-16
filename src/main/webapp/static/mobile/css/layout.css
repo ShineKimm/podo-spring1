@@ -17,8 +17,8 @@
 -webkit-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
 }
-.topmenuWrap .topReser{position: fixed; top: 15px; left:5%; background: url(/mobile/images/calendar_w.svg) no-repeat center center; background-size: 40px; display: block; width: 40px; height: 40px;}
-.topmenuWrap .logo { width: 150px; height: 40px; text-align: center; display: block; margin: 15px auto; background: url(/mobile/images/logo_w.svg) no-repeat center center; background-size: 150px 40px; }
+.topmenuWrap .topReser{position: fixed; top: 15px; left:5%; background: url(/static/mobile/images/calendar_w.svg) no-repeat center center; background-size: 40px; display: block; width: 40px; height: 40px;}
+.topmenuWrap .logo { width: 150px; height: 40px; text-align: center; display: block; margin: 15px auto; background: url(/static/mobile/images/logo_w.svg) no-repeat center center; background-size: 150px 40px; }
 .topmenuWrap .mborder{border-bottom:1px solid #a0a0a0; width: 96%; margin: 0 auto;}
 
 .country{position: fixed; top: 25px; right:10%;font-size:0.9em;color:#fff;border-radius:20px;padding:5px 7px;border:1px solid #fff;}
@@ -28,8 +28,8 @@
 	-webkit-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
 }
-.topmenuWrap.white .topReser{background: url(/mobile/images/calendar.svg) no-repeat center center;background-size: 40px; display: block; width: 40px; height: 40px;}
-.topmenuWrap.white .logo {background: url(/mobile/images/logo.svg) no-repeat center center; background-size: 150px 40px;}
+.topmenuWrap.white .topReser{background: url(/static/mobile/images/calendar.svg) no-repeat center center;background-size: 40px; display: block; width: 40px; height: 40px;}
+.topmenuWrap.white .logo {background: url(/static/mobile/images/logo.svg) no-repeat center center; background-size: 150px 40px;}
 .topmenuWrap.white .toggle-btn .bar { background-color: #000;}
 .topmenuWrap.white .mborder{border-bottom:0;}
 
@@ -38,8 +38,8 @@
 	-webkit-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
 }
-.topmenuWrap.white2 .topReser{background: url(/mobile/images/calendar.svg) no-repeat center center;background-size: 40px; display: block; width: 40px; height: 40px;}
-.topmenuWrap.white2 .logo {background: url(/mobile/images/logo.svg) no-repeat center center; background-size: 150px 40px;}
+.topmenuWrap.white2 .topReser{background: url(/static/mobile/images/calendar.svg) no-repeat center center;background-size: 40px; display: block; width: 40px; height: 40px;}
+.topmenuWrap.white2 .logo {background: url(/static/mobile/images/logo.svg) no-repeat center center; background-size: 150px 40px;}
 .topmenuWrap.white2 .toggle-btn .bar { background-color: #000;}
 .topmenuWrap.white2 .mborder{border-bottom:1px solid #a0a0a0; width: 100%; margin: 0 auto;}
 

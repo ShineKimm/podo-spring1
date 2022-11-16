@@ -28,7 +28,7 @@
     var sUrl = "/controller/BoardController";
     var params = {};
 
-    params["method"] = "getBoardDetail";
+    //params["method"] = "getBoardDetail";
     params["coDiv"] = globals.coDiv;
     params["type"] = mType;
     params["idx"] = mIdx;
@@ -81,7 +81,7 @@
     var sUrl = "/controller/BoardController";
     var params = {};
 
-    params["method"] = "getReplyList";
+    //params["method"] = "getReplyList";
     params["coDiv"] = globals.coDiv;
     params["type"] = mType;
     params["idx"] = mIdx;
@@ -135,7 +135,7 @@
     var sUrl = "/controller/BoardController";
     var params = {};
 
-    params["method"] = "doDeleteReply";
+    //params["method"] = "doDeleteReply";
     params["coDiv"] = globals.coDiv;
     params["type"] = mType;
     params["idx"] = mIdx;
@@ -155,7 +155,7 @@
     var sUrl = "/controller/BoardController";
     var params = {};
 
-    params["method"] = "doDelete";
+    //params["method"] = "doDelete";
     params["coDiv"] = globals.coDiv;
     params["type"] = mType;
     params["idx"] = mIdx;
@@ -178,7 +178,7 @@
     var sUrl = "/controller/BoardController";
     var params = {};
 
-    params["method"] = "writeReply";
+    //params["method"] = "writeReply";
     params["coDiv"] = globals.coDiv;
     params["type"] = mType;
     params["idx"] = mIdx;

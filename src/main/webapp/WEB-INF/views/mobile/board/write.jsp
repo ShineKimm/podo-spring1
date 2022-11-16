@@ -3,10 +3,10 @@
 <%@ include file="../include/header.jsp" %>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="on" ><a href="/mobile/board/list.asp">공지사항</a></li>
-		<li class="" ><a href="/mobile/board/event.asp">이벤트</a></li>
-		<li class="" ><a href="/mobile/board/honor.asp">홀인원</a></li>
-		<li class="" ><a href="/mobile/board/joinList.asp">조인게시판</a></li>
+		<li class="on" ><a href="/mobile/board/list">공지사항</a></li>
+		<li class="" ><a href="/mobile/board/event">이벤트</a></li>
+		<li class="" ><a href="/mobile/board/honor">홀인원</a></li>
+		<li class="" ><a href="/mobile/board/joinList">조인게시판</a></li>
 	</ul>
 </div>
 
@@ -49,7 +49,7 @@
 	</table>
 	<div class="btnBox">
 		<a href="" class="motion">글쓰기</a>
-		<a href="/mobile/index.asp" class="cancel">취소</a>
+		<a href="/mobile/index" class="cancel">취소</a>
 	</div>
 
 				

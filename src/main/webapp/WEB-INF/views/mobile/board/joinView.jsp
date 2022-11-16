@@ -14,7 +14,7 @@
 	function init() {
 		if("<%=session.getAttribute("ms_num")%>" == "") {
 			alert("로그인 후 이용 가능합니다.");
-			location.href = "/member/login.asp?page=/mobile/board/joinList.asp";
+			location.href = "/member/login?page=/mobile/board/joinList";
 			return;
 		}
 
@@ -25,10 +25,10 @@
 	}
 
 	function doSearchDetail() {
-		var sUrl = "/controller/BoardController.asp";
+		var sUrl = "/controller/BoardController";
 		var params = {};
 
-		params["method"] = "getBoardDetail";
+		//params["method"] = "getBoardDetail";
 		params["coDiv"] = globals.coDiv;
 		params["type"] = mType;
 		params["idx"] = mIdx;
@@ -78,10 +78,10 @@
 	}
 
 	function doSearchReply() {
-		var sUrl = "/controller/BoardController.asp";
+		var sUrl = "/controller/BoardController";
 		var params = {};
 
-		params["method"] = "getReplyList";
+		//params["method"] = "getReplyList";
 		params["coDiv"] = globals.coDiv;
 		params["type"] = mType;
 		params["idx"] = mIdx;
@@ -132,10 +132,10 @@
 	}
 
 	function doDeleteReply(i) {
-		var sUrl = "/controller/BoardController.asp";
+		var sUrl = "/controller/BoardController";
 		var params = {};
 
-		params["method"] = "doDeleteReply";
+		//params["method"] = "doDeleteReply";
 		params["coDiv"] = globals.coDiv;
 		params["type"] = mType;
 		params["idx"] = mIdx;
@@ -152,10 +152,10 @@
 	}
 
 	function doDelete() {
-		var sUrl = "/controller/BoardController.asp";
+		var sUrl = "/controller/BoardController";
 		var params = {};
 
-		params["method"] = "doDelete";
+		//params["method"] = "doDelete";
 		params["coDiv"] = globals.coDiv;
 		params["type"] = mType;
 		params["idx"] = mIdx;
@@ -163,7 +163,7 @@
 		mAjax(sUrl, params, "POST", true, function(data) {
 			if(data.resultCode == "0000") {
 				alert("게시글이 삭제되었습니다.");
-				location.href = "/mobile/board/joinList.asp";
+				location.href = "/mobile/board/joinList";
 			} else {
 				alert(data.resultMessage);
 			}
@@ -175,10 +175,10 @@
 	}
 
 	function writeReply() {
-		var sUrl = "/controller/BoardController.asp";
+		var sUrl = "/controller/BoardController";
 		var params = {};
 
-		params["method"] = "writeReply";
+		//params["method"] = "writeReply";
 		params["coDiv"] = globals.coDiv;
 		params["type"] = mType;
 		params["idx"] = mIdx;
@@ -197,10 +197,10 @@
 </script>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="" ><a href="/mobile/board/list.asp?type=1">공지사항</a></li>
-		<li class="" ><a href="/mobile/board/list.asp?type=2">이벤트</a></li>
-		<li class="" ><a href="/mobile/board/honor.asp">홀인원</a></li>
-		<li class="on" ><a href="/mobile/board/joinList.asp">조인게시판</a></li>
+		<li class="" ><a href="/mobile/board/list?type=1">공지사항</a></li>
+		<li class="" ><a href="/mobile/board/list?type=2">이벤트</a></li>
+		<li class="" ><a href="/mobile/board/honor">홀인원</a></li>
+		<li class="on" ><a href="/mobile/board/joinList">조인게시판</a></li>
 	</ul>
 </div>
 
@@ -245,7 +245,7 @@
 	</table>
 
 		<div class="btnBox">
-			<a href="/mobile/board/joinList.asp" class="cancel">목록</a>
+			<a href="/mobile/board/joinList" class="cancel">목록</a>
 			<a href="javascript:doUpdate()" id="btnAdminAction1" class="cancel" hidden>수정</a>
 			<a href="javascript:doDelete()" id="btnAdminAction2" class="cancel" hidden>삭제</a>
 		</div>

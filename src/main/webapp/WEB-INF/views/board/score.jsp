@@ -154,7 +154,7 @@
     var sUrl = "/controller/MemberController";
     var params = {};
 
-    params["method"] = "getScoreRank";
+    //params["method"] = "getScoreRank";
     params["coDiv"] = globals.coDiv;
     params["stDate"] = stDate;
     params["edDate"] = fnDate;

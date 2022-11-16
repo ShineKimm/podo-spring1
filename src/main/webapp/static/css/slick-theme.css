@@ -2,7 +2,7 @@
 /* Slider */
 .slick-loading .slick-list
 {
-    background: #fff url('../images/ajax-loader.gif') center center no-repeat;
+    background: #fff url('/static/images/ajax-loader.gif') center center no-repeat;
 }
 
 /* Icons */
@@ -15,11 +15,11 @@
 /* Arrows */
 .slick-prev
 {
- background:url('../images/main/arrow_rest_l.png')no-repeat center;
+ background:url('/static/images/main/arrow_rest_l.png')no-repeat center;
 }
 .slick-next
 {
- background:url('../images/main/arrow_rest_r.png')no-repeat center;
+ background:url('/static/images/main/arrow_rest_r.png')no-repeat center;
 }
 .slick-prev,
 .slick-next

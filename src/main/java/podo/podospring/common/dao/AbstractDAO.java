@@ -2,6 +2,7 @@ package podo.podospring.common.dao;
 
 import java.util.List;
 
+import java.util.Map;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -26,9 +27,18 @@ public class AbstractDAO {
     public Object selectOne(String queryId){
         return sqlSession.selectOne(queryId);
     }
-     
+
+    @SuppressWarnings("rawtypes")
     public Object selectOne(String queryId, Object params){
         return sqlSession.selectOne(queryId, params);
+    }
+
+    public Map<String, Object> selectMap(String queryId, String mapKey){
+        return sqlSession.selectMap(queryId, mapKey);
+    }
+
+    public Map<String, Object>  selectMap(String queryId, Object params, String mapKey){
+        return sqlSession.selectMap(queryId, params, mapKey);
     }
      
     @SuppressWarnings("rawtypes")

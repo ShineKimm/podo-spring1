@@ -8,8 +8,8 @@
   });
 
   function init() {
-    if("<%=(String)session.getAttribute ("MS_NUM")%>" != "") {
-      location.href = "/index.asp";
+    if(<%=session.getAttribute ("MS_NUM") != null %>) {
+      location.href = "/index";
     }
   }
 
@@ -42,10 +42,10 @@
 <div id="wrap">
     <div class="navbarWrap">
         <ul class="navbarBox">
-            <li class="" onclick="location.href='/member/login.asp'">로그인</li>
-            <li class="on" onclick="location.href='/member/join01.asp'">회원가입</li>
-            <li class="" onclick="location.href='/member/find.asp'">아이디/비번찾기</li>
-            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 회원가입 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 회원가입</li>
+            <li class="" onclick="location.href='/member/login'">로그인</li>
+            <li class="on" onclick="location.href='/member/join01'">회원가입</li>
+            <li class="" onclick="location.href='/member/find'">아이디/비번찾기</li>
+            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 회원가입 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 회원가입</li>
         </ul>
     </div>
     <div class="contents">
@@ -64,7 +64,7 @@
         </div>
 
         <div class="joinBox">
-            <form name="agreeChk" method="post" action="/member/join03.asp">
+            <form name="agreeChk" method="post" action="/member/join03">
 
                 <h2 class="commonDot"> 포도 컨트리클럽 골프클럽 이용약관 동의(필수)</h2>
 
@@ -359,7 +359,7 @@
             <div class="btnBox">
                 <!--<a href="javascript:doNextStep()" class="motion">분양회원</a>-->
                 <a href="javascript:doNextStep()" class="cancel">인터넷회원</a>
-                <a href="/index.asp" class="whiteBtn">취소</a>
+                <a href="/index" class="whiteBtn">취소</a>
             </div>
         </div>
     </div><!-- contents End-->

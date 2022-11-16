@@ -1,5 +1,9 @@
 package podo.podospring.controller;
 
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
-import podo.podospring.dao.Member;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import podo.podospring.service.MemberService;
 
 @Controller
@@ -21,34 +27,52 @@ public class MemberController {
 
     }
 
-    @GetMapping(value = "/members/new")
-    public String createForm() {
-        return "members/createMemberForm";
+    @ResponseBody
+    @RequestMapping("/doLogin")
+    public Map<String, Object> doLogin(@RequestParam HashMap<String, Object> params, HttpSession session)
+            throws NoSuchAlgorithmException {
+
+        //System.out.println("session.getId() = " + session.getId());
+        params.put("sessionID", session.getId());
+        Map<String, Object> resultMap = memberService.doLogin(params);
+
+        return resultMap;
     }
 
-    @PostMapping("/members/new")
-    public String create(MemberForm form) {
-        Member member = new Member();
-        member.setName(form.getName());
+    @ResponseBody
+    @RequestMapping("/chkDuplicateId")
+    public Map<String, Object> chkDuplicateId(@RequestParam HashMap<String, Object> params) {
 
-        System.out.println("member = " + member.getName());
-
-        memberService.join(member);
-
-        return "redirect:/";
+        Map<String, Object> resultMap = memberService.chkDuplicateId(params);
+        return resultMap;
     }
 
-    @GetMapping("/members")
-    public String list(Model model) {
-        List<Member> members = memberService.findMembers();
-        model.addAttribute("members",members);
-        return "members/memberList";
+    @ResponseBody
+    @RequestMapping("/doCertification")
+    public Map<String, Object> doCertification(@RequestParam HashMap<String, Object> params) {
+
+        Map<String, Object> resultMap = memberService.doCertification(params);
+        return resultMap;
     }
 
-//    @GetMapping("/board/list")
-//    public String notice(Model model) {
-//        System.out.println("공지사항 컨트롤러");
-//
-//        return "board/list";
-//    }
+    @ResponseBody
+    @RequestMapping("/doSignUp")
+    public Map<String, Object> doSignUp(@RequestParam HashMap<String, Object> params) {
+
+        if (params.get("chkMail").equals("") || params.get("chkMail").equals("undefined")) {
+            params.put("chkMail","N");
+        }
+        if (params.get("sms").equals("N")) {
+            params.put("mkt1","N");
+            params.put("mkt2","N");
+            params.put("mkt3","N");
+        } else if (params.get("sms").equals("Y")) {
+            params.put("mkt1","Y");
+            params.put("mkt2","Y");
+            params.put("mkt3","Y");
+        }
+
+        Map<String, Object> resultMap = memberService.doSignUp(params);
+        return resultMap;
+    }
 }

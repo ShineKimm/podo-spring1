@@ -56,12 +56,12 @@
 %>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="" ><a href="/mobile/board/list.asp?type=1">공지사항</a></li>
-		<li class="" ><a href="/mobile/board/list.asp?type=2">이벤트</a></li>
-		<li class="" ><a href="/mobile/board/list.asp?type=3">보도자료</a></li>
-		<li class="on" ><a href="/mobile/board/honor.asp">홀인원</a></li>
-		<li class="" ><a href="/mobile/board/joinList.asp">조인게시판</a></li>
-		<li class="" ><a href="/mobile/board/list.asp?type=7">명예의 전당</a></li>
+		<li class="" ><a href="/mobile/board/list?type=1">공지사항</a></li>
+		<li class="" ><a href="/mobile/board/list?type=2">이벤트</a></li>
+		<li class="" ><a href="/mobile/board/list?type=3">보도자료</a></li>
+		<li class="on" ><a href="/mobile/board/honor">홀인원</a></li>
+		<li class="" ><a href="/mobile/board/joinList">조인게시판</a></li>
+		<li class="" ><a href="/mobile/board/list?type=7">명예의 전당</a></li>
 	</ul>
 </div>
 <div class="contents">
@@ -139,7 +139,7 @@
 <%
 		Else
 %>
-				<a href='honor.asp?PageNum=<%=CLng(intTemp) - CInt(intBlockPage)%>'>◀</a>
+				<a href='honor?PageNum=<%=CLng(intTemp) - CInt(intBlockPage)%>'>◀</a>
 <%
 		End If
 
@@ -152,7 +152,7 @@
 <%
 			Else
 %>
-				<a href='honor.asp?PageNum=<%=intTemp%>'><%=intTemp%></a>
+				<a href='honor?PageNum=<%=intTemp%>'><%=intTemp%></a>
 <%
 			End If
 			intTemp = Cint(intTemp) + 1
@@ -165,7 +165,7 @@
 <%
 		Else
 %>
-				<a href='honor.asp?PageNum=<%=intTemp%>' class='pagebtn'>▶</a>
+				<a href='honor?PageNum=<%=intTemp%>' class='pagebtn'>▶</a>
 <%
 		End If
 %>

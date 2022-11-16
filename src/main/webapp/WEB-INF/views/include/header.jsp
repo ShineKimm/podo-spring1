@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <%
     String mobrwz = "iPhone|iPod|IEMobile|Mobile|lgtelecom|PPC";
     String[] sArray1 = mobrwz.split("|");
@@ -74,7 +73,7 @@
         var sUrl = "/controller/MemberController";
         var params = {};
 
-        params["method"] = "doLogout";
+        //params["method"] = "doLogout";
 
         mAjax(sUrl, params, "POST", true, function(data) {
           if(data.resultCode == "0000") {
@@ -92,35 +91,31 @@
       }
 
       function sessionCheck() {
-        // var sUrl = "/controller/SessionManager";
-        // var params = {"method" : "sessionConfirm"};
-        //
-        // mAjax(sUrl, params, "POST", false, function(data) {
-        //   if(data.resultCode == "2000") {
-        //     //alert(data.resultMessage);
-        //     location.reload();
-        //   }
-        // });
+        <%=session.getAttribute("MS_NUM")%>
+        <%--alert(<%=session.getAttribute("MS_NUM")%>);--%>
+        var sUrl = "/sessionConfirm";
+        var params = {/*"method" : "sessionConfirm"*/};
+
+        mAjax(sUrl, params, "POST", false, function(data) {
+          if(data.resultCode == "2000") {
+            alert(data.resultMessage);
+            location.reload();
+          }
+        });
       }
 
       function deleteMember() {
 
-        if(<%=(String)session.getAttribute("MS_NUM") == "" %>) {
+        if(<%=session.getAttribute("MS_NUM") == null %>) {
           alert("로그인 후 이용 가능합니다.");
           location.href = "/members/login";
           return;
         }
 
-        <%--if("<%=session.getAttribute("ms_num")%>" == "") {--%>
-        <%--  alert("로그인 후 이용 가능합니다.");--%>
-        <%--  location.href = "/members/login";--%>
-        <%--  return;--%>
-        <%--}--%>
-
         var sUrl = "/controller/MemberController";
         var params = {};
 
-        params["method"] = "doDeleteMemeber";
+        //params["method"] = "doDeleteMemeber";
 
         var con = confirm("회원님께서 확인 버튼을 누르면 탈퇴가 완료됩니다.\r\n그동안 포도CC를 이용해 주셔서 감사합니다..");
         if(con == true) {

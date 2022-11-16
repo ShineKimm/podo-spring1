@@ -3,7 +3,7 @@
 <%@ include file="../include/header.jsp" %>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="on" ><a href="/mobile/course/intro.asp">코스안내</a></li>
+		<li class="on" ><a href="/mobile/course/intro">코스안내</a></li>
 		<!--<li class="" ><a href="javascript:alert('준비중입니다.');">Out코스</a></li>
 		<li class="" ><a href="javascript:alert('준비중입니다.');">In코스</a></li>-->
 	</ul>
@@ -17,7 +17,7 @@
 
 	<div class="boardTxt">포도컨트리클럽의 High quality 코스로 여러분을 초대합니다.</div>
 
-	<img src="/mobile/images/course/courseToal.jpg" alt="" class="introImg">
+	<img src="/static/mobile/images/course/courseToal.jpg" alt="" class="introImg">
 	
 	<p class="clubTxt">
 		자연과 예술적인 감동은 설레임으로 다가오고, 매홀마다 새로운 기대와 아름다움을 보여 줍니다.<br>

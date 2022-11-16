@@ -54,10 +54,10 @@
 
   function doSearch() {
 
-    var sUrl = "/controller/getBoardList";
+    var sUrl = "/getBoardList";
     var params = {};
 
-    params["method"] = "getBoardList";
+    //params["method"] = "getBoardList";
 
     params["coDiv"] = globals.coDiv;
     params["type"] = mType;
@@ -72,44 +72,7 @@
       params["searchOption"] = opt;
     }
 
-
-    console.log(params);
-
-
-    // $.ajax({
-    //   type : "POST",
-    //   url : "/controller/getBoardList",
-    //   data: params,
-    //   success : function(data){
-    //     console.log(data)
-    //     //rows = data.rows;
-    //
-    //     var tbody = $("#tbody");
-    //     tbody.empty();
-    //     var eventList = $("#eventList");
-    //     eventList.empty();
-    //
-    //     for(i=0; i<data.length; i++) {
-    //         var tr = $("<tr style='cursor:pointer' onclick='onClickRow(" + i + ")'></tr>");
-    //         var td1 = $("<td>" + data[i].IDX + "</td>");
-    //         var td2 = $("<td class='subject'>" + data[i].TITLE + "</td>");
-    //         var td3 = $("<td>" + data[i].WRITER_NAME + "</td>");
-    //         var td4 = $("<td>" + data[i].INPUT_DATETIME + "</td>");
-    //         var td5 = $("<td>" + data[i].VIEW_CNT + "</td>");
-    //
-    //         tr.append(td1, td2, td3, td4, td5).appendTo(tbody);
-    //     }
-    //     // 토탈카운트 가져오기
-    //     initPaging(83);
-    //
-    //   },
-    //   error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
-    //     console.log("통신 실패.");
-    //   }
-    // })//ajax
-
-
-
+    // console.log(params);
 
     mAjax(sUrl, params, "POST", true, function(data) {
       // if(data.resultCode == "0000") {
@@ -207,7 +170,7 @@
     var type = data[i].TYPE;
     var idx = data[i].IDX;
 
-    location.href = String.format("/board/view.jsp?type={0}&idx={1}", type, idx);
+    location.href = String.format("/board/view?type={0}&idx={1}", type, idx);
   }
 
 </script>
@@ -241,8 +204,8 @@
             <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 정보마당 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; <span id="txtTitle" style="font-size:inherit;color:inherit;font-weight:400;"></span></li>
         </ul>
         <ul class="navbarBox" id="galleryList" hidden>
-            <li class="on" onclick="location.href='/course/intro.jsp'">코스소개</li>
-            <li class="" onclick="location.href='/board/list.jsp?type=5'">코스갤러리</li>
+            <li class="on" onclick="location.href='/course/intro'">코스소개</li>
+            <li class="" onclick="location.href='/board/list?type=5'">코스갤러리</li>
 
             <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 코스소개 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 코스소개</li>
         </ul>
@@ -284,15 +247,6 @@
                     </tr>
                     </thead>
                     <tbody id="tbody">
-                    <c:forEach items="${list}" var="board">
-                        <tr style='cursor:pointer' onclick='onClickRow(" + i + ")'>
-                            <td><c:out value="${board.IDX}" /></td>
-                            <td><c:out value="${board.TITLE}" /></td>
-                            <td><c:out value="${board.WRITER_NAME}" /></td>
-                            <td><c:out value="${board.INPUT_DATETIME}" /></td>
-                            <td><c:out value="${board.VIEW_CNT}" /></td>
-                        </tr>
-                    </c:forEach>
                     </tbody>
                 </table>
 

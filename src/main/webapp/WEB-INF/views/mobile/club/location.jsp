@@ -3,9 +3,9 @@
 <%@ include file="../include/header.jsp" %>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="" ><a href="/mobile/club/intro.asp">클럽소개</a></li>
-		<li class="" ><a href="/mobile/club/greeting.asp">인사말</a></li>
-		<li class="on" ><a href="/mobile/club/location.asp">오시는길</a></li>
+		<li class="" ><a href="/mobile/club/intro">클럽소개</a></li>
+		<li class="" ><a href="/mobile/club/greeting">인사말</a></li>
+		<li class="on" ><a href="/mobile/club/location">오시는길</a></li>
 	</ul>
 </div>
 

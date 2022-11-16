@@ -3,11 +3,11 @@
 <%@ include file="../include/header.jsp" %>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="on" ><a href="/mobile/guide/guide.asp">예약안내</a></li>
-		<li class="" ><a href="/mobile/guide/fee.asp">이용요금</a></li>
-		<li class="" ><a href="/mobile/guide/penalty.asp">위약안내</a></li>
-		<li class="" ><a href="/mobile/guide/etiquette.asp">에티켓</a></li>
-		<li class="" ><a href="/mobile/guide/etc.asp">예약/기타문의</a></li>
+		<li class="on" ><a href="/mobile/guide/guide">예약안내</a></li>
+		<li class="" ><a href="/mobile/guide/fee">이용요금</a></li>
+		<li class="" ><a href="/mobile/guide/penalty">위약안내</a></li>
+		<li class="" ><a href="/mobile/guide/etiquette">에티켓</a></li>
+		<li class="" ><a href="/mobile/guide/etc">예약/기타문의</a></li>
 	</ul>
 </div>
 

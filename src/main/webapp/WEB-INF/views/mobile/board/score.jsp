@@ -151,10 +151,10 @@
 	}
 
 	function doSearch() {
-		var sUrl = "/controller/MemberController.asp";
+		var sUrl = "/controller/MemberController";
 		var params = {};
 
-		params["method"] = "getScoreRank";
+		//params["method"] = "getScoreRank";
 		params["coDiv"] = globals.coDiv;
 		params["stDate"] = stDate;
 		params["edDate"] = fnDate;
@@ -206,12 +206,12 @@
 </script>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="" id="type1"><a href="/mobile/board/list.asp?type=1">공지사항</a></li>
-		<li class="" id="type2"><a href="/mobile/board/list.asp?type=2">이벤트</a></li>
-		<li class="" id="type3"><a href="/mobile/board/list.asp?type=3">보도자료</a></li>
-		<li class=""><a href="/mobile/board/honor.asp">홀인원</a></li>
-		<li class="" id="type6"><a href="/mobile/board/joinList.asp">조인게시판</a></li>
-		<li class="on" id=""><a href="/mobile/board/score.asp">스코어조회</a></li>
+		<li class="" id="type1"><a href="/mobile/board/list?type=1">공지사항</a></li>
+		<li class="" id="type2"><a href="/mobile/board/list?type=2">이벤트</a></li>
+		<li class="" id="type3"><a href="/mobile/board/list?type=3">보도자료</a></li>
+		<li class=""><a href="/mobile/board/honor">홀인원</a></li>
+		<li class="" id="type6"><a href="/mobile/board/joinList">조인게시판</a></li>
+		<li class="on" id=""><a href="/mobile/board/score">스코어조회</a></li>
 	</ul>
 </div>
 

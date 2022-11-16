@@ -10,7 +10,7 @@
 
   $(document).ready(function() {
 
-    if("<%=(String)session.getAttribute ("ms_num")%>" == "") {
+    if(<%=session.getAttribute ("MS_NUM") != null %>) {
       alert("로그인 후 이용 가능합니다.");
       location.href = "/member/login?page=/member/modify";
       return;
@@ -56,32 +56,32 @@
       }
     });
 
-    $("#txtName").empty().append("<%=Session("ms_name")%>");
-    $("#txtId").empty().append("<%=Session("ms_id")%>");
-    $("#txtBirth").val("<%=Session("ms_birth")%>");
-    $("#txtPhone").val("<%=Session("ms_first_phone1")%>" + "<%=Session("ms_mid_phone1")%>" + "<%=Session("ms_last_phone1")%>");
-    if ("<%=Session("MS_EMAIL")%>" != "") {
-      msEmail = "<%=Session("MS_EMAIL")%>".split("@");
+    $("#txtName").empty().append("<%=session.getAttribute("ms_name")%>");
+    $("#txtId").empty().append("<%=session.getAttribute("ms_id")%>");
+    $("#txtBirth").val("<%=session.getAttribute("ms_birth")%>");
+    $("#txtPhone").val("<%=session.getAttribute("ms_first_phone1")%>" + "<%=session.getAttribute("ms_mid_phone1")%>" + "<%=session.getAttribute("ms_last_phone1")%>");
+    if ("<%=session.getAttribute("MS_EMAIL")%>" != "") {
+      msEmail = "<%=session.getAttribute("MS_EMAIL")%>".split("@");
       $("#txtMail1").val(msEmail[0]);
       $("#txtMail2").val(msEmail[1]);
     }
 
-    var sex = "<%=Session("ms_sex")%>";
+    var sex = "<%=session.getAttribute("ms_sex")%>";
     if(sex != "") {
       $("input:radio[name=chkSex]:input[value=" + sex + "]").attr("checked", true);
     }
 
-    var sms = "<%=Session("SMS_CHK1")%>";
+    var sms = "<%=session.getAttribute("SMS_CHK1")%>";
     if(sms != "") {
       $("input:radio[name=chkSms]:input[value=" + sms + "]").attr("checked", true);
     }
 
-    var email = "<%=Session("MS_EMAIL_YN")%>";
+    var email = "<%=session.getAttribute("MS_EMAIL_YN")%>";
     if(email != "") {
       $("input:radio[name=chkMail]:input[value=" + email + "]").attr("checked", true);
     }
 
-    var birth = "<%=Session("MS_BIRTHYL")%>";
+    var birth = "<%=session.getAttribute("MS_BIRTHYL")%>";
     if(birth != "") {
       $("input:radio[name=chkBirth]:input[value=" + birth + "]").attr("checked", true);
     }
@@ -91,7 +91,7 @@
     var sUrl = "/controller/MemberController";
     var params = {};
 
-    params["method"] = "doUpdateMemeber";
+    //params["method"] = "doUpdateMemeber";
 
     var pw = $("#txtPw").val();
     var sex = $(':radio[name="chkSex"]:checked').val();
@@ -104,9 +104,9 @@
     var homeAddress1 = $("#txtHomeAddress1").val();
     var birth = $("#txtBirth").val();
 
-    var bPhone1 = "<%=Session("MS_FIRST_PHONE1")%>";
-    var bPhone2 = "<%=Session("MS_MID_PHONE1")%>";
-    var bPhone3 = "<%=Session("MS_LAST_PHONE1")%>";
+    var bPhone1 = "<%=session.getAttribute("MS_FIRST_PHONE1")%>";
+    var bPhone2 = "<%=session.getAttribute("MS_MID_PHONE1")%>";
+    var bPhone3 = "<%=session.getAttribute("MS_LAST_PHONE1")%>";
 
     if(phone1 != bPhone1 || phone2 != bPhone2 || phone3 != bPhone3) {
       if(!certifyYn) {
@@ -172,7 +172,7 @@
     var sUrl = "/controller/MemberController";
     var params = {};
 
-    params["method"] = "doCertification";
+    //params["method"] = "doCertification";
 
     var phone1 = $("#txtPhone").val().substr(0,3);
     var phone2 = $("#txtPhone").val().substr(3,4);
@@ -277,10 +277,10 @@
   }
 
   function doSearchArea() {
-    var sUrl = "/controller/CommonController";
+    var sUrl = "/getCommonCode";
     var params = {};
 
-    params["method"] = "getCommonCode";
+    //params["method"] = "getCommonCode";
     params["coDiv"] = globals.coDiv;
     params["division"] = "003";
 
@@ -299,7 +299,7 @@
           tbody.append(col1)
         }
 
-        $("#txtHomeAddress1").val("<%=Session("ms_area")%>").prop("selected", true);
+        $("#txtHomeAddress1").val("<%=session.getAttribute("ms_area")%>").prop("selected", true);
       } else {
         alert(data.resultMessage);
       }
@@ -398,11 +398,11 @@
                 <tr>
                     <th>성별</th>
                     <td title="성별구분">
-                        <input value="1" name="chkSex" type="radio">
-                        <label for="ctl00_Content_UserSexType1">남자</label>
+                        <input value="1" name="chkSex" id="male" type="radio">
+                        <label for="male">남자</label>
                         &nbsp;
-                        <input value="2" name="chkSex" type="radio">
-                        <label for="">여자</label>
+                        <input value="2" name="chkSex" id="female" type="radio">
+                        <label for="female">여자</label>
                     </td>
                 </tr>
                 <tr>
@@ -428,10 +428,10 @@
                     <td title="생년월일">
                         <input name="txtBirth" type="text" id="txtBirth" class="w150" maxlength="8" onkeydown="onlyNumber(this)" placeholder="ex ) 19810101">&nbsp;&nbsp;
                         <input value="1" name="chkBirth" type="radio" id="UserBirthType1">
-                        <label for="chkBirth">양력</label>
+                        <label for="UserBirthType1">양력</label>
                         &nbsp;
                         <input value="2" name="chkBirth" type="radio" id="UserBirthType2">
-                        <label for="chkBirth">음력</label>
+                        <label for="UserBirthType2">음력</label>
                     </td>
                 </tr>
                 <tr>
@@ -453,11 +453,11 @@
                 <tr>
                     <th>문자 메시지 수신여부</th>
                     <td>
-                        <input value="Y" name="chkSms" type="radio">
-                        <label for="chkSms">동의</label>
+                        <input value="Y" name="chkSms" id="agree" type="radio">
+                        <label for="agree">동의</label>
                         &nbsp;
-                        <input value="N" name="chkSms" type="radio">
-                        <label for="chkSms">거부</label>
+                        <input value="N" name="chkSms" id="denial" type="radio">
+                        <label for="denial">거부</label>
                         <p class="sub_txt">* 수신거부할 경우 예약 확인을 제외한 모든 메시지(그린피 할인, 공지사항 등)를 수신할 수 없습니다.</p>
                     </td>
                 </tr>

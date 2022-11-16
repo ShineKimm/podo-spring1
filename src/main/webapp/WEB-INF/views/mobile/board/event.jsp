@@ -3,15 +3,15 @@
 <%@ include file="../include/header.jsp" %>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="" ><a href="/mobile/board/list.asp">공지사항</a></li>
-		<li class="on" ><a href="/mobile/board/event.asp">이벤트</a></li>
-		<li class="" ><a href="/mobile/board/honor.asp">홀인원</a></li>
-		<li class="" ><a href="/mobile/board/joinList.asp">조인게시판</a></li>
+		<li class="" ><a href="/static/mobile/board/list">공지사항</a></li>
+		<li class="on" ><a href="/static/mobile/board/event">이벤트</a></li>
+		<li class="" ><a href="/static/mobile/board/honor">홀인원</a></li>
+		<li class="" ><a href="/static/mobile/board/joinList">조인게시판</a></li>
 	</ul>
 </div>
 
-<link rel="stylesheet" type="text/css" href="/mobile/css/animate.css">
-<script src="/mobile/js/wow.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/mobile/css/animate.css">
+<script src="/static/mobile/js/wow.js"></script>
 <script type="text/javascript">
 	/* 컨텐츠 fade in */
 	wow = new WOW(
@@ -37,7 +37,7 @@
             <div class="gallBoxCont">
                 <a href="#">
                 <div class="galImg">
-                    <img src="/mobile/images/introImg1.jpg" alt="">
+                    <img src="/static/mobile/images/introImg1.jpg" alt="">
                 </div>			
                 <div class="gallery">				
                     <div class="gallTitle">2021 포도C.C 리뉴얼</div>				
@@ -52,7 +52,7 @@
             <div class="gallBoxCont">
                 <a href="#">
                 <div class="galImg">
-                    <img src="/mobile/images/introImg1.jpg" alt="">
+                    <img src="/static/mobile/images/introImg1.jpg" alt="">
                 </div>			
                 <div class="gallery">				
                     <div class="gallTitle">2021 포도C.C 리뉴얼</div>				
@@ -67,7 +67,7 @@
             <div class="gallBoxCont">
                 <a href="#">
                 <div class="galImg">
-                    <img src="/mobile/images/introImg1.jpg" alt="">
+                    <img src="/static/mobile/images/introImg1.jpg" alt="">
                 </div>			
                 <div class="gallery">				
                    <div class="gallTitle">2021 포도C.C 리뉴얼</div>				

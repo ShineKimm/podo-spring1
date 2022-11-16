@@ -23,8 +23,4 @@ public class BoardServiceImpl implements BoardService{
     }
 
 
-    @Override
-    public List<HashMap<String, Object>> boardList(Map<String, Object> params) {
-        return boardDAO.boardList(params);
-    }
 }

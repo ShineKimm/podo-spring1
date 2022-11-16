@@ -1,8 +1,10 @@
-<!-- #include virtual='/mobile/include/header.asp' -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../include/header.jsp" %>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="on" ><a href="/mobile/member/join01.asp">회원가입</a></li>
-		<li class="" ><a href="/mobile/member/login.asp">로그인</a></li>
+		<li class="on" ><a href="/mobile/member/join01">회원가입</a></li>
+		<li class="" ><a href="/mobile/member/login">로그인</a></li>
 	</ul>
 </div>
 
@@ -13,7 +15,7 @@ $(document).ready(function() {
 
 	function init() {
 		if("<%=session.getAttribute("ms_num")%>" != "") {
-			location.href = "/mobile/index.asp";
+			location.href = "/mobile/index";
 		}
 
 		for(i=1; i<=5; i++) {
@@ -53,7 +55,7 @@ $(document).ready(function() {
 		<li class="midBar"></li>
 	</ul>
 
-	<form name="agreeChk" method="post" action="/mobile/member/join02.asp">
+	<form name="agreeChk" method="post" action="/mobile/member/join02">
 	<div class="agreeyBgBox">
 		<ul class="joinAgreeyList">
 			<li class="agreeyTitle agBtn1">골프클럽 이용약관 <span class="red">(필수)</span></li>
@@ -365,7 +367,7 @@ $(document).ready(function() {
 	
 	<div class="btnBox">
 		<a href="javascript:doNextStep()" class="motion">동의</a>
-		<a href="/mobile/index.asp" class="cancel">취소</a>
+		<a href="/mobile/index" class="cancel">취소</a>
 	</div>
 
 </div>	

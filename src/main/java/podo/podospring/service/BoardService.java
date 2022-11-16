@@ -9,5 +9,4 @@ public interface BoardService {
 
     public List<HashMap<String, Object>> getBoardList(Map<String, Object> params);
 
-    public List<HashMap<String, Object>> boardList(Map<String, Object> params);
 }

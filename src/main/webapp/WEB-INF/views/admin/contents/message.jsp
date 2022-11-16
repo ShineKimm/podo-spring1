@@ -15,7 +15,7 @@
     var sUrl = "/controller/AdminController";
     var params = {};
 
-    params["method"] = "getMessage";
+    //params["method"] = "getMessage";
     params["coDiv"] = globals.coDiv;
 
     mAjax(sUrl, params, "POST", true, function(data) {
@@ -35,7 +35,7 @@
     var sUrl = "/controller/AdminController";
     var params = {};
 
-    params["method"] = "doSaveMessage";
+    //params["method"] = "doSaveMessage";
     params["coDiv"] = globals.coDiv;
     params["code"] = code;
     params["content"] = replaceAll($("#txtMessage" + code).val(), "\n", "<br>");

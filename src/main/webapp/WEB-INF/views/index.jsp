@@ -130,14 +130,14 @@
           document.location.href = document.location.href.replace('http:', 'https:');
         }
       }
-
       function sessionCheck() {
-        var sUrl = "/controller/SessionManager";
-        var params = {"method" : "sessionConfirm"};
+        var sUrl = "/sessionConfirm";
+        //var params = {"method" : "sessionConfirm"};
+        var params = {};
 
         mAjax(sUrl, params, "POST", false, function(data) {
           if(data.resultCode == "2000") {
-            //alert(data.resultMessage);
+            alert(data.resultMessage);
             location.reload();
           }
         });
@@ -147,93 +147,93 @@
         var sUrl = "/controller/ReservationController";
         var params = {};
 
-        params["method"] = "getCalendar";
+        //params["method"] = "getCalendar";
         params["coDiv"] = globals.coDiv;
         params["selYm"] = year + month;
 
-        mAjax(sUrl, params, "POST", true, function(data) {
-          if(data.resultCode == "0000") {
-            $(selector + " #calHeader").empty().append(month + "월");
-
-            var currentDay = new Date().yyyymmdd();
-            var tBody = $(selector + " #calendar-body");
-            tBody.empty();
-
-            var rows = data.rows;
-
-            if(rows.length > 0) {
-              var row = $("<tr></tr>");
-
-              var fWeek = rows[0].CL_DAYDIV - 1;
-
-              for(i=0; i<fWeek; i++) {
-                row.append($("<td></td>"));
-              }
-              for(i=0; i<rows.length; i++) {
-                if(rows[i].CL_SOLAR >= currentDay) {
-                  if (rows[i].CL_SOLAR == currentDay) {
-                    var td = $("<td>"+ rows[i].DAYNUM + "</td>");
-                    td.addClass('today');
-                  } else if(rows[i].BK_TEAM > 0) {
-                    var td = $("<td>" + rows[i].DAYNUM + "</td>");
-                    if (rows[i].CL_BUSINESS == "2") {
-                      td.addClass('sat');
-                    } else if (rows[i].CL_BUSINESS == "3" || rows[i].CL_BUSINESS == "4") {
-                      td.addClass('sun');
-                    }
-                    td.data('date', rows[i].CL_SOLAR);
-                    td.addClass('possible');
-                    td.on('click', function() {
-                      onClickDay($(this).data('date'));
-                    });
-                  } else {
-                    var td = $("<td>" + rows[i].DAYNUM + "</td>");
-                    if (rows[i].CL_BUSINESS == "2") {
-                      td.addClass('sat');
-                    } else if (rows[i].CL_BUSINESS == "3" || rows[i].CL_BUSINESS == "4") {
-                      td.addClass('sun');
-                    }
-                    td.addClass('impossible');
-                  }
-                } else {
-                  var td = $("<td>" + rows[i].DAYNUM + "</td>");
-                  if (rows[i].CL_BUSINESS == "2") {
-                    td.addClass('sat');
-                  } else if (rows[i].CL_BUSINESS == "3" || rows[i].CL_BUSINESS == "4") {
-                    td.addClass('sun');
-                  }
-                  td.addClass('impossible');
-                }
-
-                row.append(td);
-
-                if(rows[i].CL_DAYDIV == 7) {
-                  row.appendTo(tBody);
-                  row = $("<tr></tr>");
-                }
-              }
-
-              var addTd = 7 - row.children("td").length;
-
-              if(addTd != 7) {
-                for(i=0; i<addTd; i++) {
-                  row.append($("<td></td>"));
-                }
-              }
-
-              row.appendTo(tBody);
-            } else {
-              tBody.append($("<tr><td colspan='7'></td></tr>"));
-              tBody.append($("<tr><td colspan='7'></td></tr>"));
-              tBody.append($("<tr><td colspan='7'></td></tr>"));
-              tBody.append($("<tr><td colspan='7'></td></tr>"));
-              tBody.append($("<tr><td colspan='7'></td></tr>"));
-              tBody.append($("<tr><td colspan='7'></td></tr>"));
-            }
-          } else {
-            //alert(data.resultMessage);
-          }
-        });
+        // mAjax(sUrl, params, "POST", true, function(data) {
+        //   if(data.resultCode == "0000") {
+        //     $(selector + " #calHeader").empty().append(month + "월");
+        //
+        //     var currentDay = new Date().yyyymmdd();
+        //     var tBody = $(selector + " #calendar-body");
+        //     tBody.empty();
+        //
+        //     var rows = data.rows;
+        //
+        //     if(rows.length > 0) {
+        //       var row = $("<tr></tr>");
+        //
+        //       var fWeek = rows[0].CL_DAYDIV - 1;
+        //
+        //       for(i=0; i<fWeek; i++) {
+        //         row.append($("<td></td>"));
+        //       }
+        //       for(i=0; i<rows.length; i++) {
+        //         if(rows[i].CL_SOLAR >= currentDay) {
+        //           if (rows[i].CL_SOLAR == currentDay) {
+        //             var td = $("<td>"+ rows[i].DAYNUM + "</td>");
+        //             td.addClass('today');
+        //           } else if(rows[i].BK_TEAM > 0) {
+        //             var td = $("<td>" + rows[i].DAYNUM + "</td>");
+        //             if (rows[i].CL_BUSINESS == "2") {
+        //               td.addClass('sat');
+        //             } else if (rows[i].CL_BUSINESS == "3" || rows[i].CL_BUSINESS == "4") {
+        //               td.addClass('sun');
+        //             }
+        //             td.data('date', rows[i].CL_SOLAR);
+        //             td.addClass('possible');
+        //             td.on('click', function() {
+        //               onClickDay($(this).data('date'));
+        //             });
+        //           } else {
+        //             var td = $("<td>" + rows[i].DAYNUM + "</td>");
+        //             if (rows[i].CL_BUSINESS == "2") {
+        //               td.addClass('sat');
+        //             } else if (rows[i].CL_BUSINESS == "3" || rows[i].CL_BUSINESS == "4") {
+        //               td.addClass('sun');
+        //             }
+        //             td.addClass('impossible');
+        //           }
+        //         } else {
+        //           var td = $("<td>" + rows[i].DAYNUM + "</td>");
+        //           if (rows[i].CL_BUSINESS == "2") {
+        //             td.addClass('sat');
+        //           } else if (rows[i].CL_BUSINESS == "3" || rows[i].CL_BUSINESS == "4") {
+        //             td.addClass('sun');
+        //           }
+        //           td.addClass('impossible');
+        //         }
+        //
+        //         row.append(td);
+        //
+        //         if(rows[i].CL_DAYDIV == 7) {
+        //           row.appendTo(tBody);
+        //           row = $("<tr></tr>");
+        //         }
+        //       }
+        //
+        //       var addTd = 7 - row.children("td").length;
+        //
+        //       if(addTd != 7) {
+        //         for(i=0; i<addTd; i++) {
+        //           row.append($("<td></td>"));
+        //         }
+        //       }
+        //
+        //       row.appendTo(tBody);
+        //     } else {
+        //       tBody.append($("<tr><td colspan='7'></td></tr>"));
+        //       tBody.append($("<tr><td colspan='7'></td></tr>"));
+        //       tBody.append($("<tr><td colspan='7'></td></tr>"));
+        //       tBody.append($("<tr><td colspan='7'></td></tr>"));
+        //       tBody.append($("<tr><td colspan='7'></td></tr>"));
+        //       tBody.append($("<tr><td colspan='7'></td></tr>"));
+        //     }
+        //   } else {
+        //     //alert(data.resultMessage);
+        //   }
+        // });
       }
 
       function sNextMonth() {
@@ -286,10 +286,10 @@
             var bbsTitle = "이벤트";
         }*/
 
-        var sUrl = "/controller/getBoardList";
+        var sUrl = "/getBoardList";
         var params = {};
 
-        params["method"] = "getBoardList";
+        //params["method"] = "getBoardList";
 
         params["coDiv"]    = globals.coDiv;
         params["type"]     = paraType;
@@ -370,7 +370,7 @@
         var sUrl = "/controller/MemberController";
         var params = {};
 
-        params["method"] = "doLogout";
+        //params["method"] = "doLogout";
 
         mAjax(sUrl, params, "POST", true, function(data) {
           if(data.resultCode == "0000") {
@@ -411,21 +411,21 @@
                     <li onclick="location.href='/fac/fac01'">시설안내</li>
                     <li onclick="location.href='/board/list?type=1'">정보마당</li>
                 </ul>
-                <!--#include virtual="/include/submenu"-->
+                <%@ include file="./include/submenu.jsp" %>
 
                 <ul class="rightBtn">
                     <li class="topJoin">
-<%--                        <%If Session("MS_NUM") = "" Then%>
-                        <a href="https://www.serenitycc.co.kr" class="podo">세레니티</a>
-                        <a href="/member/login" class="topLogin" id="login"></a>
-                        <%Else%>
-                        <a href="https://www.serenitycc.co.kr" class="podo">세레니티</a>
-                        <a href="/member/modify" class="topLogin" id="login"></a>
-                        <%End If%>--%>
+                        <% if (session.getAttribute("MS_NUM") == null) { %>
+                            <a href="https://www.serenitycc.co.kr" class="podo">세레니티</a>
+                            <a href="/member/login" class="topLogin" id="login"></a>
+                        <% } else { %>
+                            <a href="https://www.serenitycc.co.kr" class="podo">세레니티</a>
+                            <a href="/member/modify" class="topLogin" id="login"></a>
+                        <% } %>
                     </li>
                 </ul>
             </div>
-            <!--#include virtual="/include/topmenu"-->
+            <%@ include file="./include/topmenu.jsp" %>
 
         </div>
 

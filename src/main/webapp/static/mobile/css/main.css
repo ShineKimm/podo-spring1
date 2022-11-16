@@ -2,7 +2,7 @@
 
 .mainWrap{ position: relative; width: 100%; }
 .topImgWrap{ overflow: hidden; width: 100%; height: 450px; position: relative;}
-.topImgBox{ background: url(/mobile/images/main/bg_main.jpg) center top no-repeat;
+.topImgBox{ background: url(/static/mobile/images/main/bg_main.jpg) center top no-repeat;
   -webkit-animation: zoomin 2s ease;
   animation: zoomin 2s ease;
   animation: zoomin 2s ease;
@@ -142,11 +142,11 @@ ul.bxslider {
 }
 .bx-wrapper .bx-prev {
   left:10px;
-  background:url(/mobile/images/main/main_arw_l.png) no-repeat;
+  background:url(/static/mobile/images/main/main_arw_l.png) no-repeat;
 }
 .bx-wrapper .bx-next {
   right:10px;
-  background:url(/mobile/images/main/main_arw_r.png) no-repeat;
+  background:url(/static/mobile/images/main/main_arw_r.png) no-repeat;
 }
 .bx-wrapper .bx-controls-direction a {
   position: absolute;

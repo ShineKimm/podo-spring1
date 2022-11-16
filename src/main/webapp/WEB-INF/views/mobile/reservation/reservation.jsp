@@ -16,7 +16,7 @@
 
 		if("<%=session.getAttribute("ms_num")%>" == "") {
 			alert("로그인 후 이용 가능합니다.");
-			location.href = "/mobile/member/login.asp?page=/mobile/reservation/reservation.asp";
+			location.href = "/mobile/member/login?page=/mobile/reservation/reservation";
 			return;
 		}
 
@@ -43,10 +43,10 @@
 	}
 
 	function initCalendar(selector, year, month) {
-		var sUrl = "/controller/ReservationController.asp";
+		var sUrl = "/controller/ReservationController";
 		var params = {};
 
-		params["method"] = "getCalendar";
+		//params["method"] = "getCalendar";
 		params["coDiv"] = globals.coDiv;
 		params["selYm"] = year + month;
 
@@ -169,7 +169,7 @@
 	}
 
 	function doSearch() {
-		var sUrl = "/controller/ReservationController.asp";
+		var sUrl = "/controller/ReservationController";
 		var params = {};
 
 		if(mDate == null || mDate == '') {
@@ -177,7 +177,7 @@
 			return;
 		}
 
-		params["method"] = "getTeeList";
+		//params["method"] = "getTeeList";
 		params["coDiv"] = globals.coDiv;
 		params["date"] = mDate;
 		params["cos"] = mCos;
@@ -236,11 +236,11 @@
 	function reserProc(i) {
 
 		if("<%=session.getAttribute("ms_num")%>" == "") {
-			location.href = "/mobile/member/login.asp?page=/mobile/reservation/reservation.asp";
+			location.href = "/mobile/member/login?page=/mobile/reservation/reservation";
 			return;
 		}
 
-		var sUrl = "/controller/ReservationController.asp";
+		var sUrl = "/controller/ReservationController";
 		var params = {};
 
 		var msNum = "<%=session.getAttribute("ms_num")%>";
@@ -250,21 +250,21 @@
 		}
 
 		if ("<%=request.getParameter("OLD_BK_DAY")%>" != "") {
-			params["method"] = "changeReservation";
+			//params["method"] = "changeReservation";
 			params["coDiv"] = globals.coDiv;
 			params["aday"] = rowData[i].BK_DAY;
 			params["acos"] = rowData[i].BK_COS;
 			params["atime"] = rowData[i].BK_TIME;
 			params["charge"] = bkCharge;
 			params["bDay"] = "<%=request.getParameter("OLD_BK_DAY")%>";
-			params["bCos"] = "<%=Request("OLD_BK_COS")%>";
-			params["bTime"] = "<%=Request("OLD_BK_TIME")%>";
+			params["bCos"] = "<%=request.getParameter("OLD_BK_COS")%>";
+			params["bTime"] = "<%=request.getParameter("OLD_BK_TIME")%>";
 			params["msNum"] = msNum;
 			params["media"] = "M";
 			
 			ans = confirm("[변경 확인] " + rowData[i].BK_DAY.substring(0,4)+"-"+rowData[i].BK_DAY.substring(4,6)+"-"+rowData[i].BK_DAY.substring(6,8)+" 날짜의 \n\n"+rowData[i].BK_TIME.substring(0,2)+"시"+rowData[i].BK_TIME.substring(2,4)+"분 "+rowData[i].BK_COS_NM+" 예약으로 변경하시겠습니까?");
 		} else {
-			params["method"] = "doReservation";
+			//params["method"] = "doReservation";
 			params["coDiv"] = globals.coDiv;
 			params["day"] = rowData[i].BK_DAY;
 			params["cos"] = rowData[i].BK_COS;
@@ -285,10 +285,10 @@
 					} else {
 						alert("예약 완료되었습니다.");
 					}
-					location.href = "/mobile/reservation/reserCheck.asp"
+					location.href = "/mobile/reservation/reserCheck"
 				} else {
 					alert(data.resultMessage);
-					location.href = "/mobile/reservation/reserCheck.asp"
+					location.href = "/mobile/reservation/reserCheck"
 				}
 			});
 
@@ -298,8 +298,8 @@
 </script>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="on" ><a href="/mobile/reservation/reservation.asp">실시간예약</a></li>
-		<li class="" ><a href="/mobile/reservation/reserCheck.asp">예약확인/취소</a></li>
+		<li class="on" ><a href="/mobile/reservation/reservation">실시간예약</a></li>
+		<li class="" ><a href="/mobile/reservation/reserCheck">예약확인/취소</a></li>
 	</ul>
 </div>
 
@@ -312,9 +312,9 @@
 	
 	<div class="monthBox" id="calendarBox">
 		<ul class="monthChoice">
-			<li class="arwl" onclick="doPrevMonth();"><img src="/mobile/images/btn_ml.png"></li>
+			<li class="arwl" onclick="doPrevMonth();"><img src="/static/mobile/images/btn_ml.png"></li>
 			<li id="calHeader" class="date"></li>
-			<li class="arwr" onclick="doNextMonth()"><img src="/mobile/images/btn_mr.png"></li>
+			<li class="arwr" onclick="doNextMonth()"><img src="/static/mobile/images/btn_mr.png"></li>
 		</ul>
 		<table class="calendar">
 			<colgroup>

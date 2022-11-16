@@ -1,4 +1,6 @@
-<!-- #include virtual='/mobile/include/header.asp' -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../include/header.jsp" %>
 <script>
 
 	var chkPw = false;
@@ -10,7 +12,7 @@
 
 		if("<%=session.getAttribute("ms_num")%>" == "") {
 			alert("로그인 후 이용 가능합니다.");
-			location.href = "/mobile/member/login.asp?page=/mobile/member/modify.asp";
+			location.href = "/mobile/member/login?page=/mobile/member/modify";
 			return;
 		}
 
@@ -86,10 +88,10 @@
 	})
 
 	function doUpdateMemeber() {
-		var sUrl = "/controller/MemberController.asp";
+		var sUrl = "/controller/MemberController";
 		var params = {};
 
-		params["method"] = "doUpdateMemeber";
+		//params["method"] = "doUpdateMemeber";
 
 		var pw = $("#txtPw").val();
 		var sex = $(':radio[name="chkSex"]:checked').val();
@@ -159,7 +161,7 @@
 			if(data.resultCode == "0000") {
 				alert("정보변경이 완료 되었습니다.");
 
-	      location.href = "/mobile/index.asp";
+	      location.href = "/mobile/index";
 			} else {
 				alert(data.resultMessage);
 			}
@@ -167,10 +169,10 @@
 	}
 
 	function doCertification() {
-		var sUrl = "/controller/MemberController.asp";
+		var sUrl = "/controller/MemberController";
 		var params = {};
 
-		params["method"] = "doCertification";
+		//params["method"] = "doCertification";
 
 		var phone1 = $("#txtPhone").val().substr(0,3);
 		var phone2 = $("#txtPhone").val().substr(3,4);
@@ -202,7 +204,7 @@
 				alert("인증번호가 발송되었습니다.");
 			} else if (data.resultCode == "9999") {
 				alert(data.resultMessage);
-				location.href = "find.asp";
+				location.href = "find";
 			} else {
 				alert(data.resultMessage);
 			}
@@ -275,10 +277,10 @@
 	}
 
 	function doSearchArea() {
-		var sUrl = "/controller/CommonController.asp";
+		var sUrl = "/getCommonCode";
 		var params = {};
 
-		params["method"] = "getCommonCode";
+		//params["method"] = "getCommonCode";
 		params["coDiv"] = globals.coDiv;
 		params["division"] = "003";
 
@@ -364,7 +366,7 @@
 </script>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="on" ><a href="/mobile/member/modify.asp">정보수정</a></li>
+		<li class="on" ><a href="/mobile/member/modify">정보수정</a></li>
 	</ul>
 </div>
 
@@ -494,8 +496,8 @@
 	
 	<div class="btnBox">
 		<a href="javascript:doUpdateMemeber()" class="motion">수정</a>
-		<a href="/mobile/index.asp" class="cancel">취소</a>
+		<a href="/mobile/index" class="cancel">취소</a>
 	</div>
 
 </div>	
-<!-- #include virtual='/mobile/include/footer.asp' -->
+<%@ include file="../include/footer.jsp" %>

@@ -14,7 +14,7 @@
 
 #header .subHeader .mainList{overflow:hidden;}
 #header .subHeader .mainList > li{float:left;width:110px;display:block;color:#fff;height:70px;padding:25px 0;font-size:16px;text-align:center;cursor:pointer;}
-#header .subHeader .mainList > li:hover{font-family:'Nanum GothicExb';background:url('../images/m_list_bar.jpg')no-repeat bottom;}
+#header .subHeader .mainList > li:hover{font-family:'Nanum GothicExb';background:url('/static/images/m_list_bar.jpg')no-repeat bottom;}
 
 #scrollmenuwrap{position:absolute;top:70px;left:0;;width:100%;z-index:100;}
 #scrollmenu2 {width:100%;margin:0 auto;height:460px;position:absolute;top:0;left:0;background:rgba(46,46,46,0.95);text-align:center;z-index:1000;display:none;min-width:1280px;}
@@ -177,7 +177,7 @@ transition:1s;
 	height:52px;
 	display:block;
 	margin-bottom:7px;
-	background:#ddd url('../images/top_arrow.png') no-repeat center center;
+	background:#ddd url('/static/images/top_arrow.png') no-repeat center center;
 	background-size:52px 52px !important;
 	/*background color transition*/
 	-webkit-transition:1s;

@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
-<!-- #include virtual='/mobile/include/menuList.asp' -->
+<!-- #include virtual='/mobile/include/menuList' 메뉴리스트 파일 없음 -->
 <div class="contents" style="padding-bottom:0;">
 	<ul class="commonTitle">
 		<li class="title">코스안내</li>
@@ -11,9 +11,9 @@
 	<div class="boardTxt">용의 형상에 시작하여 크고 깊은 잔잔한 호수의 <br>흐름을 표현하여 유려하지만 강인한 느낌</div>
 
 	<ul class="courseTab">
-		<li class="" onclick="location.href='intro.asp'">All</li>
-		<li class="" onclick="location.href='l1.asp'">레이크코스</li>
-		<li class="on" onclick="location.href='d1.asp'">드래곤코스</li>
+		<li class="" onclick="location.href='intro'">All</li>
+		<li class="" onclick="location.href='l1'">레이크코스</li>
+		<li class="on" onclick="location.href='d1'">드래곤코스</li>
 	</ul>
 
 	<div class="courseInfoBox">
@@ -23,15 +23,15 @@
 		</ul>
 		<div class="selectBox">
 			<select name="" id=""onchange="window.open(value,'_self');" class="select-arrow select">
-				<option value="d1.asp"selected>1홀</option>
-				<option value="d2.asp" >2홀</option>
-				<option value="d3.asp">3홀</option>
-				<option value="d4.asp">4홀</option>
-				<option value="d5.asp">5홀</option>
-				<option value="d6.asp">6홀</option>
-				<option value="d7.asp">7홀</option>
-				<option value="d8.asp">8홀</option>
-				<option value="d9.asp">9홀</option>
+				<option value="d1"selected>1홀</option>
+				<option value="d2" >2홀</option>
+				<option value="d3">3홀</option>
+				<option value="d4">4홀</option>
+				<option value="d5">5홀</option>
+				<option value="d6">6홀</option>
+				<option value="d7">7홀</option>
+				<option value="d8">8홀</option>
+				<option value="d9">9홀</option>
 			</select>
 		</div>
 	</div>

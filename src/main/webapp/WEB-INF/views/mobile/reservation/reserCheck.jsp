@@ -1,4 +1,6 @@
-<!-- #include virtual='/mobile/include/header.asp' -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../include/header.jsp" %>
 <script type="text/javascript">
 
 var rows;
@@ -10,7 +12,7 @@ $(document).ready(function() {
 function init() {
 	if("<%=session.getAttribute("ms_num")%>" == "") {
 		alert("로그인 후 이용 가능합니다.");
-		location.href = "/mobile/member/login.asp";
+		location.href = "/mobile/member/login";
 		return;
 	}
 
@@ -18,10 +20,10 @@ function init() {
 }
 
 function doSearch() {
-	var sUrl = "/controller/ReservationController.asp";
+	var sUrl = "/controller/ReservationController";
 	var params = {};
 
-	params["method"] = "getReservationList";
+	//params["method"] = "getReservationList";
 	params["coDiv"] = globals.coDiv;
 	params["msNum"] = "<%=session.getAttribute("ms_num")%>";
 
@@ -90,10 +92,10 @@ function blDeleteReservation(i) {
 
 	if (ans == true) {
 
-		var sUrl = "/controller/ReservationController.asp";
+		var sUrl = "/controller/ReservationController";
 		var params = {};
 
-		params["method"] = "blDeleteReservation";
+		//params["method"] = "blDeleteReservation";
 		params["coDiv"] = globals.coDiv;
 		params["msNum"] = "<%=session.getAttribute("ms_num")%>";
 		params["day"] = rows[i].BK_DAY;
@@ -127,10 +129,10 @@ function doDeleteReservation(i) {
 
 	if (ans == true) {
 
-		var sUrl = "/controller/ReservationController.asp";
+		var sUrl = "/controller/ReservationController";
 		var params = {};
 
-		params["method"] = "cancelReservation";
+		//params["method"] = "cancelReservation";
 		params["coDiv"] = globals.coDiv;
 		params["msNum"] = "<%=session.getAttribute("ms_num")%>";
 		params["day"] = rows[i].BK_DAY;
@@ -164,7 +166,7 @@ function changeReservation(i) {
 
 </script>
 
-<form id="form_change" action="/mobile/reservation/reservation.asp" method="post">
+<form id="form_change" action="/mobile/reservation/reservation" method="post">
 	<input type="hidden" name="OLD_BK_DAY" 					id="BK_DAY" >
 	<input type="hidden" name="OLD_BK_COS" 					id="BK_COS" >
 	<input type="hidden" name="OLD_BK_COS_NM" 			id="BK_COS_NM" >
@@ -174,8 +176,8 @@ function changeReservation(i) {
 </form>
 <div class="menuTabBox">
 	<ul class="menuList">
-		<li class="" ><a href="/mobile/reservation/reservation.asp">실시간예약</a></li>
-		<li class="on" ><a href="/mobile/reservation/reserCheck.asp">예약확인/취소</a></li>
+		<li class="" ><a href="/mobile/reservation/reservation">실시간예약</a></li>
+		<li class="on" ><a href="/mobile/reservation/reserCheck">예약확인/취소</a></li>
 	</ul>
 </div>
 
