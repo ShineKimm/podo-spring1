@@ -8,12 +8,17 @@ import podo.podospring.common.dao.AbstractDAO;
 
 @Repository
 public class CommonDAO extends AbstractDAO {
+    public Map<String, Object> getCommonCode(HashMap<String, Object> params) {
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("resultCode","9999");
+        resultMap.put("resultMessage","");
 
-    public List<Map<String, Object>> getCommonCode(HashMap<String, Object> params) {
-    List<Map<String, Object>> resultList= selectList("common.getCommonCode", params);
+        List<Map<String, Object>> resultList = selectList("common.getCommonCode", params);
+        resultMap.put("rows",resultList);
+
         if (resultList != null || resultList.size() != 0) {
-            resultList.get(0).put("resultCode","0000");
+            resultMap.put("resultCode","0000");
         }
-        return resultList;
+        return resultMap;
     }
 }

@@ -102,7 +102,7 @@ public class MemberDAO extends AbstractDAO {
             params.put("netLevel","00");
 
             
-            // 트렌젝션 시작구문 추가해야함
+//             TODO KDY 트렌젝션 시작구문 추가해야함
             try {
                 String msNum = (String)selectOne("member.doSignUp2",params);
                 String homeAddress = (String) selectOne("member.doSignUp3",params);

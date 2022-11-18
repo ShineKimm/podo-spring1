@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 
 public interface CommonService {
 
-    List<Map<String, Object>> getCommonCode(HashMap<String, Object> params);
+    Map<String, Object> getCommonCode(HashMap<String , Object> params);
 }

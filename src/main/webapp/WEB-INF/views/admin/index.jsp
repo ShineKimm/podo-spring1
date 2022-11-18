@@ -1,16 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../include/header.jsp" %>
+<%@ include file="./include/header.jsp" %>
 <script>
   $(document).ready(function() {
     init();
   });
 
   function init() {
-    var sUrl = "/controller/AdminController";
-    var params = {
-      "method" : "getMainData"
-    };
+    var sUrl = "/getMainData";
+    var params = {};
 
     mAjax(sUrl, params, "GET", true, function(data) {
       if(data.resultCode == "0000") {
@@ -112,4 +110,4 @@
         </div>
     </div>
 </div>
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="./include/footer.jsp" %>

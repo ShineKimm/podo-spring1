@@ -162,9 +162,9 @@
 	}
 
 	function writeBoard() {
-		var sUrl = "/controller/BoardController";
+		var sUrl = "/writeBoard";
 
-		$("#method").val("writeBoard");
+		// $("#method").val("writeBoard");
 		$("#coDiv").val(globals.coDiv);
 		$("#flag").val(mFlag);
 		$("#type").val(mType);

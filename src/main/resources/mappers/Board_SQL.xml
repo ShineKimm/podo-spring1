@@ -3,7 +3,7 @@
 
 <mapper namespace="board">
 
-  <select id="getBoardList" parameterType="hashmap" resultType="hashmap">
+  <select id="query1" parameterType="hashmap" resultType="hashmap">
     SELECT H.CO_DIV
     , H.TYPE
     , H.IDX
@@ -26,14 +26,14 @@
         , IFNULL(NULLIF(U.USER_NAME, ''), '관리자') AS WRITER_NAME
       </otherwise>
     </choose>
-    , DATE_FORMAT(H.INPUT_DATETIME, '%Y.%m.%d') 	AS INPUT_DATETIME
-    , IFNULL(NULLIF(D.FILE_NAME1, ''), '') 			AS FILE_NAME1
-    , IFNULL(NULLIF(D.FILE_PATH1, ''), '') 			AS FILE_PATH1
-    , IFNULL(NULLIF(D.FILE_NAME2, ''), '') 			AS FILE_NAME2
-    , IFNULL(NULLIF(D.FILE_PATH2, ''), '') 			AS FILE_PATH2
-    , IFNULL(NULLIF(D.FILE_NAME3, ''), '') 			AS FILE_NAME3
-    , IFNULL(NULLIF(D.FILE_PATH3, ''), '') 			AS FILE_PATH3
-    , IFNULL(NULLIF(D.ATTACH_CNT, 0), 0) 				AS ATTACH_CNT
+    , DATE_FORMAT(H.INPUT_DATETIME, '%Y.%m.%d') AS INPUT_DATETIME
+    , IFNULL(NULLIF(D.FILE_NAME1, ''), '') AS FILE_NAME1
+    , IFNULL(NULLIF(D.FILE_PATH1, ''), '') AS FILE_PATH1
+    , IFNULL(NULLIF(D.FILE_NAME2, ''), '') AS FILE_NAME2
+    , IFNULL(NULLIF(D.FILE_PATH2, ''), '') AS FILE_PATH2
+    , IFNULL(NULLIF(D.FILE_NAME3, ''), '') AS FILE_NAME3
+    , IFNULL(NULLIF(D.FILE_PATH3, ''), '') AS FILE_PATH3
+    , IFNULL(NULLIF(D.ATTACH_CNT, 0), 0) AS ATTACH_CNT
     , H.VIEW_CNT
     , H.DEL_DIV
     FROM HP_BOARD H
@@ -55,15 +55,15 @@
     , IFNULL(NULLIF(FILE_PATH1, ''), '') AS FILE_PATH1
     , IFNULL(NULLIF(FILE_NAME2, ''), '') AS FILE_NAME2
     , IFNULL(NULLIF(FILE_PATH2, ''), '') AS FILE_PATH2
-    , IFNULL(NULLIF(FILE_NAME3, ''), '') 	AS FILE_NAME3
-    , IFNULL(NULLIF(FILE_PATH3, ''), '') 	AS FILE_PATH3
+    , IFNULL(NULLIF(FILE_NAME3, ''), '') AS FILE_NAME3
+    , IFNULL(NULLIF(FILE_PATH3, ''), '') AS FILE_PATH3
     , IF(IFNULL(NULLIF(FILE_NAME2, ''), '') = '', 0, 1)
     + IF(IFNULL(NULLIF(FILE_NAME3, ''), '') = '', 0, 1) AS ATTACH_CNT
     FROM HP_BOARD_ATTACH
     ) D
     ON H.CO_DIV = D.CO_DIV
-    AND H.TYPE   = D.TYPE
-    AND H.IDX    = D.IDX
+    AND H.TYPE = D.TYPE
+    AND H.IDX = D.IDX
     WHERE H.CO_DIV = ${coDiv}
     AND H.TYPE = ${type}
     <if test='adminYn != "Y"'>
@@ -92,5 +92,118 @@
     LIMIT ${startCnt}, ${pageCnt}
   </select>
 
+  <select id="query2" parameterType="hashmap" resultType="int">
+    SELECT COUNT(*) TOTAL_CNT
+    FROM HP_BOARD H
+    <choose>
+      <when test='sType == "6"'>
+        LEFT OUTER JOIN MS_MAININFO U
+        ON H.INPUT_STAFF = U.MS_NUM
+      </when>
+      <otherwise>
+        LEFT OUTER JOIN USER_INFO U
+        ON H.INPUT_STAFF = U.USER_STAFF
+      </otherwise>
+    </choose>
+    LEFT OUTER JOIN (
+    SELECT CO_DIV
+    , TYPE
+    , IDX
+    , IFNULL(NULLIF(FILE_NAME1, ''), '') AS FILE_NAME1
+    , IFNULL(NULLIF(FILE_PATH1, ''), '') AS FILE_PATH1
+    , IF(IFNULL(NULLIF(FILE_NAME2, ''), '') = '', 0, 1)
+    + IF(IFNULL(NULLIF(FILE_NAME3, ''), '') = '', 0, 1) AS ATTACH_CNT
+    FROM HP_BOARD_ATTACH
+    ) D
+    ON H.CO_DIV = D.CO_DIV
+    AND H.TYPE = D.TYPE
+    AND H.IDX = D.IDX
+    WHERE H.CO_DIV = '${coDiv}'
+    <if test='adminYn != "Y"'>
+      AND H.DEL_DIV = '0'
+    </if>
+    AND H.TYPE = '${type}'
+    <if test='boardDiv != null and !boardDiv.equals("")'>
+      AND H.BOARD_DIV = '${boardDiv}'
+    </if>
+    <if test='stDate != null and !stDate.equals("") and edDate != null and !edDate.equals("")'>
+      AND H.BK_DAY BETWEEN '${stDate}' AND '${edDate}'
+    </if>
+    <if test='searchText != null and !searchText.equals("") '>
+      <choose>
+        <when test='searchOption == "title"'>
+          AND H.TITLE LIKE '${searchText}'
+        </when>
+        <when test='searchOption == "content"'>
+          AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE '${searchText}'
+        </when>
+        <when test='searchOption == "writer"'>
+          AND U.USER_NAME = '${searchText}'
+        </when>
+      </choose>
+    </if>
+  </select>
 
+  <select id="getBoardDetail" parameterType="hashmap" resultType="hashmap">
+    SELECT H.CO_DIV
+         , H.TYPE
+         , H.IDX
+         , H.TITLE
+         , CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) AS CONTENT
+         , H.BOARD_DIV
+         , H.JOIN_STATUS
+         , H.BK_DAY
+         , H.BK_TIME
+         , H.BK_PERSON
+         , H.BK_FIRST_PHONE
+         , CAST(AES_DECRYPT(UNHEX(H.BK_MID_PHONE),'JBOG') AS CHAR) AS BK_MID_PHONE
+         , H.BK_LAST_PHONE
+         , H.LINK
+         , H.INPUT_STAFF
+    <choose>
+      <when test='sType == "6"'>
+         , IFNULL(NULLIF(U.MS_NAME, ''), '') AS WRITER_NAME
+      </when>
+      <otherwise>
+         , IFNULL(NULLIF(U.USER_NAME, ''), '관리자') AS WRITER_NAME
+      </otherwise>
+    </choose>
+         , DATE_FORMAT(H.INPUT_DATETIME, '%Y-%m-%d') AS INPUT_DATETIME
+ 		     , IFNULL(NULLIF(H.VIEW_CNT, 0), 0) AS VIEW_CNT
+ 		     , IFNULL(NULLIF(A.FILE_NAME1, ''), '') AS FILE_NAME1
+ 		     , IFNULL(NULLIF(A.ORIGIN_FILE_NAME1, ''), '') AS ORIGIN_FILE_NAME1
+ 		     , IFNULL(NULLIF(A.FILE_PATH1, ''), '') AS FILE_PATH1
+ 		     , IFNULL(NULLIF(A.FILE_NAME2, ''), '') AS FILE_NAME2
+ 		     , IFNULL(NULLIF(A.ORIGIN_FILE_NAME2, ''), '') AS ORIGIN_FILE_NAME2
+ 		     , IFNULL(NULLIF(A.FILE_PATH2, ''), '') AS FILE_PATH2
+ 		     , IFNULL(NULLIF(A.FILE_NAME3, ''), '') AS FILE_NAME3
+ 		     , IFNULL(NULLIF(A.ORIGIN_FILE_NAME3, ''), '') AS ORIGIN_FILE_NAME3
+ 		     , IFNULL(NULLIF(A.FILE_PATH3, ''), '') AS FILE_PATH3
+   FROM HP_BOARD H
+    <choose>
+      <when test='sType == "6"'>
+        LEFT OUTER JOIN MS_MAININFO U
+        ON H.INPUT_STAFF = U.MS_NUM
+      </when>
+      <otherwise>
+        LEFT OUTER JOIN USER_INFO U
+        ON H.INPUT_STAFF = U.USER_STAFF
+      </otherwise>
+    </choose>
+        LEFT OUTER JOIN HP_BOARD_ATTACH A
+        ON H.CO_DIV      = A.CO_DIV
+        AND H.TYPE        = A.TYPE
+        AND H.IDX         = A.IDX
+        WHERE H.CO_DIV      = '${coDiv}'
+        AND H.TYPE        = '${sType}'
+        AND H.IDX         = '${sIdx}'
+  </select>
+
+  <update id="ReCnt" parameterType="hashmap">
+    UPDATE HP_BOARD H
+    SET VIEW_CNT = IFNULL(NULLIF(H.VIEW_CNT, 0), 0) + 1
+    WHERE CO_DIV      = '${coDiv}'
+      AND TYPE        = '${sType}'
+      AND IDX         = '${sIdx}'
+  </update>
 </mapper>

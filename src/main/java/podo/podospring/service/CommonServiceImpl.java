@@ -15,7 +15,7 @@ public class CommonServiceImpl implements CommonService {
     }
 
     @Override
-    public List<Map<String, Object>> getCommonCode(HashMap<String, Object> params) {
+    public Map<String, Object> getCommonCode(HashMap<String, Object> params) {
 
         return commonDAO.getCommonCode(params);
     }

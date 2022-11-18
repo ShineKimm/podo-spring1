@@ -50,7 +50,7 @@
   }
 
   function doSearch() {
-    var sUrl = "/controller/BoardController";
+    var sUrl = "/getBoardList";
     var params = {};
 
     //params["method"] = "getBoardList";

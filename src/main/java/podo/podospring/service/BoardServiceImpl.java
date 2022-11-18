@@ -18,8 +18,18 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public List<HashMap<String, Object>> getBoardList(Map<String, Object> params) {
+    public HashMap<String, Object> getBoardList(HashMap<String, Object> params) {
         return boardDAO.getBoardList(params);
+    }
+
+    @Override
+    public HashMap<String, Object> getBoardDetail(HashMap<String, Object> params) {
+        return boardDAO.getBoardDetail(params);
+    }
+
+    @Override
+    public void writeBoard(HashMap<String, Object> params) {
+        boardDAO.writeBoard(params);
     }
 
 

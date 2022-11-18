@@ -52,16 +52,13 @@
       function doLogin() {
         var sUrl = "/adminDoLogin";
         var params = {};
-        <%--var page = "<%=Request("page")%>";--%>
-        var page = "<%=request.getParameter("page")%>";
-
+        var page = <%=request.getParameter("page")%>;
         var id = $("#txtAdminId").val();
-        var pw = $("#txtAdminPw").val();
 
-        if(page == null || page == "") {
+        var pw = $("#txtAdminPw").val();
+        if(page == null || page == "" || page == "null") {
           page = "/admin/index";
         }
-
         if(id == "") {
           alert("아이디를 입력하세요.");
           return;

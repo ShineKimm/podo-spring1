@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>포도CC 관리자</title>
 
-    <link href="/admin/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/static/admin/css/style.css" rel="stylesheet" type="text/css">
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
     <script src="/static/js/globals.js"></script>

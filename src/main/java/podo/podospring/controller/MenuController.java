@@ -117,6 +117,7 @@ public class MenuController {
         return "/fac/fac04";
     }
 
+//  admin
     @GetMapping("/admin/member/login")
     public String adminLogin() {
         return "/admin/member/login";
@@ -129,6 +130,25 @@ public class MenuController {
     public String adminIndex_1() {
         return "/admin/index";
     }
+
+    @GetMapping("/admin/board/list")
+    public String adminList() {
+        return "/admin/board/list";
+    }
+    @GetMapping("/admin/board/write")
+    public String adminBoardWrite() {
+        return "/admin/board/write";
+    }
+    @GetMapping("/admin/board/view")
+    public String adminBoardView() {
+        return "/admin/board/view";
+    }
+    @GetMapping("/admin/contents/message")
+    public String adminContentsMessage() {
+        return "/admin/contents/message";
+    }
+
+
     @GetMapping("/member/clause")
     public String memberClause() {
         return "/member/clause";

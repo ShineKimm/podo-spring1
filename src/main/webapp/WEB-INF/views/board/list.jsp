@@ -75,19 +75,19 @@
     // console.log(params);
 
     mAjax(sUrl, params, "POST", true, function(data) {
-      // if(data.resultCode == "0000") {
-        rows = data.length;
+      if(data.resultCode == "0000") {
+        rows = data.rows;
 
         var tbody = $("#tbody");
         tbody.empty();
         var eventList = $("#eventList");
         eventList.empty();
 
-        if(rows == 0) {
+        if(rows.length == 0) {
           tbody.append("<tr><td colspan='5'>등록된 글이 없습니다.</td></tr>");
           eventList.append("<div style='text-align:center'>등록된 글이 없습니다.</div>");
         }
-        for(i=0; i<rows; i++) {
+        for(i=0; i<rows.length; i++) {
           if (mType == "2" || mType == "5") {
 
             var template = "";
@@ -102,24 +102,23 @@
             template += "		</a>																																															";
             template += "	</div>																																															";
 
-            eventList.append(String.format(template, i, data[i].FILE_PATH3, data[i].FILE_NAME3, data[i].TITLE, data[i].INPUT_DATETIME));
+            eventList.append(String.format(template, i, rows[i].FILE_PATH3, rows[i].FILE_NAME3, rows[i].TITLE, rows[i].INPUT_DATETIME));
           } else {
             var tr = $("<tr style='cursor:pointer' onclick='onClickRow(" + i + ")'></tr>");
-            var td1 = $("<td>" + data[i].IDX + "</td>");
-            var td2 = $("<td class='subject'>" + data[i].TITLE + "</td>");
-            var td3 = $("<td>" + data[i].WRITER_NAME + "</td>");
-            var td4 = $("<td>" + data[i].INPUT_DATETIME + "</td>");
-            var td5 = $("<td>" + data[i].VIEW_CNT + "</td>");
+            var td1 = $("<td>" + rows[i].IDX + "</td>");
+            var td2 = $("<td class='subject'>" + rows[i].TITLE + "</td>");
+            var td3 = $("<td>" + rows[i].WRITER_NAME + "</td>");
+            var td4 = $("<td>" + rows[i].INPUT_DATETIME + "</td>");
+            var td5 = $("<td>" + rows[i].VIEW_CNT + "</td>");
 
             tr.append(td1, td2, td3, td4, td5).appendTo(tbody);
           }
         }
 
-        initPaging(80);
-      // } else {
-      //   alert("여기?");
-      //   alert(data.resultMessage);
-      // }
+        initPaging(data.totalCnt);
+      } else {
+        alert(data.resultMessage);
+      }
     });
   }
 
@@ -167,8 +166,8 @@
   }
 
   function onClickRow(i) {
-    var type = data[i].TYPE;
-    var idx = data[i].IDX;
+    var type = rows[i].TYPE;
+    var idx = rows[i].IDX;
 
     location.href = String.format("/board/view?type={0}&idx={1}", type, idx);
   }

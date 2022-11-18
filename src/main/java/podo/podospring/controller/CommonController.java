@@ -19,9 +19,9 @@ public class CommonController {
 
     @ResponseBody
     @RequestMapping("/getCommonCode")
-    public List<Map<String, Object>> getCommonCode(@RequestParam HashMap<String, Object> params) {
+    public Map<String, Object> getCommonCode(@RequestParam HashMap<String, Object> params) {
 
-        List<Map<String, Object>> resultList = commonService.getCommonCode(params);
-        return resultList;
+        Map<String, Object> resultMap = commonService.getCommonCode(params);
+        return resultMap;
     }
 }

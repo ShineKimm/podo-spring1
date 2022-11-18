@@ -39,7 +39,7 @@
   }
 
   function doSearchDetail() {
-    var sUrl = "/controller/BoardController";
+    var sUrl = "/getBoardDetail";
     var params = {};
 
     //params["method"] = "getBoardDetail";
@@ -92,10 +92,12 @@
             var img = String.format("<img src='{0}/{1}' class='viewMainImage'>", filePath1, fileName1);
             imageContainer.show();
             imageContainer.append(img);
+            console.log(img);
           } else {
             var a = String.format("&nbsp;&nbsp;<a href='{0}/{1}'>{2}</a>", filePath1, fileName1, originFileName1);
             fileContainer.show();
             $("#txtFiles").append(a);
+            console.log(a);
           }
         }
 
@@ -104,10 +106,12 @@
             var img = String.format("<img src='{0}/{1}' class='viewMainImage'>", filePath2, fileName2);
             imageContainer.show();
             imageContainer.append(img);
+            console.log(img);
           } else {
             var a = String.format("&nbsp;&nbsp;<a href='{0}/{1}'>{2}</a>", filePath2, fileName2, originFileName2);
             fileContainer.show();
             $("#txtFiles").append(a);
+            console.log(a);
           }
         }
 

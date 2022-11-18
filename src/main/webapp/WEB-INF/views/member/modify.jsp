@@ -286,15 +286,15 @@
 
     mAjax(sUrl, params, "POST", true, function(data) {
       if(data.resultCode == "0000") {
-        rows = data.rows;
+        // rows = data.rows;
         var tbody = $("#txtHomeAddress1");
         tbody.empty();
 
         tbody.append("<option value=''>지역선택</option>")
 
-        for(i=0; i<rows.length; i++) {
+        for(i=0; i<data.length; i++) {
 
-          var col1 = $("<option value='" + rows[i].CD_CODE + "'>" + rows[i].CD_TITLE1 + "</option>");
+          var col1 = $("<option value='" + data[i].CD_CODE + "'>" + data[i].CD_TITLE1 + "</option>");
 
           tbody.append(col1)
         }

@@ -2,7 +2,9 @@ package podo.podospring.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,12 +19,22 @@ public class AdminController {
     public AdminController(AdminService adminService) {
         this.adminService = adminService;
     }
-
-
     @RequestMapping("/adminDoLogin")
     @ResponseBody
-    public List<HashMap<String, Object>> doLogin(@RequestParam HashMap<String, Object> params) {
-        List<HashMap<String, Object>> result = adminService.doLogin(params);
+    public Map<String, Object> adminDoLogin(@RequestParam HashMap<String, Object> params, HttpSession session) {
+        Map<String, Object> result = adminService.adminDoLogin(params,session);
+        return result;
+    }
+    @RequestMapping("/getMainData")
+    @ResponseBody
+    public HashMap<String, Object> getMainData(@RequestParam HashMap<String, Object> params) {
+        HashMap<String, Object> result = adminService.getMainData(params);
+        return result;
+    }
+    @RequestMapping("/getMessage")
+    @ResponseBody
+    public HashMap<String, Object> getMessage(@RequestParam HashMap<String, Object> params) {
+        HashMap<String, Object> result = adminService.getMessage(params);
         return result;
     }
 }
