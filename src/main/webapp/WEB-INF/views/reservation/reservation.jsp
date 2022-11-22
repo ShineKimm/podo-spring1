@@ -45,7 +45,7 @@
   }
 
   function initCalendar(selector, year, month) {
-    var sUrl = "/controller/ReservationController";
+    var sUrl = "/getCalendar";
     var params = {};
 
     //params["method"] = "getCalendar";
@@ -191,7 +191,7 @@
   }
 
   function doSearch() {
-    var sUrl = "/controller/ReservationController";
+    var sUrl = "/getTeeList";
     var params = {};
 
     if(mDate == null || mDate == '') {
@@ -266,11 +266,11 @@
     }
 
     var comment = "";
-    if ("<%=Session("MS_DIVISION")%>" == "48"){}
-    else if ("<%=Session("MS_DIVISION")%>" != "21") {
-      if (rowData[i].CL_BUSINESS == "1" && weekDayCnt >= "<%=Session("MS_WEEKDAY_CNT")%>") {
+    if ("<%=session.getAttribute("MS_DIVISION")%>" == "48"){}
+    else if ("<%=session.getAttribute("MS_DIVISION")%>" != "21") {
+      if (rowData[i].CL_BUSINESS == "1" && weekDayCnt >= "<%=session.getAttribute("MS_WEEKDAY_CNT")%>") {
         comment = "\r\n회원님께서는 해당 주중 예약 횟수를 초과하여 비회원가로 예약됩니다.\r\n\r\n";
-      } else if (rowData[i].CL_BUSINESS != "1" && weekEndCnt >= "<%=Session("MS_WEEKEND_CNT")%>") {
+      } else if (rowData[i].CL_BUSINESS != "1" && weekEndCnt >= "<%=session.getAttribute("MS_WEEKEND_CNT")%>") {
         comment = "\r\n회원님께서는 해당 주말 예약 횟수를 초과하여 비회원가로 예약됩니다.\r\n\r\n";
       }
     }
@@ -293,8 +293,8 @@
       params["atime"] = rowData[i].BK_TIME;
       params["charge"] = bkCharge;
       params["bDay"] = "<%=request.getParameter("OLD_BK_DAY")%>";
-      params["bCos"] = "<%=Request("OLD_BK_COS")%>";
-      params["bTime"] = "<%=Request("OLD_BK_TIME")%>";
+      params["bCos"] = "<%=request.getParameter("OLD_BK_COS")%>";
+      params["bTime"] = "<%=request.getParameter("OLD_BK_TIME")%>";
       params["msNum"] = msNum;
       params["media"] = "R";
 
@@ -346,7 +346,7 @@
         <ul class="navbarBox">
             <li class="on" onclick="location.href='/reservation/reservation'">실시간예약</li>
             <li class="" onclick="location.href='/reservation/reserCheck'">예약확인/취소</li>
-            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 인터넷예약 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 실시간예약</li>
+            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 인터넷예약 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 실시간예약</li>
         </ul>
     </div>
     <div class="contents">
@@ -411,7 +411,7 @@
         <div class="padding30"></div>
         <div class="borderBox" id="scrollerLine">
             <ul class="memberInfo">
-                <li>• 예약자 : <span class="bold"><%=Session("MS_NAME")%></span></li>
+                <li>• 예약자 : <span class="bold"><%=session.getAttribute("MS_NAME")%></span></li>
                 <li>• 예약일자 : <span class="bold" id="txtChooseDate">예약일자를 선택해 주세요.</span></li>
             </ul>
 
@@ -447,7 +447,7 @@
             </table>
         </div>
 
-        <a href="#" class="calBtn"><img src="/images/calImg01.png" alt=""> 달력보기</a>
+        <a href="#" class="calBtn"><img src="/static/images/calImg01.png" alt=""> 달력보기</a>
     </div><!-- contents End-->
 
 </div>	<!-- wrap End -->

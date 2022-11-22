@@ -113,7 +113,8 @@ function mFileAjax(sUrl, formData, fnSuccess) {
             processData : false,
             contentType : false,
             success : function(data) {
-            	fnSuccess(JSON.parse(data));
+            	// fnSuccess(JSON.parse(data));
+							fnSuccess(data);
             },
             error : fnError
         });

@@ -41,27 +41,22 @@ public class MemberDAO extends AbstractDAO {
         } else {
 //            resultMap = selectMap("member.verification",params, "id");
             Map<String, Object> hMap = (Map<String, Object>) selectOne("member.verification", params);
-            System.out.println(hMap.get("MS_NAME"));
-
-            resultMap.put("MS_NAME",hMap.get("MS_NAME"));
-            resultMap.put("MS_NUM",hMap.get("MS_NUM"));
-            if (resultMap == null) {
+            if (hMap != null) {
+                System.out.println(hMap.get("MS_NAME"));
+                resultMap.put("MS_NAME",hMap.get("MS_NAME"));
+                resultMap.put("MS_NUM",hMap.get("MS_NUM"));
+            }
+            if (hMap == null) {
                 resultMap.put("resultCode", "2000");
                 resultMap.put("resultMessage", "암호가 잘못되었습니다.");
             } else {
-                // 세션에 MS_NUM 저장
                 session.setAttribute("MS_NUM", hMap.get("MS_NUM"));
                 hMap.put("sessionID",params.get("sessionID"));
-                // 세션아이디 저장
                 update("member.loginInformation", hMap);
-
                 resultMap.put("resultCode","0000");
                 resultMap.put("resultName",resultMap.get("MS_NAME"));
-                
-                //MS_SESSION_KEY 와 MS_NUM 값을 가지고와야함
             }
         }
-
         return resultMap;
     }
 

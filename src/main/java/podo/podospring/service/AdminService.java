@@ -12,4 +12,5 @@ public interface AdminService {
     HashMap<String, Object> getMainData(HashMap<String, Object> params);
 
     HashMap<String, Object> getMessage(HashMap<String, Object> params);
+
 }

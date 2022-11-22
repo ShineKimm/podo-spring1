@@ -65,7 +65,7 @@
     AND H.TYPE = D.TYPE
     AND H.IDX = D.IDX
     WHERE H.CO_DIV = ${coDiv}
-    AND H.TYPE = ${type}
+    AND H.TYPE = ${sType}
     <if test='adminYn != "Y"'>
       AND H.DEL_DIV = '0'
     </if>
@@ -78,13 +78,13 @@
     <if test='searchText != null and !searchText.equals("") '>
       <choose>
         <when test='searchOption == "title"'>
-          AND H.TITLE LIKE ${searchText}
+          AND H.TITLE LIKE '%${searchText}%'
         </when>
         <when test='searchOption == "content"'>
-          AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE ${searchText}
+          AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE '%${searchText}%'
         </when>
         <when test='searchOption == "writer"'>
-          AND U.USER_NAME = ${searchText}
+          AND U.USER_NAME = '%${searchText}%'
         </when>
       </choose>
     </if>
@@ -146,40 +146,40 @@
 
   <select id="getBoardDetail" parameterType="hashmap" resultType="hashmap">
     SELECT H.CO_DIV
-         , H.TYPE
-         , H.IDX
-         , H.TITLE
-         , CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) AS CONTENT
-         , H.BOARD_DIV
-         , H.JOIN_STATUS
-         , H.BK_DAY
-         , H.BK_TIME
-         , H.BK_PERSON
-         , H.BK_FIRST_PHONE
-         , CAST(AES_DECRYPT(UNHEX(H.BK_MID_PHONE),'JBOG') AS CHAR) AS BK_MID_PHONE
-         , H.BK_LAST_PHONE
-         , H.LINK
-         , H.INPUT_STAFF
+    , H.TYPE
+    , H.IDX
+    , H.TITLE
+    , CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) AS CONTENT
+    , H.BOARD_DIV
+    , H.JOIN_STATUS
+    , H.BK_DAY
+    , H.BK_TIME
+    , H.BK_PERSON
+    , H.BK_FIRST_PHONE
+    , CAST(AES_DECRYPT(UNHEX(H.BK_MID_PHONE),'JBOG') AS CHAR) AS BK_MID_PHONE
+    , H.BK_LAST_PHONE
+    , H.LINK
+    , H.INPUT_STAFF
     <choose>
       <when test='sType == "6"'>
-         , IFNULL(NULLIF(U.MS_NAME, ''), '') AS WRITER_NAME
+        , IFNULL(NULLIF(U.MS_NAME, ''), '') AS WRITER_NAME
       </when>
       <otherwise>
-         , IFNULL(NULLIF(U.USER_NAME, ''), '관리자') AS WRITER_NAME
+        , IFNULL(NULLIF(U.USER_NAME, ''), '관리자') AS WRITER_NAME
       </otherwise>
     </choose>
-         , DATE_FORMAT(H.INPUT_DATETIME, '%Y-%m-%d') AS INPUT_DATETIME
- 		     , IFNULL(NULLIF(H.VIEW_CNT, 0), 0) AS VIEW_CNT
- 		     , IFNULL(NULLIF(A.FILE_NAME1, ''), '') AS FILE_NAME1
- 		     , IFNULL(NULLIF(A.ORIGIN_FILE_NAME1, ''), '') AS ORIGIN_FILE_NAME1
- 		     , IFNULL(NULLIF(A.FILE_PATH1, ''), '') AS FILE_PATH1
- 		     , IFNULL(NULLIF(A.FILE_NAME2, ''), '') AS FILE_NAME2
- 		     , IFNULL(NULLIF(A.ORIGIN_FILE_NAME2, ''), '') AS ORIGIN_FILE_NAME2
- 		     , IFNULL(NULLIF(A.FILE_PATH2, ''), '') AS FILE_PATH2
- 		     , IFNULL(NULLIF(A.FILE_NAME3, ''), '') AS FILE_NAME3
- 		     , IFNULL(NULLIF(A.ORIGIN_FILE_NAME3, ''), '') AS ORIGIN_FILE_NAME3
- 		     , IFNULL(NULLIF(A.FILE_PATH3, ''), '') AS FILE_PATH3
-   FROM HP_BOARD H
+    , DATE_FORMAT(H.INPUT_DATETIME, '%Y-%m-%d') AS INPUT_DATETIME
+    , IFNULL(NULLIF(H.VIEW_CNT, 0), 0) AS VIEW_CNT
+    , IFNULL(NULLIF(A.FILE_NAME1, ''), '') AS FILE_NAME1
+    , IFNULL(NULLIF(A.ORIGIN_FILE_NAME1, ''), '') AS ORIGIN_FILE_NAME1
+    , IFNULL(NULLIF(A.FILE_PATH1, ''), '') AS FILE_PATH1
+    , IFNULL(NULLIF(A.FILE_NAME2, ''), '') AS FILE_NAME2
+    , IFNULL(NULLIF(A.ORIGIN_FILE_NAME2, ''), '') AS ORIGIN_FILE_NAME2
+    , IFNULL(NULLIF(A.FILE_PATH2, ''), '') AS FILE_PATH2
+    , IFNULL(NULLIF(A.FILE_NAME3, ''), '') AS FILE_NAME3
+    , IFNULL(NULLIF(A.ORIGIN_FILE_NAME3, ''), '') AS ORIGIN_FILE_NAME3
+    , IFNULL(NULLIF(A.FILE_PATH3, ''), '') AS FILE_PATH3
+    FROM HP_BOARD H
     <choose>
       <when test='sType == "6"'>
         LEFT OUTER JOIN MS_MAININFO U
@@ -190,20 +190,109 @@
         ON H.INPUT_STAFF = U.USER_STAFF
       </otherwise>
     </choose>
-        LEFT OUTER JOIN HP_BOARD_ATTACH A
-        ON H.CO_DIV      = A.CO_DIV
-        AND H.TYPE        = A.TYPE
-        AND H.IDX         = A.IDX
-        WHERE H.CO_DIV      = '${coDiv}'
-        AND H.TYPE        = '${sType}'
-        AND H.IDX         = '${sIdx}'
+    LEFT OUTER JOIN HP_BOARD_ATTACH A
+    ON H.CO_DIV = A.CO_DIV
+    AND H.TYPE = A.TYPE
+    AND H.IDX = A.IDX
+    WHERE H.CO_DIV = '${coDiv}'
+    AND H.TYPE = '${sType}'
+    AND H.IDX = '${sIdx}'
   </select>
 
   <update id="ReCnt" parameterType="hashmap">
     UPDATE HP_BOARD H
     SET VIEW_CNT = IFNULL(NULLIF(H.VIEW_CNT, 0), 0) + 1
-    WHERE CO_DIV      = '${coDiv}'
-      AND TYPE        = '${sType}'
-      AND IDX         = '${sIdx}'
+    WHERE CO_DIV = '${coDiv}'
+      AND TYPE = '${sType}'
+      AND IDX = '${sIdx}'
   </update>
+
+  <select id="idx" parameterType="hashmap" resultType="int">
+    SELECT IFNULL(NULLIF(MAX(IDX), 0), 0) + 1 AS IDX
+    FROM HP_BOARD
+    WHERE CO_DIV = '${coDiv}'
+      AND TYPE = '${sType}'
+  </select>
+
+  <insert id="writeBoardQuery2" parameterType="hashmap">
+    INSERT INTO HP_BOARD (CO_DIV, TYPE, IDX,
+                          TITLE, CONTENT, DEL_DIV,
+                          BK_DAY, BK_TIME, BK_PERSON,
+                          BK_FIRST_PHONE, BK_MID_PHONE, BK_LAST_PHONE,
+                          VIEW_CNT, BOARD_DIV, INPUT_STAFF,
+                          INPUT_DATETIME, INPUT_IP, UPDATE_STAFF,
+                          UPDATE_DATETIME, UPDATE_IP, LINK,
+                          JOIN_STATUS)
+    VALUES ('${coDiv}', '${sType}', '${idx}',
+            '${title}', '${content}', '0',
+            '${bkDay}', '${bkTime}', '${bkPerson}',
+            '${phone1}', HEX(AES_ENCRYPT('${phone2}', 'JBOG')), '${phone3}',
+            0, '${boardDiv}', '${staff}',
+            NOW(), '${ipAddr}', '${staff}',
+            NOW(), '${ipAddr}', '${link}',
+            '${joinStatus}')
+  </insert>
+  <insert id="writeBoardQuery3" parameterType="hashmap">
+    INSERT INTO HP_BOARD_ATTACH (CO_DIV, TYPE, IDX,
+                                 FILE_NAME1, ORIGIN_FILE_NAME1, FILE_PATH1,
+                                 FILE_NAME2, ORIGIN_FILE_NAME2, FILE_PATH2,
+                                 FILE_NAME3, ORIGIN_FILE_NAME3, FILE_PATH3)
+    VALUES ('${coDiv}', '${sType}', '${idx}',
+            '${fileName1}', '${originFileName1}', '${filePath1}',
+            '${fileName2}', '${originFileName2}', '${filePath2}',
+            '${fileName3}', '${originFileName3}', '${filePath3}')
+  </insert>
+
+  <update id="updateQuery1" parameterType="hashmap">
+    UPDATE HP_BOARD
+    SET TITLE 						= '${title}'
+      , CONTENT 					= '${content}'
+      , BOARD_DIV 				= '${boardDiv}'
+      , JOIN_STATUS 		= '${joinStatus}'
+      , BK_DAY 					= '${bkDay}'
+      , BK_TIME 					= '${bkTime}'
+      , BK_PERSON 				=  '${bkPerson}'
+      , BK_FIRST_PHONE 	= '${phone1}'
+      , BK_MID_PHONE 		= HEX(AES_ENCRYPT('${phone2}', 'JBOG'))
+      , BK_LAST_PHONE 		= '${phone3}'
+      , LINK					 		= '${link}'
+      , UPDATE_STAFF 		= '${staff}'
+      , UPDATE_DATETIME 	= NOW()
+      , UPDATE_IP 				= '${ipAddr}'
+    WHERE CO_DIV 					= '${coDiv}'
+      AND TYPE 						= '${sType}'
+      AND IDX 							= '${idx}'
+  </update>
+
+  <update id="updateQuery2" parameterType="hashmap">
+    UPDATE HP_BOARD_ATTACH
+    SET CO_DIV = CO_DIV
+    <if test=' !fileName1.equals("") and fileName1 !=null '>
+      , FILE_NAME1 = '${fileName1}'
+      , ORIGIN_FILE_NAME1 = '${originFileName1}'
+      , FILE_PATH1 = '${filePath1}'
+    </if>
+    <if test=' !fileName2.equals("") and fileName2 !=null '>
+      , FILE_NAME2 = '${fileName2}'
+      , ORIGIN_FILE_NAME2 = '${originFileName2}'
+      , FILE_PATH2 = '${filePath2}'
+    </if>
+    <if test=' !fileName3.equals("") and fileName3 !=null '>
+      , FILE_NAME3 = '${fileName3}'
+      , ORIGIN_FILE_NAME3 = '${originFileName3}'
+      , FILE_PATH3 = '${filePath3}'
+    </if>
+    WHERE CO_DIV = '${coDiv}'
+    AND TYPE 	  = '${sType}'
+    AND IDX 		= '${idx}'
+  </update>
+
+  <update id="doDelete" parameterType="hashmap">
+    UPDATE HP_BOARD
+    SET DEL_DIV = '${sDiv}'
+    WHERE CO_DIV = '${coDiv}'
+      AND TYPE = '${sType}'
+      AND IDX = '${sIdx}'
+  </update>
+
 </mapper>

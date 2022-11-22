@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reservation">
+  <select id="nowDate" parameterType="hashmap" resultType="String">
+    SELECT DATE_FORMAT(NOW(), '%Y%m%d')
+    FROM DUAL
+  </select>
+
+  <select id="getCalendarQuery1" parameterType="hashmap" resultType="hashmap">
+    SELECT CASE
+             WHEN CL_DAYDIV = '2' THEN
+               DATE_FORMAT(
+                 IF(
+                     WEEKDAY(
+                       DATE_SUB(CL_SOLAR, INTERVAL -1 WEEK)
+                       ) = 1,
+                     DATE_SUB(CL_SOLAR, INTERVAL -1 WEEK),
+                     DATE_ADD(
+                       DATE_SUB(CL_SOLAR, INTERVAL -1 WEEK),
+                       INTERVAL (
+			          1 - WEEKDAY(
+			            DATE_SUB(CL_SOLAR, INTERVAL -1 WEEK)
+			          )
+			        ) DAY
+			      )
+                   ),
+                 '%Y%m%d'
+                 )
+             ELSE
+               DATE_FORMAT(
+                 IF(
+                     WEEKDAY(
+                       DATE_SUB(CL_SOLAR, INTERVAL -2 WEEK)
+                       ) = 1,
+                     DATE_SUB(CL_SOLAR, INTERVAL -2 WEEK),
+                     DATE_ADD(
+                       DATE_SUB(CL_SOLAR, INTERVAL -2 WEEK),
+                       INTERVAL (
+			          1 - WEEKDAY(
+			            DATE_SUB(CL_SOLAR, INTERVAL -2 WEEK)
+			          )
+			        ) DAY
+			      )
+                   ),
+                 '%Y%m%d'
+                 )
+             END AS MINDAY,
+           CASE
+             WHEN CL_DAYDIV = '2' THEN
+               DATE_FORMAT(
+                 IF(
+                     WEEKDAY(
+                       DATE_SUB(CL_SOLAR, INTERVAL -1 WEEK)
+                       ) = 7,
+                     DATE_SUB(CL_SOLAR, INTERVAL -1 WEEK),
+                     DATE_ADD(
+                       DATE_SUB(CL_SOLAR, INTERVAL -1 WEEK),
+                       INTERVAL (
+		            7 - WEEKDAY(
+		              DATE_SUB(CL_SOLAR, INTERVAL -1 WEEK)
+		            )
+		          ) DAY
+		        )
+                   ),
+                 '%Y%m%d'
+                 )
+             ELSE
+               DATE_FORMAT(
+                 IF(
+                     WEEKDAY(
+                       DATE_SUB(CL_SOLAR, INTERVAL -2 WEEK)
+                       ) = 7,
+                     DATE_SUB(CL_SOLAR, INTERVAL -2 WEEK),
+                     DATE_ADD(
+                       DATE_SUB(CL_SOLAR, INTERVAL -2 WEEK),
+                       INTERVAL (
+		            7 - WEEKDAY(
+		              DATE_SUB(CL_SOLAR, INTERVAL -2 WEEK)
+		            )
+		          ) DAY
+		        )
+                   ),
+                 '%Y%m%d'
+                 )
+             END AS MAXDAY
+    FROM CL_DAYINFO
+    WHERE CO_DIV = '${coDiv}'
+      AND CL_SOLAR = DATE_FORMAT(NOW(), '%Y%m%d')
+  </select>
+
+  <select id="getCalendarQuery2" parameterType="hashmap" resultType="hashmap">
+    SELECT A.CL_SOLAR AS CL_SOLAR
+    , A.CL_DAYDIV
+    , NVL(B.BOOKG_ABLE_CNT, 0) AS BK_TEAM
+    , SUBSTRING(A.CL_SOLAR, 7, 2) + 0 AS DAYNUM
+    , A.CL_BUSINESS AS CL_BUSINESS
+    , CASE WHEN DAYOFWEEK(NOW()) = 3 AND  DATE_FORMAT(NOW(), '%H%i') <![CDATA[<]]> '0900'
+    THEN DATE_FORMAT(DATE_ADD('${minDay}', INTERVAL -1 DAY),'%Y%m%d')	ELSE '${maxDay}' END MAXDAY
+    FROM CL_DAYINFO A
+    LEFT OUTER JOIN (
+    SELECT A.CO_DIV
+    , A.CL_SOLAR
+    , CAST(COUNT(B.BK_TIME) AS CHAR) AS BOOKG_ABLE_CNT
+    FROM CL_DAYINFO A
+    INNER JOIN BK_HISTORY B
+    ON A.CO_DIV = B.CO_DIV
+    AND A.CL_SOLAR = B.BK_DAY
+    AND NVL(B.BK_NAME,'') = ''
+    AND NVL(B.BK_MSNUM,'') = ''
+    AND NVL(B.BK_YN,'N') = 'N'
+    AND (TIMESTAMPDIFF(MINUTE, NVL(BK_LOCKTIME, NOW()), NOW()) > 5	OR NVL(BK_LOCKTIME, '') = '')
+    AND B.BK_DAY > DATE_FORMAT(NOW(), '%Y%m%d')
+    WHERE A.CO_DIV = '${coDiv}'
+    AND A.CL_SOLAR LIKE CONCAT('${selYm}', '%')
+    AND A.CL_BUSINESS IN ('1', '2', '3', '4')
+    AND B.BK_DAY <![CDATA[<=]]> '${maxDay}'
+    AND CASE WHEN DAYOFWEEK(NOW()) = 3 AND B.BK_DAY >= '${minDay}'
+    THEN DATE_FORMAT(NOW(), '%H%i') >= '0900'	ELSE 1 = 1 END
+    AND B.BK_DAY > DATE_FORMAT(NOW(), '%Y%m%d')
+    GROUP BY A.CL_SOLAR
+    ) B
+    ON A.CO_DIV = B.CO_DIV
+    AND A.CL_SOLAR = B.CL_SOLAR
+    WHERE A.CL_SOLAR LIKE CONCAT('${selYm}', '%')
+    AND A.CO_DIV = '${coDiv}'
+    GROUP BY A.CL_SOLAR
+    ORDER BY A.CL_SOLAR
+  </select>
+
+
+</mapper>

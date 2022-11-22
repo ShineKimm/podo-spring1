@@ -37,4 +37,12 @@ public class AdminController {
         HashMap<String, Object> result = adminService.getMessage(params);
         return result;
     }
+
+    @RequestMapping("/adminDoLogout")
+    @ResponseBody
+    public HashMap<String, Object> adminDoLogout(@RequestParam HashMap<String, Object> params, HttpSession session) {
+        session.invalidate();
+        params.put("resultCode","0000");
+        return params;
+    }
 }

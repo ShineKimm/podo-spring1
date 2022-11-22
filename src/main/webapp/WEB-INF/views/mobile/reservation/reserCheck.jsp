@@ -125,7 +125,7 @@ function doDeleteReservation(i) {
 	var bkTime = rows[i].BK_TIME;
 	bkTime = bkTime.substring(0, 2) + ":" + bkTime.substring(2, 4);
 
-	ans = confirm("[취소 확인] <%=Session("MS_NAME")%> 회원님. \r\n" + bkDate + " " + bkTime + " " + rows[i].BK_COS_NM + "코스 취소를 진행 하시겠습니까?");
+	ans = confirm("[취소 확인] <%=session.getAttribute("MS_NAME")%> 회원님. \r\n" + bkDate + " " + bkTime + " " + rows[i].BK_COS_NM + "코스 취소를 진행 하시겠습니까?");
 
 	if (ans == true) {
 

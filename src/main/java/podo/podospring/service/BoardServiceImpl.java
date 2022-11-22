@@ -28,8 +28,13 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public void writeBoard(HashMap<String, Object> params) {
-        boardDAO.writeBoard(params);
+    public HashMap<String, Object> writeBoard(HashMap<String, Object> params) {
+        return boardDAO.writeBoard(params);
+    }
+
+    @Override
+    public HashMap<String, Object> doDelete(HashMap<String, Object> params) {
+        return boardDAO.doDelete(params);
     }
 
 

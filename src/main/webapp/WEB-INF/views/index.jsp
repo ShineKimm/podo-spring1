@@ -144,7 +144,7 @@
       }
 
       function initCalendar(selector, year, month) {
-        var sUrl = "/controller/ReservationController";
+        var sUrl = "/getCalendar";
         var params = {};
 
         //params["method"] = "getCalendar";

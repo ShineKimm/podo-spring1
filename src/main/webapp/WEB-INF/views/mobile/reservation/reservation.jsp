@@ -43,7 +43,7 @@
 	}
 
 	function initCalendar(selector, year, month) {
-		var sUrl = "/controller/ReservationController";
+		var sUrl = "/getCalendar";
 		var params = {};
 
 		//params["method"] = "getCalendar";
@@ -169,7 +169,7 @@
 	}
 
 	function doSearch() {
-		var sUrl = "/controller/ReservationController";
+		var sUrl = "/getTeeList";
 		var params = {};
 
 		if(mDate == null || mDate == '') {

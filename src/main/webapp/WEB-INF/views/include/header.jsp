@@ -1,16 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-    String mobrwz = "iPhone|iPod|IEMobile|Mobile|lgtelecom|PPC";
-    String[] sArray1 = mobrwz.split("|");
-    String agent = request.getHeader("User-Agent");
+    String IS_MOBILE = "MOBI";
+    String IS_PC = "PC";
+    String agent = request.getHeader("User-Agent").toUpperCase();
+    if(agent.indexOf(IS_MOBILE) > -1) {
+        response.sendRedirect("/mobile/index");
+    }
 
-    /*For i = 0 To UBound(spmobrwz)
-        If InStr(agent,spmobrwz(i)) > 0 Then
-    Response.Redirect("/mobile/index")
-    Exit For
-    End If
-    Next*/
 %>
 
 <!DOCTYPE html>
@@ -92,7 +89,6 @@
 
       function sessionCheck() {
         <%=session.getAttribute("MS_NUM")%>
-        <%--alert(<%=session.getAttribute("MS_NUM")%>);--%>
         var sUrl = "/sessionConfirm";
         var params = {/*"method" : "sessionConfirm"*/};
 

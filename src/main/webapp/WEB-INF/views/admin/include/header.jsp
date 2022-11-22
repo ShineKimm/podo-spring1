@@ -15,7 +15,6 @@
 
     <script>
       $(document).ready(function() {
-        <%--var staff = "<%=Session("USER_STAFF")%>";--%>
         var staff = "<%=(String)session.getAttribute("USER_STAFF")%>";
 
         if(staff == "") {
@@ -24,14 +23,13 @@
       });
 
       function doLogout() {
-        var sUrl = "/Controller/AdminController";
+        var sUrl = "/adminDoLogout";
         var params = {};
 
-        //params["method"] = "doLogout";
+        // params["method"] = "doLogout";
 
         mAjax(sUrl, params, "POST", true, function(data) {
-          // if(data.resultCode == "0000") {
-          if(data.resultCode == true) {
+          if(data.resultCode == "0000") {
             alert("로그아웃 되었습니다.");
             location.href = "/admin/member/login"
           }

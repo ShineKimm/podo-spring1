@@ -43,7 +43,49 @@ public class BoardDAO extends AbstractDAO {
         return resultMap;
     }
 
-    public void writeBoard(HashMap<String, Object> params) {
+    public HashMap<String, Object> writeBoard(HashMap<String, Object> params) {
 
+        //트렌젝션 시작
+        int errNum = 0;
+        if ("I".equals((String)params.get( "actionFlag"))) {
+            int idx = selectCnt("board.idx", params);
+            params.put("idx",idx);
+            int ReCnt2 = insert("board.writeBoardQuery2", params);
+            if (ReCnt2 < 1) {
+                errNum = errNum +1;
+            }
+            int ReCnt3 = insert("board.writeBoardQuery3", params);
+            if (ReCnt3 < 1) {
+                errNum = errNum +1;
+            }
+        } else if ("U".equals((String)params.get( "actionFlag"))) {
+            params.get("idx");
+            int ReCnt4 = update("board.updateQuery1",params);
+            if (ReCnt4 < 1) {
+                errNum = errNum +1;
+            }
+            if (null != params.get("fileName1") || null != params.get("fileName2") || null != params.get("fileName3")) {
+                int ReCnt5 = update("board.updateQuery2",params);
+                if (ReCnt5 < 1) {
+                    errNum = errNum +1;
+                }
+            }
+        }
+
+        if (errNum > 0) {
+            //트렌젝션 롤백
+            params.put("resultCode", "9999");
+            params.put("resultMessage", "오류가 발생하였습니다. 잠시 후 다시 시도해주세요.");
+        } else {
+            //트렌젝션 커밋
+            params.put("resultCode", "0000");
+        }
+        return params;
+    }//writeBoard
+
+    public HashMap<String, Object> doDelete(HashMap<String, Object> params) {
+        update("board.doDelete",params);
+        params.put("resultCode","0000");
+        return params;
     }
 }

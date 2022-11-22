@@ -11,5 +11,7 @@ public interface BoardService {
 
     HashMap<String, Object> getBoardDetail(HashMap<String, Object> params);
 
-    void writeBoard(HashMap<String, Object> params);
+    HashMap<String, Object> writeBoard(HashMap<String, Object> params);
+
+    HashMap<String, Object> doDelete(HashMap<String, Object> params);
 }

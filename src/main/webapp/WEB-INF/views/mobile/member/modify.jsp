@@ -56,32 +56,32 @@
 			}
 		});
 
-		$("#txtName").empty().append("<%=Session("ms_name")%>");
-		$("#txtId").empty().append("<%=Session("ms_id")%>");
-		$("#txtBirth").val("<%=Session("ms_birth")%>");
-		$("#txtPhone").val("<%=Session("ms_first_phone1")%>" + "<%=Session("ms_mid_phone1")%>" + "<%=Session("ms_last_phone1")%>");
-		if ("<%=Session("MS_EMAIL")%>" != "") {
-			msEmail = "<%=Session("MS_EMAIL")%>".split("@");
+		$("#txtName").empty().append("<%=session.getAttribute("ms_name")%>");
+		$("#txtId").empty().append("<%=session.getAttribute("ms_id")%>");
+		$("#txtBirth").val("<%=session.getAttribute("ms_birth")%>");
+		$("#txtPhone").val("<%=session.getAttribute("ms_first_phone1")%>" + "<%=session.getAttribute("ms_mid_phone1")%>" + "<%=session.getAttribute("ms_last_phone1")%>");
+		if ("<%=session.getAttribute("MS_EMAIL")%>" != "") {
+			msEmail = "<%=session.getAttribute("MS_EMAIL")%>".split("@");
 			$("#txtMail1").val(msEmail[0]);
 			$("#txtMail2").val(msEmail[1]);
 		}
 
-		var sex = "<%=Session("ms_sex")%>";
+		var sex = "<%=session.getAttribute("ms_sex")%>";
 		if(sex != "") {
 			$("input:radio[name=chkSex]:input[value=" + sex + "]").attr("checked", true);
 		}
 
-		var sms = "<%=Session("SMS_CHK1")%>";
+		var sms = "<%=session.getAttribute("SMS_CHK1")%>";
 		if(sms != "") {
 			$("input:radio[name=chkSms]:input[value=" + sms + "]").attr("checked", true);
 		}
 
-		var email = "<%=Session("MS_EMAIL_YN")%>";
+		var email = "<%=session.getAttribute("MS_EMAIL_YN")%>";
 		if(email != "") {
 			$("input:radio[name=chkMail]:input[value=" + email + "]").attr("checked", true);
 		}
 
-		var birth = "<%=Session("MS_BIRTHYL")%>";
+		var birth = "<%=session.getAttribute("MS_BIRTHYL")%>";
 		if(birth != "") {
 			$("input:radio[name=chkBirth]:input[value=" + birth + "]").attr("checked", true);
 		}

@@ -133,7 +133,7 @@
   }
 
   function doDelete(div) {
-    var sUrl = "/controller/BoardController";
+    var sUrl = "/doDelete";
     var params = {};
 
     //params["method"] = "doDelete";

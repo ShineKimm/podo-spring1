@@ -32,4 +32,5 @@ public class AdminServiceImpl implements AdminService{
     public HashMap<String, Object> getMessage(HashMap<String, Object> params) {
         return adminDao.getMessage(params);
     }
+
 }
