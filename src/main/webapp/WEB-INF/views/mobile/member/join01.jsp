@@ -14,7 +14,7 @@ $(document).ready(function() {
 	});
 
 	function init() {
-		if("<%=session.getAttribute("ms_num")%>" != "") {
+		if<%=session.getAttribute("MS_NUM") != null %>) {
 			location.href = "/mobile/index";
 		}
 

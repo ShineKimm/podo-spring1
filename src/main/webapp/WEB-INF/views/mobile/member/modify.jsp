@@ -10,7 +10,7 @@
 
 	$(document).ready(function() {
 
-		if("<%=session.getAttribute("ms_num")%>" == "") {
+		if(<%=session.getAttribute("MS_NUM") == null %>) {
 			alert("로그인 후 이용 가능합니다.");
 			location.href = "/mobile/member/login?page=/mobile/member/modify";
 			return;

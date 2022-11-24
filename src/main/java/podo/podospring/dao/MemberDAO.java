@@ -39,7 +39,6 @@ public class MemberDAO extends AbstractDAO {
             resultMap.put("resultCode", "1000");
             resultMap.put("resultMessage", "존재하지 않는 아이디입니다.");
         } else {
-//            resultMap = selectMap("member.verification",params, "id");
             Map<String, Object> hMap = (Map<String, Object>) selectOne("member.verification", params);
             if (hMap != null) {
                 System.out.println(hMap.get("MS_NAME"));
@@ -50,7 +49,49 @@ public class MemberDAO extends AbstractDAO {
                 resultMap.put("resultCode", "2000");
                 resultMap.put("resultMessage", "암호가 잘못되었습니다.");
             } else {
-                session.setAttribute("MS_NUM", hMap.get("MS_NUM"));
+                Map<String, Object> SessionMap = (Map<String, Object>)selectOne("member.setSession", hMap);
+                session.setAttribute("MS_NUM", SessionMap.get("MS_NUM"));
+                session.setAttribute("MS_MAIN_CODIV", SessionMap.get("MS_MAIN_CODIV"));
+                session.setAttribute("MS_DIVISION", SessionMap.get("MS_DIVISION"));
+                session.setAttribute("MS_CLASS", SessionMap.get("MS_CLASS"));
+                session.setAttribute("MS_LEVEL", SessionMap.get("MS_LEVEL"));
+                session.setAttribute("MS_ID", SessionMap.get("MS_ID"));
+                session.setAttribute("MS_PASSWORD", SessionMap.get("MS_PASSWORD"));
+                session.setAttribute("MS_NAME", SessionMap.get("MS_NAME"));
+                session.setAttribute("MS_SEX", SessionMap.get("MS_SEX"));
+                session.setAttribute("MS_BIRTH", SessionMap.get("MS_BIRTH"));
+                session.setAttribute("MS_BIRTHYL", SessionMap.get("MS_BIRTHYL"));
+                session.setAttribute("MS_EMAIL", SessionMap.get("MS_EMAIL"));
+                session.setAttribute("MS_EMAIL_YN", SessionMap.get("MS_EMAIL_YN"));
+                session.setAttribute("MS_FIRST_PHONE1", SessionMap.get("MS_FIRST_PHONE1"));
+                session.setAttribute("MS_MID_PHONE1", SessionMap.get("MS_MID_PHONE1"));
+                session.setAttribute("MS_LAST_PHONE1", SessionMap.get("MS_LAST_PHONE1"));
+                session.setAttribute("SMS_CHK1", SessionMap.get("SMS_CHK1"));
+                session.setAttribute("MS_HOMETEL", SessionMap.get("MS_HOMETEL"));
+                session.setAttribute("MS_HOMEZIP", SessionMap.get("MS_HOMEZIP"));
+                session.setAttribute("MS_HOMEADDR1", SessionMap.get("MS_HOMEADDR1"));
+                session.setAttribute("MS_HOMEADDR2", SessionMap.get("MS_HOMEADDR2"));
+                session.setAttribute("MS_COMPTEL", SessionMap.get("MS_COMPTEL"));
+                session.setAttribute("MS_COMPZIP", SessionMap.get("MS_COMPZIP"));
+                session.setAttribute("MS_COMPADDR1", SessionMap.get("MS_COMPADDR1"));
+                session.setAttribute("MS_COMPADDR2", SessionMap.get("MS_COMPADDR2"));
+                session.setAttribute("MS_DM_H", SessionMap.get("MS_DM_H"));
+                session.setAttribute("MS_DM_C", SessionMap.get("MS_DM_C"));
+                session.setAttribute("MS_CAR_NO", SessionMap.get("MS_CAR_NO"));
+                session.setAttribute("MS_FIRSTDAY", SessionMap.get("MS_FIRSTDAY"));
+                session.setAttribute("MS_WEEKDAY_CNT", SessionMap.get("MS_WEEKDAY_CNT"));
+                session.setAttribute("MS_WEEKEND_CNT", SessionMap.get("MS_WEEKEND_CNT"));
+                session.setAttribute("INPUT_STAFF", SessionMap.get("INPUT_STAFF"));
+                session.setAttribute("INPUT_DATETIME", SessionMap.get("INPUT_DATETIME"));
+                session.setAttribute("INPUT_IP", SessionMap.get("INPUT_IP"));
+                session.setAttribute("UPDATE_STAFF", SessionMap.get("UPDATE_STAFF"));
+                session.setAttribute("UPDATE_DATETIME", SessionMap.get("UPDATE_DATETIME"));
+                session.setAttribute("UPDATE_IP", SessionMap.get("UPDATE_IP"));
+                session.setAttribute("MS_JOB_CD", SessionMap.get("MS_JOB_CD"));
+                session.setAttribute("MS_AREA", SessionMap.get("MS_AREA"));
+                session.setAttribute("MS_BK_CNT", SessionMap.get("MS_BK_CNT"));
+                session.setMaxInactiveInterval(60);
+
                 hMap.put("sessionID",params.get("sessionID"));
                 update("member.loginInformation", hMap);
                 resultMap.put("resultCode","0000");

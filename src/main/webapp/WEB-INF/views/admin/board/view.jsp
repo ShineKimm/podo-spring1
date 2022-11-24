@@ -182,7 +182,7 @@
             <!-- 컨텐츠 시작 -->
             <div class="start"> <br>
                 <form name="frm" method="post">
-                    <input type="hidden" name="title" value="<%--<%=strTitle%>--%>">
+                    <input type="hidden" name="title" value="<%--<%=request.getParameter("strTitle")%>--%>">
                     <input type="hidden" name="bbstype" value="<%--<%=bbstype%>--%>">
                     <input type="hidden" name="intIdx" value="<%--<%=intIdx%>--%>">
                     <input type="hidden" name="txtMode" value="">

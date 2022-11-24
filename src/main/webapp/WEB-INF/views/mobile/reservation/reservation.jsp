@@ -14,7 +14,7 @@
 
 	function init() {
 
-		if("<%=session.getAttribute("ms_num")%>" == "") {
+		if(<%=session.getAttribute("MS_NUM") == null %>) {
 			alert("로그인 후 이용 가능합니다.");
 			location.href = "/mobile/member/login?page=/mobile/reservation/reservation";
 			return;
@@ -235,7 +235,7 @@
 
 	function reserProc(i) {
 
-		if("<%=session.getAttribute("ms_num")%>" == "") {
+		if(<%=session.getAttribute("MS_NUM") == null %>) {
 			location.href = "/mobile/member/login?page=/mobile/reservation/reservation";
 			return;
 		}
@@ -243,7 +243,7 @@
 		var sUrl = "/controller/ReservationController";
 		var params = {};
 
-		var msNum = "<%=session.getAttribute("ms_num")%>";
+		var msNum = "<%=session.getAttribute("MS_NUM")%>";
 		var bkCharge = rowData[i].BK_B_CHARGE;
 		if(rowData[i].BK_S_CHARGE != "") {
 			bkCharge = rowData[i].BK_S_CHARGE;

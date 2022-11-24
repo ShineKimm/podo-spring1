@@ -10,7 +10,7 @@ $(document).ready(function() {
 });
 
 function init() {
-	if("<%=session.getAttribute("ms_num")%>" == "") {
+	if(<%=session.getAttribute("MS_NUM") == null %>) {
 		alert("로그인 후 이용 가능합니다.");
 		location.href = "/mobile/member/login";
 		return;
@@ -25,7 +25,7 @@ function doSearch() {
 
 	//params["method"] = "getReservationList";
 	params["coDiv"] = globals.coDiv;
-	params["msNum"] = "<%=session.getAttribute("ms_num")%>";
+	params["msNum"] = "<%=session.getAttribute("MS_NUM")%>";
 
 	mAjax(sUrl, params, "GET", true, function(data) {
 		if(data.resultCode == "0000") {
@@ -97,7 +97,7 @@ function blDeleteReservation(i) {
 
 		//params["method"] = "blDeleteReservation";
 		params["coDiv"] = globals.coDiv;
-		params["msNum"] = "<%=session.getAttribute("ms_num")%>";
+		params["msNum"] = "<%=session.getAttribute("MS_NUM")%>";
 		params["day"] = rows[i].BK_DAY;
 		params["cos"] = rows[i].BK_COS;
 		params["time"] = rows[i].BK_TIME;
@@ -134,7 +134,7 @@ function doDeleteReservation(i) {
 
 		//params["method"] = "cancelReservation";
 		params["coDiv"] = globals.coDiv;
-		params["msNum"] = "<%=session.getAttribute("ms_num")%>";
+		params["msNum"] = "<%=session.getAttribute("MS_NUM")%>";
 		params["day"] = rows[i].BK_DAY;
 		params["cos"] = rows[i].BK_COS;
 		params["time"] = rows[i].BK_TIME;

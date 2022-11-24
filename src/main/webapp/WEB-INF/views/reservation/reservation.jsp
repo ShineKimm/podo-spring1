@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
+<%=session.getAttribute("MS_NUM")%>
+<script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
 <script>
 
   var mDate;
@@ -8,14 +10,28 @@
   var sYear, fYear, sMonth, fMonth;
   var rowData;
   var weekDayCnt, weekEndCnt;
+  var getIP;
+
+  //ip 가져오기
+  async function getClientIP() {
+    try {
+      const response = await axios.get('https://api.ipify.org?format=json');
+      getIP = response.data.ip;
+      console.log(getIP);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 
   $(document).ready(function(data) {
+    getClientIP();
     init();
   });
 
   function init() {
 
-    if("<%=session.getAttribute("ms_num")%>" == "") {
+    if(<%=session.getAttribute("MS_NUM") == null %>) {
       alert("로그인 후 이용 가능합니다.");
       location.href = "/member/login?page=/reservation/reservation";
       return;
@@ -31,12 +47,11 @@
     initCalendar("#calendarBox1", sYear, sMonth);
     initCalendar("#calendarBox2", fYear, fMonth);
 
-    var day = "<%=request.getParameter("BK_DAY")%>";
-    if ("<%=request.getParameter("OLD_BK_DAY")%>" != "") {
-      day = "<%=request.getParameter("OLD_BK_DAY")%>";
+    var day = <%=request.getParameter("BK_DAY")%>;
+    if (<%=request.getParameter("OLD_BK_DAY") != null %>) {
+      day = <%=request.getParameter("OLD_BK_DAY")%>;
     }
-
-    if(day != "") {
+    if(day != null) {
       mDate = day;
       var dSel = getDateFormat(mDate);
       $("#txtChooseDate").empty().append(String.format("{0}년 {1}월 {2}일 ({3}요일)", dSel.yyyy(), dSel.mm(), dSel.dd(), dSel.week()));
@@ -72,8 +87,8 @@
           }
           for(i=0; i<rows.length; i++) {
             var td = $("<td>" + rows[i].DAYNUM + "</td>");
-
-            if ("<%=request.getParameter("OLD_BK_DAY")%>" != "") {
+            if (<%=request.getParameter("OLD_BK_DAY") != null%>) {
+              console.log("OLD_BK_DAY 값이 있음");
               td.addClass('no');
             } else if (rows[i].CL_SOLAR == currentDay) {
               td.addClass('choice');
@@ -203,7 +218,7 @@
     params["coDiv"] = globals.coDiv;
     params["date"] = mDate;
     params["cos"] = mCos;
-    params["msNum"] = "<%=session.getAttribute("ms_num")%>";
+    params["msNum"] = "<%=session.getAttribute("MS_NUM")%>";
 
     mAjax(sUrl, params, "POST", true, function(data) {
       if(data.resultCode == "0000") {
@@ -225,7 +240,7 @@
           var col3 = $("<td>" + rowData[i].BK_B_CHARGE_NM + "</td>");
           var col4 = $("<td class='red'>" + rowData[i].BK_S_CHARGE_NM + "</td>");
           var col5 = $("<td>" + rowData[i].BK_CADDY + "</td>");
-          if ("<%=request.getParameter("OLD_BK_DAY")%>" != "") {
+          if (<%=request.getParameter("OLD_BK_DAY") != null%>) {
             var col6 = $("<td><input type='button' class='darkGrayBtn' value='변경' onclick='reserProc(" + i + ")'></td>");
           } else {
             var col6 = $("<td><input type='button' class='darkGrayBtn' value='예약' onclick='reserProc(" + i + ")'></td>");
@@ -260,33 +275,36 @@
 
   function reserProc(i) {
 
-    if("<%=session.getAttribute("ms_num")%>" == "") {
+    if(<%=session.getAttribute("MS_NUM") == null %>) {
       location.href = "/member/login?page=/reservation/reservation";
       return;
     }
 
     var comment = "";
-    if ("<%=session.getAttribute("MS_DIVISION")%>" == "48"){}
-    else if ("<%=session.getAttribute("MS_DIVISION")%>" != "21") {
-      if (rowData[i].CL_BUSINESS == "1" && weekDayCnt >= "<%=session.getAttribute("MS_WEEKDAY_CNT")%>") {
-        comment = "\r\n회원님께서는 해당 주중 예약 횟수를 초과하여 비회원가로 예약됩니다.\r\n\r\n";
-      } else if (rowData[i].CL_BUSINESS != "1" && weekEndCnt >= "<%=session.getAttribute("MS_WEEKEND_CNT")%>") {
-        comment = "\r\n회원님께서는 해당 주말 예약 횟수를 초과하여 비회원가로 예약됩니다.\r\n\r\n";
-      }
+    if (String(<%=session.getAttribute("MS_DIVISION")%>) == "48"){
+        console.log("MS_DIVISION == 48")
+    }
+    if (String(<%=session.getAttribute("MS_DIVISION")%>) != "21") {
+          if (rowData[i].CL_BUSINESS == "1" && weekDayCnt >= <%=session.getAttribute("MS_WEEKDAY_CNT")%>) {
+            comment = "\r\n회원님께서는 해당 주중 예약 횟수를 초과하여 비회원가로 예약됩니다.\r\n\r\n";
+          } else if (rowData[i].CL_BUSINESS != "1" && weekEndCnt >= <%=session.getAttribute("MS_WEEKEND_CNT")%>) {
+            comment = "\r\n회원님께서는 해당 주말 예약 횟수를 초과하여 비회원가로 예약됩니다.\r\n\r\n";
+          }
     }
 
-
-    var sUrl = "/controller/ReservationController";
+    var sUrl = "";
     var params = {};
+    params["ip"] = getIP;
 
-    var msNum = "<%=session.getAttribute("ms_num")%>";
+    var msNum = <%=session.getAttribute("MS_NUM")%>;
     var bkCharge = rowData[i].BK_B_CHARGE;
     if(rowData[i].BK_S_CHARGE != "") {
       bkCharge = rowData[i].BK_S_CHARGE;
     }
 
-    if ("<%=request.getParameter("OLD_BK_DAY")%>" != "") {
+    if (<%=request.getParameter("OLD_BK_DAY") != null%>) {
       //params["method"] = "changeReservation";
+      sUrl = "/changeReservation";
       params["coDiv"] = globals.coDiv;
       params["aday"] = rowData[i].BK_DAY;
       params["acos"] = rowData[i].BK_COS;
@@ -300,6 +318,7 @@
 
       ans = confirm("[변경 확인] " + rowData[i].BK_DAY.substring(0,4)+"-"+rowData[i].BK_DAY.substring(4,6)+"-"+rowData[i].BK_DAY.substring(6,8)+" 날짜의 \n\n"+rowData[i].BK_TIME.substring(0,2)+"시"+rowData[i].BK_TIME.substring(2,4)+"분 "+rowData[i].BK_COS_NM+" 예약으로 변경하시겠습니까?");
     } else {
+      sUrl = "/doReservation";
       //params["method"] = "doReservation";
       params["coDiv"] = globals.coDiv;
       params["day"] = rowData[i].BK_DAY;
@@ -316,7 +335,7 @@
 
       mAjax(sUrl, params, "POST", true, function(data) {
         if(data.resultCode == "0000") {
-          if ("<%=request.getParameter("OLD_BK_DAY")%>" != "") {
+          if (<%=request.getParameter("OLD_BK_DAY") != null%>) {
             alert("변경 완료되었습니다.");
           } else {
             alert("예약 완료되었습니다.");

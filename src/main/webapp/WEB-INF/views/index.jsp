@@ -151,89 +151,89 @@
         params["coDiv"] = globals.coDiv;
         params["selYm"] = year + month;
 
-        // mAjax(sUrl, params, "POST", true, function(data) {
-        //   if(data.resultCode == "0000") {
-        //     $(selector + " #calHeader").empty().append(month + "월");
-        //
-        //     var currentDay = new Date().yyyymmdd();
-        //     var tBody = $(selector + " #calendar-body");
-        //     tBody.empty();
-        //
-        //     var rows = data.rows;
-        //
-        //     if(rows.length > 0) {
-        //       var row = $("<tr></tr>");
-        //
-        //       var fWeek = rows[0].CL_DAYDIV - 1;
-        //
-        //       for(i=0; i<fWeek; i++) {
-        //         row.append($("<td></td>"));
-        //       }
-        //       for(i=0; i<rows.length; i++) {
-        //         if(rows[i].CL_SOLAR >= currentDay) {
-        //           if (rows[i].CL_SOLAR == currentDay) {
-        //             var td = $("<td>"+ rows[i].DAYNUM + "</td>");
-        //             td.addClass('today');
-        //           } else if(rows[i].BK_TEAM > 0) {
-        //             var td = $("<td>" + rows[i].DAYNUM + "</td>");
-        //             if (rows[i].CL_BUSINESS == "2") {
-        //               td.addClass('sat');
-        //             } else if (rows[i].CL_BUSINESS == "3" || rows[i].CL_BUSINESS == "4") {
-        //               td.addClass('sun');
-        //             }
-        //             td.data('date', rows[i].CL_SOLAR);
-        //             td.addClass('possible');
-        //             td.on('click', function() {
-        //               onClickDay($(this).data('date'));
-        //             });
-        //           } else {
-        //             var td = $("<td>" + rows[i].DAYNUM + "</td>");
-        //             if (rows[i].CL_BUSINESS == "2") {
-        //               td.addClass('sat');
-        //             } else if (rows[i].CL_BUSINESS == "3" || rows[i].CL_BUSINESS == "4") {
-        //               td.addClass('sun');
-        //             }
-        //             td.addClass('impossible');
-        //           }
-        //         } else {
-        //           var td = $("<td>" + rows[i].DAYNUM + "</td>");
-        //           if (rows[i].CL_BUSINESS == "2") {
-        //             td.addClass('sat');
-        //           } else if (rows[i].CL_BUSINESS == "3" || rows[i].CL_BUSINESS == "4") {
-        //             td.addClass('sun');
-        //           }
-        //           td.addClass('impossible');
-        //         }
-        //
-        //         row.append(td);
-        //
-        //         if(rows[i].CL_DAYDIV == 7) {
-        //           row.appendTo(tBody);
-        //           row = $("<tr></tr>");
-        //         }
-        //       }
-        //
-        //       var addTd = 7 - row.children("td").length;
-        //
-        //       if(addTd != 7) {
-        //         for(i=0; i<addTd; i++) {
-        //           row.append($("<td></td>"));
-        //         }
-        //       }
-        //
-        //       row.appendTo(tBody);
-        //     } else {
-        //       tBody.append($("<tr><td colspan='7'></td></tr>"));
-        //       tBody.append($("<tr><td colspan='7'></td></tr>"));
-        //       tBody.append($("<tr><td colspan='7'></td></tr>"));
-        //       tBody.append($("<tr><td colspan='7'></td></tr>"));
-        //       tBody.append($("<tr><td colspan='7'></td></tr>"));
-        //       tBody.append($("<tr><td colspan='7'></td></tr>"));
-        //     }
-        //   } else {
-        //     //alert(data.resultMessage);
-        //   }
-        // });
+        mAjax(sUrl, params, "POST", true, function(data) {
+          if(data.resultCode == "0000") {
+            $(selector + " #calHeader").empty().append(month + "월");
+
+            var currentDay = new Date().yyyymmdd();
+            var tBody = $(selector + " #calendar-body");
+            tBody.empty();
+
+            var rows = data.rows;
+
+            if(rows.length > 0) {
+              var row = $("<tr></tr>");
+
+              var fWeek = rows[0].CL_DAYDIV - 1;
+
+              for(i=0; i<fWeek; i++) {
+                row.append($("<td></td>"));
+              }
+              for(i=0; i<rows.length; i++) {
+                if(rows[i].CL_SOLAR >= currentDay) {
+                  if (rows[i].CL_SOLAR == currentDay) {
+                    var td = $("<td>"+ rows[i].DAYNUM + "</td>");
+                    td.addClass('today');
+                  } else if(rows[i].BK_TEAM > 0) {
+                    var td = $("<td>" + rows[i].DAYNUM + "</td>");
+                    if (rows[i].CL_BUSINESS == "2") {
+                      td.addClass('sat');
+                    } else if (rows[i].CL_BUSINESS == "3" || rows[i].CL_BUSINESS == "4") {
+                      td.addClass('sun');
+                    }
+                    td.data('date', rows[i].CL_SOLAR);
+                    td.addClass('possible');
+                    td.on('click', function() {
+                      onClickDay($(this).data('date'));
+                    });
+                  } else {
+                    var td = $("<td>" + rows[i].DAYNUM + "</td>");
+                    if (rows[i].CL_BUSINESS == "2") {
+                      td.addClass('sat');
+                    } else if (rows[i].CL_BUSINESS == "3" || rows[i].CL_BUSINESS == "4") {
+                      td.addClass('sun');
+                    }
+                    td.addClass('impossible');
+                  }
+                } else {
+                  var td = $("<td>" + rows[i].DAYNUM + "</td>");
+                  if (rows[i].CL_BUSINESS == "2") {
+                    td.addClass('sat');
+                  } else if (rows[i].CL_BUSINESS == "3" || rows[i].CL_BUSINESS == "4") {
+                    td.addClass('sun');
+                  }
+                  td.addClass('impossible');
+                }
+
+                row.append(td);
+
+                if(rows[i].CL_DAYDIV == 7) {
+                  row.appendTo(tBody);
+                  row = $("<tr></tr>");
+                }
+              }
+
+              var addTd = 7 - row.children("td").length;
+
+              if(addTd != 7) {
+                for(i=0; i<addTd; i++) {
+                  row.append($("<td></td>"));
+                }
+              }
+
+              row.appendTo(tBody);
+            } else {
+              tBody.append($("<tr><td colspan='7'></td></tr>"));
+              tBody.append($("<tr><td colspan='7'></td></tr>"));
+              tBody.append($("<tr><td colspan='7'></td></tr>"));
+              tBody.append($("<tr><td colspan='7'></td></tr>"));
+              tBody.append($("<tr><td colspan='7'></td></tr>"));
+              tBody.append($("<tr><td colspan='7'></td></tr>"));
+            }
+          } else {
+            alert(data.resultMessage);
+          }
+        });
       }
 
       function sNextMonth() {

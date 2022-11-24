@@ -3,8 +3,10 @@ package podo.podospring.controller;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MenuController {
@@ -161,8 +163,10 @@ public class MenuController {
     public String memberPolicy() {
         return "/member/policy";
     }
-    @GetMapping("/reservation/reservation")
-    public String reservation() {
+    @RequestMapping("/reservation/reservation")
+    public String reservation(@RequestParam HashMap<String, Object> params, Model model) {
+        String BK_DAY = (String) params.get("BK_DAY");
+        model.addAttribute("BK_DAY",BK_DAY);
         return "/reservation/reservation";
     }
     @GetMapping("/reservation/joinWrite")
@@ -180,6 +184,11 @@ public class MenuController {
     @GetMapping("/reservation/joinCal")
     public String reservationJoinCal() {
         return "/reservation/joinCal";
+    }
+
+    @GetMapping("/reservation/reserCheck")
+    public String reservationReserCheck() {
+        return "/reservation/reserCheck";
     }
 
 ////////////////////////////////////////////

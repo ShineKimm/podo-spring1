@@ -1,18 +1,32 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
+<script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
 <script type="text/javascript">
 
   var smYear, smMonth, fmYear, fmMonth;
   var stDate, fnDate;
   var rows;
+  var getIP;
+
+  //ip 가져오기
+  async function getClientIP() {
+    try {
+      const response = await axios.get('https://api.ipify.org?format=json');
+      getIP = response.data.ip;
+      console.log(getIP);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   $(document).ready(function() {
+    getClientIP();
     init();
   });
 
   function init() {
-    if("<%=session.getAttribute("ms_num")%>" == "") {
+    if(<%=session.getAttribute("MS_NUM") == null %>) {
       alert("로그인 후 이용 가능합니다.");
       location.href = "/member/login";
       return;
@@ -67,12 +81,12 @@
   }
 
   function doSearch() {
-    var sUrl = "/controller/ReservationController";
+    var sUrl = "/getReservationList";
     var params = {};
 
     //params["method"] = "getReservationList";
     params["coDiv"] = globals.coDiv;
-    params["msNum"] = "<%=session.getAttribute("ms_num")%>";
+    params["msNum"] = <%=session.getAttribute("MS_NUM")%>;
 
     mAjax(sUrl, params, "POST", true, function(data) {
       if(data.resultCode == "0000") {
@@ -134,19 +148,19 @@
   function cantChange() {
     alert("해당 예약은 위약일자에 포함되는 예약으로 예약변경이 불가능합니다.");
   }
-
+    //TODO 사용안함 컨트롤러에 blDeleteReservation 구현된 기능 없음
   function blDeleteReservation(i) {
 
     ans = confirm("[위약 확인] 해당건은 위약 일자에 포함되는 건으로 취소시 위약이 발생합니다. 취소를 진행 하시겠습니까?");
 
     if (ans == true) {
 
-      var sUrl = "/controller/ReservationController";
+      var sUrl = "/blDeleteReservation";
       var params = {};
 
       //params["method"] = "blDeleteReservation";
       params["coDiv"] = globals.coDiv;
-      params["msNum"] = "<%=session.getAttribute("ms_num")%>";
+      params["msNum"] = <%=session.getAttribute("MS_NUM")%>;
       params["day"] = rows[i].BK_DAY;
       params["cos"] = rows[i].BK_COS;
       params["time"] = rows[i].BK_TIME;
@@ -178,15 +192,18 @@
 
     if (ans == true) {
 
-      var sUrl = "/controller/ReservationController";
+      var sUrl = "/cancelReservation";
       var params = {};
 
       //params["method"] = "cancelReservation";
       params["coDiv"] = globals.coDiv;
-      params["msNum"] = "<%=session.getAttribute("ms_num")%>";
+      params["msNum"] = <%=session.getAttribute("MS_NUM")%>;
       params["day"] = rows[i].BK_DAY;
       params["cos"] = rows[i].BK_COS;
       params["time"] = rows[i].BK_TIME;
+      if (getIP) {
+        params["ip"] = getIP;
+      }
 
       mAjax(sUrl, params, "POST", true, function(data) {
         if(data.resultCode == "0000") {
@@ -299,7 +316,7 @@
         <ul class="navbarBox">
             <li class="" onclick="location.href='/reservation/reservation'">실시간예약</li>
             <li class="on" onclick="location.href='/reservation/reserCheck'">예약확인/취소</li>
-            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 인터넷예약 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 예약확인/취소</li>
+            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 인터넷예약 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 예약확인/취소</li>
         </ul>
     </div>
     <div class="contents">

@@ -3,7 +3,7 @@
 <%@ include file="../include/header.jsp" %>
 <script language="javascript">
 		$(document).ready(function() {
-			if("<%=session.getAttribute("ms_num")%>" != "") {
+			if(<%=session.getAttribute("MS_NUM") != null %>) {
 				alert("이미 로그인이 되어있습니다.");
 				location.href="/mobile/index";
 			}
