@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -37,6 +38,11 @@ public class MenuController {
     }
     @RequestMapping("/member/join03")
     public String join03() {
+        return "/member/join03";
+    }
+    @PostMapping("/member/join03")
+    public String postJoin03(@RequestParam HashMap<String, Object> param, Model model) {
+        model.addAttribute("param",param);
         return "/member/join03";
     }
     @RequestMapping("/member/join04")

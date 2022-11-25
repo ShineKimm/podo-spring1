@@ -35,7 +35,7 @@
   function doLogin() {
     var sUrl = "/doLogin";
     var params = {};
-    var page = <%=request.getParameter("page")%>;
+    var page = "<%=request.getParameter("page")%>";
 
     var id = $("#txtId").val();
     var pw = $("#txtPw").val();

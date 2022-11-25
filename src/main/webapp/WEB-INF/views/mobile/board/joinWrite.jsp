@@ -21,8 +21,8 @@
 			return;
 		}
 
-		mIdx = "<%=Request("idx")%>";
-		mFlag = "<%=Request("action")%>";
+		mIdx = <%=request.getParameter("idx")%>;
+		mFlag = <%=request.getParameter("action")%>;
 
 		if(mFlag == "I") {
 			 $("#btnAction").html("등록하기");

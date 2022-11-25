@@ -32,9 +32,6 @@ public class SessionManagerController {
         String sessionId = session.getId();
         String resultCode = "9999";
         String resultMessage = "";
-
-//        System.out.println("session.getId() = " + sessionId);
-//        System.out.println("session.getAttribute MS_NUM = " + session.getAttribute("MS_NUM"));
         params.put("MS_NUM",session.getAttribute("MS_NUM"));
 
         if (session.getAttribute("MS_NUM") != null) {

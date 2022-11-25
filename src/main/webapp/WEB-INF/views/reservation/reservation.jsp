@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
-<%=session.getAttribute("MS_NUM")%>
 <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
 <script>
 
@@ -218,7 +217,7 @@
     params["coDiv"] = globals.coDiv;
     params["date"] = mDate;
     params["cos"] = mCos;
-    params["msNum"] = "<%=session.getAttribute("MS_NUM")%>";
+    params["msNum"] = <%=session.getAttribute("MS_NUM")%>;
 
     mAjax(sUrl, params, "POST", true, function(data) {
       if(data.resultCode == "0000") {
@@ -310,9 +309,9 @@
       params["acos"] = rowData[i].BK_COS;
       params["atime"] = rowData[i].BK_TIME;
       params["charge"] = bkCharge;
-      params["bDay"] = "<%=request.getParameter("OLD_BK_DAY")%>";
-      params["bCos"] = "<%=request.getParameter("OLD_BK_COS")%>";
-      params["bTime"] = "<%=request.getParameter("OLD_BK_TIME")%>";
+      params["bDay"] = <%=request.getParameter("OLD_BK_DAY")%>;
+      params["bCos"] = <%=request.getParameter("OLD_BK_COS")%>;
+      params["bTime"] = <%=request.getParameter("OLD_BK_TIME")%>;
       params["msNum"] = msNum;
       params["media"] = "R";
 

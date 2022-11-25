@@ -24,9 +24,9 @@
   });
 
   function init() {
-    mType = "<%=request.getParameter("type")%>";
-    mIdx = "<%=request.getParameter("idx")%>";
-    mFlag = "<%=request.getParameter("action")%>";
+    mType = <%=request.getParameter("type")%>;
+    mIdx = <%=request.getParameter("idx")%>;
+    mFlag = <%=request.getParameter("action")%>;
 
     $("#txtSubject").html(title[mType]);
 

@@ -18,7 +18,7 @@
       return;
     }
 
-    mIdx = "<%=Request("idx")%>";
+    mIdx = <%=request.getParameter("idx")%>;
 
     doSearchDetail();
     doSearchReply();
@@ -67,7 +67,7 @@
             , (rows[0].JOIN_STATUS == "1" ? "진행중" : "종료")
         ));
 
-        if("<%=session.getAttribute("MS_NUM")%>" == rows[0].INPUT_STAFF) {
+        if(String(<%=session.getAttribute("MS_NUM")%>) == rows[0].INPUT_STAFF) {
           $("#btnAdminAction1").show();
           $("#btnAdminAction2").show();
         }
@@ -121,7 +121,7 @@
               , writer
               , datetime
               , content
-              , ("<%=session.getAttribute("MS_NUM")%>" == staff ? "" : "hidden")
+              , (<%=session.getAttribute("MS_NUM")%> == staff ? "" : "hidden")
               , i
           ));
         }

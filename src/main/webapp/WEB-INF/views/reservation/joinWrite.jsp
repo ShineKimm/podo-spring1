@@ -20,8 +20,8 @@
       return;
     }
 
-    mIdx = "<%=request.getParameter("idx")%>";
-    mFlag = "<%=request.getParameter("action")%>";
+    mIdx = <%=request.getParameter("idx")%>;
+    mFlag = <%=request.getParameter("action")%>;
 
     if(mFlag == "I") {
       $("#btnAction").html("등록");

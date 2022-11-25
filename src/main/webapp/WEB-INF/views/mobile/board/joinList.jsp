@@ -24,9 +24,9 @@
 
 		var date = new Date();
 		var date2 = addMonth(date.yyyymmdd(), 3);
-		if("<%=Request("date")%>".length == 8) {
-			date = getDateFormat("<%=Request("date")%>");
-			date2 = getDateFormat("<%=Request("date")%>");
+		if(<%=request.getParameter("date")%>.length == 8) {
+			date = getDateFormat(<%=request.getParameter("date")%>);
+			date2 = getDateFormat(<%=request.getParameter("date")%>);
 		}
 		sYear = date.yyyy();
 		sMonth = date.mm();

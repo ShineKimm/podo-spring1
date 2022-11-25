@@ -56,32 +56,32 @@
       }
     });
 
-    $("#txtName").empty().append("<%=session.getAttribute("ms_name")%>");
-    $("#txtId").empty().append("<%=session.getAttribute("ms_id")%>");
-    $("#txtBirth").val("<%=session.getAttribute("ms_birth")%>");
-    $("#txtPhone").val("<%=session.getAttribute("ms_first_phone1")%>" + "<%=session.getAttribute("ms_mid_phone1")%>" + "<%=session.getAttribute("ms_last_phone1")%>");
-    if ("<%=session.getAttribute("MS_EMAIL")%>" != "") {
-      msEmail = "<%=session.getAttribute("MS_EMAIL")%>".split("@");
+    $("#txtName").empty().append(<%=session.getAttribute("ms_name")%>);
+    $("#txtId").empty().append(<%=session.getAttribute("ms_id")%>);
+    $("#txtBirth").val(<%=session.getAttribute("ms_birth")%>);
+    $("#txtPhone").val(<%=session.getAttribute("ms_first_phone1")%> + <%=session.getAttribute("ms_mid_phone1")%> + <%=session.getAttribute("ms_last_phone1")%>);
+    if (<%=session.getAttribute("MS_EMAIL") == null %>) {
+      msEmail = <%=session.getAttribute("MS_EMAIL")%>.split("@");
       $("#txtMail1").val(msEmail[0]);
       $("#txtMail2").val(msEmail[1]);
     }
 
-    var sex = "<%=session.getAttribute("ms_sex")%>";
+    var sex = <%=session.getAttribute("ms_sex")%>;
     if(sex != "") {
       $("input:radio[name=chkSex]:input[value=" + sex + "]").attr("checked", true);
     }
 
-    var sms = "<%=session.getAttribute("SMS_CHK1")%>";
+    var sms = <%=session.getAttribute("SMS_CHK1")%>;
     if(sms != "") {
       $("input:radio[name=chkSms]:input[value=" + sms + "]").attr("checked", true);
     }
 
-    var email = "<%=session.getAttribute("MS_EMAIL_YN")%>";
+    var email = <%=session.getAttribute("MS_EMAIL_YN")%>;
     if(email != "") {
       $("input:radio[name=chkMail]:input[value=" + email + "]").attr("checked", true);
     }
 
-    var birth = "<%=session.getAttribute("MS_BIRTHYL")%>";
+    var birth = <%=session.getAttribute("MS_BIRTHYL")%>;
     if(birth != "") {
       $("input:radio[name=chkBirth]:input[value=" + birth + "]").attr("checked", true);
     }
@@ -104,9 +104,9 @@
     var homeAddress1 = $("#txtHomeAddress1").val();
     var birth = $("#txtBirth").val();
 
-    var bPhone1 = "<%=session.getAttribute("MS_FIRST_PHONE1")%>";
-    var bPhone2 = "<%=session.getAttribute("MS_MID_PHONE1")%>";
-    var bPhone3 = "<%=session.getAttribute("MS_LAST_PHONE1")%>";
+    var bPhone1 = <%=session.getAttribute("MS_FIRST_PHONE1")%>;
+    var bPhone2 = <%=session.getAttribute("MS_MID_PHONE1")%>;
+    var bPhone3 = <%=session.getAttribute("MS_LAST_PHONE1")%>;
 
     if(phone1 != bPhone1 || phone2 != bPhone2 || phone3 != bPhone3) {
       if(!certifyYn) {
@@ -299,7 +299,7 @@
           tbody.append(col1)
         }
 
-        $("#txtHomeAddress1").val("<%=session.getAttribute("ms_area")%>").prop("selected", true);
+        $("#txtHomeAddress1").val(<%=session.getAttribute("ms_area")%>).prop("selected", true);
       } else {
         alert(data.resultMessage);
       }

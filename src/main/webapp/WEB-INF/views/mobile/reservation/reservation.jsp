@@ -29,9 +29,9 @@
 
 		initCalendar("#calendarBox", sYear, sMonth);
 
-		var day = "<%=request.getParameter("BK_DAY")%>";
-		if ("<%=request.getParameter("OLD_BK_DAY")%>" != "") {
-			day = "<%=request.getParameter("OLD_BK_DAY")%>";
+		var day = <%=request.getParameter("BK_DAY")%>;
+		if (<%=request.getParameter("OLD_BK_DAY") != null%>) {
+			day = <%=request.getParameter("OLD_BK_DAY")%>;
 		}
 
 		if(day != "") {
@@ -71,7 +71,7 @@
 					for(i=0; i<rows.length; i++) {
 						var td = $("<td>" + rows[i].DAYNUM + "</td>");
 						
-						if ("<%=request.getParameter("OLD_BK_DAY")%>" != "") {
+						if (<%=request.getParameter("OLD_BK_DAY") != null%>) {
 							td.addClass('no');
 						} else if (rows[i].CL_SOLAR == currentDay) {
 							td.addClass('choice');
@@ -200,7 +200,7 @@
 					var col3 = $("<td>" + rowData[i].BK_B_CHARGE_NM + "</td>");
 					var col4 = $("<td class='red bold'>" + rowData[i].BK_S_CHARGE_NM + "</td>");
 					var col5 = $("<td>" + rowData[i].BK_CADDY + "</td>");
-					if ("<%=request.getParameter("OLD_BK_DAY")%>" != "") {
+					if (<%=request.getParameter("OLD_BK_DAY") != null%>) {
 					var col6 = $("<td><input type='button' class='brownBtn' value='변경' onclick='reserProc(" + i + ")'></td>");
 					} else {
 					var col6 = $("<td><input type='button' class='brownBtn' value='예약' onclick='reserProc(" + i + ")'></td>");
@@ -243,22 +243,22 @@
 		var sUrl = "/controller/ReservationController";
 		var params = {};
 
-		var msNum = "<%=session.getAttribute("MS_NUM")%>";
+		var msNum = <%=session.getAttribute("MS_NUM")%>;
 		var bkCharge = rowData[i].BK_B_CHARGE;
 		if(rowData[i].BK_S_CHARGE != "") {
 			bkCharge = rowData[i].BK_S_CHARGE;
 		}
 
-		if ("<%=request.getParameter("OLD_BK_DAY")%>" != "") {
+		if (<%=request.getParameter("OLD_BK_DAY") != null%>) {
 			//params["method"] = "changeReservation";
 			params["coDiv"] = globals.coDiv;
 			params["aday"] = rowData[i].BK_DAY;
 			params["acos"] = rowData[i].BK_COS;
 			params["atime"] = rowData[i].BK_TIME;
 			params["charge"] = bkCharge;
-			params["bDay"] = "<%=request.getParameter("OLD_BK_DAY")%>";
-			params["bCos"] = "<%=request.getParameter("OLD_BK_COS")%>";
-			params["bTime"] = "<%=request.getParameter("OLD_BK_TIME")%>";
+			params["bDay"] = <%=request.getParameter("OLD_BK_DAY")%>;
+			params["bCos"] = <%=request.getParameter("OLD_BK_COS")%>;
+			params["bTime"] = <%=request.getParameter("OLD_BK_TIME")%>;
 			params["msNum"] = msNum;
 			params["media"] = "M";
 			
@@ -280,7 +280,7 @@
 
 			mAjax(sUrl, params, "POST", true, function(data) {
 				if(data.resultCode == "0000") {
-					if ("<%=request.getParameter("OLD_BK_DAY")%>" != "") {
+					if (<%=request.getParameter("OLD_BK_DAY") != null%>) {
 						alert("변경 완료되었습니다.");
 					} else {
 						alert("예약 완료되었습니다.");

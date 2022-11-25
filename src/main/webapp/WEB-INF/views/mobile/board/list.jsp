@@ -39,7 +39,7 @@
 	});
 
 	function init() {
-		mType = "<%=request.getParameter("type")%>";
+		mType = <%=request.getParameter("type")%>;
 
 		$("#txtTitle").html(title[mType]);
 		$("#type" + mType).addClass("on");

@@ -147,9 +147,9 @@
 		params["phone1"] = phone1;
 		params["phone2"] = phone2;
 		params["phone3"] = phone3;
-		params["mkt1"] = "<%=request.getParameter("chkAgree3")%>";
-		params["mkt2"] = "<%=request.getParameter("chkAgree4")%>";
-		params["mkt3"] = "<%=request.getParameter("chkAgree5")%>";
+		params["mkt1"] = <%=request.getParameter("chkAgree3")%>;
+		params["mkt2"] = <%=request.getParameter("chkAgree4")%>;
+		params["mkt3"] = <%=request.getParameter("chkAgree5")%>;
 		params["birth"] = birth;
 		params["chkMail"] = chkMail;
 		params["chkBirth"] = chkBirth;

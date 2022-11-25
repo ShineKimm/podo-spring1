@@ -26,7 +26,7 @@
 
   function init() {
 
-    mType = "<%=request.getParameter("type")%>";
+    mType = <%=request.getParameter("type")%>;
     //mType = "1";
 
     $("#txtTitle").html(title[mType]);

@@ -90,7 +90,8 @@ public class MemberDAO extends AbstractDAO {
                 session.setAttribute("MS_JOB_CD", SessionMap.get("MS_JOB_CD"));
                 session.setAttribute("MS_AREA", SessionMap.get("MS_AREA"));
                 session.setAttribute("MS_BK_CNT", SessionMap.get("MS_BK_CNT"));
-                session.setMaxInactiveInterval(60);
+//              TODO 세션시간 확인필요
+                session.setMaxInactiveInterval(3600);
 
                 hMap.put("sessionID",params.get("sessionID"));
                 update("member.loginInformation", hMap);
