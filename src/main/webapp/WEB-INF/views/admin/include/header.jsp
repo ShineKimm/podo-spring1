@@ -15,7 +15,7 @@
 
     <script>
       $(document).ready(function() {
-        var staff = "<%=(String)session.getAttribute("USER_STAFF")%>";
+        var staff = <%=(String)session.getAttribute("USER_STAFF")%>;
 
         if(staff == "") {
           location.href = "/admin/member/login";

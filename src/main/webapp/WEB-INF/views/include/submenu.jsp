@@ -50,9 +50,7 @@
         </div>
 
         <div class="menuLine"></div>
-<%--        <%--%>
-<%--            If Session("MS_NUM") = "" Then--%>
-<%--        %>--%>
+        <% if (session.getAttribute("MS_NUM") == null) { %>
         <div class="subMenuLink">
             <ul class="menuLinkBox" onclick="location.href='/member/login'">
                 <li class="icon"><img src="/static/images/menuIcon01.png" alt=""></li>
@@ -68,26 +66,22 @@
                     많은 혜택을</li>
             </ul>
         </div>
-<%--        <%--%>
-<%--            Else--%>
-<%--        %>--%>
-<%--        <div class="subMenuLink">--%>
-<%--            <ul class="menuLinkBox" onclick="doLogout()">--%>
-<%--                <li class="icon"><img src="/images/menuIcon01.png" alt=""></li>--%>
-<%--                <li class="title">로그아웃</li>--%>
-<%--                <li class="txt">새로워진 포도CC를 <br>--%>
-<%--                    만나보세요</li>--%>
-<%--            </ul>--%>
-<%--            <div class="line"></div>--%>
-<%--            <ul class="menuLinkBox" onclick="location.href='/member/modify'">--%>
-<%--                <li class="icon"><img src="/images/menuIcon03.png" alt=""></li>--%>
-<%--                <li class="title">정보수정</li>--%>
-<%--                <li class="txt">더 좋은 서비스로 <br>--%>
-<%--                    보답 하겠습니다</li>--%>
-<%--            </ul>--%>
-<%--        </div>--%>
-<%--        <%--%>
-<%--            End If--%>
-<%--        %>--%>
+        <% } else { %>
+        <div class="subMenuLink">
+            <ul class="menuLinkBox" onclick="doLogout()">
+                <li class="icon"><img src="/static/images/menuIcon01.png" alt=""></li>
+                <li class="title">로그아웃</li>
+                <li class="txt">새로워진 포도CC를 <br>
+                    만나보세요</li>
+            </ul>
+            <div class="line"></div>
+            <ul class="menuLinkBox" onclick="location.href='/member/modify'">
+                <li class="icon"><img src="/static/images/menuIcon03.png" alt=""></li>
+                <li class="title">정보수정</li>
+                <li class="txt">더 좋은 서비스로 <br>
+                    보답 하겠습니다</li>
+            </ul>
+        </div>
+        <% } %>
     </div>
 </div>

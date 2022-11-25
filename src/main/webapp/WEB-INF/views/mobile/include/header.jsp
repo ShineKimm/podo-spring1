@@ -53,7 +53,7 @@
 	});
 
 	function doLogout() {
-		var sUrl = "/controller/MemberController";
+		var sUrl = "/doLogout";
 		var params = {};
 
 		//params["method"] = "doLogout";

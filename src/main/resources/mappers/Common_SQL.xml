@@ -11,8 +11,8 @@
          , CD_TITLE2
          , CD_TITLE3
     FROM CD_COMMON
-    WHERE CO_DIV = '${coDiv}'
-      AND CD_DIVISION = '${division}'
+    WHERE CO_DIV = #{coDiv}
+      AND CD_DIVISION = #{division}
       AND CD_USEYN = 'Y'
   </select>
 

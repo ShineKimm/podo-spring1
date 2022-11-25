@@ -18,8 +18,8 @@
   });
 
   function init() {
-    mType = "<%=request.getParameter("type")%>";
-    mIdx = "<%=request.getParameter("idx")%>";
+    mType = <%=request.getParameter("type")%>;
+    mIdx = <%=request.getParameter("idx")%>;
 
     $("#txtTitle").html(title[mType]);
 

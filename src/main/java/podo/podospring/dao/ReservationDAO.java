@@ -144,12 +144,8 @@ public class ReservationDAO extends AbstractDAO {
 
         HashMap<String, Object> resultMap = (HashMap<String, Object>)selectOne("reservation.cancelReservationQuery1",params);
         params.forEach((key, value) -> resultMap.merge(key, value, (v1, v2) -> v2));
-        System.out.println(resultMap);
-
-
         resultMap.put("msName",resultMap.get("MS_NAME"));
         resultMap.put("phone",resultMap.get("MS_PHONE1"));
-
 
         int diff = selectCnt("reservation.cancelReservationQuery2",resultMap);
         resultMap.put("cancelYn","Y");
@@ -158,10 +154,10 @@ public class ReservationDAO extends AbstractDAO {
         }
         LocalTime now = LocalTime.now();
         int hour = now.getHour();
-
         if (diff == 5 && hour <17) {
             resultMap.put("cancelYn","Y");
         }
+
         if ((String)resultMap.get("cancelYn") == "N") {
             resultMap.put("cancelYn", "Y");
             resultMap.put("resultCode", "2000");
@@ -170,14 +166,13 @@ public class ReservationDAO extends AbstractDAO {
             //TODO 트렌젝션 시작
             resultMap.put("RESULT","");
             selectOne("reservation.cancelReservationQuery3",resultMap);
-            String sResult = (String)selectOne("reservation.cancelReservationQuery4",resultMap);
-            if (sResult == "0000") {
+            if ((String)resultMap.get("RESULT") == "0000") {
                 // TODO 문자발송
                 // SP_SMS_SEND coDiv, "10002", phone, "", sDate, sCos, sTime, msName, msNum, "", "", "HOMEPAGE", ip, "", "", ""
                 resultMap.put("resultCode", "0000");
                 // TODO 트렌젝션 커밋
             } else {
-                resultMap.put("resultCode", sResult);
+                resultMap.put("resultCode", (String) resultMap.get("RESULT"));
 
                 if (resultMap.get("resultCode") == "1000") {
                     resultMap.put("resultMessage", "내장처리 된 예약입니다. 예약 취소 불가합니다.");

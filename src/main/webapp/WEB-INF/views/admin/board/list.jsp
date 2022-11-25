@@ -24,7 +24,7 @@
   });
 
   function init() {
-    mType = "<%=request.getParameter("type")%>";
+    mType = <%=request.getParameter("type")%>;
 
     initTabMenu();
 

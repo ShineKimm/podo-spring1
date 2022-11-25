@@ -16,6 +16,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import podo.podospring.service.MemberService;
 
+//' Member API (method)
+//        ' doLogin 			  : 로그인
+//        ' doLogout			  : 로그아웃
+//        ' chkDuplicateId  : 아이디 중복체크
+//        ' doSignUp 			  : 회원 가입
+//        ' doUpdateMemeber : 회원 정보 수정
+//        ' doFindId				: 아이디 찾기
+//        ' doFindPw				: 비밀번호 찾기
+//        ' doDeleteMemeber : 회원 탈퇴
+//        ' doCertification : 인증번호 전송
+//        ' getVisitList		: 내장내역 조회
+//        ' getScoreList		: 스코어정보 조회
+//        ' getCouponList		: 쿠폰조회
+
 @Controller
 public class MemberController {
     private MemberService memberService;
@@ -37,6 +51,16 @@ public class MemberController {
         Map<String, Object> resultMap = memberService.doLogin(params);
 
         return resultMap;
+    }
+
+    @ResponseBody
+    @RequestMapping("/doLogout")
+    public Map<String, Object> doLogout(@RequestParam HashMap<String, Object> params, HttpSession session) {
+
+        session.invalidate();
+        params.put("resultCode","0000");
+
+        return params;
     }
 
     @ResponseBody

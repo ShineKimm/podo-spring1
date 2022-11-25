@@ -361,13 +361,13 @@
               });
             }, 300);
           } else {
-            //alert(data.resultMessage);
+            alert(data.resultMessage);
           }
         });
       }
 
       function doLogout() {
-        var sUrl = "/controller/MemberController";
+        var sUrl = "/doLogout";
         var params = {};
 
         //params["method"] = "doLogout";
@@ -539,18 +539,18 @@
         </div>
         <div class="secondRight">
             <div class="hero-slider2" data-carousel>
-<%--                <div class="carousel-cell" style="background-image:url(/images/main/Img01.jpg);">
+                <div class="carousel-cell" style="background-image:url(/static/images/main/img01.jpg);">
                     <div class="overlay"></div>
                     <div class="inner">
                         “지친 삶 속에서 자연과 함께하는 즐거운 시간”
                     </div>
                 </div>
-                <div class="carousel-cell" style="background-image:url(/images/main/Img02.jpg);">
+                <div class="carousel-cell" style="background-image:url(/static/images/main/img02.jpg);">
                     <div class="overlay"></div>
                     <div class="inner">
                         “고객에게 감사의 마음으로 최고의 서비스를 약속합니다.”
                     </div>
-                </div>--%>
+                </div>
                 <!--<div class="carousel-cell" style="background-image:url(/images/main/Img01.jpg);">
                     <div class="overlay"></div>
                       <div class="inner">

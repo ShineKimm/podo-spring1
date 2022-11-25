@@ -6,7 +6,7 @@
   <select id="sessionConfirm" parameterType="hashmap" resultType="hashmap">
     SELECT MS_SESSION_KEY
     FROM MS_MAININFO_DETAIL
-    WHERE MS_NUM = IFNULL(NULLIF(${MS_NUM}, ''), '')
+    WHERE MS_NUM = IFNULL(NULLIF(#{MS_NUM}, ''), '')
   </select>
 
 </mapper>

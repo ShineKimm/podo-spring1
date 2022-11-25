@@ -85,7 +85,7 @@
                  )
              END AS MAXDAY
     FROM CL_DAYINFO
-    WHERE CO_DIV = '${coDiv}'
+    WHERE CO_DIV = #{coDiv}
       AND CL_SOLAR = DATE_FORMAT(NOW(), '%Y%m%d')
   </select>
 
@@ -97,8 +97,8 @@
          , A.CL_BUSINESS                   AS CL_BUSINESS
          , CASE
              WHEN DAYOFWEEK(NOW()) = 3 AND DATE_FORMAT(NOW(), '%H%i') <![CDATA[<]]> '0900'
-               THEN DATE_FORMAT(DATE_ADD('${minDay}', INTERVAL -1 DAY), '%Y%m%d')
-             ELSE '${maxDay}' END             MAXDAY
+               THEN DATE_FORMAT(DATE_ADD(#{minDay}, INTERVAL -1 DAY), '%Y%m%d')
+             ELSE #{maxDay} END             MAXDAY
     FROM CL_DAYINFO A
            LEFT OUTER JOIN (SELECT A.CO_DIV
                                  , A.CL_SOLAR
@@ -114,20 +114,20 @@
                                                  (TIMESTAMPDIFF(MINUTE, NVL(BK_LOCKTIME, NOW()), NOW()) >
                                                   5 OR NVL(BK_LOCKTIME, '') = '')
                                                 AND B.BK_DAY > DATE_FORMAT(NOW(), '%Y%m%d')
-                            WHERE A.CO_DIV = '${coDiv}'
-                              AND A.CL_SOLAR LIKE CONCAT('${selYm}', '%')
+                            WHERE A.CO_DIV = #{coDiv}
+                              AND A.CL_SOLAR LIKE CONCAT(#{selYm}, '%')
                               AND A.CL_BUSINESS IN ('1', '2', '3', '4')
-                              AND B.BK_DAY <![CDATA[<=]]> '${maxDay}'
+                              AND B.BK_DAY <![CDATA[<=]]> #{maxDay}
                               AND CASE
-                                    WHEN DAYOFWEEK(NOW()) = 3 AND B.BK_DAY >= '${minDay}'
+                                    WHEN DAYOFWEEK(NOW()) = 3 AND B.BK_DAY >= #{minDay}
                                       THEN DATE_FORMAT(NOW(), '%H%i') >= '0900'
                                     ELSE 1 = 1 END
                               AND B.BK_DAY > DATE_FORMAT(NOW(), '%Y%m%d')
                             GROUP BY A.CL_SOLAR) B
                            ON A.CO_DIV = B.CO_DIV
                              AND A.CL_SOLAR = B.CL_SOLAR
-    WHERE A.CL_SOLAR LIKE CONCAT('${selYm}', '%')
-      AND A.CO_DIV = '${coDiv}'
+    WHERE A.CL_SOLAR LIKE CONCAT(#{selYm}, '%')
+      AND A.CO_DIV = #{coDiv}
     GROUP BY A.CL_SOLAR
     ORDER BY A.CL_SOLAR
   </select>
@@ -166,17 +166,17 @@
     SELECT B.CO_DIV
     , MAX(GIJUN_DAY) GIJUN_DAY
     FROM MN_MASTER_COST B
-    WHERE B.CO_DIV = '${coDiv}'
-    AND GIJUN_DAY <![CDATA[<=]]> '${sDate}'
+    WHERE B.CO_DIV = #{coDiv}
+    AND GIJUN_DAY <![CDATA[<=]]> #{sDate}
     GROUP BY B.CO_DIV
     ) B
     ON A.CO_DIV = B.CO_DIV
     AND A.GIJUN_DAY = B.GIJUN_DAY
-    WHERE A.CO_DIV = '${coDiv}'
-    AND A.MB_CO_DIV = '${coDiv}'
-    AND A.MS_DIVISION = '${sDivision}'
-    AND A.MS_CLASS = '${sClass}'
-    AND A.MS_LEVEL = '${sLevel}'
+    WHERE A.CO_DIV = #{coDiv}
+    AND A.MB_CO_DIV = #{coDiv}
+    AND A.MS_DIVISION = #{sDivision}
+    AND A.MS_CLASS = #{sClass}
+    AND A.MS_LEVEL = #{sLevel}
     ) E
     ON A.CO_DIV = E.CO_DIV
     AND A.BK_TIME BETWEEN E.START_TIME AND E.END_TIME
@@ -189,8 +189,8 @@
     , MN_TIME
     , MN_AMOUNT_DIV
     FROM MN_COST_SALE
-    WHERE CO_DIV = '${coDiv}'
-    AND MN_DAY = '${sDate}'
+    WHERE CO_DIV = #{coDiv}
+    AND MN_DAY = #{sDate}
     ) F
     ON A.CO_DIV = F.CO_DIV
     AND A.BK_DAY = F.MN_DAY
@@ -201,7 +201,7 @@
     , CD_CODE
     , CD_TITLE1
     FROM CD_COMMON
-    WHERE CO_DIV = '${coDiv}'
+    WHERE CO_DIV = #{coDiv}
     AND CD_DIVISION = '004'
     ) G
     ON E.CO_DIV = G.CO_DIV
@@ -211,15 +211,15 @@
     , CD_CODE
     , CD_TITLE1
     FROM CD_COMMON
-    WHERE CO_DIV = '${coDiv}'
+    WHERE CO_DIV = #{coDiv}
     AND CD_DIVISION = '004'
     ) H
     ON F.CO_DIV = H.CO_DIV
     AND F.MN_AMOUNT_DIV = H.CD_CODE
-    WHERE A.CO_DIV = '${coDiv}'
-    AND A.BK_DAY = '${sDate}'
+    WHERE A.CO_DIV = #{coDiv}
+    AND A.BK_DAY = #{sDate}
     <if test=' !sCos.equals("All") '>
-      AND A.BK_COS = '${sCos}'
+      AND A.BK_COS = #{sCos}
     </if>
     AND IFNULL(NULLIF(A.BK_NAME, ''), '') = ''
     AND IFNULL(NULLIF(A.BK_MSNUM, ''), '') = ''
@@ -232,8 +232,8 @@
   <select id="getTeeQuery2" parameterType="hashmap" resultType="int">
     SELECT CL_MONTH_WEEK
     FROM CL_DAYINFO
-    WHERE CO_DIV = '${coDiv}'
-      AND CL_SOLAR = '${sDate}'
+    WHERE CO_DIV = #{coDiv}
+      AND CL_SOLAR = #{sDate}
   </select>
 
   <select id="getTeeQuery3" parameterType="hashmap" resultType="hashmap">
@@ -242,14 +242,14 @@
     FROM BK_HISTORY BK
            INNER JOIN (SELECT CO_DIV, CL_SOLAR, CL_BUSINESS
                        FROM CL_DAYINFO
-                       WHERE CO_DIV = '${coDiv}'
-                         AND CL_SOLAR BETWEEN DATE_FORMAT(DATE_ADD('${sDate}', INTERVAL -7 DAY), '%Y%m%d') AND DATE_FORMAT(DATE_ADD('${sDate}', INTERVAL 7 DAY), '%Y%m%d')
-                         AND CL_MONTH_WEEK = '${monthWeek}') CL
+                       WHERE CO_DIV = #{coDiv}
+                         AND CL_SOLAR BETWEEN DATE_FORMAT(DATE_ADD(#{sDate}, INTERVAL -7 DAY), '%Y%m%d') AND DATE_FORMAT(DATE_ADD(#{sDate}, INTERVAL 7 DAY), '%Y%m%d')
+                         AND CL_MONTH_WEEK = #{monthWeek}) CL
                       ON BK.CO_DIV = CL.CO_DIV
                         AND BK.BK_DAY = CL.CL_SOLAR
-    WHERE BK.CO_DIV = '${coDiv}'
-      AND BK.BK_DAY BETWEEN DATE_FORMAT(DATE_ADD('${sDate}', INTERVAL -7 DAY), '%Y%m%d') AND DATE_FORMAT(DATE_ADD('${sDate}', INTERVAL 7 DAY), '%Y%m%d')
-      AND BK.BK_MSNUM LIKE CONCAT(SUBSTR('${msNum}', 1, 10), '%')
+    WHERE BK.CO_DIV = #{coDiv}
+      AND BK.BK_DAY BETWEEN DATE_FORMAT(DATE_ADD(#{sDate}, INTERVAL -7 DAY), '%Y%m%d') AND DATE_FORMAT(DATE_ADD(#{sDate}, INTERVAL 7 DAY), '%Y%m%d')
+      AND BK.BK_MSNUM LIKE CONCAT(SUBSTR(#{msNum}, 1, 10), '%')
       AND BK.RAIN_CHK = 'N'
       AND BK.BK_NAME  <![CDATA[<>]]> ''
   </select>
@@ -266,16 +266,16 @@
          , CAST(AES_DECRYPT(UNHEX(MS_MID_PHONE1), 'JBOG') AS CHAR) AS MS_MID_PHONE1
          , MS_LAST_PHONE1
     FROM MS_MAININFO
-    WHERE MS_NUM = '${msNum}'
+    WHERE MS_NUM = #{msNum}
   </select>
 
   <select id="vCount1" parameterType="hashmap" resultType="int">
     SELECT COUNT(*)
     FROM BK_HISTORY
-    WHERE CO_DIV = '${coDiv}'
-      AND BK_DAY = '${sDate}'
-      AND BK_COS = '${sCos}'
-      AND BK_TIME = '${sTime}'
+    WHERE CO_DIV = #{coDiv}
+      AND BK_DAY = #{sDate}
+      AND BK_COS = #{sCos}
+      AND BK_TIME = #{sTime}
       AND (IFNULL(NULLIF(BK_NAME, ''), 'X') <![CDATA[<>]]> 'X'
       OR BK_YN = 'Y'
       OR TIMESTAMPDIFF(MINUTE, IFNULL(IFNULL(BK_LOCKTIME, ''), DATE_ADD(NOW(), INTERVAL -5 MINUTE)),
@@ -285,8 +285,8 @@
   <select id="vCount2" parameterType="hashmap" resultType="int">
     SELECT COUNT(BL_MSNUM)
     FROM BL_BREACH
-    WHERE CO_DIV = '${coDiv}'
-      AND BL_MSNUM = '${msNum}'
+    WHERE CO_DIV = #{coDiv}
+      AND BL_MSNUM = #{msNum}
       AND BL_BK_NOSTART <![CDATA[<=]]> DATE_FORMAT(NOW(), '%Y%m%d')
       AND BL_BK_NOEND > DATE_FORMAT(NOW(), '%Y%m%d')
       AND (IFNULL(BL_CONF, 'N') = 'N' OR IFNULL(BL_CONF, 'B') = 'B')
@@ -295,58 +295,58 @@
   <select id="vCount3" parameterType="hashmap" resultType="int">
     SELECT COUNT(*)
     FROM BK_HISTORY
-    WHERE CO_DIV = '${coDiv}'
+    WHERE CO_DIV = #{coDiv}
       AND BK_MEMORIALYN = DATE_FORMAT(NOW(), '%Y%m%d')
-      AND BK_MSNUM = '${msNum}'
+      AND BK_MSNUM = #{msNum}
   </select>
 
   <update id="reservationQuery2" parameterType="hashmap">
     UPDATE BK_HISTORY
-    SET BK_RSVNO        = NVL(BK_RSVNO, NEXTVAL('${coDiv}', 'G', 'BK_HISTORY_SEQ'))
-      , BK_MSNUM        = '${msNum}'
-      , BK_NAME         = '${msName}'
+    SET BK_RSVNO        = NVL(BK_RSVNO, NEXTVAL(#{coDiv}, 'G', 'BK_HISTORY_SEQ'))
+      , BK_MSNUM        = #{msNum}
+      , BK_NAME         = #{msName}
       , BK_MEDIA_TEMP   = BK_MEDIA
-      , BK_MEDIA        = '${sMedia}'
+      , BK_MEDIA        = #{sMedia}
       , BK_DIVISION     = '1'
-      , BK_FIRST_PHONE1 = '${msPhone1}'
-      , BK_MID_PHONE1   = HEX(AES_ENCRYPT('${msPhone2}', 'JBOG'))
-      , BK_LAST_PHONE1  = '${msPhone3}'
-      , BK_CHARGE       = '${sCharge}'
+      , BK_FIRST_PHONE1 = #{msPhone1}
+      , BK_MID_PHONE1   = HEX(AES_ENCRYPT(#{msPhone2}, 'JBOG'))
+      , BK_LAST_PHONE1  = #{msPhone3}
+      , BK_CHARGE       = #{sCharge}
       , BK_FIRST_DAY    = NVL(BK_FIRST_DAY, DATE_FORMAT(NOW(), '%Y%m%d%H%i%s'))
       , BK_AREA         = DATE_FORMAT(NOW(), '%Y%m%d')
       , BK_MEMORIALYN   = DATE_FORMAT(NOW(), '%Y%m%d')
-      , BK_MS_DIV       = '${msDivision}'
-      , BK_MS_CLASS     = '${msClass}'
-      , BK_MS_LEVEL     = '${msLevel}'
+      , BK_MS_DIV       = #{msDivision}
+      , BK_MS_CLASS     = #{msClass}
+      , BK_MS_LEVEL     = #{msLevel}
       , BK_MS_YN        = '2'
-      , BK_MARKET_CD    = '${marketCd}'
-      , BK_BUSINESS_CD  = '${businessCd}'
+      , BK_MARKET_CD    = #{marketCd}
+      , BK_BUSINESS_CD  = #{businessCd}
       , BK_SMSSEND1     = 'Y'
       , UPDATE_STAFF    = 'HOMEPAGE'
       , UPDATE_DATETIME = NOW()
-      , UPDATE_IP       = '${ip}'
-    WHERE CO_DIV = '${coDiv}'
-      AND BK_DAY = '${sDate}'
-      AND BK_COS = '${sCos}'
-      AND BK_TIME = '${sTime}'
+      , UPDATE_IP       = #{ip}
+    WHERE CO_DIV = #{coDiv}
+      AND BK_DAY = #{sDate}
+      AND BK_COS = #{sCos}
+      AND BK_TIME = #{sTime}
       AND IFNULL(NULLIF(BK_NAME, ''), '') = ''
   </update>
 
   <select id="vCount4" parameterType="hashmap" resultType="int">
     SELECT COUNT(*)
     FROM BK_HISTORY
-    WHERE CO_DIV = '${coDiv}'
-      AND BK_DAY = '${sDate}'
-      AND BK_COS = '${sCos}'
-      AND BK_TIME = '${sTime}'
-      AND BK_NAME = '${msName}'
+    WHERE CO_DIV = #{coDiv}
+      AND BK_DAY = #{sDate}
+      AND BK_COS = #{sCos}
+      AND BK_TIME = #{sTime}
+      AND BK_NAME = #{msName}
   </select>
 
   <select id="bkSeq" parameterType="hashmap" resultType="int">
     SELECT IFNULL(MAX(BK_SEQ), 0) + 1
     FROM BK_HISTORY_LOG
-    WHERE CO_DIV = '${coDiv}'
-      AND BK_DAY = '${sDate}'
+    WHERE CO_DIV = #{coDiv}
+      AND BK_DAY = #{sDate}
   </select>
 
   <insert id="reservationQuery3" parameterType="hashmap">
@@ -367,7 +367,7 @@
            BK_DAY,
            BK_COS,
            BK_TIME,
-           '${bkSeq}',
+           #{bkSeq},
            BK_RSVNO,
            BK_NAME,
            BK_MSNUM,
@@ -414,11 +414,11 @@
            BK_BUSINESS_CD,
            BK_COMP_CD
     FROM BK_HISTORY
-    WHERE CO_DIV = '${coDiv}'
-      AND BK_DAY = '${sDate}'
-      AND BK_COS = '${sCos}'
-      AND BK_TIME = '${sTime}'
-      AND BK_NAME = '${msName}'
+    WHERE CO_DIV = #{coDiv}
+      AND BK_DAY = #{sDate}
+      AND BK_COS = #{sCos}
+      AND BK_TIME = #{sTime}
+      AND BK_NAME = #{msName}
   </insert>
 
   <select id="getReservationList" parameterType="hashmap" resultType="hashmap">
@@ -455,8 +455,8 @@
            LEFT OUTER JOIN CL_DAYINFO E
                            ON B.CO_DIV = E.CO_DIV
                              AND B.BK_DAY = E.CL_SOLAR
-    WHERE B.CO_DIV = '${coDiv}'
-      AND B.BK_MSNUM = '${msNum}'
+    WHERE B.CO_DIV = #{coDiv}
+      AND B.BK_MSNUM = #{msNum}
       AND B.BK_DAY >= CONCAT(DATE_FORMAT(NOW(), '%Y%m'), '01')
       AND B.BK_ROUNDF NOT IN ('3', '4')
     ORDER BY B.BK_DAY
@@ -468,11 +468,11 @@
       , CAST(AES_DECRYPT(UNHEX(MS_MID_PHONE1),'JBOG') AS CHAR)
       , MS_LAST_PHONE1) AS MS_PHONE1
     FROM MS_MAININFO
-    WHERE MS_NUM = '${msNum}'
+    WHERE MS_NUM = #{msNum}
   </select>
 
   <select id="cancelReservationQuery2" parameterType="hashmap" resultType="int">
-    SELECT DATEDIFF('${sDate}', NOW()) AS CANCEL_DIFF
+    SELECT DATEDIFF(#{sDate}, NOW()) AS CANCEL_DIFF
   </select>
 
   <select id="cancelReservationQuery3" parameterType="hashmap" resultType="String" statementType="CALLABLE">
@@ -485,12 +485,6 @@
        , #{ip,mode=IN,jdbcType=VARCHAR}
        , #{RESULT,mode=OUT,jdbcType=VARCHAR}
     )
-  </select>
-
-
-
-  <select id="cancelReservationQuery4" parameterType="hashmap" resultType="String">
-    SELECT DATEDIFF('${sDate}', NOW()) AS CANCEL_DIFF
   </select>
 
 </mapper>
