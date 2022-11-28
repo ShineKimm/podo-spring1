@@ -37,5 +37,10 @@ public class BoardServiceImpl implements BoardService{
         return boardDAO.doDelete(params);
     }
 
+    @Override
+    public HashMap<String, Object> getJoinList(HashMap<String, Object> params) {
+        return boardDAO.getJoinList(params);
+    }
+
 
 }

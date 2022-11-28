@@ -487,4 +487,30 @@
     )
   </select>
 
+  <select id="changeReservation1" parameterType="hashmap" resultType="hashmap">
+    SELECT COUNT(*) AS CNT
+    FROM BK_HISTORY
+    WHERE CO_DIV   = #{coDiv}
+      AND BK_DAY   = #{bDate}
+      AND BK_COS   = #{bCos}
+      AND BK_TIME  = #{bTime}
+      AND BK_MSNUM = #{msNum}
+  </select>
+
+  <select id="changeReservation2" parameterType="hashmap" resultType="String" statementType="CALLABLE">
+    CALL SP_HOMEPAGE_BOOKING_CANCEL(
+      #{coDiv,mode=IN,jdbcType=VARCHAR}
+      , #{aDate,mode=IN,jdbcType=VARCHAR}
+      , #{aCos,mode=IN,jdbcType=VARCHAR}
+      , #{aTime,mode=IN,jdbcType=VARCHAR}
+      , #{bDate,mode=IN,jdbcType=VARCHAR}
+      , #{bCos,mode=IN,jdbcType=VARCHAR}
+      , #{bTime,mode=IN,jdbcType=VARCHAR}
+      , #{'M',mode=IN,jdbcType=VARCHAR}
+      , #{HOMEPAGE,mode=IN,jdbcType=VARCHAR}
+      , #{ip,mode=IN,jdbcType=VARCHAR}
+      , #{RESULT,mode=OUT,jdbcType=VARCHAR}
+      )
+  </select>
+
 </mapper>

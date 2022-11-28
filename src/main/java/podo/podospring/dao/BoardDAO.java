@@ -45,7 +45,7 @@ public class BoardDAO extends AbstractDAO {
 
     public HashMap<String, Object> writeBoard(HashMap<String, Object> params) {
 
-        //트렌젝션 시작
+        //TODO 트랜젝션 시작
         int errNum = 0;
         if ("I".equals((String)params.get( "actionFlag"))) {
             int idx = selectCnt("board.idx", params);
@@ -73,11 +73,11 @@ public class BoardDAO extends AbstractDAO {
         }
 
         if (errNum > 0) {
-            //트렌젝션 롤백
+            //TODO 트랜잭션 롤백
             params.put("resultCode", "9999");
             params.put("resultMessage", "오류가 발생하였습니다. 잠시 후 다시 시도해주세요.");
         } else {
-            //트렌젝션 커밋
+            //TODO 트랜잭션 커밋
             params.put("resultCode", "0000");
         }
         return params;
@@ -87,5 +87,16 @@ public class BoardDAO extends AbstractDAO {
         update("board.doDelete",params);
         params.put("resultCode","0000");
         return params;
+    }
+
+    public HashMap<String, Object> getJoinList(HashMap<String, Object> params) {
+        HashMap<String, Object> resultMap = new HashMap<String, Object>();
+        List<HashMap<String, Object>> getJoinList = selectList("board.getJoinList", params);
+        resultMap.put("rows",getJoinList);
+        int totalCnt = selectCnt("board.joinTotalCnt", params);
+        resultMap.put("totalCnt",totalCnt);
+        resultMap.put("resultCode","0000");
+
+        return resultMap;
     }
 }

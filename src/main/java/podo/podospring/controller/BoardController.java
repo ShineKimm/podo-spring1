@@ -85,13 +85,26 @@ public class BoardController {
 
 
         params.put("actionFlag",params.get("flag"));
+        params.put("coDiv",params.get("coDiv"));
         params.put("sType",params.get("type"));
         params.put("title",params.get("txtTitle"));
         params.put("content",params.get("txtContent"));
-        String staff = (String)session.getAttribute("USER_STAFF");
-        staff = (String) session.getAttribute("STAFF");
+        params.put("boardDiv",params.get("boardDiv"));
+        params.put("joinStatus",params.get("joinStatus"));
+        params.put("bkDay",params.get("bkDay"));
+        params.put("bkTime",params.get("bkTime"));
+        params.put("bkPerson",params.get("bkPerson"));
+        params.put("phone1",params.get("phone1"));
+        params.put("phone2",params.get("phone2"));
+        params.put("phone3",params.get("phone3"));
+        params.put("link",params.get("link"));
+        params.put("timeStamp",params.get("timeStamp"));
+        params.put("ipAddr",params.get("ip"));
+        String staff = (String)session.getAttribute("INPUT_STAFF");
+        params.put("staff",staff);
+        String sType = (String)params.get("sType");
 
-        if ("6" == params.get("sType")) {
+        if (sType.equals("6")) {
             staff = (String)session.getAttribute("MS_NUM");
         }
         if (null == params.get("bkPerson")) {
@@ -150,5 +163,26 @@ public class BoardController {
 
         return params;
     }
+
+    @ResponseBody
+    @RequestMapping("/getJoinList")
+    public HashMap<String, Object> getJoinList(@RequestParam HashMap<String, Object> params) {
+        params.put("coDiv",params.get("coDiv"));
+        params.put("sType",params.get("type"));
+        params.put("stDate",params.get("stDate"));
+        params.put("edDate",params.get("edDate"));
+        params.put("startCnt",params.get("startCnt"));
+        params.put("pageCnt",params.get("pageCnt"));
+        params.put("searchText",params.get("searchText"));
+        params.put("searchOption",params.get("searchOption"));
+
+        params = boardService.getJoinList(params);
+
+
+
+        return params;
+    }
+
+
 
 }

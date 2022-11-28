@@ -81,7 +81,7 @@
           AND H.TITLE LIKE %#{searchText}%
         </when>
         <when test='searchOption == "content"'>
-          AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE '%#{searchText}%'
+          AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE %#{searchText}%
         </when>
         <when test='searchOption == "writer"'>
           AND U.USER_NAME = %#{searchText}%
@@ -132,13 +132,13 @@
     <if test='searchText != null and !searchText.equals("") '>
       <choose>
         <when test='searchOption == "title"'>
-          AND H.TITLE LIKE #{searchText}
+          AND H.TITLE LIKE %#{searchText}%
         </when>
         <when test='searchOption == "content"'>
-          AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE #{searchText}
+          AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE %#{searchText}%
         </when>
         <when test='searchOption == "writer"'>
-          AND U.USER_NAME = #{searchText}
+          AND U.USER_NAME = %#{searchText}%
         </when>
       </choose>
     </if>
@@ -245,23 +245,23 @@
 
   <update id="updateQuery1" parameterType="hashmap">
     UPDATE HP_BOARD
-    SET TITLE 						= #{title}
-      , CONTENT 					= #{content}
-      , BOARD_DIV 				= #{boardDiv}
-      , JOIN_STATUS 		= #{joinStatus}
-      , BK_DAY 					= #{bkDay}
-      , BK_TIME 					= #{bkTime}
-      , BK_PERSON 				=  #{bkPerson}
-      , BK_FIRST_PHONE 	= #{phone1}
-      , BK_MID_PHONE 		= HEX(AES_ENCRYPT(#{phone2}, 'JBOG'))
-      , BK_LAST_PHONE 		= #{phone3}
-      , LINK					 		= #{link}
-      , UPDATE_STAFF 		= #{staff}
-      , UPDATE_DATETIME 	= NOW()
-      , UPDATE_IP 				= #{ipAddr}
-    WHERE CO_DIV 					= #{coDiv}
-      AND TYPE 						= #{sType}
-      AND IDX 							= #{idx}
+    SET TITLE           = #{title}
+      , CONTENT         = #{content}
+      , BOARD_DIV       = #{boardDiv}
+      , JOIN_STATUS     = #{joinStatus}
+      , BK_DAY          = #{bkDay}
+      , BK_TIME         = #{bkTime}
+      , BK_PERSON       = #{bkPerson}
+      , BK_FIRST_PHONE  = #{phone1}
+      , BK_MID_PHONE    = HEX(AES_ENCRYPT(#{phone2}, 'JBOG'))
+      , BK_LAST_PHONE   = #{phone3}
+      , LINK            = #{link}
+      , UPDATE_STAFF    = #{staff}
+      , UPDATE_DATETIME = NOW()
+      , UPDATE_IP       = #{ipAddr}
+    WHERE CO_DIV = #{coDiv}
+      AND TYPE = #{sType}
+      AND IDX = #{idx}
   </update>
 
   <update id="updateQuery2" parameterType="hashmap">
@@ -283,8 +283,8 @@
       , FILE_PATH3 = #{filePath3}
     </if>
     WHERE CO_DIV = #{coDiv}
-    AND TYPE 	  = #{sType}
-    AND IDX 		= #{idx}
+    AND TYPE = #{sType}
+    AND IDX = #{idx}
   </update>
 
   <update id="doDelete" parameterType="hashmap">
@@ -295,4 +295,65 @@
       AND IDX = #{sIdx}
   </update>
 
+  <select id="getJoinList" parameterType="hashmap" resultType="hashmap">
+    SELECT H.CO_DIV
+    , H.TYPE
+    , H.IDX
+    , 0 AS SEQ
+    , H.TITLE
+    , CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) AS CONTENT
+    , H.BOARD_DIV
+    , H.JOIN_STATUS
+    , IFNULL(NULLIF(U.MS_NAME, ''), '') AS WRITER_NAME
+    , DATE_FORMAT(H.INPUT_DATETIME, '%Y.%m.%d') AS INPUT_DATETIME
+    , H.VIEW_CNT
+    FROM HP_BOARD H
+    LEFT OUTER JOIN MS_MAININFO U
+    ON H.INPUT_STAFF = U.MS_NUM
+    WHERE H.CO_DIV = #{coDiv}
+    AND H.TYPE = #{sType}
+    AND H.DEL_DIV = '0'
+    AND H.BK_DAY BETWEEN #{stDate} AND #{edDate}
+    <if test='searchText != null and !searchText.equals("") '>
+      <choose>
+        <when test='searchOption.equals("title")'>
+          AND H.TITLE LIKE %#{searchText}%
+        </when>
+        <when test='searchOption.equals("content")'>
+          AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE %#{searchText}%
+        </when>
+        <when test='searchOption.equals("writer")'>
+          AND U.MS_NAME = %#{searchText}%
+        </when>
+        <otherwise>
+          LEFT OUTER JOIN USER_INFO U
+          ON H.INPUT_STAFF = U.USER_STAFF
+        </otherwise>
+      </choose>
+    </if>
+  </select>
+
+  <select id="joinTotalCnt" parameterType="hashmap" resultType="int">
+    SELECT COUNT(*) AS CNT
+    FROM HP_BOARD H
+    LEFT OUTER JOIN MS_MAININFO U
+    ON H.INPUT_STAFF = U.MS_ID
+    WHERE H.CO_DIV  = #{coDiv}
+    AND H.TYPE    = #{sType}
+    AND H.DEL_DIV = '0'
+    AND H.BK_DAY  BETWEEN #{stDate} AND #{edDate}
+    <if test='searchText != null and !searchText.equals("") '>
+      <choose>
+        <when test='searchOption == "title"'>
+          AND H.TITLE LIKE %#{searchText}%
+        </when>
+        <when test='searchOption == "content"'>
+          AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE %#{searchText}%
+        </when>
+        <when test='searchOption == "writer"'>
+          AND U.MS_NAME = %#{searchText}%
+        </when>
+      </choose>
+    </if>
+  </select>
 </mapper>

@@ -90,6 +90,7 @@ public class MemberDAO extends AbstractDAO {
                 session.setAttribute("MS_JOB_CD", SessionMap.get("MS_JOB_CD"));
                 session.setAttribute("MS_AREA", SessionMap.get("MS_AREA"));
                 session.setAttribute("MS_BK_CNT", SessionMap.get("MS_BK_CNT"));
+
 //              TODO 세션시간 확인필요
                 session.setMaxInactiveInterval(3600);
 
@@ -139,7 +140,7 @@ public class MemberDAO extends AbstractDAO {
             params.put("netLevel","00");
 
             
-//             TODO KDY 트렌젝션 시작구문 추가해야함
+//             TODO KDY 트랜잭션 시작구문 추가해야함
             try {
                 String msNum = (String)selectOne("member.doSignUp2",params);
                 String homeAddress = (String) selectOne("member.doSignUp3",params);
@@ -161,7 +162,7 @@ public class MemberDAO extends AbstractDAO {
                 params.put("resultCode","9999");
                 params.put("resultMessage","알 수 없는 오류가 발생하였습니다. 잠시 후 다시 시도해주세요.");
             }
-            //트렌젝션 끝
+            //TODO 트랜잭션 끝
 
         } else {
             params.put("resultCode","9999");

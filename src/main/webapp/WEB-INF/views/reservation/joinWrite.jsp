@@ -1,27 +1,42 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
+<script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
 <script>
 
   var mFlag;
   var mType = "6";
   var mYear, mMonth, mDate;
+  var getIP = "";
+
+  //ip 가져오기
+  async function getClientIP() {
+    try {
+      const response = await axios.get('https://api.ipify.org?format=json');
+      getIP = response.data.ip;
+      console.log(getIP);
+      $("#ip").val(getIP);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   $(document).ready(function() {
+    getClientIP();
     init();
 
     initListener();
   });
 
   function init() {
-    if(<%=session.getAttribute ("MS_NUM") != null %>) {
+    if(<%=session.getAttribute("MS_NUM") == null %>) {
       alert("로그인 후 이용 가능합니다.");
       location.href = "/member/login?page=/reservation/joinList";
       return;
     }
 
-    mIdx = <%=request.getParameter("idx")%>;
-    mFlag = <%=request.getParameter("action")%>;
+    mIdx = "<%=request.getParameter("idx")%>";
+    mFlag = "<%=request.getParameter("action")%>";
 
     if(mFlag == "I") {
       $("#btnAction").html("등록");
@@ -194,10 +209,11 @@
 
     var formData = new FormData($("#fileForm")[0]);
 
-    progressStart();
+    //TODO 프로그래스 실행 확인
+    // progressStart();
 
     mFileAjax(sUrl, formData, function(data) {
-      progressStop();
+      // progressStop();
 
       if(data.resultCode == "0000") {
         alert("작성한 글이 정상적으로 등록되었습니다.");
@@ -318,6 +334,7 @@
             <input type="hidden" id="bkTime" name="bkTime">
             <input type="hidden" id="bkDay" name="bkDay">
             <input type="hidden" id="timestamp" name="timestamp">
+            <input type="hidden" id="ip" name="ip">
         </form>
 
         <div class="padding15"></div>
