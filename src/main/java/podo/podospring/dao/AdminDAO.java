@@ -23,8 +23,8 @@ public class AdminDAO extends AbstractDAO {
                 params.put("resultCode", "2000");
                 params.put("resultMessage", "암호가 잘못되었습니다.");
             } else {
-                session.setAttribute("USER_STAFF",adminVerification.get("id"));
-                session.setAttribute("USER_NAME",adminVerification.get("pw"));
+                session.setAttribute("USER_STAFF",adminVerification.get("USER_STAFF"));
+                session.setAttribute("USER_NAME",adminVerification.get("USER_NAME"));
                 params.put("resultCode", "0000");
             }
         }

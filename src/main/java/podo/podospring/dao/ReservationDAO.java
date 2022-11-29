@@ -1,12 +1,22 @@
 package podo.podospring.dao;
 
+import java.sql.Connection;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
+import org.springframework.cache.Cache;
+import org.springframework.cache.Cache.ValueRetrievalException;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import podo.podospring.common.dao.AbstractDAO;
+import podo.podospring.controller.ReturnException;
+
 
 @Repository
 public class ReservationDAO extends AbstractDAO {
@@ -77,8 +87,9 @@ public class ReservationDAO extends AbstractDAO {
         return params;
     }
 
-    public HashMap<String, Object> doReservation(HashMap<String, Object> params) {
-        
+    @Transactional(rollbackFor = {Exception.class})
+    public HashMap<String, Object> doReservation(HashMap<String, Object> params) throws Exception{
+
 //        TODO 트랜잭션 시작
 
         HashMap<String, Object> resultMap = (HashMap<String, Object>)selectOne("reservation.reservationQuery1",params);
@@ -108,7 +119,7 @@ public class ReservationDAO extends AbstractDAO {
         }
         int vCount3 = selectCnt( "reservation.vCount3",resultMap);
 
-        if ((String) resultMap.get("MS_DIVISION") == "21") {
+        if (resultMap.get("MS_DIVISION").equals("21")) {
             if (vCount3 >= 2) {
                 resultMap.put("sResult","5000");
             }
@@ -123,29 +134,35 @@ public class ReservationDAO extends AbstractDAO {
 
         insert("reservation.reservationQuery3",resultMap);
 
-        if ((String) resultMap.get("sResult") == "0000") {
+        if ((String)resultMap.get("sResult") == "0000") {
 //          TODO 예약됐을경우 SMS 문자 발송
 //            SP_SMS_SEND coDiv, "10000", phone, "", sDate, sCos, sTime, msName, msNum, "", "", "HOMEPAGE", ip, "", "", ""
             resultMap.put("resultCode", "0000");
 
 //          TODO 트랜잭션 커밋
+
         } else {
             resultMap.put("resultCode", resultMap.get("sResult"));
 
-            if ((String) resultMap.get("sResult") == "1000") {
+            if ((String)resultMap.get("sResult") == "1000") {
                 resultMap.put("resultMessage", "해당일자에 이미 예약건이 있습니다.");
-            } else if ((String) resultMap.get("sResult") == "2000") {
+            } else if ((String)resultMap.get("sResult") == "2000") {
                 resultMap.put("resultMessage", "이미 다른 회원이 예약한 타임입니다. 다른 시간을 이용해 주세요.");
-            } else if ((String) resultMap.get("sResult") == "3000") {
+            } else if ((String)resultMap.get("sResult") == "3000") {
                 resultMap.put("resultMessage", "위약이 걸려있어 예약이 불가능합니다.");
-            } else if ((String) resultMap.get("sResult") == "4000") {
+            } else if ((String)resultMap.get("sResult") == "4000") {
                 resultMap.put("resultMessage", "해당 월 예약횟수를 모두 사용하였습니다.");
-            } else if ((String) resultMap.get("sResult") == "5000") {
+            } else if ((String)resultMap.get("sResult") == "5000") {
                 resultMap.put("resultMessage", "해당 일 예약횟수를 모두 사용하였습니다.");
             } else {
                 resultMap.put("resultMessage", "예약이 실패하였습니다. 다시 시도해 주세요.");
             }
 //          TODO 트랜잭션 롤백
+            try{
+                throw new Exception();
+            } catch(Exception e) {
+                throw new ReturnException(resultMap,"실행중 에러가 발생");
+            }
         }
 
         return resultMap;

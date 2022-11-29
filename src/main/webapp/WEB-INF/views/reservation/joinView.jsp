@@ -25,7 +25,7 @@
   }
 
   function doSearchDetail() {
-    var sUrl = "/controller/BoardController";
+    var sUrl = "/getBoardDetail";
     var params = {};
 
     //params["method"] = "getBoardDetail";
@@ -78,7 +78,7 @@
   }
 
   function doSearchReply() {
-    var sUrl = "/controller/BoardController";
+    var sUrl = "/getReplyList";
     var params = {};
 
     //params["method"] = "getReplyList";
@@ -132,7 +132,7 @@
   }
 
   function doDeleteReply(i) {
-    var sUrl = "/controller/BoardController";
+    var sUrl = "/doDeleteReply";
     var params = {};
 
     //params["method"] = "doDeleteReply";

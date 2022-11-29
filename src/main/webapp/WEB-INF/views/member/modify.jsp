@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
+<%=session.getAttribute("MS_AREA")%>
 <script>
 
   var chkPw = false;
@@ -56,33 +57,35 @@
       }
     });
 
-    $("#txtName").empty().append(<%=session.getAttribute("ms_name")%>);
-    $("#txtId").empty().append(<%=session.getAttribute("ms_id")%>);
-    $("#txtBirth").val(<%=session.getAttribute("ms_birth")%>);
-    $("#txtPhone").val(<%=session.getAttribute("ms_first_phone1")%> + <%=session.getAttribute("ms_mid_phone1")%> + <%=session.getAttribute("ms_last_phone1")%>);
+    $("#txtName").empty().append("<%=session.getAttribute("MS_NAME")%>");
+    $("#txtId").empty().append("<%=session.getAttribute("MS_ID")%>");
+    $("#txtBirth").val("<%=session.getAttribute("MS_BIRTH")%>");
+    $("#txtPhone").val("<%=session.getAttribute("MS_FIRST_PHONE1")%>" + "<%=session.getAttribute("MS_MID_PHONE1")%>" + "<%=session.getAttribute("MS_LAST_PHONE1")%>");
     if (<%=session.getAttribute("MS_EMAIL") == null %>) {
-      msEmail = <%=session.getAttribute("MS_EMAIL")%>.split("@");
+      msEmail = "<%=session.getAttribute("MS_EMAIL")%>".split("@");
       $("#txtMail1").val(msEmail[0]);
       $("#txtMail2").val(msEmail[1]);
     }
 
-    var sex = <%=session.getAttribute("ms_sex")%>;
-    if(sex != "") {
+    var sex = <%=session.getAttribute("MS_SEX")%>;
+    if(sex != "" || sex == null || sex == "null") {
       $("input:radio[name=chkSex]:input[value=" + sex + "]").attr("checked", true);
     }
 
-    var sms = <%=session.getAttribute("SMS_CHK1")%>;
-    if(sms != "") {
+    var sms = "<%=session.getAttribute("SMS_CHK1")%>";
+    if(sms != "" || sms == null || sex == "null") {
       $("input:radio[name=chkSms]:input[value=" + sms + "]").attr("checked", true);
     }
 
-    var email = <%=session.getAttribute("MS_EMAIL_YN")%>;
-    if(email != "") {
+    var email = "<%=session.getAttribute("MS_EMAIL_YN")%>";
+    if(email != "" || email == null || sex == "null") {
       $("input:radio[name=chkMail]:input[value=" + email + "]").attr("checked", true);
     }
 
-    var birth = <%=session.getAttribute("MS_BIRTHYL")%>;
-    if(birth != "") {
+    var birth = "<%=session.getAttribute("MS_BIRTHYL")%>";
+
+    if(birth != "" || birth == null || sex == "null") {
+      console.log(birth);
       $("input:radio[name=chkBirth]:input[value=" + birth + "]").attr("checked", true);
     }
   })
@@ -104,9 +107,9 @@
     var homeAddress1 = $("#txtHomeAddress1").val();
     var birth = $("#txtBirth").val();
 
-    var bPhone1 = <%=session.getAttribute("MS_FIRST_PHONE1")%>;
-    var bPhone2 = <%=session.getAttribute("MS_MID_PHONE1")%>;
-    var bPhone3 = <%=session.getAttribute("MS_LAST_PHONE1")%>;
+    var bPhone1 = "<%=session.getAttribute("MS_FIRST_PHONE1")%>";
+    var bPhone2 = "<%=session.getAttribute("MS_MID_PHONE1")%>";
+    var bPhone3 = "<%=session.getAttribute("MS_LAST_PHONE1")%>";
 
     if(phone1 != bPhone1 || phone2 != bPhone2 || phone3 != bPhone3) {
       if(!certifyYn) {
@@ -167,72 +170,72 @@
       }
     });
   }
-
-  function doCertification() {
-    var sUrl = "/controller/MemberController";
-    var params = {};
-
-    //params["method"] = "doCertification";
-
-    var phone1 = $("#txtPhone").val().substr(0,3);
-    var phone2 = $("#txtPhone").val().substr(3,4);
-    var phone3 = $("#txtPhone").val().substr(7,4);
-
-    if(phone1 == "" || phone1.length != 3) {
-      alert("휴대폰번호를 정확하게 입력하세요.");
-      return;
-    }
-    if(phone2 == "" || phone2.length != 4) {
-      alert("휴대폰번호를 정확하게 입력하세요.");
-      return;
-    }
-    if(phone3 == "" || phone3.length != 4) {
-      alert("휴대폰번호를 정확하게 입력하세요.");
-      return;
-    }
-
-    certifyKey = Math.floor(Math.random() * 1000000) + 100000;
-
-    params["certifyKey"] = certifyKey;
-    params["phone"] = phone1 + phone2 + phone3;
-    params["phone1"] = phone1;
-    params["phone2"] = phone2;
-    params["phone3"] = phone3;
-
-    mAjax(sUrl, params, "POST", true, function(data) {
-      if(data.resultCode == "0000") {
-        alert("인증번호가 발송되었습니다.");
-      } else if (data.resultCode == "9999") {
-        alert(data.resultMessage);
-        location.href = "find";
-      } else {
-        alert(data.resultMessage);
-      }
-    });
-  }
-
-  function doConfirmCertification() {
-    var code = $("#txtCerCode").val();
-
-    if (code == "") {
-      alert("인증번호를 먼저 입력해주세요.")
-    } else if(certifyKey == code) {
-      certifyYn = "Y";
-
-      $("#txtPhone").prop("disabled", true);
-      $("#txtPhone").css("background", "#EAEAEA");
-      $("#txtCerCode").prop("disabled", true);
-      $("#txtCerCode").css("background", "#EAEAEA");
-      $("#btnSend").click(function (e) {
-        e.preventDefault();
-      });
-      $("#btnConfirm").click(function (e) {
-        e.preventDefault();
-      });
-    } else {
-      alert("인증번호가 잘못 되었습니다.")
-    }
-  }
+    //TODO 인증번호 기능 확인필요
+  // function doCertification() {
+  //   var sUrl = "/controller/MemberController";
+  //   var params = {};
+  //
+  //   //params["method"] = "doCertification";
+  //
+  //   var phone1 = $("#txtPhone").val().substr(0,3);
+  //   var phone2 = $("#txtPhone").val().substr(3,4);
+  //   var phone3 = $("#txtPhone").val().substr(7,4);
+  //
+  //   if(phone1 == "" || phone1.length != 3) {
+  //     alert("휴대폰번호를 정확하게 입력하세요.");
+  //     return;
+  //   }
+  //   if(phone2 == "" || phone2.length != 4) {
+  //     alert("휴대폰번호를 정확하게 입력하세요.");
+  //     return;
+  //   }
+  //   if(phone3 == "" || phone3.length != 4) {
+  //     alert("휴대폰번호를 정확하게 입력하세요.");
+  //     return;
+  //   }
+  //
+  //   certifyKey = Math.floor(Math.random() * 1000000) + 100000;
+  //
+  //   params["certifyKey"] = certifyKey;
+  //   params["phone"] = phone1 + phone2 + phone3;
+  //   params["phone1"] = phone1;
+  //   params["phone2"] = phone2;
+  //   params["phone3"] = phone3;
+  //
+  //   mAjax(sUrl, params, "POST", true, function(data) {
+  //     if(data.resultCode == "0000") {
+  //       alert("인증번호가 발송되었습니다.");
+  //     } else if (data.resultCode == "9999") {
+  //       alert(data.resultMessage);
+  //       location.href = "find";
+  //     } else {
+  //       alert(data.resultMessage);
+  //     }
+  //   });
+  // }
+  //
+  // function doConfirmCertification() {
+  //   var code = $("#txtCerCode").val();
+  //
+  //   if (code == "") {
+  //     alert("인증번호를 먼저 입력해주세요.")
+  //   } else if(certifyKey == code) {
+  //     certifyYn = "Y";
+  //
+  //     $("#txtPhone").prop("disabled", true);
+  //     $("#txtPhone").css("background", "#EAEAEA");
+  //     $("#txtCerCode").prop("disabled", true);
+  //     $("#txtCerCode").css("background", "#EAEAEA");
+  //     $("#btnSend").click(function (e) {
+  //       e.preventDefault();
+  //     });
+  //     $("#btnConfirm").click(function (e) {
+  //       e.preventDefault();
+  //     });
+  //   } else {
+  //     alert("인증번호가 잘못 되었습니다.")
+  //   }
+  // }
 
   function onCheckPw() {
     var pw = $("#txtPw").val();
@@ -299,7 +302,7 @@
           tbody.append(col1)
         }
 
-        $("#txtHomeAddress1").val(<%=session.getAttribute("ms_area")%>).prop("selected", true);
+        $("#txtHomeAddress1").val("<%=session.getAttribute("MS_AREA")%>").prop("selected", true);
       } else {
         alert(data.resultMessage);
       }

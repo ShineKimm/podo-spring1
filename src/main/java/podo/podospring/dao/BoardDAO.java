@@ -58,7 +58,7 @@ public class BoardDAO extends AbstractDAO {
             if (ReCnt3 < 1) {
                 errNum = errNum +1;
             }
-        } else if ("U".equals((String)params.get( "actionFlag"))) {
+        } else if ("U".equals((String)params.get("actionFlag"))) {
             params.get("idx");
             int ReCnt4 = update("board.updateQuery1",params);
             if (ReCnt4 < 1) {
@@ -98,5 +98,20 @@ public class BoardDAO extends AbstractDAO {
         resultMap.put("resultCode","0000");
 
         return resultMap;
+    }
+
+    public HashMap<String, Object> getReplyList(HashMap<String, Object> params) {
+        HashMap<String, Object> resultMap = new HashMap<String, Object>();
+
+        List<HashMap<String, Object>> getReplyList = selectList("board.getReplyList", params);
+        resultMap.put("rows",getReplyList);
+        resultMap.put("resultCode","0000");
+        return resultMap;
+    }
+
+    public HashMap<String, Object> doDeleteReply(HashMap<String, Object> params) {
+        update("board.doDeleteReply", params);
+        params.put("resultCode","0000");
+        return params;
     }
 }

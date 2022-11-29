@@ -191,6 +191,10 @@ public class MenuController {
     public String reservationJoinCal() {
         return "/reservation/joinCal";
     }
+    @GetMapping("/reservation/joinView")
+    public String reservationJoinView() {
+        return "/reservation/joinView";
+    }
 
     @GetMapping("/reservation/reserCheck")
     public String reservationReserCheck() {

@@ -81,9 +81,6 @@ public class BoardController {
             }
         }
 
-
-
-
         params.put("actionFlag",params.get("flag"));
         params.put("coDiv",params.get("coDiv"));
         params.put("sType",params.get("type"));
@@ -100,12 +97,13 @@ public class BoardController {
         params.put("link",params.get("link"));
         params.put("timeStamp",params.get("timeStamp"));
         params.put("ipAddr",params.get("ip"));
-        String staff = (String)session.getAttribute("INPUT_STAFF");
+        String staff = (String)session.getAttribute("USER_STAFF");
         params.put("staff",staff);
         String sType = (String)params.get("sType");
 
         if (sType.equals("6")) {
             staff = (String)session.getAttribute("MS_NUM");
+            params.put("staff",staff);
         }
         if (null == params.get("bkPerson")) {
             params.put("bkPerson","0");
@@ -180,6 +178,32 @@ public class BoardController {
 
 
 
+        return params;
+    }
+
+    @ResponseBody
+    @RequestMapping("/getReplyList")
+    public HashMap<String, Object> getReplyList(@RequestParam HashMap<String, Object> params) {
+        params.put("coDiv",params.get("coDiv"));
+        params.put("sType",params.get("type"));
+        params.put("sIdx",params.get("idx"));
+
+        params = boardService.getReplyList(params);
+
+
+
+        return params;
+    }
+
+    @ResponseBody
+    @RequestMapping("/doDeleteReply")
+    public HashMap<String, Object> doDeleteReply(@RequestParam HashMap<String, Object> params) {
+        params.put("coDiv",params.get("coDiv"));
+        params.put("sType",params.get("type"));
+        params.put("sIdx",params.get("idx"));
+        params.put("sSeq",params.get("seq"));
+
+        params = boardService.doDeleteReply(params);
         return params;
     }
 

@@ -56,7 +56,7 @@
 			}
 		});
 
-		$("#txtName").empty().append(<%=session.getAttribute("ms_name")%>);
+		$("#txtName").empty().append(<%=session.getAttribute("MS_NAME")%>);
 		$("#txtId").empty().append(<%=session.getAttribute("ms_id")%>);
 		$("#txtBirth").val(<%=session.getAttribute("ms_birth")%>);
 		$("#txtPhone").val(<%=session.getAttribute("ms_first_phone1")%> + <%=session.getAttribute("ms_mid_phone1")%> + <%=session.getAttribute("ms_last_phone1")%>);

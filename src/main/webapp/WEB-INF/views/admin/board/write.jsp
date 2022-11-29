@@ -1,12 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
+<script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
 
 <script>
 
   var mFlag;
   var mType;
   var mIdx;
+  var getIP = "";
 
   var title = {
     "1" : "공지사항",
@@ -18,15 +20,17 @@
   }
 
   $(document).ready(function() {
+
+    getClientIP();
     init();
 
     initListener();
   });
 
   function init() {
-    mType = <%=request.getParameter("type")%>;
-    mIdx = <%=request.getParameter("idx")%>;
-    mFlag = <%=request.getParameter("action")%>;
+    mType = "<%=request.getParameter("type")%>";
+    mIdx = "<%=request.getParameter("idx")%>";
+    mFlag = "<%=request.getParameter("action")%>";
 
     $("#txtSubject").html(title[mType]);
 
@@ -150,6 +154,7 @@
     $("#type").val(mType);
     $("#idx").val(mIdx);
     $("#timestamp").val(getTimeStamp());
+    $("#ip").val(getIP);
 
     var title = $("#txtTitle").val();
 
@@ -175,6 +180,16 @@
     });
   }
 
+  //ip 가져오기
+  async function getClientIP() {
+    try {
+      const response = await axios.get('https://api.ipify.org?format=json');
+      getIP = response.data.ip;
+      console.log(getIP);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 </script>
 
 <div id="wrap">
@@ -268,6 +283,7 @@
                         <input type="hidden" id="idx" name="idx" />
                         <input type="hidden" id="flag" name="flag" />
                         <input type="hidden" id="timestamp" name="timestamp" />
+                        <input type="hidden" id="ip" name="ip" />
                     </form>
                 </div>
                 <ul class="choice">

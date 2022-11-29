@@ -36,7 +36,7 @@
 	}
 
 	function doSearchDetail() {
-		var sUrl = "/controller/BoardController";
+		var sUrl = "/getBoardDetail";
 		var params = {};
 
 		//params["method"] = "getBoardDetail";

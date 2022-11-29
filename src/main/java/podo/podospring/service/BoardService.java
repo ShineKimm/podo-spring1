@@ -16,4 +16,8 @@ public interface BoardService {
     HashMap<String, Object> doDelete(HashMap<String, Object> params);
 
     HashMap<String, Object> getJoinList(HashMap<String, Object> params);
+
+    HashMap<String, Object> getReplyList(HashMap<String, Object> params);
+
+    HashMap<String, Object> doDeleteReply(HashMap<String, Object> params);
 }

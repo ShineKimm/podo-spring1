@@ -94,6 +94,7 @@
             } else if(rows[i].CL_SOLAR >= currentDay) {
               td.data('date', rows[i].CL_SOLAR);
               if(rows[i].BK_TEAM > 0) {
+                console.log(rows[i].BK_TEAM);
                 td.addClass('possible');
                 td.on('click', function() {
                   onClickDay($(this).data('date'));

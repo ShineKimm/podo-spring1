@@ -78,13 +78,13 @@
     <if test='searchText != null and !searchText.equals("") '>
       <choose>
         <when test='searchOption == "title"'>
-          AND H.TITLE LIKE %#{searchText}%
+          AND H.TITLE LIKE CONCAT('%',#{searchText},'%')
         </when>
         <when test='searchOption == "content"'>
-          AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE %#{searchText}%
+          AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE CONCAT('%',#{searchText},'%')
         </when>
         <when test='searchOption == "writer"'>
-          AND U.USER_NAME = %#{searchText}%
+          AND U.USER_NAME = #{searchText}
         </when>
       </choose>
     </if>
@@ -132,13 +132,13 @@
     <if test='searchText != null and !searchText.equals("") '>
       <choose>
         <when test='searchOption == "title"'>
-          AND H.TITLE LIKE %#{searchText}%
+          AND H.TITLE LIKE CONCAT('%',#{searchText},'%')
         </when>
         <when test='searchOption == "content"'>
-          AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE %#{searchText}%
+          AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE CONCAT('%',#{searchText},'%')
         </when>
         <when test='searchOption == "writer"'>
-          AND U.USER_NAME = %#{searchText}%
+          AND U.USER_NAME = CONCAT('%',#{searchText},'%')
         </when>
       </choose>
     </if>
@@ -317,13 +317,13 @@
     <if test='searchText != null and !searchText.equals("") '>
       <choose>
         <when test='searchOption.equals("title")'>
-          AND H.TITLE LIKE %#{searchText}%
+          AND H.TITLE LIKE CONCAT('%',#{searchText},'%')
         </when>
         <when test='searchOption.equals("content")'>
-          AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE %#{searchText}%
+          AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE CONCAT('%',#{searchText},'%')
         </when>
         <when test='searchOption.equals("writer")'>
-          AND U.MS_NAME = %#{searchText}%
+          AND U.MS_NAME = CONCAT('%',#{searchText},'%')
         </when>
         <otherwise>
           LEFT OUTER JOIN USER_INFO U
@@ -331,6 +331,8 @@
         </otherwise>
       </choose>
     </if>
+    ORDER BY IDX DESC, SEQ
+    LIMIT ${startCnt}, ${pageCnt}
   </select>
 
   <select id="joinTotalCnt" parameterType="hashmap" resultType="int">
@@ -338,22 +340,53 @@
     FROM HP_BOARD H
     LEFT OUTER JOIN MS_MAININFO U
     ON H.INPUT_STAFF = U.MS_ID
-    WHERE H.CO_DIV  = #{coDiv}
-    AND H.TYPE    = #{sType}
+    WHERE H.CO_DIV = #{coDiv}
+    AND H.TYPE = #{sType}
     AND H.DEL_DIV = '0'
-    AND H.BK_DAY  BETWEEN #{stDate} AND #{edDate}
+    AND H.BK_DAY BETWEEN #{stDate} AND #{edDate}
     <if test='searchText != null and !searchText.equals("") '>
       <choose>
         <when test='searchOption == "title"'>
-          AND H.TITLE LIKE %#{searchText}%
+          AND H.TITLE LIKE CONCAT('%',#{searchText},'%')
         </when>
         <when test='searchOption == "content"'>
-          AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE %#{searchText}%
+          AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE CONCAT('%',#{searchText},'%')
         </when>
         <when test='searchOption == "writer"'>
-          AND U.MS_NAME = %#{searchText}%
+          AND U.MS_NAME = CONCAT('%',#{searchText},'%')
         </when>
       </choose>
     </if>
   </select>
+
+  <select id="getReplyList" parameterType="hashmap" resultType="hashmap">
+    SELECT H.CO_DIV
+         , H.TYPE
+         , H.IDX
+         , H.SEQ
+         , H.CONTENT
+         , H.BK_PERSON
+         , IFNULL(NULLIF(U.MS_NAME, ''), '') AS WRITER_NAME
+         , H.BK_FIRST_PHONE
+         , CAST(AES_DECRYPT(UNHEX(H.BK_MID_PHONE),'JBOG') AS CHAR) AS BK_MID_PHONE
+         , H.BK_LAST_PHONE
+         , DATE_FORMAT(H.INPUT_DATETIME, '%Y.%m.%d') 	AS INPUT_DATETIME
+         , H.INPUT_STAFF
+    FROM HP_BOARD_REPLY	H
+           LEFT OUTER JOIN MS_MAININFO U
+                           ON H.INPUT_STAFF = U.MS_NUM
+    WHERE H.CO_DIV      = #{coDiv}
+      AND H.TYPE        = #{sType}
+      AND H.IDX         = #{sIdx}
+      AND H.DEL_DIV 		 = '0'
+    ORDER BY H.SEQ ASC
+  </select>
+
+  <update id="doDeleteReply" parameterType="hashmap">
+    UPDATE HP_BOARD_REPLY SET DEL_DIV = '1'
+    WHERE CO_DIV = #{coDiv}
+      AND TYPE = #{sType}
+      AND IDX = #{sIdx}
+      AND SEQ = #{sSeq}
+  </update>
 </mapper>

@@ -90,7 +90,8 @@ public class ReservationController {
 
     @ResponseBody
     @RequestMapping("/doReservation")
-    public HashMap<String, Object> doReservation(@RequestParam HashMap<String, Object> params) {
+    public HashMap<String, Object> doReservation(@RequestParam HashMap<String, Object> params)
+            throws Exception {
 
 
         params.put("coDiv",params.get("coDiv"));

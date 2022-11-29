@@ -10,7 +10,7 @@ public interface ReservationService {
 
     HashMap<String, Object> changeReservation(HashMap<String, Object> params);
 
-    HashMap<String, Object> doReservation(HashMap<String, Object> params);
+    HashMap<String, Object> doReservation(HashMap<String, Object> params) throws Exception;
 
     HashMap<String, Object> getReservationList(HashMap<String, Object> params);
 
