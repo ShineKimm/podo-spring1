@@ -207,6 +207,22 @@ public class BoardController {
         return params;
     }
 
+    @ResponseBody
+    @RequestMapping("/writeReply")
+    public HashMap<String, Object> writeReply(@RequestParam HashMap<String, Object> params, HttpSession session) {
+        params.put("coDiv",params.get("coDiv"));
+        params.put("sType",params.get("type"));
+        params.put("sIdx",params.get("idx"));
+        params.put("content",params.get("content"));
+        params.put("content",params.get("content"));
+        params.put("ipAddr",params.get("ip"));
+
+        params.put("MS_NUM", session.getAttribute("MS_NUM"));
+
+        params = boardService.writeReply(params);
+        return params;
+    }
+
 
 
 }

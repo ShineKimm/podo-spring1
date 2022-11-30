@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//@Transactional
 public interface MemberService {
 
     Map<String, Object> doLogin(Map<String, Object> params)
@@ -16,4 +15,6 @@ public interface MemberService {
     Map<String, Object> doCertification(HashMap<String, Object> params);
 
     Map<String, Object> doSignUp(HashMap<String, Object> params);
+
+    Map<String, Object> doUpdateMemeber(HashMap<String, Object> params);
 }

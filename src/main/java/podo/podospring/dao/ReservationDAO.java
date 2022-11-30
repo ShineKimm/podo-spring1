@@ -55,35 +55,43 @@ public class ReservationDAO extends AbstractDAO {
         return params;
     }
 
-    public HashMap<String, Object> changeReservation(HashMap<String, Object> params) {
+    @Transactional(rollbackFor = {Exception.class})
+    public HashMap<String, Object> changeReservation(HashMap<String, Object> params)
+            throws ReturnException {
 //        TODO 트랜잭션 시작
-        int bkCnt = selectCnt("reservation.changeReservation1",params);
-        if (bkCnt > 0) {
-            selectOne("reservation.changeReservation2", params);
-            params.put("sResult", params.get("RESULT"));
-            if ((String) params.get("sResult") == "0000") {
-                //TODO 문자발송
-//                SP_SMS_SEND coDiv, "10001", phone, "", bDate, bCos, bTime, msName, msNum, "", "", "HOMEPAGE", ip, aDate, aCos, aTime
-                params.put("resultCode", "0000");
-//                TODO 트랜잭션 커밋
-            } else {
-                params.put("resultCode", params.get("sResult"));
-                if ((String) params.get("resultCode") == "2000") {
-                    params.put("resultMessage", "이미 다른 회원이 예약한 타임입니다. 다른 시간을 이용해 주세요.");
-                } else if ((String) params.get("resultCode") == "3000") {
-                    params.put("resultMessage", "이미 다른 회원이 예약한 타임입니다. 다른 시간을 이용해 주세요.");
-                } else if ((String) params.get("resultCode") == "4000") {
-                    params.put("resultMessage", "이미 다른 회원이 예약한 타임입니다. 다른 시간을 이용해 주세요.");
+        try {
+            int bkCnt = selectCnt("reservation.changeReservation1", params);
+            if (bkCnt > 0) {
+                selectOne("reservation.changeReservation2", params);
+                params.put("sResult", params.get("RESULT"));
+                Object sResult = params.get("sResult");
+                if (sResult.equals("0000")) {
+                    //TODO 문자발송
+                    //SP_SMS_SEND coDiv, "10001", phone, "", bDate, bCos, bTime, msName, msNum, "", "", "HOMEPAGE", ip, aDate, aCos, aTime
+                    params.put("resultCode", "0000");
+                    //TODO 트랜잭션 커밋
                 } else {
-                    params.put("resultMessage", "예약이 실패하였습니다. 다시 시도해 주세요.");
+                    params.put("resultCode", params.get("sResult"));
+                    if ((String) params.get("resultCode") == "2000") {
+                        params.put("resultMessage", "이미 다른 회원이 예약한 타임입니다. 다른 시간을 이용해 주세요.");
+                    } else if ((String) params.get("resultCode") == "3000") {
+                        params.put("resultMessage", "이미 다른 회원이 예약한 타임입니다. 다른 시간을 이용해 주세요.");
+                    } else if ((String) params.get("resultCode") == "4000") {
+                        params.put("resultMessage", "이미 다른 회원이 예약한 타임입니다. 다른 시간을 이용해 주세요.");
+                    } else {
+                        params.put("resultMessage", "예약이 실패하였습니다. 다시 시도해 주세요.");
+                    }
+                    //TODO 트렌잭션 롤백
+                    throw new Exception();
                 }
-//                TODO 트렌잭션 롤백
+            } else {
+                params.put("resultMessage", "등록된 예약이 없습니다.");
+                //TODO 트렌잭션 롤백
+                throw new Exception();
             }
-        } else {
-            params.put("resultMessage", "등록된 예약이 없습니다.");
-//            TODO 트렌잭션 롤백
+        } catch (Exception e) {
+            throw new ReturnException(params,"실행중 에러가 발생");
         }
-
         return params;
     }
 
@@ -143,7 +151,7 @@ public class ReservationDAO extends AbstractDAO {
 
         } else {
             resultMap.put("resultCode", resultMap.get("sResult"));
-
+            //TODO 해당일자 예약건(sResult == 1000) 처리 로직이 없음
             if ((String)resultMap.get("sResult") == "1000") {
                 resultMap.put("resultMessage", "해당일자에 이미 예약건이 있습니다.");
             } else if ((String)resultMap.get("sResult") == "2000") {
@@ -158,6 +166,7 @@ public class ReservationDAO extends AbstractDAO {
                 resultMap.put("resultMessage", "예약이 실패하였습니다. 다시 시도해 주세요.");
             }
 //          TODO 트랜잭션 롤백
+//          TODO try catch if문 밖으로
             try{
                 throw new Exception();
             } catch(Exception e) {

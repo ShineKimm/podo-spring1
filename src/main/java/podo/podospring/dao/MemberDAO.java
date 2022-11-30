@@ -170,4 +170,10 @@ public class MemberDAO extends AbstractDAO {
         }
         return params;
     }
+
+    public Map<String, Object> doUpdateMemeber(HashMap<String, Object> params) {
+        update("member.doUpdateMemeber1",params);
+        update("member.doUpdateMemeber2",params);
+        return params;
+    }
 }

@@ -129,7 +129,7 @@ function doDeleteReservation(i) {
 
 	if (ans == true) {
 
-		var sUrl = "/controller/ReservationController";
+		var sUrl = "/cancelReservation";
 		var params = {};
 
 		//params["method"] = "cancelReservation";

@@ -227,8 +227,8 @@
     $("#BK_TIME").val(rows[i].BK_TIME);
     $("#BK_NAME").val(rows[i].BK_NAME);
     $("#BK_ROUNDF").val(rows[i].BK_ROUNDF);
-    $("#ip").val(getIP);
     $("#form_change").submit();
+
   }
 
   function smNextMonth() {
@@ -295,14 +295,13 @@
 
 </script>
 
-<form id="form_change" action="/changeReservation" method="post">
+<form id="form_change" action="/reservation/reservation" method="post">
     <input type="hidden" name="OLD_BK_DAY" 				id="BK_DAY" >
     <input type="hidden" name="OLD_BK_COS" 				id="BK_COS" >
     <input type="hidden" name="OLD_BK_COS_NM" 			id="BK_COS_NM" >
     <input type="hidden" name="OLD_BK_TIME" 			id="BK_TIME" >
     <input type="hidden" name="OLD_BK_NAME" 			id="BK_NAME" >
     <input type="hidden" name="OLD_BK_ROUNDF" 			id="BK_ROUNDF" >
-    <input type="hidden" name="ip" 			            id="ip" >
 </form>
 
 <div class="middleBg zoomImg">

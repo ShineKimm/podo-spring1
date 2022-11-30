@@ -114,4 +114,21 @@ public class BoardDAO extends AbstractDAO {
         params.put("resultCode","0000");
         return params;
     }
+
+    public HashMap<String, Object> writeReply(HashMap<String, Object> params) {
+        //TODO 트렌젝션 시작
+        int seq = selectCnt("board.writeReplySeq", params);
+        params.put("seq",seq);
+        int ReCnt = insert("board.writeReplyInsert", params);
+        if (ReCnt == 0) {
+            //TODO 트렌젝션 롤백
+            params.put("resultCode", "9999");
+            params.put("resultMessage", "오류가 발생하였습니다. 잠시 후 다시 시도해주세요.");
+        } else {
+            //TODO 트렌젝션 커밋
+            params.put("resultCode", "0000");
+        }
+
+        return params;
+    }
 }

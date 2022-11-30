@@ -65,20 +65,19 @@ public class ReservationController {
     @RequestMapping("/changeReservation")
     public HashMap<String, Object> changeReservation(@RequestParam HashMap<String, Object> params, HttpSession session) {
 
-//        TODO asp에서도 변경 기능 작동 안함 확인필요
-//        submit으로 넘겨주는 파라메터가 없음
 
         params.put("coDiv",params.get("coDiv"));
-        params.put("aDate",params.get("aDay"));
-        params.put("aCos",params.get("aCos"));
-        params.put("aTime",params.get("aTime"));
+        params.put("aDate",params.get("aday"));
+        params.put("aCos",params.get("acos"));
+        params.put("aTime",params.get("atime"));
         params.put("bDate",params.get("bDay"));
         params.put("bCos",params.get("bCos"));
         params.put("bTime",params.get("bTime"));
         params.put("sCharge",params.get("charge"));
         params.put("sMedia",params.get("media"));
         params.put("msNum",params.get("msNum"));
-        params.put("msName",params.get("MS_NAME"));
+        String msName = (String)session.getAttribute("MS_NAME");
+        params.put("msName",msName);
         params.put("phone",(String)session.getAttribute("MS_FIRST_PHONE1")+(String)session.getAttribute("MS_FIRST_PHONE1")+(String)session.getAttribute("MS_LAST_PHONE1"));
         params.put("ip",params.get("ip"));
 

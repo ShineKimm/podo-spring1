@@ -57,16 +57,16 @@
 		});
 
 		$("#txtName").empty().append(<%=session.getAttribute("MS_NAME")%>);
-		$("#txtId").empty().append(<%=session.getAttribute("ms_id")%>);
-		$("#txtBirth").val(<%=session.getAttribute("ms_birth")%>);
-		$("#txtPhone").val(<%=session.getAttribute("ms_first_phone1")%> + <%=session.getAttribute("ms_mid_phone1")%> + <%=session.getAttribute("ms_last_phone1")%>);
+		$("#txtId").empty().append(<%=session.getAttribute("MS_ID")%>);
+		$("#txtBirth").val(<%=session.getAttribute("MS_BIRTH")%>);
+		$("#txtPhone").val(<%=session.getAttribute("MS_FIRST_PHONE1")%> + <%=session.getAttribute("MS_MID_PHONE1")%> + <%=session.getAttribute("MS_LAST_PHONE1")%>);
 		if (<%=session.getAttribute("MS_EMAIL") != null%>) {
 			msEmail = String(<%=session.getAttribute("MS_EMAIL")%>).split("@");
 			$("#txtMail1").val(msEmail[0]);
 			$("#txtMail2").val(msEmail[1]);
 		}
 
-		var sex = <%=session.getAttribute("ms_sex")%>;
+		var sex = <%=session.getAttribute("MS_SEX")%>;
 		if(sex != "" || sex != null) {
 			$("input:radio[name=chkSex]:input[value=" + sex + "]").attr("checked", true);
 		}
@@ -88,7 +88,7 @@
 	})
 
 	function doUpdateMemeber() {
-		var sUrl = "/controller/MemberController";
+		var sUrl = "/doUpdateMemeber";
 		var params = {};
 
 		//params["method"] = "doUpdateMemeber";

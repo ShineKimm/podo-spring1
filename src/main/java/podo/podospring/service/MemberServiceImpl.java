@@ -37,4 +37,9 @@ public class MemberServiceImpl implements MemberService{
     public Map<String, Object> doSignUp(HashMap<String, Object> params) {
         return memberDAO.doSignUp(params);
     }
+
+    @Override
+    public Map<String, Object> doUpdateMemeber(HashMap<String, Object> params) {
+        return memberDAO.doUpdateMemeber(params);
+    }
 }

@@ -366,27 +366,49 @@
          , H.SEQ
          , H.CONTENT
          , H.BK_PERSON
-         , IFNULL(NULLIF(U.MS_NAME, ''), '') AS WRITER_NAME
+         , IFNULL(NULLIF(U.MS_NAME, ''), '')                        AS WRITER_NAME
          , H.BK_FIRST_PHONE
-         , CAST(AES_DECRYPT(UNHEX(H.BK_MID_PHONE),'JBOG') AS CHAR) AS BK_MID_PHONE
+         , CAST(AES_DECRYPT(UNHEX(H.BK_MID_PHONE), 'JBOG') AS CHAR) AS BK_MID_PHONE
          , H.BK_LAST_PHONE
-         , DATE_FORMAT(H.INPUT_DATETIME, '%Y.%m.%d') 	AS INPUT_DATETIME
+         , DATE_FORMAT(H.INPUT_DATETIME, '%Y.%m.%d')                AS INPUT_DATETIME
          , H.INPUT_STAFF
-    FROM HP_BOARD_REPLY	H
+    FROM HP_BOARD_REPLY H
            LEFT OUTER JOIN MS_MAININFO U
                            ON H.INPUT_STAFF = U.MS_NUM
-    WHERE H.CO_DIV      = #{coDiv}
-      AND H.TYPE        = #{sType}
-      AND H.IDX         = #{sIdx}
-      AND H.DEL_DIV 		 = '0'
+    WHERE H.CO_DIV = #{coDiv}
+      AND H.TYPE = #{sType}
+      AND H.IDX = #{sIdx}
+      AND H.DEL_DIV = '0'
     ORDER BY H.SEQ ASC
   </select>
 
   <update id="doDeleteReply" parameterType="hashmap">
-    UPDATE HP_BOARD_REPLY SET DEL_DIV = '1'
+    UPDATE HP_BOARD_REPLY
+    SET DEL_DIV = '1'
     WHERE CO_DIV = #{coDiv}
       AND TYPE = #{sType}
       AND IDX = #{sIdx}
       AND SEQ = #{sSeq}
   </update>
+
+  <select id="writeReplySeq" parameterType="hashmap" resultType="int">
+    SELECT IFNULL(NULLIF(MAX(SEQ), 0), 0) + 1 AS SEQ
+    FROM HP_BOARD_REPLY
+    WHERE CO_DIV = #{coDiv}
+      AND TYPE = #{sType}
+      AND IDX = #{sIdx}
+  </select>
+
+  <insert id="writeReplyInsert" parameterType="hashmap">
+    INSERT INTO HP_BOARD_REPLY (CO_DIV, TYPE, IDX,
+                                SEQ, TITLE, CONTENT,
+                                DEL_DIV, INPUT_STAFF,
+                                INPUT_DATETIME, INPUT_IP, UPDATE_STAFF,
+                                UPDATE_DATETIME, UPDATE_IP)
+    VALUES (#{coDiv}, #{sType}, #{sIdx},
+            #{seq}, '', #{content},
+            '0', #{MS_NUM},
+            NOW(), #{ipAddr}, #{MS_NUM},
+            NOW(), #{ipAddr})
+  </insert>
 </mapper>

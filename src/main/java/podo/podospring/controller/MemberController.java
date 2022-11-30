@@ -83,6 +83,24 @@ public class MemberController {
     @RequestMapping("/doSignUp")
     public Map<String, Object> doSignUp(@RequestParam HashMap<String, Object> params) {
 
+        params.put("coDiv",params.get("coDiv"));
+        params.put("name",params.get("name"));
+        params.put("id",params.get("id"));
+        params.put("pw",params.get("pw"));
+        params.put("birth",params.get("birth"));
+        params.put("birthYL",params.get("chkBirth"));
+        params.put("sex",params.get("sex"));
+        params.put("area",params.get("homeAddress1"));
+        params.put("phone1",params.get("phone1"));
+        params.put("phone2",params.get("phone2"));
+        params.put("phone3",params.get("phone3"));
+        params.put("mkt1",params.get("mkt1"));
+        params.put("mkt2",params.get("mkt2"));
+        params.put("mkt3",params.get("mkt3"));
+        params.put("sms",params.get("sms"));
+        params.put("email",params.get("email"));
+        params.put("chkMail",params.get("chkMail"));
+
         if (params.get("chkMail").equals("") || params.get("chkMail").equals("undefined")) {
             params.put("chkMail","N");
         }
@@ -97,6 +115,59 @@ public class MemberController {
         }
 
         Map<String, Object> resultMap = memberService.doSignUp(params);
+        return resultMap;
+    }
+
+    @ResponseBody
+    @RequestMapping("/doUpdateMemeber")
+    public Map<String, Object> doUpdateMemeber(@RequestParam HashMap<String, Object> params,HttpSession session) {
+//        TODO 트렌젝션 시작
+        params.put("coDiv",params.get("coDiv"));
+        params.put("pw",params.get("pw"));
+        params.put("birth",params.get("birth"));
+        params.put("birthYL",params.get("chkBirth"));
+        params.put("sex",params.get("sex"));
+        params.put("area",params.get("homeAddress1"));
+        params.put("phone1",params.get("phone1"));
+        params.put("phone2",params.get("phone2"));
+        params.put("phone3",params.get("phone3"));
+        params.put("sms",params.get("sms"));
+        params.put("email",params.get("email"));
+        params.put("chkMail",params.get("chkMail"));
+        params.put("ip",params.get("ip"));
+        String ms_num = (String)session.getAttribute("MS_NUM");
+        params.put("ms_num",ms_num);
+
+        if (params.get("chkMail").equals("") || params.get("chkMail").equals("undefined") || params.get("chkMail") == null) {
+            params.put("chkMail","N");
+        }
+        if (params.get("sms").equals("N")) {
+            params.put("mkt1","N");
+            params.put("mkt2","N");
+            params.put("mkt3","N");
+        } else if (params.get("sms").equals("Y")) {
+            params.put("mkt1","Y");
+            params.put("mkt2","Y");
+            params.put("mkt3","Y");
+        }
+        Map<String, Object> resultMap = memberService.doUpdateMemeber(params);
+        session.setAttribute("MS_MAIN_CODIV",resultMap.get("coDiv"));
+        session.setAttribute("MS_SEX",resultMap.get("sex"));
+        session.setAttribute("SMS_CHK1",resultMap.get("sms"));
+        session.setAttribute("MS_FIRST_PHONE1",resultMap.get("phone1"));
+        session.setAttribute("MS_MID_PHONE1",resultMap.get("phone2"));
+        session.setAttribute("MS_LAST_PHONE1",resultMap.get("phone3"));
+        session.setAttribute("MS_BIRTH",resultMap.get("birth"));
+        session.setAttribute("MS_EMAIL_YN",resultMap.get("chkMail"));
+        session.setAttribute("MS_EMAIL",resultMap.get("email"));
+        session.setAttribute("INPUT_IP",resultMap.get("ip"));
+        session.setAttribute("MS_BIRTHYL",resultMap.get("birthYL"));
+        session.setAttribute("MS_AREA",resultMap.get("area"));
+        session.setAttribute("MS_NUM",resultMap.get("ms_num"));
+
+        resultMap.put("resultCode","0000");
+        //TODO 트렌젝션 커밋
+
         return resultMap;
     }
 }

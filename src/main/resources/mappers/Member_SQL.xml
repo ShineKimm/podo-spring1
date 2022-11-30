@@ -285,4 +285,36 @@
                              AND C.CD_DIVISION   = '006'
     WHERE H.MS_NUM = #{MS_NUM}
   </select>
+
+  <update id="doUpdateMemeber1" parameterType="hashmap">
+    UPDATE MS_MAININFO
+    SET MS_SEX						= #{sex}
+    <if test="!pw.equals('') and pw!=null">
+      , MS_PASSWORD 			= SHA2(#{pw}, 256)
+    </if>
+    , MS_BIRTH					= #{birth}
+    , MS_BIRTHYL				= #{birthYL}
+    , MS_FIRST_PHONE1	= #{phone1}
+    , MS_MID_PHONE1		= HEX(AES_ENCRYPT(#{phone2}, 'JBOG'))
+    , MS_LAST_PHONE1		= #{phone3}
+    , MS_MKT_AGREE_YN					= #{mkt1}
+    , MS_MKT_AGREE_YN2					= #{mkt2}
+    , MS_MKT_AGREE_YN3					= #{mkt3}
+    , MS_EMAIL					= HEX(AES_ENCRYPT(#{email}, 'JBOG'))
+    , MS_EMAIL_YN					= #{chkMail}
+    , UPDATE_STAFF 		= 'HOMEPAGE'
+    , UPDATE_DATETIME 	= NOW()
+    , UPDATE_IP 				= #{ip}
+    WHERE MS_NUM = #{ms_num}
+  </update>
+
+  <update id="doUpdateMemeber2" parameterType="hashmap">
+    UPDATE MS_MAININFO_DETAIL
+    SET MS_AREA					= #{area}
+      , UPDATE_STAFF 		= 'HOMEPAGE'
+      , UPDATE_DATETIME 	= NOW()
+      , UPDATE_IP 				= #{ip}
+    WHERE MS_NUM = #{ms_num}
+  </update>
+
 </mapper>

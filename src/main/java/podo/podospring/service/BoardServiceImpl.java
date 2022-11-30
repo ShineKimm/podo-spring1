@@ -1,8 +1,6 @@
 package podo.podospring.service;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import podo.podospring.dao.BoardDAO;
@@ -50,6 +48,11 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public HashMap<String, Object> doDeleteReply(HashMap<String, Object> params) {
         return boardDAO.doDeleteReply(params);
+    }
+
+    @Override
+    public HashMap<String, Object> writeReply(HashMap<String, Object> params) {
+        return boardDAO.writeReply(params);
     }
 
 

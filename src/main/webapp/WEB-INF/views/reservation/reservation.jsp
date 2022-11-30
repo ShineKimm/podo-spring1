@@ -48,7 +48,7 @@
 
     var day = <%=request.getParameter("BK_DAY")%>;
     if (<%=request.getParameter("OLD_BK_DAY") != null %>) {
-      day = <%=request.getParameter("OLD_BK_DAY")%>;
+      day = "<%=request.getParameter("OLD_BK_DAY")%>"
     }
     if(day != null) {
       mDate = day;
@@ -87,7 +87,6 @@
           for(i=0; i<rows.length; i++) {
             var td = $("<td>" + rows[i].DAYNUM + "</td>");
             if (<%=request.getParameter("OLD_BK_DAY") != null%>) {
-              console.log("OLD_BK_DAY 값이 있음");
               td.addClass('no');
             } else if (rows[i].CL_SOLAR == currentDay) {
               td.addClass('choice');
@@ -218,7 +217,7 @@
     params["coDiv"] = globals.coDiv;
     params["date"] = mDate;
     params["cos"] = mCos;
-    params["msNum"] = <%=session.getAttribute("MS_NUM")%>;
+    params["msNum"] = "<%=session.getAttribute("MS_NUM")%>";
 
     mAjax(sUrl, params, "POST", true, function(data) {
       if(data.resultCode == "0000") {
@@ -294,9 +293,8 @@
 
     var sUrl = "";
     var params = {};
-    params["ip"] = getIP;
 
-    var msNum = <%=session.getAttribute("MS_NUM")%>;
+    var msNum = "<%=session.getAttribute("MS_NUM")%>";
     var bkCharge = rowData[i].BK_B_CHARGE;
     if(rowData[i].BK_S_CHARGE != "") {
       bkCharge = rowData[i].BK_S_CHARGE;
@@ -310,11 +308,12 @@
       params["acos"] = rowData[i].BK_COS;
       params["atime"] = rowData[i].BK_TIME;
       params["charge"] = bkCharge;
-      params["bDay"] = <%=request.getParameter("OLD_BK_DAY")%>;
-      params["bCos"] = <%=request.getParameter("OLD_BK_COS")%>;
-      params["bTime"] = <%=request.getParameter("OLD_BK_TIME")%>;
+      params["bDay"] = "<%=request.getParameter("OLD_BK_DAY")%>";
+      params["bCos"] = "<%=request.getParameter("OLD_BK_COS")%>";
+      params["bTime"] = "<%=request.getParameter("OLD_BK_TIME")%>";
       params["msNum"] = msNum;
       params["media"] = "R";
+      params["ip"] = getIP;
 
       ans = confirm("[변경 확인] " + rowData[i].BK_DAY.substring(0,4)+"-"+rowData[i].BK_DAY.substring(4,6)+"-"+rowData[i].BK_DAY.substring(6,8)+" 날짜의 \n\n"+rowData[i].BK_TIME.substring(0,2)+"시"+rowData[i].BK_TIME.substring(2,4)+"분 "+rowData[i].BK_COS_NM+" 예약으로 변경하시겠습니까?");
     } else {
@@ -327,6 +326,7 @@
       params["charge"] = bkCharge;
       params["msNum"] = msNum;
       params["media"] = "R";
+      params["ip"] = getIP;
 
       ans = confirm("[예약 확인] " + comment + rowData[i].BK_DAY.substring(0,4)+"-"+rowData[i].BK_DAY.substring(4,6)+"-"+rowData[i].BK_DAY.substring(6,8)+" 날짜의 \n\n"+rowData[i].BK_TIME.substring(0,2)+"시"+rowData[i].BK_TIME.substring(2,4)+"분 "+rowData[i].BK_COS_NM+" 예약을 확정하시겠습니까?");
     }

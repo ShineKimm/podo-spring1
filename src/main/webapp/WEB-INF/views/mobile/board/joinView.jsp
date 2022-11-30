@@ -175,7 +175,7 @@
 	}
 
 	function writeReply() {
-		var sUrl = "/controller/BoardController";
+		var sUrl = "/writeReply";
 		var params = {};
 
 		//params["method"] = "writeReply";

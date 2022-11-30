@@ -20,4 +20,6 @@ public interface BoardService {
     HashMap<String, Object> getReplyList(HashMap<String, Object> params);
 
     HashMap<String, Object> doDeleteReply(HashMap<String, Object> params);
+
+    HashMap<String, Object> writeReply(HashMap<String, Object> params);
 }

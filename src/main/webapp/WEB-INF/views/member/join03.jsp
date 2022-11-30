@@ -8,6 +8,7 @@
   var chkId = false;
   var chkPw = false;
   var chkPwConfirm = false;
+  //TODO 문자인증기능 수정
   // var certifyYn = false;
   var certifyYn = "Y";
   var certifyKey = "";
@@ -348,8 +349,7 @@
 
     mAjax(sUrl, params, "POST", true, function(data) {
       if(data.resultCode == "0000") {
-        rows = data.rows;
-        // console.log(rows);
+        rows = data.rows;;
         var tbody = $("#txtHomeAddress1");
         tbody.empty();
 

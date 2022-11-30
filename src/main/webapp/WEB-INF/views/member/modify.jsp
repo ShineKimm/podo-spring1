@@ -1,16 +1,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
-<%=session.getAttribute("MS_AREA")%>
+<script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
 <script>
 
   var chkPw = false;
   var chkPwConfirm = false;
-  var certifyYn = false;
+  //TODO 문자인증기능 수정
+  // var certifyYn = false;
+  var certifyYn = "Y";
   var certifyKey = "";
+  var getIP;
+
+  //ip 가져오기
+  async function getClientIP() {
+    try {
+      const response = await axios.get('https://api.ipify.org?format=json');
+      getIP = response.data.ip;
+      console.log(getIP);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   $(document).ready(function() {
-
+    getClientIP();
     if(<%=session.getAttribute ("MS_NUM") == null %>) {
       alert("로그인 후 이용 가능합니다.");
       location.href = "/member/login?page=/member/modify";
@@ -61,7 +75,7 @@
     $("#txtId").empty().append("<%=session.getAttribute("MS_ID")%>");
     $("#txtBirth").val("<%=session.getAttribute("MS_BIRTH")%>");
     $("#txtPhone").val("<%=session.getAttribute("MS_FIRST_PHONE1")%>" + "<%=session.getAttribute("MS_MID_PHONE1")%>" + "<%=session.getAttribute("MS_LAST_PHONE1")%>");
-    if (<%=session.getAttribute("MS_EMAIL") == null %>) {
+    if (<%=session.getAttribute("MS_EMAIL") != null %>) {
       msEmail = "<%=session.getAttribute("MS_EMAIL")%>".split("@");
       $("#txtMail1").val(msEmail[0]);
       $("#txtMail2").val(msEmail[1]);
@@ -85,13 +99,12 @@
     var birth = "<%=session.getAttribute("MS_BIRTHYL")%>";
 
     if(birth != "" || birth == null || sex == "null") {
-      console.log(birth);
       $("input:radio[name=chkBirth]:input[value=" + birth + "]").attr("checked", true);
     }
   })
 
   function doUpdateMemeber() {
-    var sUrl = "/controller/MemberController";
+    var sUrl = "/doUpdateMemeber";
     var params = {};
 
     //params["method"] = "doUpdateMemeber";
@@ -159,6 +172,7 @@
     params["chkMail"] = chkMail;
     params["homeAddress1"] = homeAddress1;
     params["email"] = email;
+    params["ip"] = getIP;
 
     mAjax(sUrl, params, "POST", true, function(data) {
       if(data.resultCode == "0000") {
@@ -171,71 +185,71 @@
     });
   }
     //TODO 인증번호 기능 확인필요
-  // function doCertification() {
-  //   var sUrl = "/controller/MemberController";
-  //   var params = {};
-  //
-  //   //params["method"] = "doCertification";
-  //
-  //   var phone1 = $("#txtPhone").val().substr(0,3);
-  //   var phone2 = $("#txtPhone").val().substr(3,4);
-  //   var phone3 = $("#txtPhone").val().substr(7,4);
-  //
-  //   if(phone1 == "" || phone1.length != 3) {
-  //     alert("휴대폰번호를 정확하게 입력하세요.");
-  //     return;
-  //   }
-  //   if(phone2 == "" || phone2.length != 4) {
-  //     alert("휴대폰번호를 정확하게 입력하세요.");
-  //     return;
-  //   }
-  //   if(phone3 == "" || phone3.length != 4) {
-  //     alert("휴대폰번호를 정확하게 입력하세요.");
-  //     return;
-  //   }
-  //
-  //   certifyKey = Math.floor(Math.random() * 1000000) + 100000;
-  //
-  //   params["certifyKey"] = certifyKey;
-  //   params["phone"] = phone1 + phone2 + phone3;
-  //   params["phone1"] = phone1;
-  //   params["phone2"] = phone2;
-  //   params["phone3"] = phone3;
-  //
-  //   mAjax(sUrl, params, "POST", true, function(data) {
-  //     if(data.resultCode == "0000") {
-  //       alert("인증번호가 발송되었습니다.");
-  //     } else if (data.resultCode == "9999") {
-  //       alert(data.resultMessage);
-  //       location.href = "find";
-  //     } else {
-  //       alert(data.resultMessage);
-  //     }
-  //   });
-  // }
-  //
-  // function doConfirmCertification() {
-  //   var code = $("#txtCerCode").val();
-  //
-  //   if (code == "") {
-  //     alert("인증번호를 먼저 입력해주세요.")
-  //   } else if(certifyKey == code) {
-  //     certifyYn = "Y";
-  //
-  //     $("#txtPhone").prop("disabled", true);
-  //     $("#txtPhone").css("background", "#EAEAEA");
-  //     $("#txtCerCode").prop("disabled", true);
-  //     $("#txtCerCode").css("background", "#EAEAEA");
-  //     $("#btnSend").click(function (e) {
-  //       e.preventDefault();
-  //     });
-  //     $("#btnConfirm").click(function (e) {
-  //       e.preventDefault();
-  //     });
-  //   } else {
-  //     alert("인증번호가 잘못 되었습니다.")
-  //   }
-  // }
+  function doCertification() {
+    var sUrl = "/controller/MemberController";
+    var params = {};
+
+    //params["method"] = "doCertification";
+
+    var phone1 = $("#txtPhone").val().substr(0,3);
+    var phone2 = $("#txtPhone").val().substr(3,4);
+    var phone3 = $("#txtPhone").val().substr(7,4);
+
+    if(phone1 == "" || phone1.length != 3) {
+      alert("휴대폰번호를 정확하게 입력하세요.");
+      return;
+    }
+    if(phone2 == "" || phone2.length != 4) {
+      alert("휴대폰번호를 정확하게 입력하세요.");
+      return;
+    }
+    if(phone3 == "" || phone3.length != 4) {
+      alert("휴대폰번호를 정확하게 입력하세요.");
+      return;
+    }
+
+    certifyKey = Math.floor(Math.random() * 1000000) + 100000;
+
+    params["certifyKey"] = certifyKey;
+    params["phone"] = phone1 + phone2 + phone3;
+    params["phone1"] = phone1;
+    params["phone2"] = phone2;
+    params["phone3"] = phone3;
+
+    mAjax(sUrl, params, "POST", true, function(data) {
+      if(data.resultCode == "0000") {
+        alert("인증번호가 발송되었습니다.");
+      } else if (data.resultCode == "9999") {
+        alert(data.resultMessage);
+        location.href = "find";
+      } else {
+        alert(data.resultMessage);
+      }
+    });
+  }
+
+  function doConfirmCertification() {
+    var code = $("#txtCerCode").val();
+
+    if (code == "") {
+      alert("인증번호를 먼저 입력해주세요.")
+    } else if(certifyKey == code) {
+      certifyYn = "Y";
+
+      $("#txtPhone").prop("disabled", true);
+      $("#txtPhone").css("background", "#EAEAEA");
+      $("#txtCerCode").prop("disabled", true);
+      $("#txtCerCode").css("background", "#EAEAEA");
+      $("#btnSend").click(function (e) {
+        e.preventDefault();
+      });
+      $("#btnConfirm").click(function (e) {
+        e.preventDefault();
+      });
+    } else {
+      alert("인증번호가 잘못 되었습니다.")
+    }
+  }
 
   function onCheckPw() {
     var pw = $("#txtPw").val();
@@ -289,15 +303,14 @@
 
     mAjax(sUrl, params, "POST", true, function(data) {
       if(data.resultCode == "0000") {
-        // rows = data.rows;
+        rows = data.rows;
         var tbody = $("#txtHomeAddress1");
         tbody.empty();
 
         tbody.append("<option value=''>지역선택</option>")
 
-        for(i=0; i<data.length; i++) {
-
-          var col1 = $("<option value='" + data[i].CD_CODE + "'>" + data[i].CD_TITLE1 + "</option>");
+        for(i=0; i<rows.length; i++) {
+          var col1 = $("<option value='" + rows[i].CD_CODE + "'>" + rows[i].CD_TITLE1 + "</option>");
 
           tbody.append(col1)
         }
