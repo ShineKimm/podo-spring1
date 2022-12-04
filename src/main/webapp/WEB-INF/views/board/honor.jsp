@@ -1,60 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
-<%--<%--%>
-<%--    int intPageSize, intPageNum; //페이지사이즈, 현재페이지번호--%>
-<%--    int intRecordCount, intPageCount; //레코드수, 페이지수--%>
-<%--    String strColumn, strSearchString;  //검색문자열--%>
-<%--    int totalpage;--%>
-<%--    int intBlockPage;--%>
-
-<%--    //페이지사이즈 셋팅--%>
-<%--    intPageSize = 10;--%>
-<%--    //페이지블럭 셋팅--%>
-<%--    intBlockPage = 10;--%>
-
-<%--    //현재페이지 설정--%>
-<%--    if (request.getParameter("PageNum").trim().isEmpty()){--%>
-<%--        intPageNum = Integer.parseInt(request.getParameter("PageNum"));--%>
-<%--    } else {--%>
-<%--        intPageNum = 1;--%>
-<%--    };--%>
-
-<%--    int intReplyWidth;--%>
-<%--    int intTemp, intLoop;--%>
-
-<%--    //페이지블럭 셋팅--%>
-<%--    intBlockPage = 10;--%>
-
-<%--    //달력 계산을 위한 현재 날짜--%>
-<%--//    strSql = "select DATE_FORMAT(NOW(),'%Y%m%d') NOWDATE, DATE_FORMAT(NOW(),'%W') NOWDAY, DATE_FORMAT(NOW(),'%H') NOWHOUR from dual "--%>
-<%--//--%>
-<%--//    adoRs.Open strSql, adoDBconn, adOpenKeyset, adLockReadOnly--%>
-<%--//--%>
-<%--//    s_date = CStr(adoRs("NOWDATE"))				'연월일(YYYYMMDD)--%>
-<%--//--%>
-<%--//    adoRs.Close--%>
-<%--//--%>
-<%--//    '페이지 Count--%>
-<%--//    strSql = ""--%>
-<%--//    strSql = strSql & "SELECT COUNT(holl_msname) "--%>
-<%--//    strSql = strSql & "FROM ms_hollhist "--%>
-<%--//    strSql = strSql & "WHERE co_div = '501' "--%>
-<%--//    strSql = strSql & "ORDER BY holl_day DESC, HOLL_SEQ  "--%>
-<%--//    adoRs.Open strSql, adoDBConn, adOpenKeyset, adLockReadOnly--%>
-<%--//    intRecordCount = adoRs(0)--%>
-<%--//    intPageCount = CLng((CLng(intRecordCount) - 1) \ CLng(intPageSize)) + 1--%>
-<%--//    adoRs.Close--%>
-<%--//--%>
-<%--//    'List Select--%>
-<%--//    strSql = ""--%>
-<%--//    strSql = strSql & "SELECT HOLL_DAY, HOLL_MSNAME, HOLL_COS, HOLL_TIME, HOLL_NO, HOLL_BALL, HOLL_CLUB, HOLL_DIV, CONCAT(HOLL_DONG1,' ',HOLL_DONG2,' ',HOLL_DONG3) HOLL_DONG   "--%>
-<%--//    strSql = strSql & "FROM ms_hollhist "--%>
-<%--//    strSql = strSql & "WHERE co_div = '501' "--%>
-<%--//    strSql = strSql & "ORDER BY holl_day DESC, HOLL_SEQ  "--%>
-<%--//--%>
-<%--//    adoRs.Open strSql, adoDBConn, adOpenKeyset, adLockReadOnly--%>
-<%--%>--%>
+<%--${resultMap.intPageSize}--%>
+<%--<%=request.getAttribute("")%>--%>
+<%--${resultMap.rows[0].HOLL_MSNAME}--%>
 <div class="middleBg6 zoomImg">
 </div>
 <ul class="mainMenuTitle text-focus-in">
@@ -112,11 +61,16 @@
                         <th scope="col">사용클럽/볼</th>
                         <!--<th scope="col">동반자</th>-->
                     </tr>
+<%--                    <c:choose>--%>
+<%--                        <c:when test="${resultMap.rows}">--%>
+                            <tr><td colspan="5" class="empty">내역이 존재하지 않습니다.</td></tr>
+<%--                        </c:when>--%>
+<%--                        <c:otherwise>--%>
+<%--                            <c:set var="totalpage" value="${resultMap.intPageCount}" />--%>
+<%--                        </c:otherwise>--%>
+<%--                    <c:choose>--%>
 <%--                    <%--%>
-<%--                        If adoRs.BOF And adoRs.EOF Then--%>
-<%--                    %>--%>
-                    <tr><td colspan="5" class="empty">내역이 존재하지 않습니다.</td></tr>
-<%--                    <%--%>
+
 <%--                        Else--%>
 <%--                        totalpage = adoRS.pagecount--%>
 <%--                        adoRS.absolutepage = intPageNum--%>

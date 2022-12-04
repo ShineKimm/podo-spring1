@@ -22,4 +22,8 @@ public interface BoardService {
     HashMap<String, Object> doDeleteReply(HashMap<String, Object> params);
 
     HashMap<String, Object> writeReply(HashMap<String, Object> params);
+
+    HashMap<String, Object> getJoinCalendar(HashMap<String, Object> params);
+
+    HashMap<String, Object> boardHonor(HashMap<String, Object> params);
 }

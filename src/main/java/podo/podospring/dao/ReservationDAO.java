@@ -72,11 +72,11 @@ public class ReservationDAO extends AbstractDAO {
                     //TODO 트랜잭션 커밋
                 } else {
                     params.put("resultCode", params.get("sResult"));
-                    if ((String) params.get("resultCode") == "2000") {
+                    if (params.get("resultCode").equals("2000")) {
                         params.put("resultMessage", "이미 다른 회원이 예약한 타임입니다. 다른 시간을 이용해 주세요.");
-                    } else if ((String) params.get("resultCode") == "3000") {
+                    } else if (params.get("resultCode").equals("3000")) {
                         params.put("resultMessage", "이미 다른 회원이 예약한 타임입니다. 다른 시간을 이용해 주세요.");
-                    } else if ((String) params.get("resultCode") == "4000") {
+                    } else if (params.get("resultCode").equals("4000")) {
                         params.put("resultMessage", "이미 다른 회원이 예약한 타임입니다. 다른 시간을 이용해 주세요.");
                     } else {
                         params.put("resultMessage", "예약이 실패하였습니다. 다시 시도해 주세요.");
@@ -99,79 +99,73 @@ public class ReservationDAO extends AbstractDAO {
     public HashMap<String, Object> doReservation(HashMap<String, Object> params) throws Exception{
 
 //        TODO 트랜잭션 시작
-
         HashMap<String, Object> resultMap = (HashMap<String, Object>)selectOne("reservation.reservationQuery1",params);
         params.forEach((key, value) -> resultMap.merge(key, value, (v1, v2) -> v2));
         System.out.println(resultMap);
+        try{
+            resultMap.put("msName",resultMap.get("MS_NAME"));
+            resultMap.put("msDivision",resultMap.get("MS_DIVISION"));
+            resultMap.put("msClass",resultMap.get("MS_CLASS"));
+            resultMap.put("msLevel",resultMap.get("MS_LEVEL"));
+            resultMap.put("phone",resultMap.get("MS_PHONE1"));
+            resultMap.put("msPhone1",resultMap.get("MS_FIRST_PHONE1"));
+            resultMap.put("msPhone2",resultMap.get("MS_MID_PHONE1"));
+            resultMap.put("msPhone3",resultMap.get("MS_LAST_PHONE1"));
 
-        resultMap.put("msName",resultMap.get("MS_NAME"));
-        resultMap.put("msDivision",resultMap.get("MS_DIVISION"));
-        resultMap.put("msClass",resultMap.get("MS_CLASS"));
-        resultMap.put("msLevel",resultMap.get("MS_LEVEL"));
-        resultMap.put("phone",resultMap.get("MS_PHONE1"));
-        resultMap.put("msPhone1",resultMap.get("MS_FIRST_PHONE1"));
-        resultMap.put("msPhone2",resultMap.get("MS_MID_PHONE1"));
-        resultMap.put("msPhone3",resultMap.get("MS_LAST_PHONE1"));
+            resultMap.put("sResult","0000");
+            resultMap.put("marketCd","002");
+            resultMap.put("businessCd","001");
 
-        resultMap.put("sResult","0000");
-        resultMap.put("marketCd","002");
-        resultMap.put("businessCd","001");
-
-        int vCount1 = selectCnt( "reservation.vCount1",resultMap);
-        if (vCount1 >= 1) {
-            resultMap.put("sResult","2000");
-        }
-        int vCount2 = selectCnt( "reservation.vCount2",resultMap);
-        if (vCount2 >= 1) {
-            resultMap.put("sResult","3000");
-        }
-        int vCount3 = selectCnt( "reservation.vCount3",resultMap);
-
-        if (resultMap.get("MS_DIVISION").equals("21")) {
-            if (vCount3 >= 2) {
-                resultMap.put("sResult","5000");
+            int vCount1 = selectCnt( "reservation.vCount1",resultMap);
+            if (vCount1 >= 1) {
+                resultMap.put("sResult","2000");
             }
-        }
-        update("reservation.reservationQuery2",resultMap);
-        int vCount4 = selectCnt( "reservation.vCount4",resultMap);
-        if (vCount4 == 0) {
-            resultMap.put("sResult","2000");
-        }
-        int bkSeq = selectCnt( "reservation.bkSeq",resultMap);
-        resultMap.put("bkSeq",bkSeq);
+            int vCount2 = selectCnt( "reservation.vCount2",resultMap);
+            if (vCount2 >= 1) {
+                resultMap.put("sResult","3000");
+            }
+            int vCount3 = selectCnt( "reservation.vCount3",resultMap);
+            if (resultMap.get("MS_DIVISION").equals("21")) {
+                if (vCount3 >= 2) {
+                    resultMap.put("sResult","5000");
+                }
+            }
+            update("reservation.reservationQuery2",resultMap);
+            int vCount4 = selectCnt( "reservation.vCount4",resultMap);
+            if (vCount4 == 0) {
+                resultMap.put("sResult","2000");
+            }
+            int bkSeq = selectCnt( "reservation.bkSeq",resultMap);
+            resultMap.put("bkSeq",bkSeq);
 
-        insert("reservation.reservationQuery3",resultMap);
+            insert("reservation.reservationQuery3",resultMap);
 
-        if ((String)resultMap.get("sResult") == "0000") {
-//          TODO 예약됐을경우 SMS 문자 발송
-//            SP_SMS_SEND coDiv, "10000", phone, "", sDate, sCos, sTime, msName, msNum, "", "", "HOMEPAGE", ip, "", "", ""
-            resultMap.put("resultCode", "0000");
-
-//          TODO 트랜잭션 커밋
-
-        } else {
-            resultMap.put("resultCode", resultMap.get("sResult"));
-            //TODO 해당일자 예약건(sResult == 1000) 처리 로직이 없음
-            if ((String)resultMap.get("sResult") == "1000") {
-                resultMap.put("resultMessage", "해당일자에 이미 예약건이 있습니다.");
-            } else if ((String)resultMap.get("sResult") == "2000") {
-                resultMap.put("resultMessage", "이미 다른 회원이 예약한 타임입니다. 다른 시간을 이용해 주세요.");
-            } else if ((String)resultMap.get("sResult") == "3000") {
-                resultMap.put("resultMessage", "위약이 걸려있어 예약이 불가능합니다.");
-            } else if ((String)resultMap.get("sResult") == "4000") {
-                resultMap.put("resultMessage", "해당 월 예약횟수를 모두 사용하였습니다.");
-            } else if ((String)resultMap.get("sResult") == "5000") {
-                resultMap.put("resultMessage", "해당 일 예약횟수를 모두 사용하였습니다.");
+            if (resultMap.get("sResult").equals("0000")) {
+    //          TODO 예약됐을경우 SMS 문자 발송
+    //            SP_SMS_SEND coDiv, "10000", phone, "", sDate, sCos, sTime, msName, msNum, "", "", "HOMEPAGE", ip, "", "", ""
+                resultMap.put("resultCode", "0000");
+    //          TODO 트랜잭션 커밋
             } else {
-                resultMap.put("resultMessage", "예약이 실패하였습니다. 다시 시도해 주세요.");
-            }
-//          TODO 트랜잭션 롤백
-//          TODO try catch if문 밖으로
-            try{
+                resultMap.put("resultCode", resultMap.get("sResult"));
+                //TODO 해당일자 예약건(sResult 1000) (sResult 4000)처리 로직이 없음
+                if (resultMap.get("sResult").equals("1000")) {
+                    resultMap.put("resultMessage", "해당일자에 이미 예약건이 있습니다.");
+                } else if (resultMap.get("sResult").equals("2000")) {
+                    resultMap.put("resultMessage", "이미 다른 회원이 예약한 타임입니다. 다른 시간을 이용해 주세요.");
+                } else if (resultMap.get("sResult").equals("3000")) {
+                    resultMap.put("resultMessage", "위약이 걸려있어 예약이 불가능합니다.");
+                } else if (resultMap.get("sResult").equals("4000")) {
+                    resultMap.put("resultMessage", "해당 월 예약횟수를 모두 사용하였습니다.");
+                } else if (resultMap.get("sResult").equals("5000")) {
+                    resultMap.put("resultMessage", "해당 일 예약횟수를 모두 사용하였습니다.");
+                } else {
+                    resultMap.put("resultMessage", "예약이 실패하였습니다. 다시 시도해 주세요.");
+                }
+    //          TODO 트랜잭션 롤백
                 throw new Exception();
-            } catch(Exception e) {
-                throw new ReturnException(resultMap,"실행중 에러가 발생");
             }
+        } catch(Exception e) {
+            throw new ReturnException(resultMap,"실행중 에러가 발생");
         }
 
         return resultMap;
@@ -209,7 +203,7 @@ public class ReservationDAO extends AbstractDAO {
             resultMap.put("cancelYn","Y");
         }
 
-        if ((String)resultMap.get("cancelYn") == "N") {
+        if (resultMap.get("cancelYn").equals("N")) {
             resultMap.put("cancelYn", "Y");
             resultMap.put("resultCode", "2000");
             resultMap.put("resultMessage", "위약기간에 해당되어 예약취소가 불가능합니다.");
@@ -217,15 +211,15 @@ public class ReservationDAO extends AbstractDAO {
             //TODO 트랜잭션 시작
             resultMap.put("RESULT","");
             selectOne("reservation.cancelReservationQuery3",resultMap);
-            if ((String)resultMap.get("RESULT") == "0000") {
+            if (resultMap.get("RESULT").equals("0000")) {
                 // TODO 문자발송
                 // SP_SMS_SEND coDiv, "10002", phone, "", sDate, sCos, sTime, msName, msNum, "", "", "HOMEPAGE", ip, "", "", ""
                 resultMap.put("resultCode", "0000");
                 // TODO 트랜잭션 커밋
             } else {
-                resultMap.put("resultCode", (String) resultMap.get("RESULT"));
+                resultMap.put("resultCode", (String)resultMap.get("RESULT"));
 
-                if (resultMap.get("resultCode") == "1000") {
+                if (resultMap.get("resultCode").equals("1000")) {
                     resultMap.put("resultMessage", "내장처리 된 예약입니다. 예약 취소 불가합니다.");
                 } else {
                     resultMap.put("resultMessage", "예약취소 실패하였습니다. 다시 시도해 주세요.");

@@ -55,5 +55,15 @@ public class BoardServiceImpl implements BoardService{
         return boardDAO.writeReply(params);
     }
 
+    @Override
+    public HashMap<String, Object> getJoinCalendar(HashMap<String, Object> params) {
+        return boardDAO.getJoinCalendar(params);
+    }
+
+    @Override
+    public HashMap<String, Object> boardHonor(HashMap<String, Object> params) {
+        return boardDAO.boardHonor(params);
+    }
+
 
 }

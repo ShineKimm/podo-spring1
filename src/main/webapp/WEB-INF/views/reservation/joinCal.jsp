@@ -29,7 +29,7 @@
   }
 
   function initCalendar(selector, year, month) {
-    var sUrl = "/controller/BoardController";
+    var sUrl = "/getJoinCalendar";
     var params = {};
 
     //params["method"] = "getJoinCalendar";

@@ -47,7 +47,7 @@ public class BoardDAO extends AbstractDAO {
 
         //TODO 트랜젝션 시작
         int errNum = 0;
-        if ("I".equals((String)params.get( "actionFlag"))) {
+        if ("I".equals((String)params.get("actionFlag"))) {
             int idx = selectCnt("board.idx", params);
             params.put("idx",idx);
             int ReCnt2 = insert("board.writeBoardQuery2", params);
@@ -130,5 +130,32 @@ public class BoardDAO extends AbstractDAO {
         }
 
         return params;
+    }
+
+    public HashMap<String, Object> getJoinCalendar(HashMap<String, Object> params) {
+        List<HashMap<String, Object>> resultList = selectList("board.getJoinCalendar1", params);
+        params.put("rows",resultList);
+        params.put("resultCode","0000");
+        return params;
+    }
+
+    public HashMap<String, Object> boardHonor(HashMap<String, Object> params) {
+        //달력 계산을 위한 현재 날짜
+        HashMap<String, Object> resultMap = (HashMap<String, Object>)selectOne("board.boardHonor1", params);
+        //연월일(YYYYMMDD)
+        String s_date = resultMap.get("NOWDATE").toString();
+        resultMap.put("s_date",s_date);
+
+        //페이지 Count
+        int intRecordCount = selectCnt("board.boardHonor2", params);
+        int intPageSize = Integer.parseInt(params.get("intPageSize").toString());
+        int intPageCount = ((intRecordCount - 1) / (intPageSize + 1));
+        resultMap.put("intPageCount",intPageCount);
+
+        List<HashMap<String, Object>> boardHonorList = selectList("board.boardHonor3", params);
+        resultMap.put("rows",boardHonorList);
+        params.forEach((key, value) -> resultMap.merge(key, value, (v1, v2) -> v2));
+
+        return resultMap;
     }
 }

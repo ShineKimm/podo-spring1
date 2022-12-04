@@ -52,17 +52,16 @@ public class MenuController {
 
     @GetMapping("/board/list")
     public String boardList() {
-        System.out.println("공지사항 컨트롤러");
         return "/board/list";
     }
     @GetMapping("/board/event")
     public String boardEvent() {
         return "/board/event";
     }
-    @GetMapping("/board/honor")
-    public String boardHonor() {
-        return "/board/honor";
-    }
+//    @GetMapping("/board/honor")
+//    public String boardHonor() {
+//        return "/board/honor";
+//    }
     @GetMapping("/board/score")
     public String boardScore() {
         return "/board/score";
@@ -171,7 +170,7 @@ public class MenuController {
     }
     @RequestMapping("/reservation/reservation")
     public String reservation(@RequestParam HashMap<String, Object> params, Model model) {
-        String BK_DAY = (String) params.get("BK_DAY");
+        String BK_DAY = (String)params.get("BK_DAY");
         model.addAttribute("BK_DAY",BK_DAY);
         return "/reservation/reservation";
     }
@@ -293,6 +292,10 @@ public class MenuController {
     @GetMapping("/mobile/reservation/reservation")
     public String mobileReservation() {
         return "/mobile/reservation/reservation";
+    }
+    @GetMapping("/club/location")
+    public String clubLocation() {
+        return "/club/location";
     }
 
 }

@@ -84,7 +84,7 @@
           AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE CONCAT('%',#{searchText},'%')
         </when>
         <when test='searchOption == "writer"'>
-          AND U.USER_NAME = #{searchText}
+          AND U.USER_NAME LIKE CONCAT('%',#{searchText},'%')
         </when>
       </choose>
     </if>
@@ -138,7 +138,7 @@
           AND CAST(H.CONTENT AS CHAR(10000) CHARACTER SET UTF8) LIKE CONCAT('%',#{searchText},'%')
         </when>
         <when test='searchOption == "writer"'>
-          AND U.USER_NAME = CONCAT('%',#{searchText},'%')
+          AND U.USER_NAME LIKE CONCAT('%',#{searchText},'%')
         </when>
       </choose>
     </if>
@@ -411,4 +411,50 @@
             NOW(), #{ipAddr}, #{MS_NUM},
             NOW(), #{ipAddr})
   </insert>
+
+  <select id="getJoinCalendar1" parameterType="hashmap" resultType="hashmap">
+    SELECT A.CL_SOLAR                      AS CL_SOLAR
+         , SUBSTRING(A.CL_SOLAR, 7, 2) + 0 AS DAYNUM
+         , A.CL_DAYDIV                     AS CL_DAYDIV
+         , A.CL_BUSINESS                   AS CL_BUSINESS
+         , IFNULL(B.TEAM_CNT_1, 0)         AS TEAM_CNT_1
+         , IFNULL(B.TEAM_CNT_2, 0)         AS TEAM_CNT_2
+    FROM CL_DAYINFO A
+           LEFT OUTER JOIN (SELECT CO_DIV
+                                 , BK_DAY
+                                 , SUM(IF(BOARD_DIV = '1', 1, 0)) AS TEAM_CNT_1
+                                 , SUM(IF(BOARD_DIV = '2', 1, 0)) AS TEAM_CNT_2
+                            FROM HP_BOARD
+                            WHERE CO_DIV = #{coDiv}
+                              AND TYPE = '6'
+                              AND DEL_DIV <![CDATA[<>]]> '1'
+                              AND BK_DAY LIKE CONCAT(#{selYm}, '%')
+                            GROUP BY CO_DIV, BK_DAY) B
+                           ON A.CO_DIV = B.CO_DIV
+                             AND A.CL_SOLAR = B.BK_DAY
+    WHERE A.CO_DIV = #{coDiv}
+      AND A.CL_SOLAR LIKE CONCAT(#{selYm}, '%')
+    GROUP BY A.CL_SOLAR
+    ORDER BY A.CL_SOLAR
+  </select>
+
+  <select id="boardHonor1" parameterType="hashmap" resultType="hashmap">
+    select DATE_FORMAT(NOW(),'%Y%m%d') NOWDATE, DATE_FORMAT(NOW(),'%W') NOWDAY, DATE_FORMAT(NOW(),'%H') NOWHOUR
+    from dual
+  </select>
+
+  <select id="boardHonor2" parameterType="hashmap" resultType="int">
+    SELECT COUNT(holl_msname)
+    FROM ms_hollhist
+    WHERE co_div = '501'
+    ORDER BY holl_day DESC, HOLL_SEQ
+  </select>
+
+  <select id="boardHonor3" parameterType="hashmap" resultType="hashmap">
+    SELECT HOLL_DAY, HOLL_MSNAME, HOLL_COS, HOLL_TIME, HOLL_NO, HOLL_BALL, HOLL_CLUB, HOLL_DIV, CONCAT(HOLL_DONG1,' ',HOLL_DONG2,' ',HOLL_DONG3) HOLL_DONG
+    FROM ms_hollhist
+    WHERE co_div = '501'
+    ORDER BY holl_day DESC, HOLL_SEQ
+  </select>
+
 </mapper>

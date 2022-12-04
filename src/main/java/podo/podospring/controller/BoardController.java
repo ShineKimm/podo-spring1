@@ -153,7 +153,7 @@ public class BoardController {
         params.put("sIdx",params.get("idx"));
         params.put("sDiv",params.get("div"));
         if (params.get("sDiv") == null) {
-            params.put("1",params.get("sDiv"));
+            params.put("sDiv","1");
         }
         params = boardService.doDelete(params);
 
@@ -221,6 +221,46 @@ public class BoardController {
 
         params = boardService.writeReply(params);
         return params;
+    }
+
+    @ResponseBody
+    @RequestMapping("/getJoinCalendar")
+    public HashMap<String, Object> getJoinCalendar(@RequestParam HashMap<String, Object> params, HttpSession session) {
+        params.put("coDiv",params.get("coDiv"));
+        params.put("selYm",params.get("selYm"));
+
+        params = boardService.getJoinCalendar(params);
+        return params;
+    }
+
+
+    @RequestMapping("/board/honor")
+    public String boardHonor(@RequestParam HashMap<String, Object> params, Model model) {
+        String intPageSize, intPageNum; //페이지사이즈, 현재페이지번호
+        String intRecordCount, intPageCount; //레코드수, 페이지수
+        String strColumn, strSearchString; //검색문자열
+        String intBlockPage, intTemp, intLoop;
+        String intReplyWidth;
+
+        //페이지사이즈 셋팅
+        intPageSize = "10";
+        //페이지블럭 셋팅
+        intBlockPage = "10";
+        params.put("intPageSize",intPageSize);
+        params.put("intBlockPage",intBlockPage);
+
+//        Object PageNum = params.get("PageNum");
+        if (params.get("PageNum") != null) {
+            intPageNum = params.get("PageNum").toString();
+            params.put("intPageNum",intPageNum);
+        } else {
+            intPageNum = "1";
+            params.put("intPageNum",intPageNum);
+        }
+        HashMap<String, Object> resultMap = boardService.boardHonor(params);
+        model.addAttribute("resultMap",resultMap);
+
+        return "/board/honor";
     }
 
 
