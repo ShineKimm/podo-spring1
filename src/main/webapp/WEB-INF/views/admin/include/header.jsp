@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%=(String)session.getAttribute("USER_STAFF")%>
 <!DOCTYPE>
 <html>
 <head>
@@ -19,6 +20,11 @@
 
         if(staff == "") {
           location.href = "/admin/member/login";
+        }
+        if (<%=session.getAttribute("USER_STAFF") == null %>) {
+          $("#logoutHide").hide(); // display 속성을 none 으로 바꾼다.
+        } else {
+          $("#logoutHide").show();
         }
       });
 
@@ -42,7 +48,7 @@
 <div id="header">
     <div class="content">
         <div class="logo">포도CC 관리자</div>
-        <ul class="member">
+        <ul class="member" id="logoutHide">
             <li><a href="/index" target="_blank"><font color="white">홈페이지</font></a></li>
             <li>|</li>
             <li><a href="javascript:doLogout()"><font color="white">로그아웃</font></a></li>

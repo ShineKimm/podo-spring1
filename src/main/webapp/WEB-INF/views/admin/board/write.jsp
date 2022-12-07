@@ -2,8 +2,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
-
 <script>
+
+  if(<%=session.getAttribute("USER_STAFF") == null %>) {
+    alert("로그인 후 이용 가능합니다.");
+    location.href = "/admin/index";
+  }
 
   var mFlag;
   var mType;
@@ -155,6 +159,9 @@
     $("#idx").val(mIdx);
     $("#timestamp").val(getTimeStamp());
     $("#ip").val(getIP);
+    $("#FileName1").val($("#txtFileName1").val());
+    $("#FileName2").val($("#txtFileName2").val());
+    $("#FileName3").val($("#txtFileName3").val());
 
     var title = $("#txtTitle").val();
 
@@ -284,6 +291,9 @@
                         <input type="hidden" id="flag" name="flag" />
                         <input type="hidden" id="timestamp" name="timestamp" />
                         <input type="hidden" id="ip" name="ip" />
+                        <input type="hidden" id="FileName1" name="txtFileName1" />
+                        <input type="hidden" id="FileName2" name="txtFileName2" />
+                        <input type="hidden" id="FileName3" name="txtFileName3" />
                     </form>
                 </div>
                 <ul class="choice">

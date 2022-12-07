@@ -89,12 +89,12 @@
 
         if(fileName1 != "" && filePath1 != "" && mType != "5") {
           if(isImage(fileName1)) {
-            var img = String.format("<img src='{0}/{1}' class='viewMainImage'>", filePath1, fileName1);
+            var img = String.format("<img src='/static{0}/{1}' class='viewMainImage'>", filePath1, fileName1);
             imageContainer.show();
             imageContainer.append(img);
             console.log(img);
           } else {
-            var a = String.format("&nbsp;&nbsp;<a href='{0}/{1}'>{2}</a>", filePath1, fileName1, originFileName1);
+            var a = String.format("&nbsp;&nbsp;<a href='/static{0}/{1}' download={1}>{2}</a>", filePath1, fileName1, originFileName1);
             fileContainer.show();
             $("#txtFiles").append(a);
             console.log(a);
@@ -103,12 +103,12 @@
 
         if(fileName2 != "" && filePath2 != "") {
           if(isImage(fileName2)) {
-            var img = String.format("<img src='{0}/{1}' class='viewMainImage'>", filePath2, fileName2);
+            var img = String.format("<img src='/static{0}/{1}' class='viewMainImage'>", filePath2, fileName2);
             imageContainer.show();
             imageContainer.append(img);
             console.log(img);
           } else {
-            var a = String.format("&nbsp;&nbsp;<a href='{0}/{1}'>{2}</a>", filePath2, fileName2, originFileName2);
+            var a = String.format("&nbsp;&nbsp;<a href='/static{0}/{1}' download={1}>{2}</a>", filePath2, fileName2, originFileName2);
             fileContainer.show();
             $("#txtFiles").append(a);
             console.log(a);
@@ -117,11 +117,11 @@
 
         if(fileName3 != "" && filePath3 != "") {
           if(isImage(fileName3)) {
-            var img = String.format("<img src='{0}/{1}' class='viewMainImage'>", filePath3, fileName3);
+            var img = String.format("<img src='/static{0}/{1}' class='viewMainImage'>", filePath3, fileName3);
             imageContainer.show();
             imageContainer.append(img);
           } else {
-            var a = String.format("&nbsp;&nbsp;<a href='{0}/{1}'>{2}</a>", filePath3, fileName3, originFileName3);
+            var a = String.format("&nbsp;&nbsp;<a href='/static{0}/{1}' download={1}>{2}</a>", filePath3, fileName3, originFileName3);
             fileContainer.show();
             $("#txtFiles").append(a);
           }

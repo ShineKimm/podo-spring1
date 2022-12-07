@@ -267,17 +267,17 @@
   <update id="updateQuery2" parameterType="hashmap">
     UPDATE HP_BOARD_ATTACH
     SET CO_DIV = CO_DIV
-    <if test=' !fileName1.equals("") and fileName1 !=null '>
+    <if test=' fileName1 !=null '>
       , FILE_NAME1 = #{fileName1}
       , ORIGIN_FILE_NAME1 = #{originFileName1}
       , FILE_PATH1 = #{filePath1}
     </if>
-    <if test=' !fileName2.equals("") and fileName2 !=null '>
+    <if test=' fileName2 !=null '>
       , FILE_NAME2 = #{fileName2}
       , ORIGIN_FILE_NAME2 = #{originFileName2}
       , FILE_PATH2 = #{filePath2}
     </if>
-    <if test=' !fileName3.equals("") and fileName3 !=null '>
+    <if test=' fileName3 !=null '>
       , FILE_NAME3 = #{fileName3}
       , ORIGIN_FILE_NAME3 = #{originFileName3}
       , FILE_PATH3 = #{filePath3}
