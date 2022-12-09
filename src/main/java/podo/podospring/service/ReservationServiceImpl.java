@@ -55,6 +55,11 @@ public class ReservationServiceImpl implements ReservationService{
 
     @Override
     public HashMap<String, Object> cancelReservation(HashMap<String, Object> params) {
-        return reservationDAO.cancelReservation(params);
+        try {
+            return reservationDAO.cancelReservation(params);
+        } catch (ReturnException e) {
+            HashMap<String, Object> resultMap = (HashMap<String, Object>)e.getValue();
+            return resultMap;
+        }
     }
 }

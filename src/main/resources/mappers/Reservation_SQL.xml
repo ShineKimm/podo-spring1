@@ -506,8 +506,8 @@
       , #{bDate,mode=IN,jdbcType=VARCHAR}
       , #{bCos,mode=IN,jdbcType=VARCHAR}
       , #{bTime,mode=IN,jdbcType=VARCHAR}
-      , #{'M',mode=IN,jdbcType=VARCHAR}
-      , #{'HOMEPAGE',mode=IN,jdbcType=VARCHAR}
+      , #{M,mode=IN,jdbcType=VARCHAR}
+      , #{HOMEPAGE,mode=IN,jdbcType=VARCHAR}
       , #{ip,mode=IN,jdbcType=VARCHAR}
       , #{RESULT,mode=OUT,jdbcType=VARCHAR}
       )
