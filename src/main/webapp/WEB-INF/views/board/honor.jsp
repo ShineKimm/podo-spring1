@@ -4,6 +4,121 @@
 <%--${resultMap.intPageSize}--%>
 <%--<%=request.getAttribute("")%>--%>
 <%--${resultMap.rows[0].HOLL_MSNAME}--%>
+
+<script>
+
+  var startPage = 1;
+  var endPage = 1;
+  var currentPage = 1;
+  var pageCnt = 10;
+  var rows;
+
+  $(document).ready(function() {
+    init();
+  });
+
+  function init() {
+
+    $("#txtSearchText").keypress(function (event) {
+      if(event.keyCode == 13) {
+        doSearch();
+      }
+    });
+
+    doSearch();
+  }
+
+  function doSearch() {
+
+    var sUrl = "/board/honorList";
+    var params = {};
+
+    //params["method"] = "/board/honorList";
+
+    params["coDiv"] = globals.coDiv;
+    params["startCnt"] = (currentPage - 1) * pageCnt;
+    params["pageCnt"] = pageCnt;
+
+    var text = $("#txtSearchText").val();
+    var opt = $("#selSearchOption").val();
+
+    if(text != "") {
+      params["searchText"] = text;
+      params["searchOption"] = opt;
+    }
+
+    mAjax(sUrl, params, "POST", true, function(data) {
+      if(data.resultCode == "0000") {
+        rows = data.rows;
+        var tbody = $("#tbody1");
+        tbody.empty();
+
+        if(rows.length == 0) {
+          tbody.append("<tr><td colspan='5'>내역이 존재하지 않습니다.</td></tr>");
+        }
+        for(i=0; i<rows.length; i++) {
+          var tr = $("<tr></tr>");
+          var td1 = $("<td>" + rows[i].HOLL_DAY + "</td>");
+          var td2 = $("<td>" + rows[i].HOLL_MSNAME + "</td>");
+          var td3 = $("<td>" + rows[i].HOLL_DIV + "</td>");
+          var td4 = $("<td>" + rows[i].HOLL_NO + "홀</td>");
+          var td5 = $("<td>" + rows[i].HOLL_CLUB + "/" + rows[i].HOLL_BALL + "</td>");
+
+          tr.append(td1, td2, td3, td4, td5).appendTo(tbody);
+        }
+        initPaging(data.intRecordCount);
+      } else {
+        alert("조회 실패");
+      }
+    });
+  }
+
+  function doSearchPaging(page) {
+    currentPage = page;
+    doSearch();
+  }
+
+  function doSearchPaging10(page) {
+    currentPage = page;
+    startPage = page;
+    doSearch();
+  }
+
+  function initPaging(intRecordCount) {
+    var pageContainer = $("#pagecontainer");
+    pageContainer.empty();
+    var page = startPage;
+    var prevBtn = "<a href='javascript:doSearchPaging10(" + (startPage - 10) + ")' class='pagebtn'>◀</a>";
+    var nextBtn = "<a href='javascript:doSearchPaging10(" + (startPage + 10) + ")' class='pagebtn'>▶</a>";
+
+    if(startPage != 1){
+      pageContainer.append(prevBtn);
+    }
+
+    endPage = Math.floor(intRecordCount / pageCnt);
+    if(intRecordCount % pageCnt != 0) {
+      endPage += 1;
+    }
+
+    for(i=startPage; i<startPage+10; i++) {
+      if(i > endPage) break;
+      var li = $(String.format("<a href='javascript:doSearchPaging({0})'>{1}</a>", i, (i < 10 ? "0" + i : i)));
+
+      if(currentPage == i) {
+        li.addClass("on")
+      }
+
+      pageContainer.append(li);
+    }
+
+    if(endPage - startPage >= 10) {
+      pageContainer.append(nextBtn);
+    }
+  }
+
+</script>
+
+
 <div class="middleBg6 zoomImg">
 </div>
 <ul class="mainMenuTitle text-focus-in">
@@ -33,7 +148,7 @@
                 <ul>
                     <li>
                         <select name="Column" id="selSearchOption" class="select-arrow">
-                            <option value="title" selected="">제목</option>
+                            <option value="title" selected="">성명</option>
                             <option value="content">내용</option>
                             <option value="writer">작성자</option>
                         </select>
@@ -61,89 +176,13 @@
                         <th scope="col">사용클럽/볼</th>
                         <!--<th scope="col">동반자</th>-->
                     </tr>
-<%--                    <c:choose>--%>
-<%--                        <c:when test="${resultMap.rows}">--%>
-                            <tr><td colspan="5" class="empty">내역이 존재하지 않습니다.</td></tr>
-<%--                        </c:when>--%>
-<%--                        <c:otherwise>--%>
-<%--                            <c:set var="totalpage" value="${resultMap.intPageCount}" />--%>
-<%--                        </c:otherwise>--%>
-<%--                    <c:choose>--%>
-<%--                    <%--%>
-
-<%--                        Else--%>
-<%--                        totalpage = adoRS.pagecount--%>
-<%--                        adoRS.absolutepage = intPageNum--%>
-
-<%--                        i = 1--%>
-<%--                        Do Until adoRs.EOF or i > adoRS.Pagesize--%>
-
-<%--                        For j = 1 To Len(adoRs("HOLL_MSNAME"))-2--%>
-<%--                        starStr = starStr & "*"--%>
-<%--                        Next--%>
-<%--                        starName = Left(adoRs("HOLL_MSNAME"),1)&starStr&Right(adoRs("HOLL_MSNAME"),1)--%>
-<%--                        starStr = ""--%>
-<%--                    %>--%>
-
-<%--                    <tr>--%>
-<%--                        <td><%=Mid(adoRs("HOLL_DAY"),1,4)%>.<%=Mid(adoRs("HOLL_DAY"),5,2)%>.<%=Mid(adoRs("HOLL_DAY"),7,2)%> </td>--%>
-<%--                        <td><%=starName%></td>--%>
-<%--                        <td><%If adoRs("HOLL_DIV") = "01" then%>알바트로스<%ElseIf adoRs("HOLL_DIV") = "02" Then%>홀인원<%ElseIf adoRs("HOLL_DIV") = "03" Then%>이글<%End If%></td>--%>
-<%--                        <td><%=adoRs("HOLL_NO")%>홀</td>--%>
-<%--                        <td><%=adoRs("HOLL_CLUB")%> / <%=adoRs("HOLL_BALL")%></td>--%>
-<%--                        <!--<td><%=adoRs("HOLL_DONG")%></td>-->--%>
-<%--                    </tr>--%>
-<%--                    <%--%>
-<%--                        adoRs.MoveNext--%>
-<%--                        i = i + 1--%>
-<%--                        Loop--%>
-<%--                        End If--%>
-<%--                        adoRs.Close--%>
-<%--                    %>--%>
+                    </tbody>
+                    <tbody id="tbody1">
                     </tbody>
                 </table>
                 <div class="padding10"></div>
                 <div class="pageNum">
-                    <div class="pageNumWrap">
-<%--                        <%--%>
-<%--                            intTemp = Int(Int((intPageNum - 1) / intBlockPage)  * intBlockPage) + 1--%>
-
-<%--                            If Cint(intTemp) = 1 Then--%>
-<%--                        %>--%>
-<%--                        <a href='#' class='pagebtn'>◀</a>--%>
-<%--                        <%--%>
-<%--                            Else--%>
-<%--                        %>--%>
-<%--                        <a href='honor?PageNum=<%=CLng(intTemp) - CInt(intBlockPage)%>'>◀</a>--%>
-<%--                        <%--%>
-<%--                            End If--%>
-
-<%--                            intLoop = 1--%>
-
-<%--                            Do Until Cint(intLoop) > Cint(intBlockPage) Or Cint(intTemp) > Cint(intPageCount)--%>
-<%--                            If Cint(intTemp) = CInt(intPageNum) Then--%>
-<%--                        %>--%>
-<%--                        <a href='#'><%=intTemp%></a>--%>
-<%--                        <%--%>
-<%--                            Else--%>
-<%--                        %>--%>
-<%--                        <a href='honor?PageNum=<%=intTemp%>'><%=intTemp%></a>--%>
-<%--                        <%--%>
-<%--                            End If--%>
-<%--                            intTemp = Cint(intTemp) + 1--%>
-<%--                            intLoop = Cint(intLoop) + 1--%>
-<%--                            Loop--%>
-
-<%--                            If Cint(intTemp) > Cint(intPageCount) Then--%>
-<%--                        %>--%>
-<%--                        <a href='#' class='pagebtn'>▶</a>--%>
-<%--                        <%--%>
-<%--                            Else--%>
-<%--                        %>--%>
-<%--                        <a href='honor?PageNum=<%=intTemp%>' class='pagebtn'>▶</a>--%>
-<%--                        <%--%>
-<%--                            End If--%>
-<%--                        %>--%>
+                    <div class="pageNumWrap" id="pagecontainer">
                     </div>
                 </div>
 

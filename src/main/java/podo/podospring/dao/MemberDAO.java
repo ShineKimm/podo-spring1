@@ -6,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Repository;
@@ -148,7 +149,7 @@ public class MemberDAO extends AbstractDAO {
                 insert("member.doSignUp4",params);
                 insert("member.doSignUp5",params);
 
-                int getCnt = selectCnt("doSignUp6",params);
+                int getCnt = selectCnt("member.doSignUp6",params);
                 if (getCnt > 0) {
                     insert("member.doSignUp7", params);
                     params.put("resultCode","0000");
@@ -172,6 +173,77 @@ public class MemberDAO extends AbstractDAO {
     public Map<String, Object> doUpdateMemeber(HashMap<String, Object> params) {
         update("member.doUpdateMemeber1",params);
         update("member.doUpdateMemeber2",params);
+        return params;
+    }
+
+    public Map<String, Object> doDeleteMemeber(HashMap<String, Object> params) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+
+        int bkCnt = selectCnt("member.doDeleteMemeber1",params);
+        if (bkCnt > 0) {
+            params.put("resultCode", "9999");
+            params.put("resultMessage", "진행중인 예약이 있습니다.");
+        } else {
+            int blCnt = selectCnt("member.doDeleteMemeber2",params);
+            if (blCnt > 0) {
+                params.put("resultCode", "9999");
+                params.put("resultMessage", "진행중인 위약이 있습니다.");
+            } else {
+                update("member.doUpdateMemeber3", params);
+                session.invalidate();
+                params.put("resultCode", "0000");
+            }
+        }
+        return params;
+    }
+
+    public Map<String, Object> doFindId(HashMap<String, Object> params) {
+        String msId = (String)selectOne("member.doFindId1", params);
+        String phone = params.get("phone").toString();
+        String name = params.get("name").toString();
+
+        if (phone.length() < 11) {
+            params.put("resultMessage", "정상적인 번호를 입력해주세요.");
+        } else {
+            String message = "[아이디 찾기]" + name + "회원님의 아이디는 " + msId + "입니다. 감사합니다. -포도CC";
+            //TODO 문자 발송
+//            SP_SMS_SEND coDiv, "", phone, message, "", "", "", "", "", "", "", "HOMEPAGE", ip, "", "", ""
+            params.put("resultCode", "0000");
+            params.put("resultMessage", "회원님의 아이디가 등록 된 휴대폰으로 전송되었습니다.");
+        }
+
+        return params;
+    }
+
+    public Map<String, Object> doFindPw(HashMap<String, Object> params) {
+        Map<String, Object> resultMap = (Map<String, Object>)selectOne("member.doFindPw1", params);
+        if (resultMap.get("MS_NUM") == null || resultMap.get("MS_NUM").equals("")) {
+            params.put("resultMessage", "일치하는 정보가 없습니다.");
+        } else {
+            Random random = new Random();
+            String msNum = resultMap.get("MS_NUM").toString();
+            String phone = resultMap.get("MS_PHONE").toString();
+            String newPw = String.valueOf(random.nextInt(1000000));
+            params.put("msNum",msNum);
+            params.put("phone",phone);
+            params.put("newPw",newPw);
+
+            if (phone.length() < 11) {
+                params.put("resultMessage", "정상적인 번호를 입력해주세요.");
+            } else {
+                String name = params.get("name").toString();
+                String message = "[비밀번호찾기]"+ name +"회원님의 임시 비밀번호는 " + newPw + "입니다. 감사합니다.-포도CC";
+                update("member.doFindPw2", params);
+                //TODO 문자발송
+//                SP_SMS_SEND coDiv, "", phone, message, "", "", "", "", "", "", "", "HOMEPAGE", ip, "", "", ""
+                params.put("resultCode", "0000");
+                //TODO 문자발송 메시지 발송
+//                params.put("resultMessage", "회원님의 초기화 된 비밀번호가 등록 된 휴대폰으로 전송되었습니다.");
+                params.put("resultMessage", message);
+            }
+
+        }
         return params;
     }
 }

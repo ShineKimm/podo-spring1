@@ -42,4 +42,19 @@ public class MemberServiceImpl implements MemberService{
     public Map<String, Object> doUpdateMemeber(HashMap<String, Object> params) {
         return memberDAO.doUpdateMemeber(params);
     }
+
+    @Override
+    public Map<String, Object> doDeleteMemeber(HashMap<String, Object> params) {
+        return memberDAO.doDeleteMemeber(params);
+    }
+
+    @Override
+    public Map<String, Object> doFindId(HashMap<String, Object> params) {
+        return memberDAO.doFindId(params);
+    }
+
+    @Override
+    public Map<String, Object> doFindPw(HashMap<String, Object> params) {
+        return memberDAO.doFindPw(params);
+    }
 }

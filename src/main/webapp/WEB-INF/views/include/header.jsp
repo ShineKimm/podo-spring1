@@ -108,7 +108,7 @@
           return;
         }
 
-        var sUrl = "/controller/MemberController";
+        var sUrl = "/doDeleteMemeber";
         var params = {};
 
         //params["method"] = "doDeleteMemeber";

@@ -451,10 +451,37 @@
   </select>
 
   <select id="boardHonor3" parameterType="hashmap" resultType="hashmap">
-    SELECT HOLL_DAY, HOLL_MSNAME, HOLL_COS, HOLL_TIME, HOLL_NO, HOLL_BALL, HOLL_CLUB, HOLL_DIV, CONCAT(HOLL_DONG1,' ',HOLL_DONG2,' ',HOLL_DONG3) HOLL_DONG
+    SELECT DATE_FORMAT(HOLL_DAY,'%Y.%m.%d') HOLL_DAY
+         , replace(HOLL_MSNAME, substr(HOLL_MSNAME, 2, 1), '*') HOLL_MSNAME
+         ,(case
+          when HOLL_DIV = '01' then '알바트로스'
+          when HOLL_DIV = '02' then '홀인원'
+          when HOLL_DIV = '03' then '이글'
+          end) as HOLL_DIV
+         , HOLL_COS
+         , HOLL_TIME
+         , HOLL_NO
+         , HOLL_BALL
+         , HOLL_CLUB
+         , HOLL_DIV
+         , CONCAT(HOLL_DONG1,' ',HOLL_DONG2,' ',HOLL_DONG3) as HOLL_DONG
     FROM ms_hollhist
     WHERE co_div = '501'
-    ORDER BY holl_day DESC, HOLL_SEQ
+    <if test='searchText != null and !searchText.equals("") '>
+      <choose>
+        <when test='searchOption == "title"'>
+          AND HOLL_MSNAME LIKE CONCAT('%',#{searchText},'%')
+        </when>
+        <when test='searchOption == "content"'>
+          AND HOLL_MSNAME LIKE CONCAT('%',#{searchText},'%')
+        </when>
+        <when test='searchOption == "writer"'>
+          AND HOLL_MSNAME LIKE CONCAT('%',#{searchText},'%')
+        </when>
+      </choose>
+    </if>
+    ORDER BY HOLL_DAY DESC, HOLL_SEQ
+    LIMIT ${startCnt}, ${pageCnt}
   </select>
 
 </mapper>

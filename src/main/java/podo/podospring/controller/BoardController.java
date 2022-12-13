@@ -2,21 +2,17 @@ package podo.podospring.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.List;
-import java.util.regex.Matcher;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.cassandra.CassandraProperties.Request;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -85,7 +81,6 @@ public class BoardController {
             params.put("bkPerson","0");
         }
 
-        //TODO 파일 업로드 기능 구현
         java.util.Iterator<String> fileNames =  files.getFileNames();
         int index = 1;
         while(fileNames.hasNext())
@@ -94,7 +89,6 @@ public class BoardController {
             MultipartFile mFile = files.getFile(fileId);
             String originFileName = mFile.getOriginalFilename();
 
-            //TODO if문 디버깅 확인필요
             if (!originFileName.equals("")) {
                     params.put("originFileName" + index, originFileName);
             } else {
@@ -240,33 +234,25 @@ public class BoardController {
     }
 
 
-    @RequestMapping("/board/honor")
-    public String boardHonor(@RequestParam HashMap<String, Object> params, Model model) {
-        String intPageSize, intPageNum; //페이지사이즈, 현재페이지번호
-        String intRecordCount, intPageCount; //레코드수, 페이지수
-        String strColumn, strSearchString; //검색문자열
-        String intBlockPage, intTemp, intLoop;
-        String intReplyWidth;
-
-        //페이지사이즈 셋팅
-        intPageSize = "10";
-        //페이지블럭 셋팅
-        intBlockPage = "10";
-        params.put("intPageSize",intPageSize);
-        params.put("intBlockPage",intBlockPage);
-
-//        Object PageNum = params.get("PageNum");
-        if (params.get("PageNum") != null) {
-            intPageNum = params.get("PageNum").toString();
-            params.put("intPageNum",intPageNum);
-        } else {
-            intPageNum = "1";
-            params.put("intPageNum",intPageNum);
-        }
+    @ResponseBody
+    @RequestMapping("/board/honorList")
+    public HashMap<String, Object> boardHonor(@RequestParam HashMap<String, Object> params) {
         HashMap<String, Object> resultMap = boardService.boardHonor(params);
-        model.addAttribute("resultMap",resultMap);
+        return resultMap;
+    }
 
-        return "/board/honor";
+//    @GetMapping("/images/filename")
+//    public Resource showImage(@PathVariable String filename) throws
+//
+//            MalformedURLException {
+////        return new UrlResource("file:" + file.getFullPath(filename));
+//        return null;
+//    }
+    @ResponseBody
+    @GetMapping("/images/filename")
+    public String showImage(@RequestParam MultipartFile file) throws MalformedURLException{
+        System.out.println("여기11111");
+        return null;
     }
 
 

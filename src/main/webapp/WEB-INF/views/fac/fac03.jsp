@@ -108,7 +108,7 @@
             <li class="on" onclick="location.href='/fac/fac03'">프로샵</li>
             <li class="" onclick="location.href='/fac/fac04'">락카</li>
 
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 시설안내 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 프로샵</li>
+            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 시설안내 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 프로샵</li>
         </ul>
     </div>
     <div class="contents">

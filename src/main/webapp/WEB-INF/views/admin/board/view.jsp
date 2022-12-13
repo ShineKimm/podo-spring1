@@ -39,6 +39,7 @@
   }
 
   function doSearchDetail() {
+
     var sUrl = "/getBoardDetail";
     var params = {};
 
@@ -156,6 +157,12 @@
     location.href = "/admin/board/write?action=U&type=" + mType + "&idx=" + mIdx;
   }
 
+  function imgError(image) {
+    image.onerror = "";
+    image.src = '{0}/{1}';
+    return true;
+  }
+
 </script>
 
 <div id="wrap">
@@ -218,6 +225,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2" class="poppadding" id="imageContainer" hidden>
+<%--                                    <img src='/uploads/20221209033711.jpg' class='viewMainImage'>--%>
                                 </td>
                             </tr>
                             <tr id="fileContainer" hidden>

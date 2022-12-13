@@ -58,10 +58,10 @@ public class MenuController {
     public String boardEvent() {
         return "/board/event";
     }
-//    @GetMapping("/board/honor")
-//    public String boardHonor() {
-//        return "/board/honor";
-//    }
+    @GetMapping("/board/honor")
+    public String boardHonor() {
+        return "/board/honor";
+    }
     @GetMapping("/board/score")
     public String boardScore() {
         return "/board/score";
@@ -296,6 +296,10 @@ public class MenuController {
     @GetMapping("/club/location")
     public String clubLocation() {
         return "/club/location";
+    }
+    @GetMapping("/member/find")
+    public String memberFind() {
+        return "/member/find";
     }
 
 }

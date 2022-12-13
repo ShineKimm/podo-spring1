@@ -31,7 +31,7 @@
 	}
 
 	function doFindId() {
-		var sUrl = "/controller/MemberController";
+		var sUrl = "/doFindId";
 		var params = {};
 
 		//params["method"] = "doFindId";
@@ -59,7 +59,7 @@
 	}
 
 	function doFindPw() {
-		var sUrl = "/controller/MemberController";
+		var sUrl = "/doFindPw";
 		var params = {};
 
 		//params["method"] = "doFindPw";

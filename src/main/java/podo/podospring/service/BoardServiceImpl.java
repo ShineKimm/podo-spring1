@@ -63,7 +63,8 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public HashMap<String, Object> boardHonor(HashMap<String, Object> params) {
-        return boardDAO.boardHonor(params);
+        HashMap<String, Object> Hmap = boardDAO.boardHonor(params);
+        return Hmap;
     }
 
 

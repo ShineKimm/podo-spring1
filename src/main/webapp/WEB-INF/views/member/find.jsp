@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 <script>
-
   $(document).ready(function() {
     init();
   });
@@ -31,7 +30,7 @@
   }
 
   function doFindId() {
-    var sUrl = "/controller/MemberController";
+    var sUrl = "/doFindId";
     var params = {};
 
     //params["method"] = "doFindId";
@@ -59,7 +58,7 @@
   }
 
   function doFindPw() {
-    var sUrl = "/controller/MemberController";
+    var sUrl = "/doFindPw";
     var params = {};
 
     //params["method"] = "doFindPw";
@@ -147,7 +146,7 @@
 
             </div>
             <div class="btnBox">
-                <a href="join01" class="cancel">회원가입</a>
+                <a href="/member/join01" class="cancel">회원가입</a>
             </div>
 
         </div>

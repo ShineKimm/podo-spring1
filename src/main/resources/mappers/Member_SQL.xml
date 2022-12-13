@@ -247,17 +247,17 @@
          , H.MS_SEX
          , H.MS_BIRTH
          , H.MS_BIRTHYL
-         , CAST(AES_DECRYPT(UNHEX(H.MS_EMAIL),'JBOG') AS CHAR) AS MS_EMAIL
+         , CAST(AES_DECRYPT(UNHEX(H.MS_EMAIL), 'JBOG') AS CHAR)      AS MS_EMAIL
          , H.MS_EMAIL_YN
          , H.MS_FIRST_PHONE1
-         , CAST(AES_DECRYPT(UNHEX(H.MS_MID_PHONE1),'JBOG') AS CHAR) AS MS_MID_PHONE1
+         , CAST(AES_DECRYPT(UNHEX(H.MS_MID_PHONE1), 'JBOG') AS CHAR) AS MS_MID_PHONE1
          , H.MS_LAST_PHONE1
          , H.SMS_CHK1
-         , CAST(AES_DECRYPT(UNHEX(H.MS_HOMETEL),'JBOG') AS CHAR) AS MS_HOMETEL
+         , CAST(AES_DECRYPT(UNHEX(H.MS_HOMETEL), 'JBOG') AS CHAR)    AS MS_HOMETEL
          , H.MS_HOMEZIP
          , H.MS_HOMEADDR1
          , H.MS_HOMEADDR2
-         , CAST(AES_DECRYPT(UNHEX(H.MS_COMPTEL),'JBOG') AS CHAR) AS MS_COMPTEL
+         , CAST(AES_DECRYPT(UNHEX(H.MS_COMPTEL), 'JBOG') AS CHAR)    AS MS_COMPTEL
          , H.MS_COMPZIP
          , H.MS_COMPADDR1
          , H.MS_COMPADDR2
@@ -275,46 +275,97 @@
          , H.UPDATE_IP
          , D.MS_JOB_CD
          , D.MS_AREA
-         , IF(IFNULL(C.CD_LENGTH, 0) = 0, 21, C.CD_LENGTH) AS MS_BK_CNT
+         , IF(IFNULL(C.CD_LENGTH, 0) = 0, 21, C.CD_LENGTH)           AS MS_BK_CNT
     FROM MS_MAININFO H
            INNER JOIN MS_MAININFO_DETAIL D
                       ON H.MS_NUM = D.MS_NUM
            LEFT OUTER JOIN CD_COMMON C
                            ON H.MS_MAIN_CODIV = C.CO_DIV
-                             AND H.MS_CLASS      = C.CD_CODE
-                             AND C.CD_DIVISION   = '006'
+                             AND H.MS_CLASS = C.CD_CODE
+                             AND C.CD_DIVISION = '006'
     WHERE H.MS_NUM = #{MS_NUM}
   </select>
 
   <update id="doUpdateMemeber1" parameterType="hashmap">
     UPDATE MS_MAININFO
-    SET MS_SEX						= #{sex}
+    SET MS_SEX = #{sex}
     <if test="!pw.equals('') and pw!=null">
-      , MS_PASSWORD 			= SHA2(#{pw}, 256)
+      , MS_PASSWORD = SHA2(#{pw}, 256)
     </if>
-    , MS_BIRTH					= #{birth}
-    , MS_BIRTHYL				= #{birthYL}
-    , MS_FIRST_PHONE1	= #{phone1}
-    , MS_MID_PHONE1		= HEX(AES_ENCRYPT(#{phone2}, 'JBOG'))
-    , MS_LAST_PHONE1		= #{phone3}
-    , MS_MKT_AGREE_YN					= #{mkt1}
-    , MS_MKT_AGREE_YN2					= #{mkt2}
-    , MS_MKT_AGREE_YN3					= #{mkt3}
-    , MS_EMAIL					= HEX(AES_ENCRYPT(#{email}, 'JBOG'))
-    , MS_EMAIL_YN					= #{chkMail}
-    , UPDATE_STAFF 		= 'HOMEPAGE'
-    , UPDATE_DATETIME 	= NOW()
-    , UPDATE_IP 				= #{ip}
+    , MS_BIRTH = #{birth}
+    , MS_BIRTHYL = #{birthYL}
+    , MS_FIRST_PHONE1 = #{phone1}
+    , MS_MID_PHONE1 = HEX(AES_ENCRYPT(#{phone2}, 'JBOG'))
+    , MS_LAST_PHONE1 = #{phone3}
+    , MS_MKT_AGREE_YN = #{mkt1}
+    , MS_MKT_AGREE_YN2 = #{mkt2}
+    , MS_MKT_AGREE_YN3 = #{mkt3}
+    , MS_EMAIL = HEX(AES_ENCRYPT(#{email}, 'JBOG'))
+    , MS_EMAIL_YN = #{chkMail}
+    , UPDATE_STAFF = 'HOMEPAGE'
+    , UPDATE_DATETIME = NOW()
+    , UPDATE_IP = #{ip}
     WHERE MS_NUM = #{ms_num}
   </update>
 
   <update id="doUpdateMemeber2" parameterType="hashmap">
     UPDATE MS_MAININFO_DETAIL
-    SET MS_AREA					= #{area}
-      , UPDATE_STAFF 		= 'HOMEPAGE'
-      , UPDATE_DATETIME 	= NOW()
-      , UPDATE_IP 				= #{ip}
+    SET MS_AREA         = #{area}
+      , UPDATE_STAFF    = 'HOMEPAGE'
+      , UPDATE_DATETIME = NOW()
+      , UPDATE_IP       = #{ip}
     WHERE MS_NUM = #{ms_num}
+  </update>
+
+  <select id="doDeleteMemeber1" parameterType="hashmap" resultType="int">
+    SELECT COUNT(*) AS CNT
+    FROM BK_HISTORY
+    WHERE CO_DIV = #{coDiv}
+      AND BK_DAY >= DATE_FORMAT(NOW(), '%Y%m%d')
+      AND BK_MSNUM = #{MS_NUM}
+  </select>
+
+  <select id="doDeleteMemeber2" parameterType="hashmap" resultType="int">
+    SELECT COUNT(*) AS CNT
+    FROM BL_BREACH
+    WHERE CO_DIV = #{coDiv}
+      AND BL_MSNUM = #{MS_NUM}
+      AND BL_BK_NOEND >= DATE_FORMAT(NOW(), '%Y%m%d')
+  </select>
+
+  <update id="doUpdateMemeber3" parameterType="hashmap">
+    UPDATE MS_MAININFO
+    SET MS_BLANK = 'Y'
+    WHERE MS_NUM = #{MS_NUM}
+  </update>
+
+  <select id="doFindId1" parameterType="hashmap" resultType="String">
+    SELECT MS_ID
+    FROM MS_MAININFO
+    WHERE MS_MAIN_CODIV = #{coDiv}
+      AND MS_NAME = #{name}
+      AND CONCAT(MS_FIRST_PHONE1
+            , CAST(AES_DECRYPT(UNHEX(MS_MID_PHONE1),'JBOG') AS CHAR)
+            , MS_LAST_PHONE1) = #{phone}
+      AND IFNULL(NULLIF(MS_BLANK,''),'N') = 'N'
+  </select>
+
+  <select id="doFindPw1" parameterType="hashmap" resultType="hashmap">
+    SELECT MS_NUM
+         , CONCAT(MS_FIRST_PHONE1
+      , CAST(AES_DECRYPT(UNHEX(MS_MID_PHONE1),'JBOG') AS CHAR)
+      , MS_LAST_PHONE1) AS MS_PHONE
+    FROM MS_MAININFO
+    WHERE MS_MAIN_CODIV = #{coDiv}
+      AND MS_NAME = #{name}
+      AND MS_ID = #{id}
+      AND IFNULL(NULLIF(MS_BLANK,''),'N') = 'N'
+  </select>
+
+  <update id="doFindPw2" parameterType="hashmap">
+    UPDATE MS_MAININFO
+    SET MS_PASSWORD = SHA2(#{newPw}, 256)
+    WHERE MS_NUM = #{msNum}
   </update>
 
 </mapper>

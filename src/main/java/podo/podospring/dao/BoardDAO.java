@@ -11,12 +11,9 @@ public class BoardDAO extends AbstractDAO {
 
     @SuppressWarnings("unchecked")
     public HashMap<String, Object> getBoardList(HashMap<String, Object> params) {
-        // TODO: 2022-11-17 파일 업로드 추가해야함
 
         params.put("resultCode", "0000");
         params.put("resultMessage", "");
-
-
         List<HashMap<String, Object>> bordList = selectList("board.query1", params);
         int totalCnt = selectCnt("board.query2", params);
 
@@ -140,22 +137,13 @@ public class BoardDAO extends AbstractDAO {
     }
 
     public HashMap<String, Object> boardHonor(HashMap<String, Object> params) {
-        //달력 계산을 위한 현재 날짜
-        HashMap<String, Object> resultMap = (HashMap<String, Object>)selectOne("board.boardHonor1", params);
-        //연월일(YYYYMMDD)
-        String s_date = resultMap.get("NOWDATE").toString();
-        resultMap.put("s_date",s_date);
-
-        //페이지 Count
         int intRecordCount = selectCnt("board.boardHonor2", params);
-        int intPageSize = Integer.parseInt(params.get("intPageSize").toString());
-        int intPageCount = ((intRecordCount - 1) / (intPageSize + 1));
-        resultMap.put("intPageCount",intPageCount);
+        params.put("intRecordCount",intRecordCount);
 
         List<HashMap<String, Object>> boardHonorList = selectList("board.boardHonor3", params);
-        resultMap.put("rows",boardHonorList);
-        params.forEach((key, value) -> resultMap.merge(key, value, (v1, v2) -> v2));
+        params.put("rows",boardHonorList);
+        params.put("resultCode", "0000");
 
-        return resultMap;
+        return params;
     }
 }

@@ -184,7 +184,7 @@
       }
     });
   }
-    //TODO 인증번호 기능 확인필요
+    //TODO 인증번호 기능 구현해야함
   function doCertification() {
     var sUrl = "/controller/MemberController";
     var params = {};

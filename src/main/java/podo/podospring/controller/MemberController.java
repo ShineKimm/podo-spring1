@@ -170,4 +170,33 @@ public class MemberController {
 
         return resultMap;
     }
+    @ResponseBody
+    @RequestMapping("/doDeleteMemeber")
+    public Map<String, Object> doDeleteMemeber(@RequestParam HashMap<String, Object> params,HttpSession session) {
+        params.put("coDiv",params.get("coDiv"));
+        params.put("MS_NUM",session.getAttribute("MS_NUM"));
+
+        Map<String, Object> resultMap = memberService.doDeleteMemeber(params);
+        return resultMap;
+    }
+    @ResponseBody
+    @RequestMapping("/doFindId")
+    public Map<String, Object> doFindId(@RequestParam HashMap<String, Object> params) {
+        params.put("coDiv",params.get("coDiv"));
+        params.put("name",params.get("name"));
+        params.put("phone",params.get("phone"));
+
+        Map<String, Object> resultMap = memberService.doFindId(params);
+        return resultMap;
+    }
+    @ResponseBody
+    @RequestMapping("/doFindPw")
+    public Map<String, Object> doFindPw(@RequestParam HashMap<String, Object> params,HttpSession session) {
+        params.put("coDiv",params.get("coDiv"));
+        params.put("name",params.get("name"));
+        params.put("id",params.get("id"));
+
+        Map<String, Object> resultMap = memberService.doFindPw(params);
+        return resultMap;
+    }
 }
