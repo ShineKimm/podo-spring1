@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Service;
+import podo.podospring.controller.ReturnException;
 import podo.podospring.dao.MemberDAO;
 
 @Service
@@ -35,7 +36,12 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public Map<String, Object> doSignUp(HashMap<String, Object> params) {
-        return memberDAO.doSignUp(params);
+        try {
+            return memberDAO.doSignUp(params);
+        } catch (ReturnException e) {
+            HashMap<String, Object> resultMap = (HashMap<String, Object>)e.getValue();
+            return resultMap;
+        }
     }
 
     @Override

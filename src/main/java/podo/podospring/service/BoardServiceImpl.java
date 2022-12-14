@@ -28,7 +28,12 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public HashMap<String, Object> writeBoard(HashMap<String, Object> params) {
-        return boardDAO.writeBoard(params);
+        try {
+            return boardDAO.writeBoard(params);
+        } catch (ReturnException e) {
+            HashMap<String, Object> resultMap = (HashMap<String, Object>)e.getValue();
+            return resultMap;
+        }
     }
 
     @Override
@@ -53,7 +58,12 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public HashMap<String, Object> writeReply(HashMap<String, Object> params) {
+        try {
         return boardDAO.writeReply(params);
+        } catch (ReturnException e) {
+            HashMap<String, Object> resultMap = (HashMap<String, Object>)e.getValue();
+            return resultMap;
+        }
     }
 
     @Override

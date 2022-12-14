@@ -209,11 +209,9 @@
 
     var formData = new FormData($("#fileForm")[0]);
 
-    //TODO 프로그래스 실행 확인
-    // progressStart();
-
+    progressStart();
     mFileAjax(sUrl, formData, function(data) {
-      // progressStop();
+      progressStop();
 
       if(data.resultCode == "0000") {
         alert("작성한 글이 정상적으로 등록되었습니다.");

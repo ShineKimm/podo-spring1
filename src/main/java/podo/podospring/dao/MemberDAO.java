@@ -10,9 +10,11 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import podo.podospring.common.dao.AbstractDAO;
+import podo.podospring.controller.ReturnException;
 
 @Repository
 public class MemberDAO extends AbstractDAO {
@@ -129,17 +131,15 @@ public class MemberDAO extends AbstractDAO {
         resultMap.put("cnt",cnt);
         return resultMap;
     }
-    
+
     @SuppressWarnings("unchecked")
-    public Map<String, Object> doSignUp(HashMap<String, Object> params) {
+    @Transactional(rollbackFor = {Exception.class})
+    public Map<String, Object> doSignUp(HashMap<String, Object> params) throws ReturnException {
         List<Map<String, Object>> list_MS_ID = selectList("member.doSignUp1",params);
         if (list_MS_ID.isEmpty()) {
             params.put("netDivision","21");
             params.put("netClass","00");
             params.put("netLevel","00");
-
-            
-//             TODO KDY 트랜잭션 시작구문 추가해야함
             try {
                 String msNum = (String)selectOne("member.doSignUp2",params);
                 String homeAddress = (String) selectOne("member.doSignUp3",params);
@@ -160,12 +160,11 @@ public class MemberDAO extends AbstractDAO {
             } catch (Exception e) {
                 params.put("resultCode","9999");
                 params.put("resultMessage","알 수 없는 오류가 발생하였습니다. 잠시 후 다시 시도해주세요.");
+                throw new ReturnException(params,"실행중 에러가 발생");
             }
-            //TODO 트랜잭션 끝
-
         } else {
             params.put("resultCode","9999");
-                params.put("resultMessage","이미 회원가입되어 있는 번호입니다.");
+            params.put("resultMessage","이미 회원가입되어 있는 번호입니다.");
         }
         return params;
     }

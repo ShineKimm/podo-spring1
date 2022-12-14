@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import podo.podospring.common.dao.AbstractDAO;
+import podo.podospring.controller.ReturnException;
 
 @Repository
 public class BoardDAO extends AbstractDAO {
@@ -40,42 +42,45 @@ public class BoardDAO extends AbstractDAO {
         return resultMap;
     }
 
-    public HashMap<String, Object> writeBoard(HashMap<String, Object> params) {
-
-        //TODO 트랜젝션 시작
-        int errNum = 0;
-        if ("I".equals((String)params.get("actionFlag"))) {
-            int idx = selectCnt("board.idx", params);
-            params.put("idx",idx);
-            int ReCnt2 = insert("board.writeBoardQuery2", params);
-            if (ReCnt2 < 1) {
-                errNum = errNum +1;
-            }
-            int ReCnt3 = insert("board.writeBoardQuery3", params);
-            if (ReCnt3 < 1) {
-                errNum = errNum +1;
-            }
-        } else if ("U".equals((String)params.get("actionFlag"))) {
-            params.get("idx");
-            int ReCnt4 = update("board.updateQuery1",params);
-            if (ReCnt4 < 1) {
-                errNum = errNum +1;
-            }
-            if (null != params.get("fileName1") || null != params.get("fileName2") || null != params.get("fileName3")) {
-                int ReCnt5 = update("board.updateQuery2",params);
-                if (ReCnt5 < 1) {
+    @Transactional(rollbackFor = {Exception.class})
+    public HashMap<String, Object> writeBoard(HashMap<String, Object> params)
+            throws ReturnException {
+        try{
+            int errNum = 0;
+            if ("I".equals((String)params.get("actionFlag"))) {
+                int idx = selectCnt("board.idx", params);
+                params.put("idx",idx);
+                int ReCnt2 = insert("board.writeBoardQuery2", params);
+                if (ReCnt2 < 1) {
                     errNum = errNum +1;
                 }
+                int ReCnt3 = insert("board.writeBoardQuery3", params);
+                if (ReCnt3 < 1) {
+                    errNum = errNum +1;
+                }
+            } else if ("U".equals((String)params.get("actionFlag"))) {
+                params.get("idx");
+                int ReCnt4 = update("board.updateQuery1",params);
+                if (ReCnt4 < 1) {
+                    errNum = errNum +1;
+                }
+                if (null != params.get("fileName1") || null != params.get("fileName2") || null != params.get("fileName3")) {
+                    int ReCnt5 = update("board.updateQuery2",params);
+                    if (ReCnt5 < 1) {
+                        errNum = errNum +1;
+                    }
+                }
             }
-        }
 
-        if (errNum > 0) {
-            //TODO 트랜잭션 롤백
-            params.put("resultCode", "9999");
-            params.put("resultMessage", "오류가 발생하였습니다. 잠시 후 다시 시도해주세요.");
-        } else {
-            //TODO 트랜잭션 커밋
-            params.put("resultCode", "0000");
+            if (errNum > 0) {
+                params.put("resultCode", "9999");
+                params.put("resultMessage", "오류가 발생하였습니다. 잠시 후 다시 시도해주세요.");
+                throw new Exception();
+            } else {
+                params.put("resultCode", "0000");
+            }
+        } catch(Exception e) {
+            throw new ReturnException(params,"실행중 에러가 발생");
         }
         return params;
     }//writeBoard
@@ -111,19 +116,22 @@ public class BoardDAO extends AbstractDAO {
         params.put("resultCode","0000");
         return params;
     }
-
-    public HashMap<String, Object> writeReply(HashMap<String, Object> params) {
-        //TODO 트렌젝션 시작
-        int seq = selectCnt("board.writeReplySeq", params);
-        params.put("seq",seq);
-        int ReCnt = insert("board.writeReplyInsert", params);
-        if (ReCnt == 0) {
-            //TODO 트렌젝션 롤백
-            params.put("resultCode", "9999");
-            params.put("resultMessage", "오류가 발생하였습니다. 잠시 후 다시 시도해주세요.");
-        } else {
-            //TODO 트렌젝션 커밋
-            params.put("resultCode", "0000");
+    @Transactional(rollbackFor = {Exception.class})
+    public HashMap<String, Object> writeReply(HashMap<String, Object> params)
+            throws ReturnException {
+        try{
+            int seq = selectCnt("board.writeReplySeq", params);
+            params.put("seq",seq);
+            int ReCnt = insert("board.writeReplyInsert", params);
+            if (ReCnt == 0) {
+                params.put("resultCode", "9999");
+                params.put("resultMessage", "오류가 발생하였습니다. 잠시 후 다시 시도해주세요.");
+                throw new Exception();
+            } else {
+                params.put("resultCode", "0000");
+            }
+        } catch(Exception e) {
+            throw new ReturnException(params,"실행중 에러가 발생");
         }
 
         return params;

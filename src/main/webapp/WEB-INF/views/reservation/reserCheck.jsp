@@ -148,7 +148,7 @@
   function cantChange() {
     alert("해당 예약은 위약일자에 포함되는 예약으로 예약변경이 불가능합니다.");
   }
-    //TODO 사용안함 컨트롤러에 blDeleteReservation 구현된 기능 없음
+    //TODO 사용안하는 기능 (구현된 기능 없음) 확인필요
   function blDeleteReservation(i) {
 
     ans = confirm("[위약 확인] 해당건은 위약 일자에 포함되는 건으로 취소시 위약이 발생합니다. 취소를 진행 하시겠습니까?");

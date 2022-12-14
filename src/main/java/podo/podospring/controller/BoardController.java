@@ -101,7 +101,7 @@ public class BoardController {
             Timestamp timestamp = new Timestamp((System.currentTimeMillis()));
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
             String timestampDate = sdf.format(timestamp);
-            String fileName = timestampDate + "." + extension;
+            String fileName = timestampDate + "_" + index + "." + extension;
 
             if (!originFileName.equals("")) {
                 params.put("fileName" + index, fileName);
