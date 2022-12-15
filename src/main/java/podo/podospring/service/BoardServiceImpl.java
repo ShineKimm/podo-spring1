@@ -3,7 +3,7 @@ package podo.podospring.service;
 import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import podo.podospring.controller.ReturnException;
+import podo.podospring.common.ReturnException;
 import podo.podospring.dao.BoardDAO;
 
 @Service

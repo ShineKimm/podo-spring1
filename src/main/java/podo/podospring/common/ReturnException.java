@@ -1,4 +1,4 @@
-package podo.podospring.controller;
+package podo.podospring.common;
 
 public class ReturnException extends Exception{
     private static final long serialVersionUID = 1L;

@@ -2,8 +2,6 @@ package podo.podospring.service;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
-
-import java.util.List;
 import java.util.Map;
 
 public interface MemberService {

@@ -2,7 +2,7 @@ package podo.podospring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import podo.podospring.controller.LogTest;
+import podo.podospring.common.LogTest;
 @SpringBootApplication
 public class PodoSpringApplication {
 

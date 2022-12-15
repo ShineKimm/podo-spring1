@@ -2,7 +2,7 @@ package podo.podospring.service;
 
 import java.util.HashMap;
 import org.springframework.stereotype.Service;
-import podo.podospring.controller.ReturnException;
+import podo.podospring.common.ReturnException;
 import podo.podospring.dao.ReservationDAO;
 
 @Service

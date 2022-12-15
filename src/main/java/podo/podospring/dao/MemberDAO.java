@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import podo.podospring.common.dao.AbstractDAO;
-import podo.podospring.controller.ReturnException;
+import podo.podospring.common.ReturnException;
 
 @Repository
 public class MemberDAO extends AbstractDAO {

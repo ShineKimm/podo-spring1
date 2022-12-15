@@ -1,4 +1,4 @@
-package podo.podospring.controller;
+package podo.podospring.common;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,6 +12,6 @@ public class LogTest {
         logger.info("[info] log!");
         logger.warn("[warn] log!");
 //        logger.error("[error] log!");
-        logger.info("로그 테스트11");
+        logger.info("----------------로그-----------------------");
     }
 }

@@ -2,7 +2,6 @@ package podo.podospring.controller;
 
 import java.util.HashMap;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

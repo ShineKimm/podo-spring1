@@ -2,11 +2,10 @@ package podo.podospring.dao;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import podo.podospring.common.dao.AbstractDAO;
-import podo.podospring.controller.ReturnException;
+import podo.podospring.common.ReturnException;
 
 @Repository
 public class BoardDAO extends AbstractDAO {

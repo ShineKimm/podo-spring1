@@ -14,6 +14,7 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation 'javax.servlet:jstl'
@@ -23,10 +24,12 @@ dependencies {
 
 	implementation group: 'javax.inject', name: 'javax.inject', version: '1'
 
+	implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+
+//	 log4j add
 	implementation 'org.apache.logging.log4j:log4j-api:2.19.0'
 	implementation 'org.apache.logging.log4j:log4j-core:2.19.0'
 
-	implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
 }
 
 tasks.named('test') {
