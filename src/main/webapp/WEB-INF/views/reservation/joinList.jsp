@@ -161,7 +161,7 @@
             <li class="" onclick="location.href='/board/list?type=2'">이벤트</li>
             <li class="" onclick="location.href='/board/list?type=3'">보도자료</li>
             <li class="" onclick="location.href='/board/list?type=4'">자료실</li>
-            <li class="" onclick="location.href='/board/Honor'">홀인원</li>
+            <li class="" onclick="location.href='/board/honor'">홀인원</li>
             <li class="on" onclick="location.href='/reservation/joinList'">조인게시판</li>
             <li class="" onclick="location.href='/board/list?type=7'">명예의 전당</li>
 
