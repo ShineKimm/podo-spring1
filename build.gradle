@@ -17,7 +17,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation 'javax.servlet:jstl'
-
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 	runtimeOnly 'mysql:mysql-connector-java:8.0.30'
 	implementation group: 'javax.inject', name: 'javax.inject', version: '1'
