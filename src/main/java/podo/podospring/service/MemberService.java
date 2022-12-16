@@ -1,43 +1,24 @@
 package podo.podospring.service;
 
-import org.springframework.transaction.annotation.Transactional;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
-import java.util.List;
-import java.util.Optional;
-import podo.podospring.dao.Member;
-import podo.podospring.repository.MemberRepository;
+public interface MemberService {
 
-@Transactional
-public class MemberService {
-    private final MemberRepository memberRepository;
+    Map<String, Object> doLogin(Map<String, Object> params)
+            throws NoSuchAlgorithmException;
 
-    public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
+    Map<String, Object> chkDuplicateId(HashMap<String, Object> params);
+    Map<String, Object> doCertification(HashMap<String, Object> params);
 
-    public long join(Member member) {
+    Map<String, Object> doSignUp(HashMap<String, Object> params);
 
-        validateDuplicateMember(member);
+    Map<String, Object> doUpdateMemeber(HashMap<String, Object> params);
 
-        memberRepository.save(member);
-        return member.getId();
-    }
+    Map<String, Object> doDeleteMemeber(HashMap<String, Object> params);
 
-    private void validateDuplicateMember(Member member) {
-        memberRepository.findByName(member.getName())
-                        .ifPresent(m -> {
-                            throw new IllegalStateException("이미 존재하는 회원입니다.");
-                        });
-    }
-    /*
-    * 전체 회원 조회
-    * */
+    Map<String, Object> doFindId(HashMap<String, Object> params);
 
-    public List<Member> findMembers() {
-        return memberRepository.findAll();
-    }
-
-    public Optional<Member> findOne(Long memberId) {
-        return memberRepository.findById(memberId);
-    }
+    Map<String, Object> doFindPw(HashMap<String, Object> params);
 }

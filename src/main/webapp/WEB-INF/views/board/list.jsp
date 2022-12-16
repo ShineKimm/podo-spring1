@@ -1,218 +1,273 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="user-scalable=yes, initial-scale=0.3, maximum-scale=1.0, minimum-scale=0.1, width=device-width" />
-    <meta name="title" content="">
-    <meta name="author" content="포도CC">
-    <meta name="Keywords" content="포도CC, 포도 컨트리클럽, ">
-    <meta name="description" content="포도CC, 포도 컨트리클럽, ">
-    <meta name="copyright" content="All Contents Copyright©pineBeach">
-    <meta name="format-detection" content="telephone=no, address=no, email=no"/>
-    <meta property="og:type" content="mobile">
-    <meta property="og:title" content="포도CC, 포도 컨트리클럽">
-    <meta property="og:description" content="포도CC, 포도 컨트리클럽">
-    <meta property="og:url" content="">
-    <title>포도 컨트리클럽</title>
-    <link rel="stylesheet" type="text/css" href="/css/import.css">
-    <link rel="stylesheet" type="text/css" href="/css/content.css?v=2">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../include/header.jsp" %>
 
-    <link rel="stylesheet" type="text/css" href="/css/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/slick-theme.css"/>
+<script>
 
-    <script type="text/javascript" src="/js/jquery.js"></script>
-    <script type="text/javascript" src="/js/slick.js"></script>
+  var startPage = 1;
+  var endPage = 1;
+  var currentPage = 1;
+  var pageCnt = 10;
+  var rows;
+  var mType;
 
+  var title = {
+    "1" : "공지사항",
+    "2" : "이벤트",
+    "3" : "보도자료",
+    "4" : "자료실",
+    "5" : "코스갤러리",
+    "7" : "명예의 전당"
+  }
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/common.js"></script>
-    <script src="/js/jquery.preloaders.js"></script>
-    <script src="/js/tools.js"></script>
-    <script src="/js/globals.js"></script>
+  $(document).ready(function() {
+    init();
+  });
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-    <link rel="stylesheet" type="text/css" href="/css/motion.css">
-    <link rel="stylesheet" type="text/css" href="/css/animate.css">
-    <script src="/js/wow.js"></script>
-    <script type="text/javascript">
-      /* 컨텐츠 fade in */
-      wow = new WOW(
-          {
-            boxClass: 'fadeBox',
-            animateClass: 'animated',
-            offset: 100,
-            callback: function(box) {
-              //console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
-            }
-          });
-      wow.init();
-      /*//컨텐츠 fade in */
+  function init() {
 
-      $(document).ready(function() {
-        //setProtocol();
-        sessionCheck();
-      });
+    mType = <%=request.getParameter("type")%>;
+    //mType = "1";
 
-      function doLogout() {
-        var sUrl = "/controller/MemberController.asp";
-        var params = {};
+    $("#txtTitle").html(title[mType]);
+    $("#type" + mType).addClass("on");
 
-        params["method"] = "doLogout";
+    $("#txtSearchText").keypress(function (event) {
+      if(event.keyCode == 13) {
+        doSearch();
+      }
+    });
+    if (mType == "2" || mType == "5") {
+      $("#eventList").show();
+    } else {
+      $("#noticeList").show();
+    }
 
-        mAjax(sUrl, params, "POST", true, function(data) {
-          if(data.resultCode == "0000") {
-            alert("로그아웃 되었습니다.");
+    if (mType == "5") {
+      $("#galleryList").show();
+    } else {
+      $("#boardList").show();
+    }
 
-            location.href = "/index.asp";
+    doSearch();
+  }
+
+  function doSearch() {
+
+    var sUrl = "/getBoardList";
+    var params = {};
+
+    //params["method"] = "getBoardList";
+
+    params["coDiv"] = globals.coDiv;
+    params["type"] = mType;
+    params["startCnt"] = (currentPage - 1) * pageCnt;
+    params["pageCnt"] = pageCnt;
+
+    var text = $("#txtSearchText").val();
+    var opt = $("#selSearchOption").val();
+
+    if(text != "") {
+      params["searchText"] = text;
+      params["searchOption"] = opt;
+    }
+
+    // console.log(params);
+
+    mAjax(sUrl, params, "POST", true, function(data) {
+      if(data.resultCode == "0000") {
+        rows = data.rows;
+
+        var tbody = $("#tbody");
+        tbody.empty();
+        var eventList = $("#eventList");
+        eventList.empty();
+
+        if(rows.length == 0) {
+          tbody.append("<tr><td colspan='5'>등록된 글이 없습니다.</td></tr>");
+          eventList.append("<div style='text-align:center'>등록된 글이 없습니다.</div>");
+        }
+        for(i=0; i<rows.length; i++) {
+          if (mType == "2" || mType == "5") {
+
+            var template = "";
+            template += "<div class='galleryBox wow fadeInUp'>			";
+            template += "	<a href='javascript:onClickRow({0})'>																																					";
+            template += "		<div class='galImg'><img src='/static{1}/{2}' onerror='this.src=\" /static/images/main/mainBg01.jpg\"'></div>																															";
+            template += "			<div class='gallery'>																																						";
+            template += "				<div class='gallTitle'>{3}</div>																															";
+            template += "				<p class='gallDate'>{4}</p>																																		";
+            template += "				<span class='gallBtn'>자세히보기</span>																													";
+            template += "			</div>																																													";
+            template += "		</a>																																															";
+            template += "	</div>																																															";
+
+            eventList.append(String.format(template, i, rows[i].FILE_PATH1, rows[i].FILE_NAME1, rows[i].TITLE, rows[i].INPUT_DATETIME, rows[0].FILE_PATH3, rows[0].FILE_NAME3));
+            console.log("FILE_PATH:"+i+":::"+rows[i].FILE_PATH1);
+            console.log("FILE_NAME:"+i+":::"+rows[i].FILE_NAME1);
+          } else {
+            var tr = $("<tr style='cursor:pointer' onclick='onClickRow(" + i + ")'></tr>");
+            var td1 = $("<td>" + rows[i].IDX + "</td>");
+            var td2 = $("<td class='subject'>" + rows[i].TITLE + "</td>");
+            var td3 = $("<td>" + rows[i].WRITER_NAME + "</td>");
+            var td4 = $("<td>" + rows[i].INPUT_DATETIME + "</td>");
+            var td5 = $("<td>" + rows[i].VIEW_CNT + "</td>");
+
+            tr.append(td1, td2, td3, td4, td5).appendTo(tbody);
           }
-        });
-      }
-
-      function setProtocol() {
-        if (document.location.protocol == 'http:') {
-          document.location.href = document.location.href.replace('http:', 'https:');
-        }
-      }
-
-      function sessionCheck() {
-        var sUrl = "/controller/SessionManager.asp";
-        var params = {"method" : "sessionConfirm"};
-
-        mAjax(sUrl, params, "POST", false, function(data) {
-          if(data.resultCode == "2000") {
-            alert(data.resultMessage);
-            location.reload();
-          }
-        });
-      }
-
-      function deleteMember() {
-
-        if("<%=Session("ms_num")%>" == "") {
-          alert("로그인 후 이용 가능합니다.");
-          location.href = "/members/login.asp";
-          return;
         }
 
-        var sUrl = "/controller/MemberController.asp";
-        var params = {};
+        initPaging(data.totalCnt);
+      } else {
+        alert(data.resultMessage);
+      }
+    });
+  }
 
-        params["method"] = "doDeleteMemeber";
+  function doSearchPaging(page) {
+    currentPage = page;
+    doSearch();
+  }
 
-        var con = confirm("회원님께서 확인 버튼을 누르면 탈퇴가 완료됩니다.\r\n그동안 포도CC를 이용해 주셔서 감사합니다..");
-        if(con == true) {
-          mAjax(sUrl, params, "POST", true, function(data) {
-            if(data.resultCode == "0000") {
-              alert("회원 탈퇴 되었습니다.");
+  function doSearchPaging10(page) {
+    currentPage = page;
+    startPage = page;
+    doSearch();
+  }
 
-              location.href = "/index.asp";
-            }
-          });
-        }
+  function initPaging(totalCnt) {
+    var pageContainer = $("#pagecontainer");
+    pageContainer.empty();
+    var page = startPage;
+    var prevBtn = "<a href='javascript:doSearchPaging10(" + (startPage - 10) + ")' class='pagebtn'>◀</a>";
+    var nextBtn = "<a href='javascript:doSearchPaging10(" + (startPage + 10) + ")' class='pagebtn'>▶</a>";
+
+    if(startPage != 1){
+      pageContainer.append(prevBtn);
+    }
+
+    endPage = Math.floor(totalCnt / pageCnt);
+    if(totalCnt % pageCnt != 0) {
+      endPage += 1;
+    }
+
+    for(i=startPage; i<startPage+10; i++) {
+      if(i > endPage) break;
+      var li = $(String.format("<a href='javascript:doSearchPaging({0})'>{1}</a>", i, (i < 10 ? "0" + i : i)));
+
+      if(currentPage == i) {
+        li.addClass("on")
       }
 
+      pageContainer.append(li);
+    }
 
-    </script>
-    <!--textmotion-->
-    <script src="js/ScrollTrigger.js"></script>
-    <script>
-      window.counter = function($) {
-        // this refers to the html element with the data-scroll-showCallback tag
-        var span = this.querySelector('span');
-        var current = parseInt(span.textContent);
+    if(endPage - startPage >= 10) {
+      pageContainer.append(nextBtn);
+    }
+  }
 
-        span.textContent = current + 1;
-      };
+  function onClickRow(i) {
+    var type = rows[i].TYPE;
+    var idx = rows[i].IDX;
 
-      document.addEventListener('DOMContentLoaded', function($){
-        var trigger = new ScrollTrigger({
-          addHeight: true
-        });
-      });
-    </script>
-    <!-- subTab Fixed js -->
-    <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+    location.href = String.format("/board/view?type={0}&idx={1}", type, idx);
+  }
 
-    <script src="/js/jquery.preloaders.js"></script>
-    <script src="/js/tools.js"></script>
-    <script src="/js/globals.js"></script>
-</head>
-<body>
-<div class="siteAll"><div class="toggleMenu"><span></span></div></div>
-<div id="header">
-    <div class="subHeader">
-        <a href="/index.asp" class="logoBox" id="logo"></a>
-        <ul class="mainList">
-            <li onclick="location.href='/reservation/reservation.asp'">인터넷예약</li>
-            <li onclick="location.href='/guide/reserGuide.asp'">이용안내</li>
-            <li onclick="location.href='/club/intro.asp'">클럽소개</li>
-            <li onclick="location.href='/course/intro.asp'">코스소개</li>
-            <li onclick="location.href='/fac/fac01.asp'">시설안내</li>
-            <li onclick="location.href='/board/list.asp?type=1.asp'">정보마당</li>
+</script>
+
+<link rel="stylesheet" type="text/css" href="/static/css/animate.css">
+<script src="/static/js/wow.js"></script>
+<script>
+  new WOW().init();
+</script>
+<div class="middleBg6 zoomImg">
+</div>
+<ul class="mainMenuTitle text-focus-in">
+<li class="big">Infomation</li>
+
+<li>정보마당</li>
+</ul>
+
+
+<!-- 컨텐츠 시작 -->
+<div id="wrap">
+    <div class="navbarWrap">
+        <ul class="navbarBox" id="boardList" hidden>
+            <li class="" onclick="location.href='/board/list?type=1'" id="type1">공지사항</li>
+            <li class="" onclick="location.href='/board/list?type=2'" id="type2">이벤트</li>
+            <li class="" onclick="location.href='/board/list?type=3'" id="type3">보도자료</li>
+            <li class="" onclick="location.href='/board/list?type=4'" id="type4">자료실</li>
+            <li class="" onclick="location.href='/board/honor'" id="honor">홀인원</li>
+            <li class="" onclick="location.href='/reservation/joinList'" id="type6">조인게시판</li>
+            <li class="" onclick="location.href='/board/list?type=7'" id="type7">명예의 전당</li>
+
+            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 정보마당 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; <span id="txtTitle" style="font-size:inherit;color:inherit;font-weight:400;"></span></li>
         </ul>
-        <!--#include virtual="/include/submenu.asp"-->
+        <ul class="navbarBox" id="galleryList" hidden>
+            <li class="on" onclick="location.href='/course/intro'">코스소개</li>
+            <li class="" onclick="location.href='/board/list?type=5'">코스갤러리</li>
 
-        <ul class="rightBtn">
-            <li class="topJoin">
-                <%If Session("MS_NUM") = "" Then%>
-                <a href="https://www.serenitycc.co.kr" class="podo">세레니티</a>
-                <a href="/member/login.asp" class="topLogin" id="login"></a>
-                <%Else%>
-                <a href="https://www.serenitycc.co.kr" class="podo">세레니티</a>
-                <a href="/member/modify.asp" class="topLogin" id="login"></a>
-                <%End If%>
-            </li>
+            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 코스소개 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 코스소개</li>
         </ul>
     </div>
+    <div class="contents">
+        <div class="borderBox">
+            <div class="serching">
+                <ul>
+                    <li>
+                        <select name="Column" id="selSearchOption" class="select-arrow">
+                            <option value="title" selected="">제목</option>
+                            <option value="content">내용</option>
+                            <option value="writer">작성자</option>
+                        </select>
+                    </li>
+                    <li>
+                        <input type="text" name="SearchString" id="txtSearchText" class="inputSerch" value="" title="검색할 내용">
+                    </li>
+                    <li><a href="javascript:doSearch()" class="darkGrayBtn serchBtn">검색</a></li>
+                </ul>
+                <div class="padding10"></div>
 
-    <div id="menu">
-        <div class="main-nav">
-            <img src="/images/logo.svg" alt="포도 로고" class="hambergerLogo">
-            <ul class="menuTitleBox">
-                <li><a href="/reservation/reservation.asp" class="title">인터넷예약</a></li>
-                <li><a href="/reservation/reservation.asp">실시간예약</a></li>
-                <li><a href="/reservation/reserCheck.asp">예약확인/취소</a></li>
-            </ul>
-            <ul class="menuTitleBox">
-                <li><a class="title" href="/guide/guide.asp">이용안내</a></li>
-                <li><a href="/guide/reserGuide.asp">예약안내</a></li>
-                <li><a href="/guide/fee.asp">이용요금</a></li>
-                <li><a href="/guide/break.asp">위약안내</a></li>
-                <li><a href="/guide/etiquette.asp">에티켓</a></li>
-                <li><a href="/guide/inquiry.asp">예약/기타문의</a></li>
-            </ul>
-            <ul class="menuTitleBox">
-                <li><a class="title" href="/club/intro.asp">클럽소개</a></li>
-                <li><a href="/club/intro.asp">소개</a></li>
-                <li><a href="/club/greeting.asp">인사말</a></li>
-                <li><a href="/club/location.asp">오시는길</a></li>
-            </ul>
-            <ul class="menuTitleBox">
-                <li><a class="title" href="/couse/intro.asp">코스소개</a></li>
-                <li><a href="/course/intro.asp">코스소개</a></li>
-                <!--<li><a href="/course/o1.asp">아웃코스</a></li>
-                <li><a href="/course/i1.asp">인코스</a></li>-->
-                <li><a href="/board/list.asp?type=5">코스갤러리</a></li>
-            </ul>
-            <ul class="menuTitleBox">
-                <li><a class="title" href="/board/list.asp">시설안내</a></li>
-                <li><a href="/fac/fac01.asp">클럽하우스</a></li>
-                <li><a href="/fac/fac02.asp">레스토랑</a></li>
-                <li><a href="/fac/fac03.asp">프로샵</a></li>
-                <li><a href="/fac/fac04.asp">락카</a></li>
-            </ul>
-            <ul class="menuTitleBox">
-                <li><a class="title" href="/board/list.asp?type=1">정보마당</a></li>
-                <li><a href="/board/list.asp?type=1">공지사항</a></li>
-                <li><a href="/board/list.asp?type=2">이벤트</a></li>
-                <li><a href="/board/list.asp?type=3">보도자료</a></li>
-                <li><a href="/board/list.asp?type=4">자료실</a></li>
-                <li><a href="/board/Honor.asp">홀인원</a></li>
-                <li><a href="/reservation/joinList.asp">조인게시판</a></li>
-                <li><a href="/board/list.asp?type=7">명예의 전당</a></li>
+                <table class="commonTable" summary="게시글목록" id="noticeList" hidden>
+                    <caption>게시글목록</caption>
+                    <colgroup>
+                        <col width="10%">
+                        <col width="54%">
+                        <col width="13%">
+                        <col width="13%">
+                        <col width="10%">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>작성일</th>
+                        <th>조회수</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    </tbody>
+                </table>
 
-            </ul>
+                <div class="galleryListBox" id="eventList" hidden>
+                </div>
+
+                <div class="padding10"></div>
+                <div class="pageNum">
+                    <div class="pageNumWrap" id="pagecontainer">
+                    </div>
+                </div>
+
+                <!--<div class="btnBox">
+                    <a href="" class="darkGrayBtn">글쓰기</a>
+                </div>-->
+
+            </div>
         </div>
-    </div>
+    </div><!-- contents End-->
 
+</div>
+<!-- wrap End -->
+<%@ include file="../include/footer.jsp" %>
