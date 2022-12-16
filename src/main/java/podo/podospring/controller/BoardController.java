@@ -34,8 +34,8 @@ public class BoardController {
     public HashMap<String, Object> getBoardList(@RequestParam HashMap<String, Object> params) {
         params.put("sType",params.get("type"));
         HashMap<String, Object> result = boardService.getBoardList(params);
-
         return result;
+
     }
 
     @ResponseBody
