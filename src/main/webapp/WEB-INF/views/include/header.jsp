@@ -88,7 +88,6 @@
       }
 
       function sessionCheck() {
-        <%=session.getAttribute("MS_NUM")%>
         var sUrl = "/sessionConfirm";
         var params = {/*"method" : "sessionConfirm"*/};
 
