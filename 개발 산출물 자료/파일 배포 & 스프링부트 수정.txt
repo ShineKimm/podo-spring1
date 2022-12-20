@@ -1,18 +1,14 @@
 파일 배포 --
-1. 로그 경로
+1. 로그 경로 >>
 C:\Users\김대영\logs\app
-2. 파일 업로드/다운로드 경로
+2. 파일 업로드/다운로드 경로 >>
 C:\dev\podo-spring\src\main\webapp\static\uploads
-
-
+3. Static 폴더위치 >>
+C:\dev\podo-spring\src\main\webapp
 
 ---------------------------
 1. boot war 배포
-
 5. 인수인계 및 전달사항 정리 , 로그파일의 저장위치 및 로그파일이 로컬임..등
-6. 모든 JSP var >> let,const
-9. Static 폴더위치 >> resource
 12. 통일성
  <li class="" onclick="location.href='/club/intro'">클럽소개</li>
  <li class="" ><a href="/static/mobile/board/list">공지사항</a></li>
-14. service 합치기
