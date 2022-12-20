@@ -81,7 +81,7 @@
       var fileValue = $("#fileUpload3").val().split("\\");
       var fileName = fileValue[fileValue.length-1];
 
-      if(fileName.substr(-3)!="mp4"){
+      if(fileName.slice(-3)!="mp4"){
         alert("mp4형식의 파일만 올려주세요");
         $("#txtFileName3").val("");
         $(this).val('');
