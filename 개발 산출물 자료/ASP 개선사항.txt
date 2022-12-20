@@ -14,19 +14,3 @@ ASP 개선사항
 4. 조인게시판 게시판 작성된 날짜와 캘린더 날짜가 일치하지 않음
 
 --------------
-
-파일 배포 --
-1. 로그 경로
-C:\Users\김대영\logs\app
-
-2. 파일 업로드/다운로드 경로
-writeBoard
-C:\dev\podo-spring\src\main\webapp\static\uploads
-
-3. 테이블 정보
-
-war 파일로 변환방법 패키징 방법 찾아보기
-
-sql 폴더 사용하는지 확인필요
-logback resultsettable 중복여부 확인
-txt파일은 폴더 만들어서 관리 
