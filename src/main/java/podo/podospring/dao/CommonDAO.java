@@ -8,6 +8,7 @@ import podo.podospring.common.dao.AbstractDAO;
 
 @Repository
 public class CommonDAO extends AbstractDAO {
+    @SuppressWarnings("unchecked")
     public Map<String, Object> getCommonCode(HashMap<String, Object> params) {
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("resultCode","9999");
