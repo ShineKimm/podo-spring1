@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 
@@ -90,7 +89,7 @@
 					}
 				}
 				if(fileName3 != "" && filePath3 != "") {
-					if(originFileName3.substr(-3)=="mp4") {
+					if(originFileName3.slice(-3)=="mp4") {
 						var img = String.format("<video muted autoplay loop controls width='370'><source src='{0}/{1}' type='video/mp4'></video>" ,filePath3, fileName3);
 						imageContainer.show();
 						imageContainer.append(img);

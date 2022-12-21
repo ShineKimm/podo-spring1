@@ -12,7 +12,9 @@
   </select>
 
   <select id="verification" parameterType="hashmap" resultType="hashmap">
-    SELECT MS_NUM, MS_NAME
+    SELECT
+         MS_NUM
+       , MS_NAME
     FROM MS_MAININFO
     WHERE MS_MAIN_CODIV = #{coDiv}
       AND MS_ID = #{id}
@@ -164,11 +166,11 @@
 
   <insert id="doSignUp7" parameterType="hashmap">
     INSERT INTO MS_BENEFIT2
-    (CO_DIV, MS_NUM, MS_DIVISION, MB_ENTRUSTYN,
-     MB_ENTRUST_CNT, MB_WEEKDAY_CNT, MB_WEEKEND_CNT, MB_C_WEEKDAY_CNT, MB_C_WEEKEND_CNT,
-     MB_C_SPRING_CNT, MB_C_SUMMER_CNT, MB_C_FALL_CNT, MB_C_WINTER_CNT, MB_SG_DC_CNT,
-     MB_SP_DC_CNT, MB_AR_DC_CNT, MB_GH_DC_CNT, MS_SALE_CD,
-     INPUT_STAFF, INPUT_DATETIME, INPUT_IP, UPDATE_STAFF, UPDATE_DATETIME, UPDATE_IP)
+      (CO_DIV, MS_NUM, MS_DIVISION, MB_ENTRUSTYN,
+       MB_ENTRUST_CNT, MB_WEEKDAY_CNT, MB_WEEKEND_CNT, MB_C_WEEKDAY_CNT, MB_C_WEEKEND_CNT,
+       MB_C_SPRING_CNT, MB_C_SUMMER_CNT, MB_C_FALL_CNT, MB_C_WINTER_CNT, MB_SG_DC_CNT,
+       MB_SP_DC_CNT, MB_AR_DC_CNT, MB_GH_DC_CNT, MS_SALE_CD,
+       INPUT_STAFF, INPUT_DATETIME, INPUT_IP, UPDATE_STAFF, UPDATE_DATETIME, UPDATE_IP)
     SELECT CO_DIV,
            #{msNum},
            MS_DIVISION,
@@ -202,11 +204,11 @@
 
   <insert id="doSignUp8" parameterType="hashmap">
     INSERT INTO MS_BENEFIT2
-    (CO_DIV, MS_NUM, MS_DIVISION, MB_ENTRUSTYN,
-     MB_ENTRUST_CNT, MB_WEEKDAY_CNT, MB_WEEKEND_CNT, MB_C_WEEKDAY_CNT, MB_C_WEEKEND_CNT,
-     MB_C_SPRING_CNT, MB_C_SUMMER_CNT, MB_C_FALL_CNT, MB_C_WINTER_CNT, MB_SG_DC_CNT,
-     MB_SP_DC_CNT, MB_AR_DC_CNT, MB_GH_DC_CNT, MS_SALE_CD,
-     INPUT_STAFF, INPUT_DATETIME, INPUT_IP, UPDATE_STAFF, UPDATE_DATETIME, UPDATE_IP)
+      (CO_DIV, MS_NUM, MS_DIVISION, MB_ENTRUSTYN,
+       MB_ENTRUST_CNT, MB_WEEKDAY_CNT, MB_WEEKEND_CNT, MB_C_WEEKDAY_CNT, MB_C_WEEKEND_CNT,
+       MB_C_SPRING_CNT, MB_C_SUMMER_CNT, MB_C_FALL_CNT, MB_C_WINTER_CNT, MB_SG_DC_CNT,
+       MB_SP_DC_CNT, MB_AR_DC_CNT, MB_GH_DC_CNT, MS_SALE_CD,
+       INPUT_STAFF, INPUT_DATETIME, INPUT_IP, UPDATE_STAFF, UPDATE_DATETIME, UPDATE_IP)
     SELECT #{coDiv},
            MS_NUM,
            MS_DIVISION,
@@ -236,7 +238,8 @@
   </insert>
 
   <select id="setSession" parameterType="hashmap" resultType="hashmap">
-    SELECT H.MS_NUM
+    SELECT
+           H.MS_NUM
          , H.MS_MAIN_CODIV
          , H.MS_DIVISION
          , H.MS_CLASS
@@ -288,23 +291,24 @@
 
   <update id="doUpdateMemeber1" parameterType="hashmap">
     UPDATE MS_MAININFO
-    SET MS_SEX = #{sex}
-    <if test="!pw.equals('') and pw!=null">
-      , MS_PASSWORD = SHA2(#{pw}, 256)
-    </if>
-    , MS_BIRTH = #{birth}
-    , MS_BIRTHYL = #{birthYL}
-    , MS_FIRST_PHONE1 = #{phone1}
-    , MS_MID_PHONE1 = HEX(AES_ENCRYPT(#{phone2}, 'JBOG'))
-    , MS_LAST_PHONE1 = #{phone3}
-    , MS_MKT_AGREE_YN = #{mkt1}
-    , MS_MKT_AGREE_YN2 = #{mkt2}
-    , MS_MKT_AGREE_YN3 = #{mkt3}
-    , MS_EMAIL = HEX(AES_ENCRYPT(#{email}, 'JBOG'))
-    , MS_EMAIL_YN = #{chkMail}
-    , UPDATE_STAFF = 'HOMEPAGE'
-    , UPDATE_DATETIME = NOW()
-    , UPDATE_IP = #{ip}
+    SET
+      MS_SEX = #{sex}
+      <if test="!pw.equals('') and pw!=null">
+        , MS_PASSWORD = SHA2(#{pw}, 256)
+      </if>
+      , MS_BIRTH = #{birth}
+      , MS_BIRTHYL = #{birthYL}
+      , MS_FIRST_PHONE1 = #{phone1}
+      , MS_MID_PHONE1 = HEX(AES_ENCRYPT(#{phone2}, 'JBOG'))
+      , MS_LAST_PHONE1 = #{phone3}
+      , MS_MKT_AGREE_YN = #{mkt1}
+      , MS_MKT_AGREE_YN2 = #{mkt2}
+      , MS_MKT_AGREE_YN3 = #{mkt3}
+      , MS_EMAIL = HEX(AES_ENCRYPT(#{email}, 'JBOG'))
+      , MS_EMAIL_YN = #{chkMail}
+      , UPDATE_STAFF = 'HOMEPAGE'
+      , UPDATE_DATETIME = NOW()
+      , UPDATE_IP = #{ip}
     WHERE MS_NUM = #{ms_num}
   </update>
 

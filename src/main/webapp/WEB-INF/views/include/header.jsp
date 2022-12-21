@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
     String IS_MOBILE = "MOBI";
@@ -88,7 +87,6 @@
       }
 
       function sessionCheck() {
-        <%=session.getAttribute("MS_NUM")%>
         var sUrl = "/sessionConfirm";
         var params = {/*"method" : "sessionConfirm"*/};
 
