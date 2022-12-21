@@ -41,6 +41,7 @@ public class BoardDAO extends AbstractDAO {
         return resultMap;
     }
 
+    @SuppressWarnings("unchecked")
     @Transactional(rollbackFor = {Exception.class})
     public HashMap<String, Object> writeBoard(HashMap<String, Object> params)
             throws ReturnException {
@@ -84,12 +85,14 @@ public class BoardDAO extends AbstractDAO {
         return params;
     }//writeBoard
 
+    @SuppressWarnings("unchecked")
     public HashMap<String, Object> doDelete(HashMap<String, Object> params) {
         update("board.doDelete",params);
         params.put("resultCode","0000");
         return params;
     }
 
+    @SuppressWarnings("unchecked")
     public HashMap<String, Object> getJoinList(HashMap<String, Object> params) {
         HashMap<String, Object> resultMap = new HashMap<String, Object>();
         List<HashMap<String, Object>> getJoinList = selectList("board.getJoinList", params);
@@ -101,6 +104,7 @@ public class BoardDAO extends AbstractDAO {
         return resultMap;
     }
 
+    @SuppressWarnings("unchecked")
     public HashMap<String, Object> getReplyList(HashMap<String, Object> params) {
         HashMap<String, Object> resultMap = new HashMap<String, Object>();
 
@@ -110,11 +114,14 @@ public class BoardDAO extends AbstractDAO {
         return resultMap;
     }
 
+    @SuppressWarnings("unchecked")
     public HashMap<String, Object> doDeleteReply(HashMap<String, Object> params) {
         update("board.doDeleteReply", params);
         params.put("resultCode","0000");
         return params;
     }
+
+    @SuppressWarnings("unchecked")
     @Transactional(rollbackFor = {Exception.class})
     public HashMap<String, Object> writeReply(HashMap<String, Object> params)
             throws ReturnException {
@@ -136,6 +143,8 @@ public class BoardDAO extends AbstractDAO {
         return params;
     }
 
+
+    @SuppressWarnings("unchecked")
     public HashMap<String, Object> getJoinCalendar(HashMap<String, Object> params) {
         List<HashMap<String, Object>> resultList = selectList("board.getJoinCalendar1", params);
         params.put("rows",resultList);
@@ -143,6 +152,7 @@ public class BoardDAO extends AbstractDAO {
         return params;
     }
 
+    @SuppressWarnings("unchecked")
     public HashMap<String, Object> boardHonor(HashMap<String, Object> params) {
         int intRecordCount = selectCnt("board.boardHonor2", params);
         params.put("intRecordCount",intRecordCount);

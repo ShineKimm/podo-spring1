@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
@@ -72,9 +71,9 @@
 		var sms = $(':radio[name="chkSms"]:checked').val();
 		var chkMail = $(':radio[name="chkMail"]:checked').val();
 		var chkBirth = $(':radio[name="chkBirth"]:checked').val();
-		var phone1 = $("#txtPhone").val().substr(0,3);
-		var phone2 = $("#txtPhone").val().substr(3,4);
-		var phone3 = $("#txtPhone").val().substr(7,4);
+		var phone1 = $("#txtPhone").val().substring(0,3);
+		var phone2 = $("#txtPhone").val().substring(3,7);
+		var phone3 = $("#txtPhone").val().substring(7,11);
 		var homeAddress1 = $("#txtHomeAddress1").val();
 		var birth = $("#txtBirth").val();
 
@@ -227,9 +226,9 @@
 
 		//params["method"] = "doCertification";
 
-		var phone1 = $("#txtPhone").val().substr(0,3);
-		var phone2 = $("#txtPhone").val().substr(3,4);
-		var phone3 = $("#txtPhone").val().substr(7,4);
+		var phone1 = $("#txtPhone").val().substring(0,3);
+		var phone2 = $("#txtPhone").val().substring(3,7);
+		var phone3 = $("#txtPhone").val().substring(7,11);
 
 		if(phone1 == "" || phone1.length != 3) {
 			alert("휴대폰번호를 정확하게 입력하세요.");

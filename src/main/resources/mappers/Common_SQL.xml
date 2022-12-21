@@ -4,7 +4,8 @@
 <mapper namespace="common">
 
   <select id="getCommonCode" parameterType="hashmap" resultType="hashmap">
-    SELECT CO_DIV
+    SELECT
+           CO_DIV
          , CD_DIVISION
          , CD_CODE
          , CD_TITLE1

@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
@@ -81,7 +80,7 @@
       var fileValue = $("#fileUpload3").val().split("\\");
       var fileName = fileValue[fileValue.length-1];
 
-      if(fileName.substr(-3)!="mp4"){
+      if(fileName.slice(-3)!="mp4"){
         alert("mp4형식의 파일만 올려주세요");
         $("#txtFileName3").val("");
         $(this).val('');

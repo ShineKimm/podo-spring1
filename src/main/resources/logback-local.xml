@@ -20,20 +20,21 @@
 
   <!-- ResultSet 포함 모든 JDBC 호출 정보를 로깅 -->
   <logger name="jdbc.resultset" level="OFF"/>
-  <logger name="jdbc.resultsettable" level="INFO"/>
 
   <!-- use Spring default values -->
+  <!-- 콘솔 출력할때 아래의 xml을 include 해서 Spring 기본 로그 스타일을 사용 -->
   <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
   <!-- 콘솔 출력 -->
   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
+<!-- org/springframework/boot/logging/logback/defaults.xml 파일안에 기본 변수가 선언되어있음. -->
       <pattern>${CONSOLE_LOG_PATTERN}</pattern>
     </encoder>
   </appender>
 
   <!-- SQL 결과 조회된 데이터의 table을 로그로 남긴다. -->
-  <logger name="jdbc.resultsettable" level="ON" additivity="false">
+  <logger name="jdbc.resultsettable" level="INFO" additivity="false">
     <appender-ref ref="CONSOLE"/>
   </logger>
 

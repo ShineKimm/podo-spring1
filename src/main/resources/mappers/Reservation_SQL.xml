@@ -90,7 +90,8 @@
   </select>
 
   <select id="getCalendarQuery2" parameterType="hashmap" resultType="hashmap">
-    SELECT A.CL_SOLAR                      AS CL_SOLAR
+    SELECT
+           A.CL_SOLAR                      AS CL_SOLAR
          , A.CL_DAYDIV
          , NVL(B.BOOKG_ABLE_CNT, 0)        AS BK_TEAM
          , SUBSTRING(A.CL_SOLAR, 7, 2) + 0 AS DAYNUM
@@ -133,19 +134,20 @@
   </select>
 
   <select id="getTeeQuery1" parameterType="hashmap" resultType="hashmap">
-    SELECT A.CO_DIV AS CO_DIV
-    , A.BK_DAY AS BK_DAY
-    , A.BK_COS AS BK_COS
-    , B.CD_TITLE1 AS BK_COS_NM
-    , A.BK_TIME AS BK_TIME
-    , A.BK_ROUNDF AS BK_ROUNDF
-    , D.CL_BUSINESS AS CL_BUSINESS
-    , IFNULL(NULLIF(E.MN_AMOUNT_DIV, ''), '') AS BK_B_CHARGE
-    , IFNULL(NULLIF(G.CD_TITLE1, ''), '') AS BK_B_CHARGE_NM
-    , IFNULL(NULLIF(F.MN_AMOUNT_DIV, ''), '') AS BK_S_CHARGE
-    , IFNULL(NULLIF(H.CD_TITLE1, ''), '') AS BK_S_CHARGE_NM
-    , CASE WHEN IFNULL(NULLIF(A.BK_CS,''),'N') = 'C' THEN '인턴캐디' WHEN IFNULL(NULLIF(A.BK_CS,''),'N')
-    = 'Y' THEN '캐디' ELSE '셀프' END AS BK_CADDY
+    SELECT
+        A.CO_DIV AS CO_DIV
+      , A.BK_DAY AS BK_DAY
+      , A.BK_COS AS BK_COS
+      , B.CD_TITLE1 AS BK_COS_NM
+      , A.BK_TIME AS BK_TIME
+      , A.BK_ROUNDF AS BK_ROUNDF
+      , D.CL_BUSINESS AS CL_BUSINESS
+      , IFNULL(NULLIF(E.MN_AMOUNT_DIV, ''), '') AS BK_B_CHARGE
+      , IFNULL(NULLIF(G.CD_TITLE1, ''), '') AS BK_B_CHARGE_NM
+      , IFNULL(NULLIF(F.MN_AMOUNT_DIV, ''), '') AS BK_S_CHARGE
+      , IFNULL(NULLIF(H.CD_TITLE1, ''), '') AS BK_S_CHARGE_NM
+      , CASE WHEN IFNULL(NULLIF(A.BK_CS,''),'N') = 'C' THEN '인턴캐디' WHEN IFNULL(NULLIF(A.BK_CS,''),'N')
+      = 'Y' THEN '캐디' ELSE '셀프' END AS BK_CADDY
     FROM BK_HISTORY A
     INNER JOIN CD_COMMON B
     ON A.CO_DIV = B.CO_DIV
@@ -155,12 +157,13 @@
     ON A.CO_DIV = D.CO_DIV
     AND A.BK_DAY = D.CL_SOLAR
     LEFT OUTER JOIN (
-    SELECT A.CO_DIV
-    , A.MN_AMOUNT_DIV
-    , A.START_TIME
-    , A.END_TIME
-    , A.YOIL
-    , IF(A.COS_CODE = 'Z', '%', A.COS_CODE) AS COS_CODE
+    SELECT
+        A.CO_DIV
+      , A.MN_AMOUNT_DIV
+      , A.START_TIME
+      , A.END_TIME
+      , A.YOIL
+      , IF(A.COS_CODE = 'Z', '%', A.COS_CODE) AS COS_CODE
     FROM MN_MASTER_COST A
     INNER JOIN (
     SELECT B.CO_DIV
@@ -183,11 +186,12 @@
     AND IF(D.CL_BUSINESS = '4', '8', D.CL_DAYDIV) = E.YOIL
     AND A.BK_COS LIKE E.COS_CODE
     LEFT OUTER JOIN (
-    SELECT CO_DIV
-    , MN_DAY
-    , MN_COS
-    , MN_TIME
-    , MN_AMOUNT_DIV
+    SELECT
+        CO_DIV
+      , MN_DAY
+      , MN_COS
+      , MN_TIME
+      , MN_AMOUNT_DIV
     FROM MN_COST_SALE
     WHERE CO_DIV = #{coDiv}
     AND MN_DAY = #{sDate}
@@ -197,9 +201,10 @@
     AND A.BK_COS = F.MN_COS
     AND A.BK_TIME = F.MN_TIME
     LEFT OUTER JOIN (
-    SELECT CO_DIV
-    , CD_CODE
-    , CD_TITLE1
+    SELECT
+        CO_DIV
+      , CD_CODE
+      , CD_TITLE1
     FROM CD_COMMON
     WHERE CO_DIV = #{coDiv}
     AND CD_DIVISION = '004'
@@ -207,9 +212,10 @@
     ON E.CO_DIV = G.CO_DIV
     AND E.MN_AMOUNT_DIV = G.CD_CODE
     LEFT OUTER JOIN (
-    SELECT CO_DIV
-    , CD_CODE
-    , CD_TITLE1
+    SELECT
+        CO_DIV
+      , CD_CODE
+      , CD_TITLE1
     FROM CD_COMMON
     WHERE CO_DIV = #{coDiv}
     AND CD_DIVISION = '004'
@@ -255,7 +261,8 @@
   </select>
 
   <select id="reservationQuery1" parameterType="hashmap" resultType="hashmap">
-    SELECT MS_NAME
+    SELECT
+           MS_NAME
          , MS_DIVISION
          , MS_CLASS
          , MS_LEVEL
@@ -463,10 +470,11 @@
   </select>
 
   <select id="cancelReservationQuery1" parameterType="hashmap" resultType="hashmap">
-    SELECT MS_NAME
-         , CONCAT(MS_FIRST_PHONE1
-      , CAST(AES_DECRYPT(UNHEX(MS_MID_PHONE1),'JBOG') AS CHAR)
-      , MS_LAST_PHONE1) AS MS_PHONE1
+    SELECT
+          MS_NAME
+        , CONCAT(MS_FIRST_PHONE1
+        , CAST(AES_DECRYPT(UNHEX(MS_MID_PHONE1),'JBOG') AS CHAR)
+        , MS_LAST_PHONE1) AS MS_PHONE1
     FROM MS_MAININFO
     WHERE MS_NUM = #{msNum}
   </select>

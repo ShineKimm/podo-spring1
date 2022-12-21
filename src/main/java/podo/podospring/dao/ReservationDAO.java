@@ -11,6 +11,7 @@ import podo.podospring.common.ReturnException;
 @Repository
 public class ReservationDAO extends AbstractDAO {
 
+    @SuppressWarnings("unchecked")
     public HashMap<String, Object> getCalendar(HashMap<String, Object> params) {
 
         String nowDate = (String)selectOne("reservation.nowDate",params);
@@ -27,6 +28,7 @@ public class ReservationDAO extends AbstractDAO {
         return resultMap;
     }
 
+    @SuppressWarnings("unchecked")
     public HashMap<String, Object> getTeeList(HashMap<String, Object> params) {
         List<HashMap<String, Object>> resultList = selectList("reservation.getTeeQuery1",params);
         params.put("rows",resultList);
@@ -44,6 +46,7 @@ public class ReservationDAO extends AbstractDAO {
         return params;
     }
 
+    @SuppressWarnings("unchecked")
     @Transactional(rollbackFor = {Exception.class})
     public HashMap<String, Object> changeReservation(HashMap<String, Object> params)
             throws ReturnException {
@@ -82,6 +85,7 @@ public class ReservationDAO extends AbstractDAO {
         return params;
     }
 
+    @SuppressWarnings("unchecked")
     @Transactional(rollbackFor = {Exception.class})
     public HashMap<String, Object> doReservation(HashMap<String, Object> params) throws Exception{
 
@@ -155,6 +159,7 @@ public class ReservationDAO extends AbstractDAO {
         return resultMap;
     }
 
+    @SuppressWarnings("unchecked")
     public HashMap<String, Object> getReservationList(HashMap<String, Object> params) {
         List<HashMap<String, Object>> getReservationList = selectList("reservation.getReservationList",params);
         params.put("rows",getReservationList);
@@ -165,9 +170,12 @@ public class ReservationDAO extends AbstractDAO {
         return params;
     }
 
+    @SuppressWarnings("unchecked")
     public HashMap<String, Object> blDeleteReservation(HashMap<String, Object> params) {
         return params;
     }
+
+    @SuppressWarnings("unchecked")
     @Transactional(rollbackFor = {Exception.class})
     public HashMap<String, Object> cancelReservation(HashMap<String, Object> params)
             throws ReturnException {
