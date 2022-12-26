@@ -11,6 +11,8 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -109,7 +111,7 @@ public class BoardController {
 
             //TODO 파일 업로드경로 서버경로로 설정
             //String filePath = "C:\\web\\podo\\uploads";
-            String filePath = "C:\\dev\\podo-spring\\src\\main\\webapp\\static\\uploads";
+            String filePath = "C:\\uploads";
             LocalDate now = LocalDate.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
             String today = now.format(formatter);
@@ -141,7 +143,6 @@ public class BoardController {
         }
 
         boardService.writeBoard(params);
-
         return params;
     }
 
@@ -156,9 +157,6 @@ public class BoardController {
             params.put("sDiv","1");
         }
         params = boardService.doDelete(params);
-
-
-
         return params;
     }
 
@@ -233,7 +231,6 @@ public class BoardController {
         return params;
     }
 
-
     @ResponseBody
     @RequestMapping("/board/honorList")
     public HashMap<String, Object> boardHonor(@RequestParam HashMap<String, Object> params) {
@@ -241,18 +238,11 @@ public class BoardController {
         return resultMap;
     }
 
-//    @GetMapping("/images/filename")
-//    public Resource showImage(@PathVariable String filename) throws
-//
-//            MalformedURLException {
-////        return new UrlResource("file:" + file.getFullPath(filename));
-//        return null;
-//    }
     @ResponseBody
-    @GetMapping("/images/filename")
-    public String showImage(@RequestParam MultipartFile file) throws MalformedURLException{
-        System.out.println("여기11111");
-        return null;
+    @GetMapping("/images/getfile")
+    public Resource showImage(@RequestParam String fullpath) throws MalformedURLException{
+        logger.debug("###fullpath######"+ fullpath);
+        return new UrlResource("file:"+fullpath);
     }
 
 
