@@ -72,9 +72,11 @@
         var filePath2 = rows[0].FILE_PATH2;
         var filePath3 = rows[0].FILE_PATH3;
 
+        //TODO 배포 후 이미지 경로 수정해야함
+        // /images/getfile?fullpath={0}/{1}
         if(fileName1 != "" && filePath1 != "") {
           if(isImage(fileName1)) {
-            var img = String.format("<div class='viewContentBox'><img src='/static{0}/{1}' alt=''></div>", filePath1, fileName1);
+            var img = String.format("<div class='viewContentBox'><img src='/images/getfile?fullpath={0}/{1}' alt=''></div>", filePath1, fileName1);
             imageContainer.show();
             imageContainer.append(img);
             console.log(img);
@@ -83,7 +85,7 @@
 
         if(fileName2 != "" && filePath2 != "") {
           if(isImage(fileName2)) {
-            var img = String.format("<div class='viewContentBox'><img src='/static{0}/{1}' alt=''></div>", filePath2, fileName2);
+            var img = String.format("<div class='viewContentBox'><img src='/images/getfile?fullpath={0}/{1}' alt=''></div>", filePath2, fileName2);
             imageContainer.show();
             imageContainer.append(img);
             console.log(img);
@@ -92,7 +94,7 @@
 
         if(fileName3 != "" && filePath3 != "") {
           if(originFileName3.substr(-3)=="mp4") {
-            var img = String.format("<video muted autoplay loop controls width='500'><source src='/static{0}/{1}' type='video/mp4'></video>" ,filePath3, fileName3);
+            var img = String.format("<video muted autoplay loop controls width='500'><source src='/images/getfile?fullpath={0}/{1}' type='video/mp4'></video>" ,filePath3, fileName3);
             imageContainer.show();
             imageContainer.append(img);
             console.log(img);

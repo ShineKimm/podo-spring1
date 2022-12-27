@@ -557,7 +557,14 @@ ul.bxslider {
 	-webkit-animation: slide-right 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s both;
 	        animation: slide-right 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s both;
 }
-
+.popup_bottom{
+  background-color: #ff8800;
+  color: #fff;
+  padding: 10px 10px;
+  margin-top:-2px;
+}
+/*pop*/
+.pull-right{float:right;}
 
 
 

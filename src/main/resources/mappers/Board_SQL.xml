@@ -37,6 +37,8 @@
       , IFNULL(NULLIF(D.ATTACH_CNT, 0), 0) AS ATTACH_CNT
       , H.VIEW_CNT
       , H.DEL_DIV
+      , H.POSITION_X
+      , H.POSITION_Y
     FROM HP_BOARD H
       <choose>
         <when test='sType == "6"'>
@@ -183,6 +185,8 @@
       , IFNULL(NULLIF(A.FILE_NAME3, ''), '') AS FILE_NAME3
       , IFNULL(NULLIF(A.ORIGIN_FILE_NAME3, ''), '') AS ORIGIN_FILE_NAME3
       , IFNULL(NULLIF(A.FILE_PATH3, ''), '') AS FILE_PATH3
+      , H.POSITION_X
+      , H.POSITION_Y
     FROM HP_BOARD H
       <choose>
         <when test='sType == "6"'>
@@ -226,7 +230,14 @@
                           VIEW_CNT, BOARD_DIV, INPUT_STAFF,
                           INPUT_DATETIME, INPUT_IP, UPDATE_STAFF,
                           UPDATE_DATETIME, UPDATE_IP, LINK,
-                          JOIN_STATUS)
+                          JOIN_STATUS
+                        <if test='POSITION_X != null and !POSITION_X.equals("")'>
+                          ,POSITION_X
+                        </if>
+                        <if test='POSITION_Y != null and !POSITION_Y.equals("")'>
+                          ,POSITION_Y
+                        </if>
+                          )
     VALUES (#{coDiv}, #{sType}, #{idx},
             #{title}, #{content}, '0',
             #{bkDay}, #{bkTime}, #{bkPerson},
@@ -234,7 +245,16 @@
             0, #{boardDiv}, #{staff},
             NOW(), #{ipAddr}, #{staff},
             NOW(), #{ipAddr}, #{link},
-            #{joinStatus})
+            #{joinStatus}
+            <if test='POSITION_X != null and !POSITION_X.equals("")'>
+              , #{POSITION_X}
+            </if>
+            <if test='POSITION_Y != null and !POSITION_Y.equals("")'>
+              , #{POSITION_Y}
+            </if>
+            )
+
+
   </insert>
   <insert id="writeBoardQuery3" parameterType="hashmap">
     INSERT INTO HP_BOARD_ATTACH (CO_DIV, TYPE, IDX,
@@ -264,6 +284,12 @@
       , UPDATE_STAFF    = #{staff}
       , UPDATE_DATETIME = NOW()
       , UPDATE_IP       = #{ipAddr}
+      <if test='POSITION_X != null and !POSITION_X.equals("")'>
+        , POSITION_X    = #{POSITION_X}
+      </if>
+      <if test='POSITION_Y != null and !POSITION_Y.equals("")'>
+        , POSITION_Y    = #{POSITION_Y}
+      </if>
     WHERE CO_DIV = #{coDiv}
       AND TYPE = #{sType}
       AND IDX = #{idx}

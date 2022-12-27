@@ -122,6 +122,7 @@
 
         initCalendar("#calendarBox1", mYear, mMonth);
         getMainNotice(1);
+        getMainNotice(8);
       }
 
       function setProtocol() {
@@ -346,7 +347,6 @@
               notice += " </div>	";
               notice += " </li>	";
               $("#mainNotice").append(notice);
-
             }
             setTimeout(function() {
               $('.slider1').bxSlider({
@@ -359,6 +359,26 @@
                 touchEnabled:false
               });
             }, 300);
+
+            //popup modal 팝업모달
+            if (params.type == 8) {
+              for(i=0; i<rows.length; i++) {
+                var popup_html = ""
+                popup_html += '<div id="main_popup'+rows[i].IDX+'" style="position: fixed; z-index: 10000000; top: '+rows[i].POSITION_Y+'px; left: '+rows[i].POSITION_X+'px;">';
+                popup_html += '<a href="'+rows[i].LINK+'">';
+                popup_html += '<img src="/images/getfile?fullpath='+rows[i].FILE_PATH1+'/'+rows[i].FILE_NAME1+'" height="400" width="400">';
+                popup_html += '</a>';
+                popup_html += '<div class="popup_bottom">';
+                popup_html += '<a href=javascript:closeMainPopupToday("main_popup'+rows[i].IDX+'") style="display: inline">오늘하루 그만보기</a>';
+                popup_html += '<a class="pull-right" href=javascript:closeMainPopup("main_popup'+rows[i].IDX+'");>닫기</a>';
+                popup_html += '</div>';
+                popup_html += '</div>';
+                $("#popup_modal").append(popup_html);
+              }
+            }
+
+
+
           } else {
             alert(data.resultMessage);
           }
@@ -385,6 +405,15 @@
         $("#mainPop").hide('fade');
       }
 
+      function closeMainPopupToday(id){
+        setCookie(id, 'Y', 1);
+        $("#" + id).hide('fade');
+      }
+
+      function closeMainPopup(id){
+        $("#" + id).hide('fade');
+      }
+
     </script>
 
     <form id="resv_info" method="POST" action="/reservation/reservation">
@@ -392,6 +421,10 @@
     </form>
 
 <body>
+
+<%--TODO 팝업링크 --%>
+<div id="popup_modal"></div>
+
 <div class="siteAll"><div class="toggleMenu"><span class=""></span></div></div>
 
 <div id="wrap">
