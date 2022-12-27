@@ -19,7 +19,8 @@
     "3" : "보도자료",
     "4" : "자료실",
     "5" : "코스갤러리",
-    "7" : "명예의 전당"
+    "7" : "명예의 전당",
+    "8" : "팝업 관리"
   }
 
   $(document).ready(function() {
@@ -55,6 +56,13 @@
       $("#fileContainer2").hide();
       $("#fileContainer3").show();
       $(".imgFile").hide();
+    }
+    if(mType == 8) {
+      $("#fileContainer4").show();
+      $("#fileContainer5").show();
+      $("#linkContainer").show();
+      $("#contentContainer").hide();
+      $("#fileContainer2").hide();
     }
     else{
       $(".vFile").hide();
@@ -100,6 +108,22 @@
       }
       $("#txtFileName3").val(fileName);
     });
+
+    $('#POSITION_X').change(function () {
+      const regExp = /[^0-9]/g;
+      if(regExp.test($('#POSITION_X').val())){
+        alert("숫자만 입력해주세요");
+        $('#POSITION_X').val('');
+      }
+    });
+    $('#POSITION_Y').change(function () {
+      const regExp = /[^0-9]/g;
+      if(regExp.test($('#POSITION_Y').val())){
+        alert("숫자만 입력해주세요");
+        $('#POSITION_Y').val('');
+      }
+    });
+
   }
 
   function initTabMenu() {
@@ -123,6 +147,7 @@
 
     mAjax(sUrl, params, "POST", true, function(data) {
       if(data.resultCode == "0000") {
+        console.log()
         rows = data.rows;
         var tbody = $("#tbody");
         tbody.empty();
@@ -134,6 +159,8 @@
         var fileName1 = rows[0].ORIGIN_FILE_NAME1;
         var fileName2 = rows[0].ORIGIN_FILE_NAME2;
         var fileName3 = rows[0].ORIGIN_FILE_NAME3;
+        var positionX = rows[0].POSITION_X;
+        var positionY = rows[0].POSITION_Y;
 
         $("#txtTitle").val(title);
         $("#txtContent").val(content);
@@ -142,6 +169,8 @@
         $("#txtFileName1").val(fileName1);
         $("#txtFileName2").val(fileName2);
         $("#txtFileName3").val(fileName3);
+        $("#POSITION_X").val(positionX);
+        $("#POSITION_Y").val(positionY);
       } else {
         alert(data.resultMessage);
       }
@@ -215,6 +244,7 @@
             <a href="javascript:location.href='/admin/board/list?type=4'" id="tab4" class="">자료실</a>
             <a href="javascript:location.href='/admin/board/list?type=5'" id="tab5" class="">코스갤러리</a>
             <a href="javascript:location.href='/admin/board/list?type=7'" id="tab7" class="">명예의 전당</a>
+            <a href="javascript:location.href='/admin/board/list?type=8'" id="tab8" class="">팝업 관리</a>
         </div>
 
         <div class="cate_title" id="txtSubject"></div>
@@ -274,6 +304,19 @@
                                     <label for="fileUpload3" class="btn_file imgFile">이미지찾기</label>
                                     <label for="fileUpload3" class="btn_file vFile">mp4/avi찾기</label>
                                     <input type="file" name="fileUpload3" id="fileUpload3">
+                                </td>
+                            </tr>
+                            <tr id="fileContainer4" hidden>
+                                <th>위치값x</th>
+                                <td>
+                                    <input type="text" name="POSITION_X" id="POSITION_X" class="popinput3">
+                                </td>
+                                <tr>
+                            </tr>
+                            <tr id="fileContainer5" hidden>
+                                <th>위치값y</th>
+                                <td>
+                                    <input type="text" name="POSITION_Y" id="POSITION_Y" class="popinput3">
                                 </td>
                             </tr>
                             <tr id="contentContainer">
