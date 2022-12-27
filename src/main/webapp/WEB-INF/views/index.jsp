@@ -363,6 +363,9 @@
             //popup modal 팝업모달
             if (params.type == 8) {
               for(i=0; i<rows.length; i++) {
+                if(getCookie("main_popup"+rows[i].IDX) == "Y"){
+                  continue;
+                }
                 var popup_html = ""
                 popup_html += '<div id="main_popup'+rows[i].IDX+'" style="position: fixed; z-index: 10000000; top: '+rows[i].POSITION_Y+'px; left: '+rows[i].POSITION_X+'px;">';
                 popup_html += '<a href="'+rows[i].LINK+'">';
