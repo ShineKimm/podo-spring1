@@ -425,7 +425,7 @@
 
 <body>
 
-<%--TODO 팝업링크 --%>
+<%-- 팝업링크 --%>
 <div id="popup_modal"></div>
 
 <div class="siteAll"><div class="toggleMenu"><span class=""></span></div></div>

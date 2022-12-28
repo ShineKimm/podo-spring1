@@ -8,9 +8,11 @@
   var title = {
     "1" : "공지사항",
     "2" : "이벤트",
-    "3" : "보도자료",
+    "3" : "분실물정보",
     "4" : "자료실",
-    "5" : "코스갤러리"
+    "5" : "코스갤러리",
+    "7" : "명예의 전당",
+    "8" : "팝업 관리"
   }
 
   $(document).ready(function() {
@@ -184,6 +186,8 @@
             <a href="javascript:location.href='/admin/board/list?type=3'" id="tab3" class="">보도자료</a>
             <a href="javascript:location.href='/admin/board/list?type=4'" id="tab4" class="">자료실</a>
             <a href="javascript:location.href='/admin/board/list?type=5'" id="tab5" class="">코스갤러리</a>
+            <a href="javascript:location.href='/admin/board/list?type=7'" id="tab7" class="">명예의 전당</a>
+            <a href="javascript:location.href='/admin/board/list?type=8'" id="tab8" class="">팝업 관리</a>
         </div>
 
         <div class="cate_title" id="txtTitle"></div>

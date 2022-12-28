@@ -176,7 +176,7 @@
         <div class="adminTab" id="tabContainer">
             <a href="javascript:onChangeTab('1')" id="tab1" class="on">공지사항</a>
             <a href="javascript:onChangeTab('2')" id="tab2" class="">이벤트</a>
-            <a href="javascript:onChangeTab('3')" id="tab3" class="">분실물정보</a>
+            <a href="javascript:onChangeTab('3')" id="tab3" class="">보도자료</a>
             <a href="javascript:onChangeTab('4')" id="tab4" class="">자료실</a>
             <a href="javascript:onChangeTab('5')" id="tab5" class="">코스갤러리</a>
             <a href="javascript:onChangeTab('7')" id="tab7" class="">명예의 전당</a>
