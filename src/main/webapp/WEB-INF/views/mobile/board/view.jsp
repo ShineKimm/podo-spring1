@@ -2,10 +2,10 @@
 <%@ include file="../include/header.jsp" %>
 
 <script>
-	var mType;
-	var mIdx;
+	let mType;
+	let mIdx;
 
-	var title = {
+	let title = {
 		"1" : "공지사항",
 		"2" : "이벤트",
 		"3" : "분실물정보",
@@ -35,8 +35,8 @@
 	}
 
 	function doSearchDetail() {
-		var sUrl = "/getBoardDetail";
-		var params = {};
+		let sUrl = "/getBoardDetail";
+		let params = {};
 
 		//params["method"] = "getBoardDetail";
 		params["coDiv"] = globals.coDiv;
@@ -47,11 +47,11 @@
 			if(data.resultCode == "0000") {
 				rows = data.rows;
 
-				var title = rows[0].TITLE;
-				var writer = rows[0].WRITER_NAME;
-				var inputDate = rows[0].INPUT_DATETIME;
-				var viewCnt = rows[0].VIEW_CNT;
-				var content = rows[0].CONTENT;
+				let title = rows[0].TITLE;
+				let writer = rows[0].WRITER_NAME;
+				let inputDate = rows[0].INPUT_DATETIME;
+				let viewCnt = rows[0].VIEW_CNT;
+				let content = rows[0].CONTENT;
 				content = replaceAll(content, "\n", "<br>");
 
 				$("#txtSubject").html(title);
@@ -61,21 +61,21 @@
 
 				$("#contentContainer").html(content);
 
-				var imageContainer = $("#imageContainer");
+				let imageContainer = $("#imageContainer");
 
-				var fileName1 = rows[0].FILE_NAME1;
-				var fileName2 = rows[0].FILE_NAME2;
-				var fileName3 = rows[0].FILE_NAME3;
-				var originFileName1 = rows[0].ORIGIN_FILE_NAME1;
-				var originFileName2 = rows[0].ORIGIN_FILE_NAME2;
-				var originFileName3 = rows[0].ORIGIN_FILE_NAME3;
-				var filePath1 = rows[0].FILE_PATH1;
-				var filePath2 = rows[0].FILE_PATH2;
-				var filePath3 = rows[0].FILE_PATH3;
+				let fileName1 = rows[0].FILE_NAME1;
+				let fileName2 = rows[0].FILE_NAME2;
+				let fileName3 = rows[0].FILE_NAME3;
+				let originFileName1 = rows[0].ORIGIN_FILE_NAME1;
+				let originFileName2 = rows[0].ORIGIN_FILE_NAME2;
+				let originFileName3 = rows[0].ORIGIN_FILE_NAME3;
+				let filePath1 = rows[0].FILE_PATH1;
+				let filePath2 = rows[0].FILE_PATH2;
+				let filePath3 = rows[0].FILE_PATH3;
 
 				if(fileName1 != "" && filePath1 != "") {
 					if(isImage(fileName1)) {
-						var img = String.format("<div class='viewContentBox'><img src='{0}/{1}' alt=''></div>", filePath1, fileName1);
+						let img = String.format("<div class='viewContentBox'><img src='{0}/{1}' alt=''></div>", filePath1, fileName1);
 						imageContainer.show();
 						imageContainer.append(img);
 					}
@@ -83,14 +83,14 @@
 
 				if(fileName2 != "" && filePath2 != "") {
 					if(isImage(fileName2)) {
-						var img = String.format("<div class='viewContentBox'><img src='{0}/{1}' alt=''></div>", filePath2, fileName2);
+						let img = String.format("<div class='viewContentBox'><img src='{0}/{1}' alt=''></div>", filePath2, fileName2);
 						imageContainer.show();
 						imageContainer.append(img);
 					}
 				}
 				if(fileName3 != "" && filePath3 != "") {
 					if(originFileName3.slice(-3)=="mp4") {
-						var img = String.format("<video muted autoplay loop controls width='370'><source src='{0}/{1}' type='video/mp4'></video>" ,filePath3, fileName3);
+						let img = String.format("<video muted autoplay loop controls width='370'><source src='{0}/{1}' type='video/mp4'></video>" ,filePath3, fileName3);
 						imageContainer.show();
 						imageContainer.append(img);
 					}

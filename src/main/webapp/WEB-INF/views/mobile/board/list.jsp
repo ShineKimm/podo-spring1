@@ -18,14 +18,14 @@
 </script>
 <script>
 
-	var startPage = 1;
-	var endPage = 1;
-	var currentPage = 1;
-	var pageCnt = 10;
-	var rows;
-	var mType;
+	let startPage = 1;
+	let endPage = 1;
+	let currentPage = 1;
+	let pageCnt = 10;
+	let rows;
+	let mType;
 
-	var title = {
+	let title = {
 		"1" : "공지사항",
 		"2" : "이벤트",
 		"3" : "보도자료",
@@ -53,8 +53,8 @@
 	}
 
 	function doSearch() {
-		var sUrl = "/controller/BoardController";
-		var params = {};
+		let sUrl = "/controller/BoardController";
+		let params = {};
 
 		//params["method"] = "getBoardList";
 
@@ -67,9 +67,9 @@
 			if(data.resultCode == "0000") {
 				rows = data.rows;
 
-				var tbody = $("#tbody");
+				let tbody = $("#tbody");
 				tbody.empty();
-				var eventList = $("#eventList");
+				let eventList = $("#eventList");
 				eventList.empty();
 
 				if(rows.length == 0) {
@@ -80,7 +80,7 @@
 				for(i=0; i<rows.length; i++) {
 					if (mType == "2" || mType == "5") {
 
-						var template = "";
+						let template = "";
 						template += "<div class='galleryBox fadeBox fadeInUp'>			";
 						template += "	<div class='gallBoxCont'>																																						";
 						template += "	<a href='javascript:onClickRow({0})'>																																						";
@@ -96,12 +96,12 @@
 
 						eventList.append(String.format(template, i, rows[i].FILE_PATH3, rows[i].FILE_NAME3, rows[i].TITLE, rows[i].INPUT_DATETIME));
 					} else {
-						var tr = $("<tr style='cursor:pointer' onclick='onClickRow(" + i + ")'></tr>");
-						var td1 = $("<td>" + rows[i].IDX + "</td>");
-						var td2 = $("<td class='title'>" + rows[i].TITLE + "</td>");
-						var td3 = $("<td>" + rows[i].WRITER_NAME + "</td>");
-						var td4 = $("<td>" + rows[i].INPUT_DATETIME + "</td>");
-						var td5 = $("<td>" + rows[i].VIEW_CNT + "</td>");
+						let tr = $("<tr style='cursor:pointer' onclick='onClickRow(" + i + ")'></tr>");
+						let td1 = $("<td>" + rows[i].IDX + "</td>");
+						let td2 = $("<td class='title'>" + rows[i].TITLE + "</td>");
+						let td3 = $("<td>" + rows[i].WRITER_NAME + "</td>");
+						let td4 = $("<td>" + rows[i].INPUT_DATETIME + "</td>");
+						let td5 = $("<td>" + rows[i].VIEW_CNT + "</td>");
 
 						tr.append(td1, td2, td3, td4, td5).appendTo(tbody);
 					}
@@ -126,11 +126,11 @@
 	}
 
 	function initPaging(totalCnt) {
-	  var pageContainer = $("#pageContainer");
+	  let pageContainer = $("#pageContainer");
 	  pageContainer.empty();
-	  var page = startPage;
-	  var prevBtn = "<a href='javascript:doSearchPaging10(" + (startPage - 10) + ")' class='pagebtn'>◀</a>";
-	  var nextBtn = "<a href='javascript:doSearchPaging10(" + (startPage + 10) + ")' class='pagebtn'>▶</a>";
+	  let page = startPage;
+	  let prevBtn = "<a href='javascript:doSearchPaging10(" + (startPage - 10) + ")' class='pagebtn'>◀</a>";
+	  let nextBtn = "<a href='javascript:doSearchPaging10(" + (startPage + 10) + ")' class='pagebtn'>▶</a>";
 
 	  endPage = Math.floor(totalCnt / pageCnt);
 	  if(totalCnt % pageCnt != 0) {
@@ -141,11 +141,11 @@
 	    pageContainer.append(prevBtn);
 	  }
 
-	  var span = $("<span class='pageNumWrap'></span>");
+	  let span = $("<span class='pageNumWrap'></span>");
 
 	  for(i=startPage; i<startPage+10; i++) {
 	    if(i > endPage) break;
-	    var a = $(String.format("<a href='javascript:doSearchPaging({0})'>{1}</a>", i, (i < 10 ? "0" + i : i)));
+	    let a = $(String.format("<a href='javascript:doSearchPaging({0})'>{1}</a>", i, (i < 10 ? "0" + i : i)));
 
 	    if(currentPage == i) {
 	      a.addClass("on")
@@ -162,8 +162,8 @@
 	}
 
 	function onClickRow(i) {
-		var type = rows[i].TYPE;
-		var idx = rows[i].IDX;
+		let type = rows[i].TYPE;
+		let idx = rows[i].IDX;
 
 		location.href = String.format("/mobile/board/view?type={0}&idx={1}", type, idx);
 	}

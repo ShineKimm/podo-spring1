@@ -2,9 +2,9 @@
 <%@ include file="../include/header.jsp" %>
 
 <script>
-	var mType = "6";
-	var mIdx;
-	var re_rows;
+	let mType = "6";
+	let mIdx;
+	let re_rows;
 
 	$(document).ready(function() {
 		init();
@@ -24,8 +24,8 @@
 	}
 
 	function doSearchDetail() {
-		var sUrl = "/getBoardDetail";
-		var params = {};
+		let sUrl = "/getBoardDetail";
+		let params = {};
 
 		//params["method"] = "getBoardDetail";
 		params["coDiv"] = globals.coDiv;
@@ -34,14 +34,14 @@
 
 		mAjax(sUrl, params, "POST", true, function(data) {
 			if(data.resultCode == "0000") {
-				var rows = data.rows;
+				let rows = data.rows;
 
-				var title = rows[0].TITLE;
-				var writer = rows[0].WRITER_NAME;
-				var inputDate = rows[0].INPUT_DATETIME;
-				var viewCnt = rows[0].VIEW_CNT;
-				var content = rows[0].CONTENT;
-				var bkDay = getDateFormat(rows[0].BK_DAY);
+				let title = rows[0].TITLE;
+				let writer = rows[0].WRITER_NAME;
+				let inputDate = rows[0].INPUT_DATETIME;
+				let viewCnt = rows[0].VIEW_CNT;
+				let content = rows[0].CONTENT;
+				let bkDay = getDateFormat(rows[0].BK_DAY);
 				content = replaceAll(content, "\n", "<br>");
 
 				$("#txtTitle").html(title);
@@ -50,7 +50,7 @@
 				$("#txtDate").html(inputDate);
 				$("#txtContent").html(content);
 
-				var template = "";
+				let template = "";
 				template += "부킹일자 : {0} . {1} . {2} ({3}) <br>";
 				template += "부킹시간 : {4} 시대<br>";
 				template += "구분 : {5}<br>";
@@ -77,8 +77,8 @@
 	}
 
 	function doSearchReply() {
-		var sUrl = "/getReplyList";
-		var params = {};
+		let sUrl = "/getReplyList";
+		let params = {};
 
 		//params["method"] = "getReplyList";
 		params["coDiv"] = globals.coDiv;
@@ -87,7 +87,7 @@
 
 		mAjax(sUrl, params, "POST", true, function(data) {
 			if(data.resultCode == "0000") {
-				var rows = data.rows;
+				let rows = data.rows;
 				re_rows = rows;
 
 				$("#replyContainer").empty();
@@ -96,7 +96,7 @@
 
 				$("#replyContainer").append("<p class='joinTitle'></p>");
 
-				var template = "";
+				let template = "";
 				template += " <li> ";
 				template += " 	<p class='data'>이름 : {0}</p> ";
 				template += " 	<p class='data'>등록일자 : {1}</p> ";
@@ -111,10 +111,10 @@
 				template += " </li> ";
 
 				for(i=0; i<rows.length; i++) {
-					var datetime = rows[i].INPUT_DATETIME;
-					var writer = rows[i].WRITER_NAME;
-					var staff = rows[i].INPUT_STAFF;
-					var content = rows[i].CONTENT;
+					let datetime = rows[i].INPUT_DATETIME;
+					let writer = rows[i].WRITER_NAME;
+					let staff = rows[i].INPUT_STAFF;
+					let content = rows[i].CONTENT;
 					content = replaceAll(content, "\n", "<br>");
 					$("#replyContainer").append(String.format(template
 						, writer
@@ -131,8 +131,8 @@
 	}
 
 	function doDeleteReply(i) {
-		var sUrl = "/doDeleteReply";
-		var params = {};
+		let sUrl = "/doDeleteReply";
+		let params = {};
 
 		//params["method"] = "doDeleteReply";
 		params["coDiv"] = globals.coDiv;
@@ -151,8 +151,8 @@
 	}
 
 	function doDelete() {
-		var sUrl = "/doDelete";
-		var params = {};
+		let sUrl = "/doDelete";
+		let params = {};
 
 		//params["method"] = "doDelete";
 		params["coDiv"] = globals.coDiv;
@@ -174,8 +174,8 @@
 	}
 
 	function writeReply() {
-		var sUrl = "/writeReply";
-		var params = {};
+		let sUrl = "/writeReply";
+		let params = {};
 
 		//params["method"] = "writeReply";
 		params["coDiv"] = globals.coDiv;

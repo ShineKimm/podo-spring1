@@ -2,10 +2,10 @@
 <%@ include file="../include/header.jsp" %>
 
 <script>
-  var mType;
-  var mIdx;
+  let mType;
+  let mIdx;
 
-  var title = {
+  let title = {
     "1" : "공지사항",
     "2" : "이벤트",
     "3" : "분실물정보",
@@ -42,8 +42,8 @@
 
   function doSearchDetail() {
 
-    var sUrl = "/getBoardDetail";
-    var params = {};
+    let sUrl = "/getBoardDetail";
+    let params = {};
 
     //params["method"] = "getBoardDetail";
     params["coDiv"] = globals.coDiv;
@@ -54,12 +54,12 @@
       if(data.resultCode == "0000") {
         rows = data.rows;
 
-        var title = rows[0].TITLE;
-        var writer = rows[0].WRITER_NAME;
-        var inputDate = rows[0].INPUT_DATETIME;
-        var viewCnt = rows[0].VIEW_CNT;
-        var content = rows[0].CONTENT;
-        var link = rows[0].LINK;
+        let title = rows[0].TITLE;
+        let writer = rows[0].WRITER_NAME;
+        let inputDate = rows[0].INPUT_DATETIME;
+        let viewCnt = rows[0].VIEW_CNT;
+        let content = rows[0].CONTENT;
+        let link = rows[0].LINK;
         content = replaceAll(content, "\n", "<br>");
 
         $("#txtSubject").html(title);
@@ -77,30 +77,30 @@
           $("#txtLink").html(link);
         }
 
-        var imageContainer = $("#imageContainer");
-        var fileContainer = $("#fileContainer");
+        let imageContainer = $("#imageContainer");
+        let fileContainer = $("#fileContainer");
 
-        var fileName1 = rows[0].FILE_NAME1;
-        var fileName2 = rows[0].FILE_NAME2;
-        var fileName3 = rows[0].FILE_NAME3;
-        var originFileName1 = rows[0].ORIGIN_FILE_NAME1;
-        var originFileName2 = rows[0].ORIGIN_FILE_NAME2;
-        var originFileName3 = rows[0].ORIGIN_FILE_NAME3;
-        var filePath1 = rows[0].FILE_PATH1;
-        var filePath2 = rows[0].FILE_PATH2;
-        var filePath3 = rows[0].FILE_PATH3;
+        let fileName1 = rows[0].FILE_NAME1;
+        let fileName2 = rows[0].FILE_NAME2;
+        let fileName3 = rows[0].FILE_NAME3;
+        let originFileName1 = rows[0].ORIGIN_FILE_NAME1;
+        let originFileName2 = rows[0].ORIGIN_FILE_NAME2;
+        let originFileName3 = rows[0].ORIGIN_FILE_NAME3;
+        let filePath1 = rows[0].FILE_PATH1;
+        let filePath2 = rows[0].FILE_PATH2;
+        let filePath3 = rows[0].FILE_PATH3;
 
         //TODO 배포 후 이미지 경로 수정
         // /images/getfile?fullpath={0}/{1}
         if(fileName1 != "" && filePath1 != "" && mType != "5") {
           if(isImage(fileName1)) {
-            var img = String.format("<img src='/images/getfile?fullpath={0}/{1}' class='viewMainImage'>", filePath1, fileName1);
+            let img = String.format("<img src='/images/getfile?fullpath={0}/{1}' class='viewMainImage'>", filePath1, fileName1);
             imageContainer.show();
             imageContainer.append(img);
             // console.log(img);
           } else {
             //TODO 파일 다운로드 확인필요
-            var a = String.format("&nbsp;&nbsp;<a href='/images/getfile?fullpath={0}/{1}' download='{2}'>{2}</a>", filePath1, fileName1, originFileName1);
+            let a = String.format("&nbsp;&nbsp;<a href='/images/getfile?fullpath={0}/{1}' download='{2}'>{2}</a>", filePath1, fileName1, originFileName1);
             fileContainer.show();
             $("#txtFiles").append(a);
             // console.log(a);
@@ -109,12 +109,12 @@
 
         if(fileName2 != "" && filePath2 != "") {
           if(isImage(fileName2)) {
-            var img = String.format("<img src='/images/getfile?fullpath={0}/{1}' class='viewMainImage'>", filePath2, fileName2);
+            let img = String.format("<img src='/images/getfile?fullpath={0}/{1}' class='viewMainImage'>", filePath2, fileName2);
             imageContainer.show();
             imageContainer.append(img);
             // console.log(img);
           } else {
-            var a = String.format("&nbsp;&nbsp;<a href='/images/getfile?fullpath={0}/{1}' download='{2}'>{2}</a>", filePath2, fileName2, originFileName2);
+            let a = String.format("&nbsp;&nbsp;<a href='/images/getfile?fullpath={0}/{1}' download='{2}'>{2}</a>", filePath2, fileName2, originFileName2);
             fileContainer.show();
             $("#txtFiles").append(a);
             // console.log(a);
@@ -123,11 +123,11 @@
 
         if(fileName3 != "" && filePath3 != "") {
           if(isImage(fileName3)) {
-            var img = String.format("<img src='/images/getfile?fullpath={0}/{1}' class='viewMainImage'>", filePath3, fileName3);
+            let img = String.format("<img src='/images/getfile?fullpath={0}/{1}' class='viewMainImage'>", filePath3, fileName3);
             imageContainer.show();
             imageContainer.append(img);
           } else {
-            var a = String.format("&nbsp;&nbsp;<a href='/images/getfile?fullpath={0}/{1}' download='{2}'>{2}</a>", filePath3, fileName3, originFileName3);
+            let a = String.format("&nbsp;&nbsp;<a href='/images/getfile?fullpath={0}/{1}' download='{2}'>{2}</a>", filePath3, fileName3, originFileName3);
             fileContainer.show();
             $("#txtFiles").append(a);
           }
@@ -139,8 +139,8 @@
   }
 
   function doDelete(div) {
-    var sUrl = "/doDelete";
-    var params = {};
+    let sUrl = "/doDelete";
+    let params = {};
 
     //params["method"] = "doDelete";
     params["coDiv"] = globals.coDiv;

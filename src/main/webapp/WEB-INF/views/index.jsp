@@ -56,9 +56,9 @@
       /*//컨텐츠 fade in */
     </script>
     <script>
-      var mDate;
-      var mYear, mMonth;
-      var rowData;
+      let mDate;
+      let mYear, mMonth;
+      let rowData;
 
       $(document).ready(function() {
         init();
@@ -116,7 +116,7 @@
           $("#mainPop").hide();
         }
 
-        var date = new Date();
+        let date = new Date();
         mYear = date.yyyy();
         mMonth = date.mm();
 
@@ -131,9 +131,9 @@
         }
       }
       function sessionCheck() {
-        var sUrl = "/sessionConfirm";
-        //var params = {"method" : "sessionConfirm"};
-        var params = {};
+        let sUrl = "/sessionConfirm";
+        //let params = {"method" : "sessionConfirm"};
+        let params = {};
 
         mAjax(sUrl, params, "POST", false, function(data) {
           if(data.resultCode == "2000") {
@@ -144,8 +144,8 @@
       }
 
       function initCalendar(selector, year, month) {
-        var sUrl = "/getCalendar";
-        var params = {};
+        let sUrl = "/getCalendar";
+        let params = {};
 
         //params["method"] = "getCalendar";
         params["coDiv"] = globals.coDiv;
@@ -155,16 +155,16 @@
           if(data.resultCode == "0000") {
             $(selector + " #calHeader").empty().append(month + "월");
 
-            var currentDay = new Date().yyyymmdd();
-            var tBody = $(selector + " #calendar-body");
+            let currentDay = new Date().yyyymmdd();
+            let tBody = $(selector + " #calendar-body");
             tBody.empty();
 
-            var rows = data.rows;
+            let rows = data.rows;
 
             if(rows.length > 0) {
-              var row = $("<tr></tr>");
+              let row = $("<tr></tr>");
 
-              var fWeek = rows[0].CL_DAYDIV - 1;
+              let fWeek = rows[0].CL_DAYDIV - 1;
 
               for(i=0; i<fWeek; i++) {
                 row.append($("<td></td>"));
@@ -213,7 +213,7 @@
                 }
               }
 
-              var addTd = 7 - row.children("td").length;
+              let addTd = 7 - row.children("td").length;
 
               if(addTd != 7) {
                 for(i=0; i<addTd; i++) {
@@ -279,15 +279,15 @@
         /*if (paraType == 1) {
             $(".btn1").addClass("on");
             $(".btn2").removeClass("on");
-            var bbsTitle = "공지사항";
+            let bbsTitle = "공지사항";
         } else {
             $(".btn2").addClass("on")
             $(".btn1").removeClass("on")
-            var bbsTitle = "이벤트";
+            let bbsTitle = "이벤트";
         }*/
 
-        var sUrl = "/getBoardList";
-        var params = {};
+        let sUrl = "/getBoardList";
+        let params = {};
 
         //params["method"] = "getBoardList";
 
@@ -299,11 +299,11 @@
         mAjax(sUrl, params, "POST", false, function(data) {
           if(data.resultCode == "0000") {
 
-            var rows = data.rows;
+            let rows = data.rows;
 
             if (rows.length == 0) {
 
-              var notice = ""
+              let notice = ""
               notice += "<li>	";
               notice += " <img src='/static/images/main/bg_blank.png'>";
               notice += " <div class='slideText'>	";
@@ -332,11 +332,11 @@
 
             for(i=0; i<rows.length; i++) {
 
-              var notice = ""
+              let notice = ""
 
-              var link = "/board/view?type=1&idx=" + rows[i].IDX;
-              var title = rows[i].TITLE;
-              var inputDate = rows[i].INPUT_DATETIME;
+              let link = "/board/view?type=1&idx=" + rows[i].IDX;
+              let title = rows[i].TITLE;
+              let inputDate = rows[i].INPUT_DATETIME;
 
               notice += "<li>	";
               notice += " <img src='/static/images/main/bg_blank.png'>";
@@ -366,7 +366,7 @@
                 if(getCookie("main_popup"+rows[i].IDX) == "Y"){
                   continue;
                 }
-                var popup_html = ""
+                let popup_html = ""
                 popup_html += '<div id="main_popup'+rows[i].IDX+'" style="position: fixed; z-index: 10000000; top: '+rows[i].POSITION_Y+'px; left: '+rows[i].POSITION_X+'px;">';
                 popup_html += '<a href="'+rows[i].LINK+'">';
                 popup_html += '<img src="/images/getfile?fullpath='+rows[i].FILE_PATH1+'/'+rows[i].FILE_NAME1+'" height="400" width="400">';
@@ -389,8 +389,8 @@
       }
 
       function doLogout() {
-        var sUrl = "/doLogout";
-        var params = {};
+        let sUrl = "/doLogout";
+        let params = {};
 
         //params["method"] = "doLogout";
 
@@ -596,7 +596,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.5/flickity.min.css">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.5/flickity.pkgd.min.js"></script>
             <script id="rendered-js" >
-              var options = {
+              let options = {
                 accessibility: true,
                 prevNextButtons: true,
                 pageDots: false,
@@ -609,14 +609,14 @@
                   y2: 45,
                   x3: 15 } };
 
-              var carousel = document.querySelector('[data-carousel]');
-              var slides = document.getElementsByClassName('carousel-cell');
-              var flkty = new Flickity(carousel, options);
+              let carousel = document.querySelector('[data-carousel]');
+              let slides = document.getElementsByClassName('carousel-cell');
+              let flkty = new Flickity(carousel, options);
 
               flkty.on('scroll', function () {
                 flkty.slides.forEach(function (slide, i) {
-                  var image = slides[i];
-                  var x = (slide.target + flkty.x) * -1 / 3;
+                  let image = slides[i];
+                  let x = (slide.target + flkty.x) * -1 / 3;
                   image.style.backgroundPosition = x + 'px';
                 });
               });
@@ -730,14 +730,14 @@
     <script>
       window.counter = function($) {
         // this refers to the html element with the data-scroll-showCallback tag
-        var span = this.querySelector('span');
-        var current = parseInt(span.textContent);
+        let span = this.querySelector('span');
+        let current = parseInt(span.textContent);
 
         span.textContent = current + 1;
       };
 
       document.addEventListener('DOMContentLoaded', function($){
-        var trigger = new ScrollTrigger({
+        let trigger = new ScrollTrigger({
           addHeight: true
         });
       });

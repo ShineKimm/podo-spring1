@@ -3,13 +3,13 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
 <script>
 
-  var chkPw = false;
-  var chkPwConfirm = false;
+  let chkPw = false;
+  let chkPwConfirm = false;
   //TODO 문자인증기능 수정
-  // var certifyYn = false;
-  var certifyYn = "Y";
-  var certifyKey = "";
-  var getIP;
+  // let certifyYn = false;
+  let certifyYn = "Y";
+  let certifyKey = "";
+  let getIP;
 
   //ip 가져오기
   async function getClientIP() {
@@ -43,8 +43,8 @@
     $("#txtPw").on("keyup", function() {
       onCheckPw();
 
-      var pw = $("#txtPw").val();
-      var pwConfirm = $("#txtPwConfirm").val();
+      let pw = $("#txtPw").val();
+      let pwConfirm = $("#txtPwConfirm").val();
 
       if(pwConfirm != "") {
         if(pw != pwConfirm) {
@@ -58,8 +58,8 @@
     });
 
     $("#txtPwConfirm").on("keyup", function() {
-      var pw = $("#txtPw").val();
-      var pwConfirm = $("#txtPwConfirm").val();
+      let pw = $("#txtPw").val();
+      let pwConfirm = $("#txtPwConfirm").val();
 
       if(pw != pwConfirm) {
         chkPwConfirm = false;
@@ -80,22 +80,22 @@
       $("#txtMail2").val(msEmail[1]);
     }
 
-    var sex = <%=session.getAttribute("MS_SEX")%>;
+    let sex = <%=session.getAttribute("MS_SEX")%>;
     if(sex != "" || sex == null || sex == "null") {
       $("input:radio[name=chkSex]:input[value=" + sex + "]").attr("checked", true);
     }
 
-    var sms = "<%=session.getAttribute("SMS_CHK1")%>";
+    let sms = "<%=session.getAttribute("SMS_CHK1")%>";
     if(sms != "" || sms == null || sex == "null") {
       $("input:radio[name=chkSms]:input[value=" + sms + "]").attr("checked", true);
     }
 
-    var email = "<%=session.getAttribute("MS_EMAIL_YN")%>";
+    let email = "<%=session.getAttribute("MS_EMAIL_YN")%>";
     if(email != "" || email == null || sex == "null") {
       $("input:radio[name=chkMail]:input[value=" + email + "]").attr("checked", true);
     }
 
-    var birth = "<%=session.getAttribute("MS_BIRTHYL")%>";
+    let birth = "<%=session.getAttribute("MS_BIRTHYL")%>";
 
     if(birth != "" || birth == null || sex == "null") {
       $("input:radio[name=chkBirth]:input[value=" + birth + "]").attr("checked", true);
@@ -103,25 +103,25 @@
   })
 
   function doUpdateMemeber() {
-    var sUrl = "/doUpdateMemeber";
-    var params = {};
+    let sUrl = "/doUpdateMemeber";
+    let params = {};
 
     //params["method"] = "doUpdateMemeber";
 
-    var pw = $("#txtPw").val();
-    var sex = $(':radio[name="chkSex"]:checked').val();
-    var sms = $(':radio[name="chkSms"]:checked').val();
-    var chkMail = $(':radio[name="chkMail"]:checked').val();
-    var chkBirth = $(':radio[name="chkBirth"]:checked').val();
-    var phone1 = $("#txtPhone").val().substring(0,3);
-    var phone2 = $("#txtPhone").val().substring(3,7);
-    var phone3 = $("#txtPhone").val().substring(7,11);
-    var homeAddress1 = $("#txtHomeAddress1").val();
-    var birth = $("#txtBirth").val();
+    let pw = $("#txtPw").val();
+    let sex = $(':radio[name="chkSex"]:checked').val();
+    let sms = $(':radio[name="chkSms"]:checked').val();
+    let chkMail = $(':radio[name="chkMail"]:checked').val();
+    let chkBirth = $(':radio[name="chkBirth"]:checked').val();
+    let phone1 = $("#txtPhone").val().substring(0,3);
+    let phone2 = $("#txtPhone").val().substring(3,7);
+    let phone3 = $("#txtPhone").val().substring(7,11);
+    let homeAddress1 = $("#txtHomeAddress1").val();
+    let birth = $("#txtBirth").val();
 
-    var bPhone1 = "<%=session.getAttribute("MS_FIRST_PHONE1")%>";
-    var bPhone2 = "<%=session.getAttribute("MS_MID_PHONE1")%>";
-    var bPhone3 = "<%=session.getAttribute("MS_LAST_PHONE1")%>";
+    let bPhone1 = "<%=session.getAttribute("MS_FIRST_PHONE1")%>";
+    let bPhone2 = "<%=session.getAttribute("MS_MID_PHONE1")%>";
+    let bPhone3 = "<%=session.getAttribute("MS_LAST_PHONE1")%>";
 
     if(phone1 != bPhone1 || phone2 != bPhone2 || phone3 != bPhone3) {
       if(!certifyYn) {
@@ -185,14 +185,14 @@
   }
     //TODO 인증번호발송 기능 구현해야함
   function doCertification() {
-    var sUrl = "/controller/MemberController";
-    var params = {};
+    let sUrl = "/controller/MemberController";
+    let params = {};
 
     //params["method"] = "doCertification";
 
-    var phone1 = $("#txtPhone").val().substring(0,3);
-    var phone2 = $("#txtPhone").val().substring(3,7);
-    var phone3 = $("#txtPhone").val().substring(7,11);
+    let phone1 = $("#txtPhone").val().substring(0,3);
+    let phone2 = $("#txtPhone").val().substring(3,7);
+    let phone3 = $("#txtPhone").val().substring(7,11);
 
     if(phone1 == "" || phone1.length != 3) {
       alert("휴대폰번호를 정확하게 입력하세요.");
@@ -228,7 +228,7 @@
   }
 
   function doConfirmCertification() {
-    var code = $("#txtCerCode").val();
+    let code = $("#txtCerCode").val();
 
     if (code == "") {
       alert("인증번호를 먼저 입력해주세요.")
@@ -251,13 +251,13 @@
   }
 
   function onCheckPw() {
-    var pw = $("#txtPw").val();
+    let pw = $("#txtPw").val();
 
-    var pattern1 = /[0-9]/;
-    var pattern2 = /[a-zA-Z]/;
-    var pattern3 = /[~!@#$%^*?]/;
+    let pattern1 = /[0-9]/;
+    let pattern2 = /[a-zA-Z]/;
+    let pattern3 = /[~!@#$%^*?]/;
 
-    var chkCnt = 0;
+    let chkCnt = 0;
 
     if(pattern1.test(pw)) chkCnt += 1;
     if(pattern2.test(pw)) chkCnt += 1;
@@ -293,8 +293,8 @@
   }
 
   function doSearchArea() {
-    var sUrl = "/getCommonCode";
-    var params = {};
+    let sUrl = "/getCommonCode";
+    let params = {};
 
     //params["method"] = "getCommonCode";
     params["coDiv"] = globals.coDiv;
@@ -303,7 +303,7 @@
     mAjax(sUrl, params, "POST", true, function(data) {
       if(data.resultCode == "0000") {
         rows = data.rows;
-        var tbody = $("#txtHomeAddress1");
+        let tbody = $("#txtHomeAddress1");
         tbody.empty();
 
         tbody.append("<option value=''>지역선택</option>")
@@ -326,7 +326,7 @@
     // yyyymmdd, yyyy-mm-dd, yyyy/mm/dd
     // output
     // 0: 정상, 1: 해당월의 날짜 넘음, 2: 존재하지 않는 달, 3: 포맷 안맞음, 4: -인 날짜
-    var y, m, d;
+    let y, m, d;
     if (yyyymmdd.length == 8) {
       if (!yyyymmdd.match(/[0-9]{8}/g))
         return 3;
@@ -342,7 +342,7 @@
     } else {
       return 3;
     }
-    var limit_day;
+    let limit_day;
     switch (eval(m)) {
       case 1:
       case 3:

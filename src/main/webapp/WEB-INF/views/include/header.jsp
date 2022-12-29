@@ -66,8 +66,8 @@
       });
 
       function doLogout() {
-        var sUrl = "/doLogout";
-        var params = {};
+        let sUrl = "/doLogout";
+        let params = {};
 
         //params["method"] = "doLogout";
 
@@ -87,8 +87,8 @@
       }
 
       function sessionCheck() {
-        var sUrl = "/sessionConfirm";
-        var params = {/*"method" : "sessionConfirm"*/};
+        let sUrl = "/sessionConfirm";
+        let params = {/*"method" : "sessionConfirm"*/};
 
         mAjax(sUrl, params, "POST", false, function(data) {
           if(data.resultCode == "2000") {
@@ -106,12 +106,12 @@
           return;
         }
 
-        var sUrl = "/doDeleteMemeber";
-        var params = {};
+        let sUrl = "/doDeleteMemeber";
+        let params = {};
 
         //params["method"] = "doDeleteMemeber";
 
-        var con = confirm("회원님께서 확인 버튼을 누르면 탈퇴가 완료됩니다.\r\n그동안 포도CC를 이용해 주셔서 감사합니다..");
+        let con = confirm("회원님께서 확인 버튼을 누르면 탈퇴가 완료됩니다.\r\n그동안 포도CC를 이용해 주셔서 감사합니다..");
         if(con == true) {
           mAjax(sUrl, params, "POST", true, function(data) {
             if(data.resultCode == "0000") {
@@ -130,14 +130,14 @@
     <script>
       window.counter = function($) {
         // this refers to the html element with the data-scroll-showCallback tag
-        var span = this.querySelector('span');
-        var current = parseInt(span.textContent);
+        let span = this.querySelector('span');
+        let current = parseInt(span.textContent);
 
         span.textContent = current + 1;
       };
 
       document.addEventListener('DOMContentLoaded', function($){
-        var trigger = new ScrollTrigger({
+        let trigger = new ScrollTrigger({
           addHeight: true
         });
       });

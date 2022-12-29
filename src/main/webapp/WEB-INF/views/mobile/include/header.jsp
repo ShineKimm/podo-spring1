@@ -52,8 +52,8 @@
 	});
 
 	function doLogout() {
-		var sUrl = "/doLogout";
-		var params = {};
+		let sUrl = "/doLogout";
+		let params = {};
 
 		//params["method"] = "doLogout";
 
@@ -73,8 +73,8 @@
 	}
 
 	function sessionCheck() {
-		var sUrl = "/sessionConfirm";
-		//var params = {"method" : "sessionConfirm"};
+		let sUrl = "/sessionConfirm";
+		//let params = {"method" : "sessionConfirm"};
 
 		mAjax(sUrl, params, "POST", false, function(data) {
 			if(data.resultCode == "2000") {

@@ -14,10 +14,10 @@
 
     <script>
       $(document).ready(function() {
-        var chkId = getCookie("chkSaveAdminId");
-        var chkPw = getCookie("chkSaveAdminPw");
-        var id = getCookie("txtAdminId");
-        var pw = getCookie("txtAdminPw");
+        let chkId = getCookie("chkSaveAdminId");
+        let chkPw = getCookie("chkSaveAdminPw");
+        let id = getCookie("txtAdminId");
+        let pw = getCookie("txtAdminPw");
 
         if(chkId != null && chkId != "") {
           $("#chkSaveAdminId").attr('checked', true);
@@ -49,12 +49,12 @@
       });
 
       function doLogin() {
-        var sUrl = "/adminDoLogin";
-        var params = {};
-        var page = <%=request.getParameter("page")%>;
-        var id = $("#txtAdminId").val();
+        let sUrl = "/adminDoLogin";
+        let params = {};
+        let page = <%=request.getParameter("page")%>;
+        let id = $("#txtAdminId").val();
 
-        var pw = $("#txtAdminPw").val();
+        let pw = $("#txtAdminPw").val();
         if(page == null || page == "" || page == "null") {
           page = "/admin/index";
         }
@@ -74,8 +74,8 @@
 
         mAjax(sUrl, params, "POST", true, function(data) {
           if(data.resultCode == "0000") {
-            var chkSaveAdminId = $('input:checkbox[id="chkSaveAdminId"]').is(":checked");
-            var chkSaveAdminPw = $('input:checkbox[id="chkSaveAdminPw"]').is(":checked");
+            let chkSaveAdminId = $('input:checkbox[id="chkSaveAdminId"]').is(":checked");
+            let chkSaveAdminPw = $('input:checkbox[id="chkSaveAdminPw"]').is(":checked");
 
             if(chkSaveAdminId) {
               setCookie("txtAdminId", $("#txtAdminId").val(), 365);

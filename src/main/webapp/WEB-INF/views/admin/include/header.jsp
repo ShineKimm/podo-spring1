@@ -15,7 +15,7 @@
 
     <script>
       $(document).ready(function() {
-        var staff = "<%=(String)session.getAttribute("USER_STAFF")%>";
+        let staff = "<%=(String)session.getAttribute("USER_STAFF")%>";
 
         if(staff == "") {
           location.href = "/admin/member/login";
@@ -28,8 +28,8 @@
       });
 
       function doLogout() {
-        var sUrl = "/adminDoLogout";
-        var params = {};
+        let sUrl = "/adminDoLogout";
+        let params = {};
 
         // params["method"] = "doLogout";
 

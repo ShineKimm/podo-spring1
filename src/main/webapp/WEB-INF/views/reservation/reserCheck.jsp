@@ -3,10 +3,10 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
 <script type="text/javascript">
 
-  var smYear, smMonth, fmYear, fmMonth;
-  var stDate, fnDate;
-  var rows;
-  var getIP;
+  let smYear, smMonth, fmYear, fmMonth;
+  let stDate, fnDate;
+  let rows;
+  let getIP;
 
   //ip 가져오기
   async function getClientIP() {
@@ -35,23 +35,23 @@
   }
 
   function initSubCalendar(selector, year, month) {
-    var rows = getCalendar(year, month);
+    let rows = getCalendar(year, month);
 
     $(selector + " #calHeader").html(year + "년  " + month + "월");
 
-    var tBody = $(selector + " #calendar-body");
+    let tBody = $(selector + " #calendar-body");
     tBody.empty();
 
-    var row = $("<tr></tr>");
+    let row = $("<tr></tr>");
 
-    var fWeek = rows[0].week - 1;
+    let fWeek = rows[0].week - 1;
 
     for(i=0; i<fWeek; i++) {
       row.append($("<td><div></div></td>"));
     }
 
     for(i=0; i<rows.length; i++) {
-      var td = $("<td><div>" + rows[i].day + "</div></td>");
+      let td = $("<td><div>" + rows[i].day + "</div></td>");
 
       if(rows[i].date == new Date().yyyymmdd()) {
         td.addClass('today');
@@ -80,8 +80,8 @@
   }
 
   function doSearch() {
-    var sUrl = "/getReservationList";
-    var params = {};
+    let sUrl = "/getReservationList";
+    let params = {};
 
     //params["method"] = "getReservationList";
     params["coDiv"] = globals.coDiv;
@@ -89,7 +89,7 @@
 
     mAjax(sUrl, params, "POST", true, function(data) {
       if(data.resultCode == "0000") {
-        var tBody = $("#tbody");
+        let tBody = $("#tbody");
         tBody.empty();
 
         rows = data.rows;
@@ -99,14 +99,14 @@
         }
 
         for(i=0; i<rows.length; i++) {
-          var row = $("<tr></tr>");
+          let row = $("<tr></tr>");
 
-          var bkDate = rows[i].BK_DAY;
+          let bkDate = rows[i].BK_DAY;
           bkDate = bkDate.substring(2, 4) + "." + bkDate.substring(4, 6) + "." + bkDate.substring(6, 8);
-          var bkTime = rows[i].BK_TIME;
+          let bkTime = rows[i].BK_TIME;
           bkTime = bkTime.substring(0, 2) + ":" + bkTime.substring(2, 4);
-          var cancelDiff = rows[i].CANCEL_DIFF;
-          var cancelYn = "Y";
+          let cancelDiff = rows[i].CANCEL_DIFF;
+          let cancelYn = "Y";
 
           if(cancelDiff < 5) {
             cancelYn = "N";
@@ -154,8 +154,8 @@
 
     if (ans == true) {
 
-      var sUrl = "/blDeleteReservation";
-      var params = {};
+      let sUrl = "/blDeleteReservation";
+      let params = {};
 
       //params["method"] = "blDeleteReservation";
       params["coDiv"] = globals.coDiv;
@@ -182,17 +182,17 @@
 
   function doDeleteReservation(i) {
 
-    var bkDate = rows[i].BK_DAY;
+    let bkDate = rows[i].BK_DAY;
     bkDate = bkDate.substring(2, 4) + "." + bkDate.substring(4, 6) + "." + bkDate.substring(6, 8);
-    var bkTime = rows[i].BK_TIME;
+    let bkTime = rows[i].BK_TIME;
     bkTime = bkTime.substring(0, 2) + ":" + bkTime.substring(2, 4);
 
     ans = confirm("[취소 확인] <%=session.getAttribute("MS_NAME")%> 회원님. \r\n" + bkDate + " " + bkTime + " " + rows[i].BK_COS_NM + "코스 취소를 진행 하시겠습니까?");
 
     if (ans == true) {
 
-      var sUrl = "/cancelReservation";
-      var params = {};
+      let sUrl = "/cancelReservation";
+      let params = {};
 
       //params["method"] = "cancelReservation";
       params["coDiv"] = globals.coDiv;
@@ -279,7 +279,7 @@
   }
 
   function onClickMiniDay(div, sDate) {
-    var date = getDateFormat(sDate);
+    let date = getDateFormat(sDate);
 
     if(div == "start") {
       stDate = sDate;

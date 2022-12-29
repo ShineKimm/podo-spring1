@@ -3,10 +3,10 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
 <script>
 
-  var mFlag;
-  var mType = "6";
-  var mYear, mMonth, mDate;
-  var getIP = "";
+  let mFlag;
+  let mType = "6";
+  let mYear, mMonth, mDate;
+  let getIP = "";
 
   //ip 가져오기
   async function getClientIP() {
@@ -49,7 +49,7 @@
       $("#selTime").append(String.format("<option value='{0}'>{0}</option>", i));
     }
 
-    var date = new Date();
+    let date = new Date();
     mYear = date.yyyy();
     mMonth = date.mm();
     mDate = date.yyyymmdd();
@@ -84,23 +84,23 @@
   }
 
   function initCalendar(selector, year, month) {
-    var rows = getCalendar(year, month);
+    let rows = getCalendar(year, month);
 
     $(selector + " #calHeader").html(year + "년 " + month + "월");
 
-    var tBody = $(selector + " #calBody");
+    let tBody = $(selector + " #calBody");
     tBody.empty();
 
-    var row = $("<tr></tr>");
+    let row = $("<tr></tr>");
 
-    var fWeek = rows[0].week - 1;
+    let fWeek = rows[0].week - 1;
 
     for(i=0; i<fWeek; i++) {
       row.append($("<td></td>"));
     }
 
     for(i=0; i<rows.length; i++) {
-      var td = $("<td>" + rows[i].day + "</td>");
+      let td = $("<td>" + rows[i].day + "</td>");
 
       if(rows[i].date == new Date().yyyymmdd()) {
         td.addClass('today');
@@ -125,7 +125,7 @@
   }
 
   function onClickMiniDay(sDate) {
-    var date = getDateFormat(sDate);
+    let date = getDateFormat(sDate);
 
     mDate = sDate;
     $("#txtDate").html(String.format("{0}-{1}-{2}", date.yyyy(), date.mm(), date.dd()));
@@ -139,8 +139,8 @@
   }
 
   function doSearchDetail() {
-    var sUrl = "/getBoardDetail";
-    var params = {};
+    let sUrl = "/getBoardDetail";
+    let params = {};
 
     //params["method"] = "getBoardDetail";
     params["coDiv"] = globals.coDiv;
@@ -150,15 +150,15 @@
     mAjax(sUrl, params, "POST", true, function(data) {
       if(data.resultCode == "0000") {
         rows = data.rows;
-        var tbody = $("#tbody");
+        let tbody = $("#tbody");
         tbody.empty();
 
-        var title = rows[0].TITLE;
-        var content = rows[0].CONTENT;
-        var boardDiv = rows[0].BOARD_DIV;
-        var joinStatus = rows[0].JOIN_STATUS;
-        var bkDay = rows[0].BK_DAY;
-        var bkTime = rows[0].BK_TIME;
+        let title = rows[0].TITLE;
+        let content = rows[0].CONTENT;
+        let boardDiv = rows[0].BOARD_DIV;
+        let joinStatus = rows[0].JOIN_STATUS;
+        let bkDay = rows[0].BK_DAY;
+        let bkTime = rows[0].BK_TIME;
 
         mDate = replaceAll(bkDay, "-", "");
 
@@ -175,7 +175,7 @@
   }
 
   function writeBoard() {
-    var sUrl = "/writeBoard";
+    let sUrl = "/writeBoard";
 
     // $("#method").val("writeBoard");
     $("#coDiv").val(globals.coDiv);
@@ -184,7 +184,7 @@
     $("#idx").val(mIdx);
     $("#timestamp").val(getTimeStamp());
 
-    var title = $("#txtTitle").val();
+    let title = $("#txtTitle").val();
 
     if(title == "") {
       alert("제목을 입력하세요.");
@@ -198,7 +198,7 @@
       $("#bkDay").val(mDate);
     }
 
-    var time = $("#selTime").val();
+    let time = $("#selTime").val();
     if(time == "") {
       alert("시간을 입력하세요.");
       return;
@@ -206,7 +206,7 @@
       $("#bkTime").val(time)
     }
 
-    var formData = new FormData($("#fileForm")[0]);
+    let formData = new FormData($("#fileForm")[0]);
 
     progressStart();
     mFileAjax(sUrl, formData, function(data) {

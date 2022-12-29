@@ -29,14 +29,14 @@
   }
 
   function doFindId() {
-    var sUrl = "/doFindId";
-    var params = {};
+    let sUrl = "/doFindId";
+    let params = {};
 
     //params["method"] = "doFindId";
     params["coDiv"] = globals.coDiv;
 
-    var name = $("#txtIdName").val();
-    var phone = $("#txtIdPhone").val();
+    let name = $("#txtIdName").val();
+    let phone = $("#txtIdPhone").val();
 
     if(name == "") {
       alert("이름을 입력하세요.");
@@ -57,14 +57,14 @@
   }
 
   function doFindPw() {
-    var sUrl = "/doFindPw";
-    var params = {};
+    let sUrl = "/doFindPw";
+    let params = {};
 
     //params["method"] = "doFindPw";
     params["coDiv"] = globals.coDiv;
 
-    var name = $("#txtPwName").val();
-    var id = $("#txtPwId").val();
+    let name = $("#txtPwName").val();
+    let id = $("#txtPwId").val();
 
     if(name == "") {
       alert("이름을 입력하세요.");

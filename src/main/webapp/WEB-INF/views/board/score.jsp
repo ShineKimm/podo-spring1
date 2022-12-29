@@ -2,9 +2,9 @@
 <%@ include file="../include/header.jsp" %>
 <script type="text/javascript">
 
-  var smYear, smMonth, fmYear, fmMonth;
-  var stDate, fnDate;
-  var rows;
+  let smYear, smMonth, fmYear, fmMonth;
+  let stDate, fnDate;
+  let rows;
 
   $(document).ready(function() {
     init();
@@ -12,8 +12,8 @@
 
   function init() {
 
-    var date = new Date();
-    var date2 = new Date();
+    let date = new Date();
+    let date2 = new Date();
     date.setMonth(date.getMonth())
     date2.setMonth(date2.getMonth())
     smYear = fmYear = date.yyyy();
@@ -43,23 +43,23 @@
   }
 
   function initSubCalendar(selector, year, month) {
-    var rows = getCalendar(year, month);
+    let rows = getCalendar(year, month);
 
     $(selector + " #calHeader").html(year + " / " + month);
 
-    var tBody = $(selector + " #calendar-body");
+    let tBody = $(selector + " #calendar-body");
     tBody.empty();
 
-    var row = $("<tr></tr>");
+    let row = $("<tr></tr>");
 
-    var fWeek = rows[0].week - 1;
+    let fWeek = rows[0].week - 1;
 
     for(i=0; i<fWeek; i++) {
       row.append($("<td><div></div></td>"));
     }
 
     for(i=0; i<rows.length; i++) {
-      var td = $("<td><div>" + rows[i].day + "</div></td>");
+      let td = $("<td><div>" + rows[i].day + "</div></td>");
 
       if(rows[i].date == new Date().yyyymmdd()) {
         td.addClass('today');
@@ -136,7 +136,7 @@
   }
 
   function onClickMiniDay(div, sDate) {
-    var date = getDateFormat(sDate);
+    let date = getDateFormat(sDate);
 
     if(div == "start") {
       stDate = sDate;
@@ -150,8 +150,8 @@
   }
 
   function doSearch() {
-    var sUrl = "/controller/MemberController";
-    var params = {};
+    let sUrl = "/controller/MemberController";
+    let params = {};
 
     //params["method"] = "getScoreRank";
     params["coDiv"] = globals.coDiv;
@@ -162,37 +162,37 @@
       if(data.resultCode = "0000") {
         rows = data.rows;
 
-        var tbody = $("#tbody");
+        let tbody = $("#tbody");
         tbody.empty();
 
         if (rows.length == 0) {
-          var tr = $("<tr></tr>");
-          var td = "<td colspan='8'>스코어 조회 정보가 없습니다.</td>";
+          let tr = $("<tr></tr>");
+          let td = "<td colspan='8'>스코어 조회 정보가 없습니다.</td>";
           tr.append(td);
           tbody.append(tr);
         }
 
-        var j = 1;
+        let j = 1;
 
         for(i=0; i<rows.length; i++) {
-          var bkDay = rows[i].EN_DAY;
+          let bkDay = rows[i].EN_DAY;
           bkDay = bkDay.substring(0, 4) + "." + bkDay.substring(4, 6) + "." + bkDay.substring(6, 8);
-          var bkTime = rows[i].EN_TIME;
+          let bkTime = rows[i].EN_TIME;
           bkTime = bkTime.substring(0, 2) + ":" + bkTime.substring(2, 4);
-          var bkName = rows[i].EN_NAME;
+          let bkName = rows[i].EN_NAME;
           bkName = bkName.substring(0, 1) + "*" + bkName.substring(2, 10);
-          var totalScore = rows[i].MS_POINT_A_TOTAL + rows[i].MS_POINT_B_TOTAL
+          let totalScore = rows[i].MS_POINT_A_TOTAL + rows[i].MS_POINT_B_TOTAL
 
-          var tr = $("<tr></tr>");
-          var td1 = $("<td>" + j + "</td>");
-          var td2 = $("<td>" + bkDay + "</td>");
-          var td3 = $("<td>" + bkTime + "</td>");
-          var td4 = $("<td>" + bkName + "</td>");
-          var td5 = $("<td>" + rows[i].EN_SEX + "</td>");
-          var td6 = $("<td>" + rows[i].MS_LAST_PHONE1 + "</td>");
-          var td7 = $("<td>" + rows[i].MS_POINT_A_TOTAL + "</td>");
-          var td8 = $("<td>" + rows[i].MS_POINT_B_TOTAL + "</td>");
-          var td9 = $("<td>" + totalScore + "</td>");
+          let tr = $("<tr></tr>");
+          let td1 = $("<td>" + j + "</td>");
+          let td2 = $("<td>" + bkDay + "</td>");
+          let td3 = $("<td>" + bkTime + "</td>");
+          let td4 = $("<td>" + bkName + "</td>");
+          let td5 = $("<td>" + rows[i].EN_SEX + "</td>");
+          let td6 = $("<td>" + rows[i].MS_LAST_PHONE1 + "</td>");
+          let td7 = $("<td>" + rows[i].MS_POINT_A_TOTAL + "</td>");
+          let td8 = $("<td>" + rows[i].MS_POINT_B_TOTAL + "</td>");
+          let td9 = $("<td>" + totalScore + "</td>");
 
           tr.append(td1,td2,td3,td4,td5,td6,td7,td8,td9).appendTo(tbody);
 

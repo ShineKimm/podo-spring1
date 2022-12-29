@@ -2,8 +2,8 @@
 <%@ include file="../include/header.jsp" %>
 <script>
 
-  var stYear, stMonth;
-  var edYear, edMonth;
+  let stYear, stMonth;
+  let edYear, edMonth;
 
   $(document).ready(function(data) {
     init();
@@ -16,10 +16,10 @@
       return;
     }
 
-    var date = new Date();
+    let date = new Date();
     stYear = date.yyyy();
     stMonth = date.mm();
-    var date2 = addMonth(date.yyyymmdd(), 1);
+    let date2 = addMonth(date.yyyymmdd(), 1);
     edYear = date2.yyyy();
     edMonth = date2.mm();
 
@@ -28,8 +28,8 @@
   }
 
   function initCalendar(selector, year, month) {
-    var sUrl = "/getJoinCalendar";
-    var params = {};
+    let sUrl = "/getJoinCalendar";
+    let params = {};
 
     //params["method"] = "getJoinCalendar";
     params["coDiv"] = globals.coDiv;
@@ -39,28 +39,28 @@
       if(data.resultCode == "0000") {
         $(selector + " #calHeader").html(Number(month));
 
-        var currentDay = new Date().yyyymmdd();
-        var tBody = $(selector + " #calBody");
+        let currentDay = new Date().yyyymmdd();
+        let tBody = $(selector + " #calBody");
         tBody.empty();
 
-        var rows = data.rows;
+        let rows = data.rows;
 
         if(rows.length > 0) {
-          var row = $("<tr></tr>");
+          let row = $("<tr></tr>");
 
-          var fWeek = rows[0].CL_DAYDIV - 1;
+          let fWeek = rows[0].CL_DAYDIV - 1;
 
           for(i=0; i<fWeek; i++) {
             row.append($("<td></td>"));
           }
           for(i=0; i<rows.length; i++) {
-            var td = $("<td>" + rows[i].DAYNUM + "</td>");
+            let td = $("<td>" + rows[i].DAYNUM + "</td>");
 
             if(rows[i].CL_SOLAR == currentDay) {
               td.addClass('today');
             } else if(rows[i].CL_SOLAR > currentDay) {
-              var team1 = rows[i].TEAM_CNT_1;
-              var team2 = rows[i].TEAM_CNT_2;
+              let team1 = rows[i].TEAM_CNT_1;
+              let team2 = rows[i].TEAM_CNT_2;
 
               if(team1 > 0 || team2 > 0) {
                 td.data("date", rows[i].CL_SOLAR);
@@ -81,7 +81,7 @@
             }
           }
 
-          var addTd = 7 - row.children("td").length;
+          let addTd = 7 - row.children("td").length;
 
           if(addTd != 7) {
             for(i=0; i<addTd; i++) {

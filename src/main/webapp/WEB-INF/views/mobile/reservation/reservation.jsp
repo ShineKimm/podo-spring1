@@ -2,10 +2,10 @@
 <%@ include file="../include/header.jsp" %>
 <script>
 
-	var mDate;
-	var mCos = "All";
-	var sYear, fYear;
-	var rowData;
+	let mDate;
+	let mCos = "All";
+	let sYear, fYear;
+	let rowData;
 
 	$(document).ready(function(data) {
 		init();
@@ -19,31 +19,31 @@
 			return;
 		}
 
-		var date = new Date();
+		let date = new Date();
 		sYear = date.yyyy();
 		sMonth = date.mm();
-		var date2 = addMonth(date.yyyymmdd(), 1);
+		let date2 = addMonth(date.yyyymmdd(), 1);
 		fYear = date2.yyyy();
 		fMonth = date2.mm();
 
 		initCalendar("#calendarBox", sYear, sMonth);
 
-		var day = <%=request.getParameter("BK_DAY")%>;
+		let day = <%=request.getParameter("BK_DAY")%>;
 		if (<%=request.getParameter("OLD_BK_DAY") != null%>) {
 			day = <%=request.getParameter("OLD_BK_DAY")%>;
 		}
 
 		if(day != "") {
 			mDate = day;
-			var dSel = getDateFormat(mDate);
+			let dSel = getDateFormat(mDate);
 			$("#txtChooseDate").empty().append(String.format("{0}년 {1}월 {2}일 ({3}요일)", dSel.yyyy(), dSel.mm(), dSel.dd(), dSel.week()));
 			onCosChange(mCos);
 		}
 	}
 
 	function initCalendar(selector, year, month) {
-		var sUrl = "/getCalendar";
-		var params = {};
+		let sUrl = "/getCalendar";
+		let params = {};
 
 		//params["method"] = "getCalendar";
 		params["coDiv"] = globals.coDiv;
@@ -53,22 +53,22 @@
 			if(data.resultCode == "0000") {
 				$(selector + " #calHeader").html(year + " / " + month);
 
-				var currentDay = new Date().yyyymmdd();
-				var tBody = $(selector + " #calBody");
+				let currentDay = new Date().yyyymmdd();
+				let tBody = $(selector + " #calBody");
 				tBody.empty();
 
-				var rows = data.rows;
+				let rows = data.rows;
 
 				if(rows.length > 0) {
-					var row = $("<tr></tr>");
+					let row = $("<tr></tr>");
 
-					var fWeek = rows[0].CL_DAYDIV - 1;
+					let fWeek = rows[0].CL_DAYDIV - 1;
 
 					for(i=0; i<fWeek; i++) {
 						row.append($("<td></td>"));
 					}
 					for(i=0; i<rows.length; i++) {
-						var td = $("<td>" + rows[i].DAYNUM + "</td>");
+						let td = $("<td>" + rows[i].DAYNUM + "</td>");
 						
 						if (<%=request.getParameter("OLD_BK_DAY") != null%>) {
 							td.addClass('no');
@@ -96,7 +96,7 @@
 						}
 					}
 
-					var addTd = 7 - row.children("td").length;
+					let addTd = 7 - row.children("td").length;
 
 					if(addTd != 7) {
 						for(i=0; i<addTd; i++) {
@@ -158,7 +158,7 @@
 	}
 
 	function onClickDay(date) {
-		var dSel = getDateFormat(date);
+		let dSel = getDateFormat(date);
 
 		$("#txtChooseDate").empty().append(String.format("{0}년 {1}월 {2}일 ({3}요일)", dSel.yyyy(), dSel.mm(), dSel.dd(), dSel.week()));
 
@@ -168,8 +168,8 @@
 	}
 
 	function doSearch() {
-		var sUrl = "/getTeeList";
-		var params = {};
+		let sUrl = "/getTeeList";
+		let params = {};
 
 		if(mDate == null || mDate == '') {
 			alert("날짜를 선택하세요.");
@@ -183,15 +183,15 @@
 
 		mAjax(sUrl, params, "POST", true, function(data) {
 			if(data.resultCode == "0000") {
-				var tBody = $("#tbody");
+				let tBody = $("#tbody");
 				tBody.empty();
 
 				rowData = data.rows;
 
 				for(i=0; i<rowData.length; i++) {
-					var row = $("<tr></tr>");
+					let row = $("<tr></tr>");
 
-					var bkTime = rowData[i].BK_TIME;
+					let bkTime = rowData[i].BK_TIME;
 					bkTime = bkTime.substring(0, 2) + ":" + bkTime.substring(2, 4);
 
 					var col1 = $("<td>" + bkTime + "</td>");
@@ -200,16 +200,16 @@
 					var col4 = $("<td class='red bold'>" + rowData[i].BK_S_CHARGE_NM + "</td>");
 					var col5 = $("<td>" + rowData[i].BK_CADDY + "</td>");
 					if (<%=request.getParameter("OLD_BK_DAY") != null%>) {
-					var col6 = $("<td><input type='button' class='brownBtn' value='변경' onclick='reserProc(" + i + ")'></td>");
+						var col6 = $("<td><input type='button' class='brownBtn' value='변경' onclick='reserProc(" + i + ")'></td>");
 					} else {
-					var col6 = $("<td><input type='button' class='brownBtn' value='예약' onclick='reserProc(" + i + ")'></td>");
+						var col6 = $("<td><input type='button' class='brownBtn' value='예약' onclick='reserProc(" + i + ")'></td>");
 					}
 
 					row.append(col1,col2,col3,col4,col5,col6).appendTo(tBody);
 				}
 
 				if(rowData.length > 0) {
-					var offset = $("#scrollerLine").offset();
+					let offset = $("#scrollerLine").offset();
 				  $('html, body').animate({scrollTop : offset.top}, 400);
 				}
 			} else {
@@ -239,11 +239,11 @@
 			return;
 		}
 
-		var sUrl = "/controller/ReservationController";
-		var params = {};
+		let sUrl = "/controller/ReservationController";
+		let params = {};
 
-		var msNum = <%=session.getAttribute("MS_NUM")%>;
-		var bkCharge = rowData[i].BK_B_CHARGE;
+		let msNum = <%=session.getAttribute("MS_NUM")%>;
+		let bkCharge = rowData[i].BK_B_CHARGE;
 		if(rowData[i].BK_S_CHARGE != "") {
 			bkCharge = rowData[i].BK_S_CHARGE;
 		}

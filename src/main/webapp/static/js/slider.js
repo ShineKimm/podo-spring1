@@ -14,7 +14,7 @@
 (function($){
     $.skdslider = function(container,options){
         // settings
-        var config = {
+        let config = {
             'delay': 2000,
             'fadeSpeed': 500,
 			'showNav':true,

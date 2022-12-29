@@ -1,7 +1,7 @@
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,select,option { margin:0; padding:0;font:12px/1.2 Dotum,"돋움",sans-serif;}
 table {	border-collapse:collapse; border-spacing:0;}
 fieldset,img { border:0;}
-address,caption,cite,code,dfn,em,strong,th,var { font-style:normal;	font-weight:normal;}
+address,caption,cite,code,dfn,em,strong,th,var,let { font-style:normal;	font-weight:normal;}
 ol,ul,li {	list-style:none;}
 caption {display:none;}
 h1,h2,h3,h4,h5,h6 {	font-size:100%;	font-weight:normal;padding:none;margin:none;}

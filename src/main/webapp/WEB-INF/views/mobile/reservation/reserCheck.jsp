@@ -2,7 +2,7 @@
 <%@ include file="../include/header.jsp" %>
 <script type="text/javascript">
 
-var rows;
+let rows;
 
 $(document).ready(function() {
 	init();
@@ -19,8 +19,8 @@ function init() {
 }
 
 function doSearch() {
-	var sUrl = "/controller/ReservationController";
-	var params = {};
+	let sUrl = "/controller/ReservationController";
+	let params = {};
 
 	//params["method"] = "getReservationList";
 	params["coDiv"] = globals.coDiv;
@@ -28,7 +28,7 @@ function doSearch() {
 
 	mAjax(sUrl, params, "GET", true, function(data) {
 		if(data.resultCode == "0000") {
-			var tBody = $("#tbody");
+			let tBody = $("#tbody");
 			tBody.empty();
 
 			rows = data.rows;
@@ -38,14 +38,14 @@ function doSearch() {
 			}
 
 			for(i=0; i<rows.length; i++) {
-				var row = $("<tr></tr>");
+				let row = $("<tr></tr>");
 
-				var bkDate = rows[i].BK_DAY;
+				let bkDate = rows[i].BK_DAY;
 				bkDate = bkDate.substring(2, 4) + "/" + bkDate.substring(4, 6) + "/" + bkDate.substring(6, 8);
-				var bkTime = rows[i].BK_TIME;
+				let bkTime = rows[i].BK_TIME;
 				bkTime = bkTime.substring(0, 2) + ":" + bkTime.substring(2, 4);
-				var cancelDiff = rows[i].CANCEL_DIFF;
-				var cancelYn = "Y";
+				let cancelDiff = rows[i].CANCEL_DIFF;
+				let cancelYn = "Y";
 
 				if(cancelDiff < 5) {
 					cancelYn = "N";
@@ -61,9 +61,9 @@ function doSearch() {
 				var col5 = $("<td>" + rows[i].BK_FIRST_PHONE1 + "-" +  rows[i].BK_MID_PHONE1 + "-" +  rows[i].BK_LAST_PHONE1 + "</td>");
 				if(rows[i].AFTER_YN=="Y"){					
 					if (cancelYn == "Y") {
-					var	col6 = $("<td><button type='button' value='변경' class='motion inputBtn2' onclick='changeReservation(" + i + ")'>변경</button><button type='button' value='취소' class='cancel inputBtn2' onclick='doDeleteReservation(" + i + ")'>취소</button></td>");
+						var	col6 = $("<td><button type='button' value='변경' class='motion inputBtn2' onclick='changeReservation(" + i + ")'>변경</button><button type='button' value='취소' class='cancel inputBtn2' onclick='doDeleteReservation(" + i + ")'>취소</button></td>");
 					} else {
-					var	col6 = $("<td><button type='button' value='변경' class='motion inputBtn2' onclick='cantChange()'>변경</button><button type='button' value='취소' class='cancel inputBtn2' onclick='cantCancel()'>취소</button></td>");
+						var	col6 = $("<td><button type='button' value='변경' class='motion inputBtn2' onclick='cantChange()'>변경</button><button type='button' value='취소' class='cancel inputBtn2' onclick='cantCancel()'>취소</button></td>");
 					}
 				}else{
 					var	col6 = $("<td><button type='button' value='완료' class='cancel inputBtn2' onclick=''>완료</button></td>");
@@ -91,8 +91,8 @@ function blDeleteReservation(i) {
 
 	if (ans == true) {
 
-		var sUrl = "/controller/ReservationController";
-		var params = {};
+		let sUrl = "/controller/ReservationController";
+		let params = {};
 
 		//params["method"] = "blDeleteReservation";
 		params["coDiv"] = globals.coDiv;
@@ -119,17 +119,17 @@ function blDeleteReservation(i) {
 
 function doDeleteReservation(i) {
 
-	var bkDate = rows[i].BK_DAY;
+	let bkDate = rows[i].BK_DAY;
 	bkDate = bkDate.substring(2, 4) + "." + bkDate.substring(4, 6) + "." + bkDate.substring(6, 8);
-	var bkTime = rows[i].BK_TIME;
+	let bkTime = rows[i].BK_TIME;
 	bkTime = bkTime.substring(0, 2) + ":" + bkTime.substring(2, 4);
 
 	ans = confirm("[취소 확인] <%=session.getAttribute("MS_NAME")%> 회원님. \r\n" + bkDate + " " + bkTime + " " + rows[i].BK_COS_NM + "코스 취소를 진행 하시겠습니까?");
 
 	if (ans == true) {
 
-		var sUrl = "/cancelReservation";
-		var params = {};
+		let sUrl = "/cancelReservation";
+		let params = {};
 
 		//params["method"] = "cancelReservation";
 		params["coDiv"] = globals.coDiv;

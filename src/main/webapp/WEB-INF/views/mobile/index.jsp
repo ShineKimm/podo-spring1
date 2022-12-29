@@ -2,7 +2,7 @@
 <%@ include file="./include/header.jsp" %>
 <link rel="stylesheet" type="text/css" href="/static/mobile/css/main.css">
 <script>
-	var selectType = "1";
+	let selectType = "1";
 
 	 $(document).ready(function() {
 		init();
@@ -15,8 +15,8 @@
 	function getMainNotice(paraType) {
 		//
 		//
-		// var sUrl = "/controller/BoardController";
-		// var params = {};
+		// let sUrl = "/controller/BoardController";
+		// let params = {};
 		//
 		// params["method"] = "getBoardList";
 		//
@@ -33,11 +33,11 @@
 		// mAjax(sUrl, params, "POST", false, function(data) {
 		// 	if(data.resultCode == "0000") {
 		//
-		// 		var rows = data.rows;
+		// 		let rows = data.rows;
 		//
 		// 		if (rows.length == 0) {
 		//
-		// 			var notice = ""
+		// 			let notice = ""
 		// 		    notice += "<dl>	";
 		// 		    notice += " <dt>등록된 글이 없습니다.</dt>";
 		// 		    notice += " <dd>-</dd>	";
@@ -51,11 +51,11 @@
 		//
 		// 	    for(i=0; i<rows.length; i++) {
 		//
-		// 			var notice = ""
+		// 			let notice = ""
 		//
-		// 			var link = "/mobile/board/view?type=" + rows[i].TYPE + "&idx=" + rows[i].IDX;
-		// 			var title = rows[i].TITLE;
-		// 			var inputDate = rows[i].INPUT_DATETIME;
+		// 			let link = "/mobile/board/view?type=" + rows[i].TYPE + "&idx=" + rows[i].IDX;
+		// 			let title = rows[i].TITLE;
+		// 			let inputDate = rows[i].INPUT_DATETIME;
 		//
 		// 		    notice += "<dl onclick=\"location.href='" + link + "'\">	";
 		// 		    notice += " <dt>" + title + "</dt>";

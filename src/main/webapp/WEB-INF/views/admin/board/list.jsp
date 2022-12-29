@@ -2,17 +2,17 @@
 <%@ include file="../include/header.jsp" %>
 <script>
 
-  var startPage = 1;
-  var endPage = 1;
-  var currentPage = 1;
-  var pageCnt = 10;
-  var rows;
-  var mType;
+  let startPage = 1;
+  let endPage = 1;
+  let currentPage = 1;
+  let pageCnt = 10;
+  let rows;
+  let mType;
 
-  var title = {
+  let title = {
     "1" : "공지사항",
     "2" : "이벤트",
-    "3" : "분실물정보",
+    "3" : "보도자료",
     "4" : "자료실",
     "5" : "코스갤러리",
     "7" : "명예의 전당",
@@ -50,8 +50,8 @@
   }
 
   function doSearch() {
-    var sUrl = "/getBoardList";
-    var params = {};
+    let sUrl = "/getBoardList";
+    let params = {};
 
     //params["method"] = "getBoardList";
 
@@ -61,8 +61,8 @@
     params["pageCnt"] = pageCnt;
     params["adminYn"] = "Y"
 
-    var text = $("#txtSearchText").val();
-    var opt = $("#selSearchOption").val();
+    let text = $("#txtSearchText").val();
+    let opt = $("#selSearchOption").val();
 
     if(text != "") {
       params["searchText"] = text;
@@ -73,7 +73,7 @@
       if(data.resultCode == "0000") {
         rows = data.rows;
 
-        var tbody = $("#tbody");
+        let tbody = $("#tbody");
         tbody.empty();
 
         if(rows.length == 0) {
@@ -81,13 +81,13 @@
         }
 
         for(i=0; i<rows.length; i++) {
-          var delDiv = rows[i].DEL_DIV;
-          var tr = $("<tr style='cursor:pointer' onclick='onClickRow(" + i + ")'></tr>");
-          var td1 = $("<td>" + rows[i].IDX + "</td>");
-          var td2 = $("<td class='subject' style='text-decoration:" + (delDiv == "1" ? "line-through" : "none") + "'>" + rows[i].TITLE + "</td>");
-          var td3 = $("<td>" + rows[i].WRITER_NAME + "</td>");
-          var td4 = $("<td>" + rows[i].INPUT_DATETIME + "</td>");
-          var td5 = $("<td>" + rows[i].VIEW_CNT + "</td>");
+          let delDiv = rows[i].DEL_DIV;
+          let tr = $("<tr style='cursor:pointer' onclick='onClickRow(" + i + ")'></tr>");
+          let td1 = $("<td>" + rows[i].IDX + "</td>");
+          let td2 = $("<td class='subject' style='text-decoration:" + (delDiv == "1" ? "line-through" : "none") + "'>" + rows[i].TITLE + "</td>");
+          let td3 = $("<td>" + rows[i].WRITER_NAME + "</td>");
+          let td4 = $("<td>" + rows[i].INPUT_DATETIME + "</td>");
+          let td5 = $("<td>" + rows[i].VIEW_CNT + "</td>");
 
           tr.append(td1, td2, td3, td4, td5).appendTo(tbody);
         }
@@ -111,11 +111,11 @@
   }
 
   function initPaging(totalCnt) {
-    var pageContainer = $("#pagecontainer");
+    let pageContainer = $("#pagecontainer");
     pageContainer.empty();
-    var page = startPage;
-    var prevBtn = "<li onclick='doSearchPaging10(" + (startPage - 10) + ")' style='cursor:pointer'><span>◀</span></li>";
-    var nextBtn = "<li onclick='doSearchPaging10(" + (startPage + 10) + ")' style='cursor:pointer'><span>▶</span></li>";
+    let page = startPage;
+    let prevBtn = "<li onclick='doSearchPaging10(" + (startPage - 10) + ")' style='cursor:pointer'><span>◀</span></li>";
+    let nextBtn = "<li onclick='doSearchPaging10(" + (startPage + 10) + ")' style='cursor:pointer'><span>▶</span></li>";
 
     if(startPage != 1){
       pageContainer.append(prevBtn);
@@ -128,7 +128,7 @@
 
     for(i=startPage; i<startPage+10; i++) {
       if(i > endPage) break;
-      var li = $(String.format("<li onclick='doSearchPaging({0})' style='cursor:pointer'><span class='bold ul'>{0}</span></li>", i));
+      let li = $(String.format("<li onclick='doSearchPaging({0})' style='cursor:pointer'><span class='bold ul'>{0}</span></li>", i));
 
       if(currentPage == i) {
         li.addClass("on")
@@ -143,8 +143,8 @@
   }
 
   function onClickRow(i) {
-    var type = rows[i].TYPE;
-    var idx = rows[i].IDX;
+    let type = rows[i].TYPE;
+    let idx = rows[i].IDX;
 
     location.href = String.format("/admin/board/view?type={0}&idx={1}", type, idx);
   }
