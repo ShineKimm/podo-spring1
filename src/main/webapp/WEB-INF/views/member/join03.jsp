@@ -429,7 +429,7 @@
     try {
       const response = await axios.get('https://api.ipify.org?format=json');
       getIP = response.data.ip;
-      console.log(getIP);
+      //console.log(getIP);
     } catch (error) {
       console.error(error);
     }
@@ -450,7 +450,7 @@
             <li class="" onclick="location.href='/member/login'">로그인</li>
             <li class="on" onclick="location.href='/member/join01'">회원가입</li>
             <li class="" onclick="location.href='/member/find'">아이디/비번찾기</li>
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 회원가입 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 회원가입</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 회원가입 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 회원가입</li>
         </ul>
     </div>
     <div class="contents">

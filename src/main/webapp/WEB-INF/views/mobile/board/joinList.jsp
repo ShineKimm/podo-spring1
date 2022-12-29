@@ -11,7 +11,7 @@
 
 	$(document).ready(function() {
 		init();
-		initListener();
+		// initListener();
 	});
 
 	function init() {
@@ -23,9 +23,9 @@
 
 		let date = new Date();
 		let date2 = addMonth(date.yyyymmdd(), 3);
-		if(<%=request.getParameter("date")%>.length == 8) {
-			date = getDateFormat(<%=request.getParameter("date")%>);
-			date2 = getDateFormat(<%=request.getParameter("date")%>);
+		if("<%=request.getParameter("date")%>".length == 8) {
+			date = getDateFormat("<%=request.getParameter("date")%>");
+			date2 = getDateFormat("<%=request.getParameter("date")%>");
 		}
 		sYear = date.yyyy();
 		sMonth = date.mm();

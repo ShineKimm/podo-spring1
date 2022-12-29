@@ -26,26 +26,26 @@
     <meta property="og:description" content="포도CC, 포도 컨트리클럽">
     <meta property="og:url" content="">
     <title>포도 컨트리클럽</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/import.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/content.css?v=2">
+    <link rel="stylesheet" type="text/css" href="/css/import.css">
+    <link rel="stylesheet" type="text/css" href="/css/content.css?v=2">
 
-    <link rel="stylesheet" type="text/css" href="/static/css/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="/static/css/slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/slick-theme.css"/>
 
-    <script type="text/javascript" src="/static/js/jquery.js"></script>
-    <script type="text/javascript" src="/static/js/slick.js"></script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/slick.js"></script>
 
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/js/common.js"></script>
-    <script src="/static/js/jquery.preloaders.js"></script>
-    <script src="/static/js/tools.js"></script>
-    <script src="/static/js/globals.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script src="/js/jquery.preloaders.js"></script>
+    <script src="/js/tools.js"></script>
+    <script src="/js/globals.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-    <link rel="stylesheet" type="text/css" href="/static/css/motion.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/animate.css">
-    <script src="/static/js/wow.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/motion.css">
+    <link rel="stylesheet" type="text/css" href="/css/animate.css">
+    <script src="/js/wow.js"></script>
     <script type="text/javascript">
       /* 컨텐츠 fade in */
       wow = new WOW(
@@ -126,7 +126,7 @@
 
     </script>
     <!--textmotion-->
-    <script src="/static/js/ScrollTrigger.js"></script>
+    <script src="/js/ScrollTrigger.js"></script>
     <script>
       window.counter = function($) {
         // this refers to the html element with the data-scroll-showCallback tag
@@ -145,9 +145,9 @@
     <!-- subTab Fixed js -->
     <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
 
-    <script src="/static/js/jquery.preloaders.js"></script>
-    <script src="/static/js/tools.js"></script>
-    <script src="/static/js/globals.js"></script>
+    <script src="/js/jquery.preloaders.js"></script>
+    <script src="/js/tools.js"></script>
+    <script src="/js/globals.js"></script>
 </head>
 <body />
 <div class="siteAll"><div class="toggleMenu"><span></span></div></div>

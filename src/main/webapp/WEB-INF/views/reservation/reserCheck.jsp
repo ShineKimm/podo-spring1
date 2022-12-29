@@ -13,7 +13,7 @@
     try {
       const response = await axios.get('https://api.ipify.org?format=json');
       getIP = response.data.ip;
-      console.log(getIP);
+      //console.log(getIP);
     } catch (error) {
       console.error(error);
     }
@@ -115,21 +115,22 @@
             cancelYn = "N";
           }
 
-          var col1 = $("<td>" + (i + 1) + "</td>");
-          var col2 = $("<td>" + bkDate + "</td>");
-          var col3 = $("<td>" + bkTime + "</td>");
-          var col4 = $("<td>" + rows[i].BK_COS_NM + "코스</td>");
-          var col5 = $("<td>" + rows[i].BK_ROUNDF + "</td>");
-          var col6 = $("<td>" + rows[i].BK_CADDY + "</td>");
-          var col7 = $("<td>" + rows[i].BK_FIRST_PHONE1 + "-" +  rows[i].BK_MID_PHONE1 + "-" +  rows[i].BK_LAST_PHONE1 + "</td>");
+          let col1 = $("<td>" + (i + 1) + "</td>");
+          let col2 = $("<td>" + bkDate + "</td>");
+          let col3 = $("<td>" + bkTime + "</td>");
+          let col4 = $("<td>" + rows[i].BK_COS_NM + "코스</td>");
+          let col5 = $("<td>" + rows[i].BK_ROUNDF + "</td>");
+          let col6 = $("<td>" + rows[i].BK_CADDY + "</td>");
+          let col7 = $("<td>" + rows[i].BK_FIRST_PHONE1 + "-" +  rows[i].BK_MID_PHONE1 + "-" +  rows[i].BK_LAST_PHONE1 + "</td>");
+          let col8 = "";
           if (rows[i].AFTER_YN == "Y") {
             if (cancelYn == "Y") {
-              var	col8 = $("<td><input type='button' value='예약변경' class='deepBlueBtn' onclick='changeReservation(" + i + ")'> <input type='button' value='취소' class='lightGrayBtn' onclick='doDeleteReservation(" + i + ")'></td>");
+              col8 = $("<td><input type='button' value='예약변경' class='deepBlueBtn' onclick='changeReservation(" + i + ")'> <input type='button' value='취소' class='lightGrayBtn' onclick='doDeleteReservation(" + i + ")'></td>");
             } else {
-              var	col8 = $("<td><input type='button' value='예약변경' class='deepBlueBtn' onclick='cantChange()'> <input type='button' value='취소' class='lightGrayBtn' onclick='cantCancel()'></td>");
+              col8 = $("<td><input type='button' value='예약변경' class='deepBlueBtn' onclick='cantChange()'> <input type='button' value='취소' class='lightGrayBtn' onclick='cantCancel()'></td>");
             }
           } else {
-            var	col8 = $("<td><input type='button' value='완료' class='lightGrayBtn'></td>");
+            col8 = $("<td><input type='button' value='완료' class='lightGrayBtn'></td>");
           }
 
           row.append(col1,col2,col3,col4,col5,col6,col7,col8).appendTo(tBody);
@@ -316,7 +317,7 @@
         <ul class="navbarBox">
             <li class="" onclick="location.href='/reservation/reservation'">실시간예약</li>
             <li class="on" onclick="location.href='/reservation/reserCheck'">예약확인/취소</li>
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 인터넷예약 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 예약확인/취소</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 인터넷예약 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 예약확인/취소</li>
         </ul>
     </div>
     <div class="contents">

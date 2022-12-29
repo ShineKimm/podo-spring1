@@ -347,7 +347,7 @@
 
 				for(i=0; i<rows.length; i++) {
 
-					var col1 = $("<option value='" + rows[i].CD_CODE + "'>" + rows[i].CD_TITLE1 + "</option>");
+					let col1 = $("<option value='" + rows[i].CD_CODE + "'>" + rows[i].CD_TITLE1 + "</option>");
 
 					tbody.append(col1)
 				}

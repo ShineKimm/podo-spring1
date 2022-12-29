@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div id="menu">
     <div class="main-nav">
-        <img src="/static/images/logo.svg" alt="포도 로고" class="hambergerLogo">
+        <img src="/images/logo.svg" alt="포도 로고" class="hambergerLogo">
         <ul class="menuTitleBox">
             <li><a href="/reservation/reservation" class="title">인터넷예약</a></li>
             <li><a href="/reservation/reservation">실시간예약</a></li>

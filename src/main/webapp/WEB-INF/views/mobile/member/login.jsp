@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
+<%=request.getParameter("page")%>
 <script language="javascript">
 		$(document).ready(function() {
 			if(<%=session.getAttribute("MS_NUM") != null %>) {
@@ -32,9 +33,9 @@
 		});
 
 		function doLogin() {
-			let sUrl = "/controller/MemberController";
+			let sUrl = "/doLogin";
 			let params = {};
-			let page = <%=request.getParameter("page")%>;
+			let page = "<%=request.getParameter("page")%>";
 
 			let id = $("#txtId").val();
 			let pw = $("#txtPw").val();

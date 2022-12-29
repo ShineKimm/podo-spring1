@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
-<link rel="stylesheet" type="text/css" href="/static/mobile/css/animate.css">
-<script src="/static/mobile/js/wow.js"></script>
+<link rel="stylesheet" type="text/css" href="/mobile/css/animate.css">
+<script src="/mobile/js/wow.js"></script>
 <script type="text/javascript">
 	/* 컨텐츠 fade in */
 	wow = new WOW(
@@ -53,7 +53,7 @@
 	}
 
 	function doSearch() {
-		let sUrl = "/controller/BoardController";
+		let sUrl = "/getBoardList";
 		let params = {};
 
 		//params["method"] = "getBoardList";
@@ -84,7 +84,7 @@
 						template += "<div class='galleryBox fadeBox fadeInUp'>			";
 						template += "	<div class='gallBoxCont'>																																						";
 						template += "	<a href='javascript:onClickRow({0})'>																																						";
-						template += "		<div class='galImg'><img src='{1}/{2}' onerror='this.src=\"/static/mobile/images/introImg1.jpg\"'></div>																															";
+						template += "		<div class='galImg'><img src='{1}/{2}' onerror='this.src=\"/mobile/images/introImg1.jpg\"'></div>																															";
 						template += "			<div class='gallery'>																																						";
 						template += "				<div class='gallTitle'>{3}</div>																															";
 						template += "				<p class='gallDate'>{4}</p>																																		";

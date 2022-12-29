@@ -54,19 +54,20 @@ function doSearch() {
 					cancelYn = "N";
 				}
 
-				var col1 = $("<td>" + bkDate + "</td>");
-				var col2 = $("<td>" + bkTime + "</td>");
-				var col3 = $("<td>" + rows[i].BK_COS_NM + "코스</td>");
-				var col4 = $("<td>" + rows[i].BK_CADDY + "</td>");
-				var col5 = $("<td>" + rows[i].BK_FIRST_PHONE1 + "-" +  rows[i].BK_MID_PHONE1 + "-" +  rows[i].BK_LAST_PHONE1 + "</td>");
+				let col1 = $("<td>" + bkDate + "</td>");
+				let col2 = $("<td>" + bkTime + "</td>");
+				let col3 = $("<td>" + rows[i].BK_COS_NM + "코스</td>");
+				let col4 = $("<td>" + rows[i].BK_CADDY + "</td>");
+				let col5 = $("<td>" + rows[i].BK_FIRST_PHONE1 + "-" +  rows[i].BK_MID_PHONE1 + "-" +  rows[i].BK_LAST_PHONE1 + "</td>");
+				let col6 = "";
 				if(rows[i].AFTER_YN=="Y"){					
 					if (cancelYn == "Y") {
-						var	col6 = $("<td><button type='button' value='변경' class='motion inputBtn2' onclick='changeReservation(" + i + ")'>변경</button><button type='button' value='취소' class='cancel inputBtn2' onclick='doDeleteReservation(" + i + ")'>취소</button></td>");
+						col6 = $("<td><button type='button' value='변경' class='motion inputBtn2' onclick='changeReservation(" + i + ")'>변경</button><button type='button' value='취소' class='cancel inputBtn2' onclick='doDeleteReservation(" + i + ")'>취소</button></td>");
 					} else {
-						var	col6 = $("<td><button type='button' value='변경' class='motion inputBtn2' onclick='cantChange()'>변경</button><button type='button' value='취소' class='cancel inputBtn2' onclick='cantCancel()'>취소</button></td>");
+						col6 = $("<td><button type='button' value='변경' class='motion inputBtn2' onclick='cantChange()'>변경</button><button type='button' value='취소' class='cancel inputBtn2' onclick='cantCancel()'>취소</button></td>");
 					}
 				}else{
-					var	col6 = $("<td><button type='button' value='완료' class='cancel inputBtn2' onclick=''>완료</button></td>");
+					col6 = $("<td><button type='button' value='완료' class='cancel inputBtn2' onclick=''>완료</button></td>");
 				}
 
 				row.append(col1,col2,col3,col4,col5,col6).appendTo(tBody);

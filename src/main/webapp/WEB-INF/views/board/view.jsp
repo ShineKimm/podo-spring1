@@ -72,8 +72,6 @@
         let filePath2 = rows[0].FILE_PATH2;
         let filePath3 = rows[0].FILE_PATH3;
 
-        //TODO 배포 후 이미지 경로 수정해야함
-        // /images/getfile?fullpath={0}/{1}
         if(fileName1 != "" && filePath1 != "") {
           if(isImage(fileName1)) {
             let img = String.format("<div class='viewContentBox'><img src='/images/getfile?fullpath={0}/{1}' alt=''></div>", filePath1, fileName1);
@@ -127,13 +125,13 @@
             <li class="" onclick="location.href='/reservation/joinList'" id="type6">조인게시판</li>
             <li class="" onclick="location.href='/board/list?type=7'" id="type7">명예의 전당</li>
 
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 정보마당 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; <span id="txtTitle" style="font-size:inherit;color:inherit;font-weight:400;"></span></li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 정보마당 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; <span id="txtTitle" style="font-size:inherit;color:inherit;font-weight:400;"></span></li>
         </ul>
         <ul class="navbarBox" id="galleryList" hidden>
             <li class="on" onclick="location.href='/course/intro'">코스소개</li>
             <li class="" onclick="location.href='/board/list?type=5'">코스갤러리</li>
 
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 코스소개 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 코스소개</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 코스소개 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 코스소개</li>
         </ul>
     </div>
     <div class="contents">

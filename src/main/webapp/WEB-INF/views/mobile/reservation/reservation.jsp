@@ -28,12 +28,12 @@
 
 		initCalendar("#calendarBox", sYear, sMonth);
 
-		let day = <%=request.getParameter("BK_DAY")%>;
+		let day = "<%=request.getParameter("BK_DAY")%>";
 		if (<%=request.getParameter("OLD_BK_DAY") != null%>) {
-			day = <%=request.getParameter("OLD_BK_DAY")%>;
+			day = "<%=request.getParameter("OLD_BK_DAY")%>";
 		}
 
-		if(day != "") {
+		if(day != null) {
 			mDate = day;
 			let dSel = getDateFormat(mDate);
 			$("#txtChooseDate").empty().append(String.format("{0}년 {1}월 {2}일 ({3}요일)", dSel.yyyy(), dSel.mm(), dSel.dd(), dSel.week()));
@@ -170,8 +170,7 @@
 	function doSearch() {
 		let sUrl = "/getTeeList";
 		let params = {};
-
-		if(mDate == null || mDate == '') {
+		if(mDate == null || mDate == '' || mDate == "null") {
 			alert("날짜를 선택하세요.");
 			return;
 		}
@@ -194,15 +193,16 @@
 					let bkTime = rowData[i].BK_TIME;
 					bkTime = bkTime.substring(0, 2) + ":" + bkTime.substring(2, 4);
 
-					var col1 = $("<td>" + bkTime + "</td>");
-					var col2 = $("<td>" + rowData[i].BK_COS_NM + "코스</td>");
-					var col3 = $("<td>" + rowData[i].BK_B_CHARGE_NM + "</td>");
-					var col4 = $("<td class='red bold'>" + rowData[i].BK_S_CHARGE_NM + "</td>");
-					var col5 = $("<td>" + rowData[i].BK_CADDY + "</td>");
+					let col1 = $("<td>" + bkTime + "</td>");
+					let col2 = $("<td>" + rowData[i].BK_COS_NM + "코스</td>");
+					let col3 = $("<td>" + rowData[i].BK_B_CHARGE_NM + "</td>");
+					let col4 = $("<td class='red bold'>" + rowData[i].BK_S_CHARGE_NM + "</td>");
+					let col5 = $("<td>" + rowData[i].BK_CADDY + "</td>");
+					let col6 = "";
 					if (<%=request.getParameter("OLD_BK_DAY") != null%>) {
-						var col6 = $("<td><input type='button' class='brownBtn' value='변경' onclick='reserProc(" + i + ")'></td>");
+						col6 = $("<td><input type='button' class='brownBtn' value='변경' onclick='reserProc(" + i + ")'></td>");
 					} else {
-						var col6 = $("<td><input type='button' class='brownBtn' value='예약' onclick='reserProc(" + i + ")'></td>");
+						col6 = $("<td><input type='button' class='brownBtn' value='예약' onclick='reserProc(" + i + ")'></td>");
 					}
 
 					row.append(col1,col2,col3,col4,col5,col6).appendTo(tBody);
@@ -239,7 +239,7 @@
 			return;
 		}
 
-		let sUrl = "/controller/ReservationController";
+		let sUrl = "/changeReservation";
 		let params = {};
 
 		let msNum = <%=session.getAttribute("MS_NUM")%>;
@@ -311,9 +311,9 @@
 	
 	<div class="monthBox" id="calendarBox">
 		<ul class="monthChoice">
-			<li class="arwl" onclick="doPrevMonth();"><img src="/static/mobile/images/btn_ml.png"></li>
+			<li class="arwl" onclick="doPrevMonth();"><img src="/mobile/images/btn_ml.png"></li>
 			<li id="calHeader" class="date"></li>
-			<li class="arwr" onclick="doNextMonth()"><img src="/static/mobile/images/btn_mr.png"></li>
+			<li class="arwr" onclick="doNextMonth()"><img src="/mobile/images/btn_mr.png"></li>
 		</ul>
 		<table class="calendar">
 			<colgroup>

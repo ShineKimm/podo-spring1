@@ -18,7 +18,7 @@
             <li class="" onclick="location.href='/guide/etiquette'">에티켓</li>
             <li class="" onclick="location.href='/guide/inquiry'">예약/기타문의</li>
 
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 이용안내 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 예약안내</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 이용안내 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 예약안내</li>
         </ul>
     </div>
     <div class="contents">

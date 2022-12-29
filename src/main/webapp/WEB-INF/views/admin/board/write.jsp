@@ -219,7 +219,7 @@
     try {
       const response = await axios.get('https://api.ipify.org?format=json');
       getIP = response.data.ip;
-      console.log(getIP);
+      //console.log(getIP);
     } catch (error) {
       console.error(error);
     }

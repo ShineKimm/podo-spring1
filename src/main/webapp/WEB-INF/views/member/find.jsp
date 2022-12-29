@@ -101,12 +101,12 @@
             <li class="on" onclick="location.href='/member/find'">아이디/비번찾기</li>
             <li class="" onclick="location.href='/member/modify'">정보수정</li>
             <li class="" onclick="deleteMember();">가입탈퇴</li>
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 회원가입 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 아이디/비번찾기</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 회원가입 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 아이디/비번찾기</li>
         </ul>
     </div>
     <div class="contents">
         <div class="grayBgBox" style="border:0;">
-            <img src="/static/images/findIcon.png" alt="그림" class="keyImg">
+            <img src="/images/findIcon.png" alt="그림" class="keyImg">
 
             <div class="findBox">
                 <div class="findId">

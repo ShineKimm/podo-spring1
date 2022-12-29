@@ -222,7 +222,7 @@
             <li class="" onclick="location.href='/reservation/joinList'">조인게시판</li>
             <li class="on" onclick="location.href='/board/score'">스코어조회</li>
             <li class="" onclick="location.href='/board/list?type=7'">명예의 전당</li>
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 정보마당 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 스코어조회</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 정보마당 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 스코어조회</li>
         </ul>
     </div>
     <div class="contents">
@@ -234,12 +234,12 @@
                 <span class="white">조회기간</span>
                 <div class="reser_search w180" id="calContainer1">
                     <b id="show_hideSub1"></b>
-                    <span class="choiceCalendar2"><img src="/static/images/img_c.png" id="show_calendar1"></span>
+                    <span class="choiceCalendar2"><img src="/images/img_c.png" id="show_calendar1"></span>
                     <div class="openCalendar2" id="subMonthBox1">
                         <div class="smallCalendarTit">
-                            <p class="arwl"><a href="javascript:smPrevMonth();"><img src="/static/images/btn_ml.png" alt="전달"></a></p>
+                            <p class="arwl"><a href="javascript:smPrevMonth();"><img src="/images/btn_ml.png" alt="전달"></a></p>
                             <h3 id="calHeader"></h3>
-                            <p class="arwr"><a href="javascript:smNextMonth();"><img src="/static/images/btn_mr.png" alt="다음달"></a></p>
+                            <p class="arwr"><a href="javascript:smNextMonth();"><img src="/images/btn_mr.png" alt="다음달"></a></p>
                         </div>
                         <table class="sCalendar">
                             <colgroup>
@@ -272,12 +272,12 @@
                 <span class="white">~</span>
                 <div class="reser_search w180" id="calContainer2">
                     <b id="show_hideSub2"></b>
-                    <span class="choiceCalendar3"><img src="/static/images/img_c.png" id="show_calendar2"></span>
+                    <span class="choiceCalendar3"><img src="/images/img_c.png" id="show_calendar2"></span>
                     <div class="openCalendar3" id="subMonthBox2">
                         <div class="smallCalendarTit">
-                            <p class="arwl"><a href="javascript:fmPrevMonth();"><img src="/static/images/btn_ml.png" alt="전달"></a></p>
+                            <p class="arwl"><a href="javascript:fmPrevMonth();"><img src="/images/btn_ml.png" alt="전달"></a></p>
                             <h3 id="calHeader"></h3>
-                            <p class="arwr"><a href="javascript:fmNextMonth();"><img src="/static/images/btn_mr.png" alt="다음달"></a></p>
+                            <p class="arwr"><a href="javascript:fmNextMonth();"><img src="/images/btn_mr.png" alt="다음달"></a></p>
                         </div>
                         <table class="sCalendar">
                             <colgroup>

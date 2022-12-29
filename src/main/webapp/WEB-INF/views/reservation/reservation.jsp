@@ -15,7 +15,7 @@
     try {
       const response = await axios.get('https://api.ipify.org?format=json');
       getIP = response.data.ip;
-      console.log(getIP);
+      // console.log(getIP);
     } catch (error) {
       console.error(error);
     }
@@ -45,11 +45,11 @@
     initCalendar("#calendarBox1", sYear, sMonth);
     initCalendar("#calendarBox2", fYear, fMonth);
 
-    let day = <%=request.getParameter("BK_DAY")%>;
+    let day = "<%=request.getParameter("BK_DAY")%>";
     if (<%=request.getParameter("OLD_BK_DAY") != null %>) {
       day = "<%=request.getParameter("OLD_BK_DAY")%>"
     }
-    if(day != null) {
+    if(day != "null") {
       mDate = day;
       let dSel = getDateFormat(mDate);
       $("#txtChooseDate").empty().append(String.format("{0}년 {1}월 {2}일 ({3}요일)", dSel.yyyy(), dSel.mm(), dSel.dd(), dSel.week()));
@@ -233,15 +233,16 @@
           let bkTime = rowData[i].BK_TIME;
           bkTime = bkTime.substring(0, 2) + ":" + bkTime.substring(2, 4);
 
-          var col1 = $("<td>" + bkTime + "</td>");
-          var col2 = $("<td>" + rowData[i].BK_COS_NM + "코스</td>");
-          var col3 = $("<td>" + rowData[i].BK_B_CHARGE_NM + "</td>");
-          var col4 = $("<td class='red'>" + rowData[i].BK_S_CHARGE_NM + "</td>");
-          var col5 = $("<td>" + rowData[i].BK_CADDY + "</td>");
+          let col1 = $("<td>" + bkTime + "</td>");
+          let col2 = $("<td>" + rowData[i].BK_COS_NM + "코스</td>");
+          let col3 = $("<td>" + rowData[i].BK_B_CHARGE_NM + "</td>");
+          let col4 = $("<td class='red'>" + rowData[i].BK_S_CHARGE_NM + "</td>");
+          let col5 = $("<td>" + rowData[i].BK_CADDY + "</td>");
+          let col6 = "";
           if (<%=request.getParameter("OLD_BK_DAY") != null%>) {
-            var col6 = $("<td><input type='button' class='darkGrayBtn' value='변경' onclick='reserProc(" + i + ")'></td>");
+            col6 = $("<td><input type='button' class='darkGrayBtn' value='변경' onclick='reserProc(" + i + ")'></td>");
           } else {
-            var col6 = $("<td><input type='button' class='darkGrayBtn' value='예약' onclick='reserProc(" + i + ")'></td>");
+            col6 = $("<td><input type='button' class='darkGrayBtn' value='예약' onclick='reserProc(" + i + ")'></td>");
           }
 
           row.append(col1,col2,col3,col4,col5,col6).appendTo(tBody);
@@ -364,7 +365,7 @@
         <ul class="navbarBox">
             <li class="on" onclick="location.href='/reservation/reservation'">실시간예약</li>
             <li class="" onclick="location.href='/reservation/reserCheck'">예약확인/취소</li>
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 인터넷예약 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 실시간예약</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 인터넷예약 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 실시간예약</li>
         </ul>
     </div>
     <div class="contents">
@@ -465,7 +466,7 @@
             </table>
         </div>
 
-        <a href="#" class="calBtn"><img src="/static/images/calImg01.png" alt=""> 달력보기</a>
+        <a href="#" class="calBtn"><img src="/images/calImg01.png" alt=""> 달력보기</a>
     </div><!-- contents End-->
 
 </div>	<!-- wrap End -->

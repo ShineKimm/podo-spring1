@@ -20,16 +20,16 @@
 <meta property="og:url" content="">
 <link rel="canonical" href="">
 <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<link rel="stylesheet" type="text/css" href="/static/mobile/css/import.css?v=1">
-<link rel="stylesheet" type="text/css" href="/static/mobile/css/animate.css">
-<link rel="stylesheet" type="text/css" href="/static/mobile/css/contents.css?v=2">
-<script src="/static/mobile/js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="/mobile/css/import.css?v=1">
+<link rel="stylesheet" type="text/css" href="/mobile/css/animate.css">
+<link rel="stylesheet" type="text/css" href="/mobile/css/contents.css?v=2">
+<script src="/mobile/js/common.js"></script>
 <title>포도CC</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-<script src="/static/js/jquery.preloaders.js"></script>
-<script src="/static/js/tools.js"></script>
-<script src="/static/js/globals.js"></script>
+<script src="/js/jquery.preloaders.js"></script>
+<script src="/js/tools.js"></script>
+<script src="/js/globals.js"></script>
 
 <script>		
 	$(document).ready(function() { 		
@@ -74,7 +74,7 @@
 
 	function sessionCheck() {
 		let sUrl = "/sessionConfirm";
-		//let params = {"method" : "sessionConfirm"};
+		let params = {/*"method" : "sessionConfirm"*/};
 
 		mAjax(sUrl, params, "POST", false, function(data) {
 			if(data.resultCode == "2000") {
@@ -102,9 +102,9 @@
 		<div class="navBg"></div>
 		<nav>
 			<div class="topNav">
-				<p><a href="/mobile/index"><img src="/static/mobile/images/logo.svg" class="navlogo"></a></p>
+				<p><a href="/mobile/index"><img src="/mobile/images/logo.svg" class="navlogo"></a></p>
 <%--				<%If Session("ms_num") = "" Then%>--%>
-<%--				<a href="/static/mobile/member/login"> 로그인 <span class="arrow arrow-right margin-4"></span></a>--%>
+<%--				<a href="/mobile/member/login"> 로그인 <span class="arrow arrow-right margin-4"></span></a>--%>
 <%--				<%Else%>--%>
 <%--				<a href="javascript:doLogout();"> 로그아웃 <span class="arrow arrow-right margin-4"></span></a>--%>
 <%--				<%End If%>--%>
@@ -112,14 +112,14 @@
 			<div class="allMenu">
 				<h2>전체메뉴</h2>
 				<ul>
-					<li class="on" onclick="location.href='/mobile/reservation/reservation'"><p><img src="/static/mobile/images/calendar_w.svg"></p>인터넷예약</li>
-					<li onclick="location.href='/mobile/club/intro'"><p><img src="/static/mobile/images/m_icon1.svg"></p>클럽소개</li>
-					<li onclick="location.href='/mobile/guide/guide'"><p><img src="/static/mobile/images/m_icon2.svg"></p>이용안내</li>
+					<li class="on" onclick="location.href='/mobile/reservation/reservation'"><p><img src="/mobile/images/calendar_w.svg"></p>인터넷예약</li>
+					<li onclick="location.href='/mobile/club/intro'"><p><img src="/mobile/images/m_icon1.svg"></p>클럽소개</li>
+					<li onclick="location.href='/mobile/guide/guide'"><p><img src="/mobile/images/m_icon2.svg"></p>이용안내</li>
 				</ul>
 				<ul>
-					<li onclick="location.href='/mobile/course/intro'"><p><img src="/static/mobile/images/m_icon3.svg"></p>코스소개</li>
-					<li onclick="location.href='/mobile/facil/clubhouse'"><p><img src="/static/mobile/images/m_icon4.svg"></p>시설안내</li>
-					<li onclick="location.href='/mobile/board/list?type=1'"><p><img src="/static/mobile/images/m_icon5.svg"></p>정보마당</li>
+					<li onclick="location.href='/mobile/course/intro'"><p><img src="/mobile/images/m_icon3.svg"></p>코스소개</li>
+					<li onclick="location.href='/mobile/facil/clubhouse'"><p><img src="/mobile/images/m_icon4.svg"></p>시설안내</li>
+					<li onclick="location.href='/mobile/board/list?type=1'"><p><img src="/mobile/images/m_icon5.svg"></p>정보마당</li>
 				</ul>
 			</div>
 			<div class="allMenuText">
@@ -129,9 +129,9 @@
 			</div>
 			<div class="allMenuBtn">
 <%--				<%If Session("ms_num") = "" Then%>--%>
-<%--				<a href="/static/mobile/member/join01">회원가입</a>--%>
+<%--				<a href="/mobile/member/join01">회원가입</a>--%>
 <%--				<%Else%>--%>
-<%--				<a href="/static/mobile/member/modify">회원정보</a>--%>
+<%--				<a href="/mobile/member/modify">회원정보</a>--%>
 <%--				<%End If%>--%>
 				<a href="http://www.weather.go.kr/weather/forecast/timeseries.jsp?searchType=INTEREST&wideCode=4100000000&cityCode=4165000000&dongCode=4165052000">날씨안내</a>
 			</div>			

@@ -18,25 +18,25 @@
     <meta property="og:url" content="">
     <title>포도 컨트리클럽</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-    <script type="text/javascript" src="/static/js/common.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
-    <link rel="stylesheet" type="text/css" href="/static/css/import.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/motion.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="/css/import.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/motion.css">
+    <link rel="stylesheet" type="text/css" href="/css/animate.css">
 
     <!-- 메인 배경 줌아웃 zoomOut -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
 
-    <script src="/static/js/jquery.preloaders.js"></script>
-    <script src="/static/js/tools.js"></script>
-    <script src="/static/js/globals.js"></script>
-    <script src="/static/js/wow.js"></script>
+    <script src="/js/jquery.preloaders.js"></script>
+    <script src="/js/tools.js"></script>
+    <script src="/js/globals.js"></script>
+    <script src="/js/wow.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.5/flickity.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.5/flickity.pkgd.min.js"></script>
@@ -170,12 +170,13 @@
                 row.append($("<td></td>"));
               }
               for(i=0; i<rows.length; i++) {
+                let td = "";
                 if(rows[i].CL_SOLAR >= currentDay) {
                   if (rows[i].CL_SOLAR == currentDay) {
-                    var td = $("<td>"+ rows[i].DAYNUM + "</td>");
+                    td = $("<td>"+ rows[i].DAYNUM + "</td>");
                     td.addClass('today');
                   } else if(rows[i].BK_TEAM > 0) {
-                    var td = $("<td>" + rows[i].DAYNUM + "</td>");
+                    td = $("<td>" + rows[i].DAYNUM + "</td>");
                     if (rows[i].CL_BUSINESS == "2") {
                       td.addClass('sat');
                     } else if (rows[i].CL_BUSINESS == "3" || rows[i].CL_BUSINESS == "4") {
@@ -187,7 +188,7 @@
                       onClickDay($(this).data('date'));
                     });
                   } else {
-                    var td = $("<td>" + rows[i].DAYNUM + "</td>");
+                    td = $("<td>" + rows[i].DAYNUM + "</td>");
                     if (rows[i].CL_BUSINESS == "2") {
                       td.addClass('sat');
                     } else if (rows[i].CL_BUSINESS == "3" || rows[i].CL_BUSINESS == "4") {
@@ -196,7 +197,7 @@
                     td.addClass('impossible');
                   }
                 } else {
-                  var td = $("<td>" + rows[i].DAYNUM + "</td>");
+                  td = $("<td>" + rows[i].DAYNUM + "</td>");
                   if (rows[i].CL_BUSINESS == "2") {
                     td.addClass('sat');
                   } else if (rows[i].CL_BUSINESS == "3" || rows[i].CL_BUSINESS == "4") {
@@ -266,7 +267,7 @@
       }
 
       function bkSumit() {
-        if(mDate == "") {
+        if(mDate == "" || mDate == null) {
           alert("날짜를 선택해주세요.");
           return;
         }
@@ -305,7 +306,7 @@
 
               let notice = ""
               notice += "<li>	";
-              notice += " <img src='/static/images/main/bg_blank.png'>";
+              notice += " <img src='/images/main/bg_blank.png'>";
               notice += " <div class='slideText'>	";
               notice += " <h1> 등록된 공지사항이 없습니다. </h1>	";
               notice += " <h4> - </h4>	"
@@ -339,7 +340,7 @@
               let inputDate = rows[i].INPUT_DATETIME;
 
               notice += "<li>	";
-              notice += " <img src='/static/images/main/bg_blank.png'>";
+              notice += " <img src='/images/main/bg_blank.png'>";
               notice += " <div class='slideText'>	";
               notice += " <h1> " + title + " </h1>	";
               notice += " <h4> " + inputDate + " </h4>	"
@@ -470,50 +471,50 @@
             <h4>포도CC 그린피 안내 및 이벤트</h4>
             <div class="slider2" height="400px">
                 <div>
-                    <p><a href="http://www.band.us/@podocc"><img src="/static/images/220805_밴드_bn.jpg" title="밴드오픈"></a></p>
-                    <p><a href="/board/view?type=2&idx=4"><img src="/static/images/220719_bn.jpg" title="홀인원이벤트"></a></p>
-                    <p><a href="/board/view?type=1&idx=63"><img src="/static/images/220627_bn.jpg" title="캐디피인상안내"></a></p>
+                    <p><a href="http://www.band.us/@podocc"><img src="/images/220805_밴드_bn.jpg" title="밴드오픈"></a></p>
+                    <p><a href="/board/view?type=2&idx=4"><img src="/images/220719_bn.jpg" title="홀인원이벤트"></a></p>
+                    <p><a href="/board/view?type=1&idx=63"><img src="/images/220627_bn.jpg" title="캐디피인상안내"></a></p>
                 </div>
                 <div>
-                    <p><a href="/board/view?type=1&idx=68"><img src="/static/images/220808_10월그린피_bn.jpg" title="10월 그린피"></a></p>
-                    <p><a href="/board/view?type=1&idx=69"><img src="/static/images/220808_10월패키지_bn.jpg" title="10월 1박2일"></a></p>
-                    <p><a href="/board/view?type=1&idx=70"><img src="/static/images/220808_10월골프대회_bn.jpg" title="10월골프대회"></a></p>
+                    <p><a href="/board/view?type=1&idx=68"><img src="/images/220808_10월그린피_bn.jpg" title="10월 그린피"></a></p>
+                    <p><a href="/board/view?type=1&idx=69"><img src="/images/220808_10월패키지_bn.jpg" title="10월 1박2일"></a></p>
+                    <p><a href="/board/view?type=1&idx=70"><img src="/images/220808_10월골프대회_bn.jpg" title="10월골프대회"></a></p>
                 </div>
                 <div>
-                    <p><a href="/board/view?type=1&idx=73"><img src="/static/images/221011_10월골프대회_bn.jpg" title="10월 골프대회"></a></p>
-                    <p><a href="/board/view?type=1&idx=71"><img src="/static/images/220913g_bn.jpg" title="11월 그린피"></a></p>
-                    <p><a href="/board/view?type=1&idx=72"><img src="/static/images/220913p_bn.jpg" title="11월 1박2일"></a></p>
+                    <p><a href="/board/view?type=1&idx=73"><img src="/images/221011_10월골프대회_bn.jpg" title="10월 골프대회"></a></p>
+                    <p><a href="/board/view?type=1&idx=71"><img src="/images/220913g_bn.jpg" title="11월 그린피"></a></p>
+                    <p><a href="/board/view?type=1&idx=72"><img src="/images/220913p_bn.jpg" title="11월 1박2일"></a></p>
                 </div>
                 <div>
-                    <p><a href="/board/view?type=1&idx=8"><img src="/static/images/210423_2.jpg" title="김천 포도CC 시행의건"></a></p>
-                    <p><a href="/board/view?type=1&idx=23"><img src="/static/images/210705_bn.jpg" alt="대체공휴일"></a></p>
-                    <p><a href="/board/view?type=1&idx=37"><img src="/static/images/211011_bn.jpg" alt="9홀추가"></a></p>
+                    <p><a href="/board/view?type=1&idx=8"><img src="/images/210423_2.jpg" title="김천 포도CC 시행의건"></a></p>
+                    <p><a href="/board/view?type=1&idx=23"><img src="/images/210705_bn.jpg" alt="대체공휴일"></a></p>
+                    <p><a href="/board/view?type=1&idx=37"><img src="/images/211011_bn.jpg" alt="9홀추가"></a></p>
                 </div>
                 <div>
-                    <p><a href="/board/view?type=1&idx=18"><img src="/static/images/210603_2_bn.jpg" alt="9홀코스오픈"></a></p>
-                    <p><a href="#"><img src="/static/images/no-img.jpg" title="이미지 없을때"></a>
-                    <p><a href="#"><img src="/static/images/no-img.jpg" title="이미지 없을때"></a>
+                    <p><a href="/board/view?type=1&idx=18"><img src="/images/210603_2_bn.jpg" alt="9홀코스오픈"></a></p>
+                    <p><a href="#"><img src="/images/no-img.jpg" title="이미지 없을때"></a>
+                    <p><a href="#"><img src="/images/no-img.jpg" title="이미지 없을때"></a>
                 </div>
             </div>
-            <div class="popX"><a href="javascript:closePopupNotToday();">오늘하루안보기</a><span onclick="$('#mainPop').hide()"><img src="/static/images/x-box.png"></span></div>
+            <div class="popX"><a href="javascript:closePopupNotToday();">오늘하루안보기</a><span onclick="$('#mainPop').hide()"><img src="/images/x-box.png"></span></div>
         </div>
         <!--메인팝업 end-->
 
         <div class="hero-slider">
             <div class="columns">
                 <div class="hero-image" >
-                    <img src="/static/images/main/mainBg01.jpg" alt="">
+                    <img src="/images/main/mainBg01.jpg" alt="">
                 </div>
             </div>
             <div class="columns">
                 <div class="hero-image" >
-                    <img src="/static/images/main/mainBg01.jpg" alt="">
+                    <img src="/images/main/mainBg01.jpg" alt="">
                 </div>
             </div>
         </div><!-- hero-slider End -->
         <div class="mainCont">
             <div class="leftTxtBox">
-                <img src="/static/images/main/mainTxt.png" alt="" class="leftTxt text-focus-in" >
+                <img src="/images/main/mainTxt.png" alt="" class="leftTxt text-focus-in" >
             </div>
             <div class="rightCalBox">
                 <div class="rightCal"></div>
@@ -574,13 +575,13 @@
         </div>
         <div class="secondRight">
             <div class="hero-slider2" data-carousel>
-                <div class="carousel-cell" style="background-image:url(/static/images/main/img01.jpg);">
+                <div class="carousel-cell" style="background-image:url(/images/main/img01.jpg);">
                     <div class="overlay"></div>
                     <div class="inner">
                         “지친 삶 속에서 자연과 함께하는 즐거운 시간”
                     </div>
                 </div>
-                <div class="carousel-cell" style="background-image:url(/static/images/main/img02.jpg);">
+                <div class="carousel-cell" style="background-image:url(/images/main/img02.jpg);">
                     <div class="overlay"></div>
                     <div class="inner">
                         “고객에게 감사의 마음으로 최고의 서비스를 약속합니다.”
@@ -726,7 +727,7 @@
 
 
     <!--textmotion-->
-    <script src="/static/js/ScrollTrigger.js"></script>
+    <script src="/js/ScrollTrigger.js"></script>
     <script>
       window.counter = function($) {
         // this refers to the html element with the data-scroll-showCallback tag

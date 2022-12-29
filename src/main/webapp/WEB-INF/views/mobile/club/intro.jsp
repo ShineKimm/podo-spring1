@@ -20,7 +20,7 @@
 		그 누구도 상상하지 못했던 아주 특별한 컨셉의 컨트리클럽이 지금 귀하의 도전과 사랑을 기다리고 있습니다.
 	</div> 
 	<br>
-	<img src="/static/mobile/images/introImg1.jpg" alt="" class="introImg">
+	<img src="/mobile/images/introImg1.jpg" alt="" class="introImg">
 
 	<div class="commonDot">클럽개요</div>
 		<div class="calTxt">

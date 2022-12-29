@@ -13,7 +13,7 @@
     try {
       const response = await axios.get('https://api.ipify.org?format=json');
       getIP = response.data.ip;
-      console.log(getIP);
+      //console.log(getIP);
       $("#ip").val(getIP);
     } catch (error) {
       console.error(error);
@@ -241,7 +241,7 @@
             <li class="" onclick="location.href='/board/honor'">홀인원</li>
             <li class="on" onclick="location.href='/reservation/joinList'">조인게시판</li>
 
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 정보마당 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 조인게시판</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 정보마당 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 조인게시판</li>
         </ul>
     </div>
     <div class="contents">
@@ -271,12 +271,12 @@
                     <td>
                         <div class="birth w180" id="calContainer">
                             <txt id="txtDate"></txt>
-                            <span class="choiceCalendar"><img src="/static/images/cal_icon.png"></span>
+                            <span class="choiceCalendar"><img src="/images/cal_icon.png"></span>
                             <div class="openCalendar">
                                 <div class="smallCalendarTit">
-                                    <p class="arwl"><a href="javascript:mPrevMonth()"><img src="/static/images/btn_ml.png" alt="전달"></a></p>
+                                    <p class="arwl"><a href="javascript:mPrevMonth()"><img src="/images/btn_ml.png" alt="전달"></a></p>
                                     <h3 id="calHeader"></h3>
-                                    <p class="arwr"><a href="javascript:mNextMonth()"><img src="/static/images/btn_mr.png" alt="다음달"></a></p>
+                                    <p class="arwr"><a href="javascript:mNextMonth()"><img src="/images/btn_mr.png" alt="다음달"></a></p>
                                 </div>
                                 <table class="jCalendar">
                                     <colgroup>

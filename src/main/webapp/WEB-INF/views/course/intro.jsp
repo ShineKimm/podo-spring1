@@ -14,7 +14,7 @@
             <li class="on" onclick="location.href='/course/intro'">코스소개</li>
             <li class="" onclick="location.href='/board/list?type=5'">코스갤러리</li>
 
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 코스소개 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 코스소개</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 코스소개 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 코스소개</li>
         </ul>
     </div>
 
@@ -32,7 +32,7 @@
         </div>
 
         <ul class="courseInfoBox">
-            <img src="/static/images/course/courseToal.jpg" alt="" class="leftImg">
+            <img src="/images/course/courseToal.jpg" alt="" class="leftImg">
             <ul class="rightIntroTxt">
                 <li class="miniTitle">클럽 개요 <span class="bar"></span></li>
                 <li class="infoTxt">- 코스안내: 27 Hole / 108 Par

@@ -300,5 +300,22 @@ public class MenuController {
     public String memberFind() {
         return "/member/find";
     }
+    @GetMapping("/mobile/member/login")
+    public String mobileMemberLogin() {
+        return "/mobile/member/login";
+    }
+    @GetMapping("/mobile/member/join01")
+    public String mobileMemberJoin01() {
+        return "/mobile/member/join01";
+    }
+    @GetMapping("/mobile/reservation/reserCheck")
+    public String mobileReservationReserCheck() {
+        return "/mobile/reservation/reserCheck";
+    }
+    @GetMapping("/mobile/board/joinWrite")
+    public String mobileBoardJoinWrite() {
+        return "/mobile/board/joinWrite";
+    }
+
 
 }

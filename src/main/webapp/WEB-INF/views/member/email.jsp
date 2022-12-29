@@ -14,7 +14,7 @@
             <li class="" onclick="location.href='/member/clause'">이용약관</li>
             <li class="" onclick="location.href='/member/policy'">개인정보처리방침</li>
             <li class="on" onclick="location.href='/member/email'">이메일무단수집거부</li>
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 약관안내 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 이메일무단수집거부</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 약관안내 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 이메일무단수집거부</li>
         </ul>
     </div>
     <div class="contents">

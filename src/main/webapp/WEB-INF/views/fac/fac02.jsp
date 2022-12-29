@@ -71,11 +71,11 @@
   }
   .bx-wrapper2 .bx-prev {
     left:30px;
-    background:url(/static/images/controls_arw2L.png) no-repeat;
+    background:url(/images/controls_arw2L.png) no-repeat;
   }
   .bx-wrapper2 .bx-next {
     right:30px;
-    background:url(/static/images/controls_arw2R.png) no-repeat;
+    background:url(/images/controls_arw2R.png) no-repeat;
   }
   .bx-wrapper2 .bx-controls-direction a {
     position: absolute;
@@ -107,7 +107,7 @@
             <li class="" onclick="location.href='/fac/fac03'">프로샵</li>
             <li class="" onclick="location.href='/fac/fac04'">락카</li>
 
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 시설안내 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 레스토랑</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 시설안내 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 레스토랑</li>
         </ul>
     </div>
     <div class="contents">
@@ -137,12 +137,12 @@
             <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
             <div class="bx-wrapper2">
                 <ul class="slider2">
-                    <li><img src="/static/images/R_01.jpg" title="식당"></li>
-                    <li><img src="/static/images/R_02.jpg" title="식당"></li>
-                    <li><img src="/static/images/R_03.jpg" title="식당"></li>
-                    <li><img src="/static/images/R_04.jpg" title="식당"></li>
-                    <li><img src="/static/images/R_05.jpg" title="식당"></li>
-                    <li><img src="/static/images/R_06.jpg" title="식당"></li>
+                    <li><img src="/images/R_01.jpg" title="식당"></li>
+                    <li><img src="/images/R_02.jpg" title="식당"></li>
+                    <li><img src="/images/R_03.jpg" title="식당"></li>
+                    <li><img src="/images/R_04.jpg" title="식당"></li>
+                    <li><img src="/images/R_05.jpg" title="식당"></li>
+                    <li><img src="/images/R_06.jpg" title="식당"></li>
                 </ul>
 
                 <script>

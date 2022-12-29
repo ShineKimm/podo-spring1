@@ -10,7 +10,7 @@
   });
 
   function init() {
-    if(<%=session.getAttribute("MS_NUM") == null%>) {
+    if(<%=session.getAttribute("MS_NUM") == null %>) {
       alert("로그인 후 이용 가능합니다.");
       location.href = "/member/login?page=/reservation/joinCal";
       return;
@@ -123,7 +123,7 @@
             <li class="" onclick="location.href='/board/honor'">홀인원</li>
             <li class="on" onclick="location.href='/reservation/joinList'">조인게시판</li>
 
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 정보마당 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 조인게시판</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 정보마당 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 조인게시판</li>
         </ul>
     </div>
     <div class="contents">

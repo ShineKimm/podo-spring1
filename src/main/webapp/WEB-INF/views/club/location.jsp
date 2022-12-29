@@ -14,14 +14,14 @@
             <li class="" onclick="location.href='/club/intro'">클럽소개</li>
             <li class="" onclick="location.href='/club/greeting'">인사말</li>
             <li class="on" onclick="location.href='/club/location'">오시는길</li>
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 시설안내 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 오시는길</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 시설안내 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 오시는길</li>
         </ul>
     </div>
     <div class="contents">
         <div class="locaTitle focus-in-expand">도심과 가까운 명문 골프장, <span class="tt">포도C.C</span></div>
 
         <ul class="locaTxt focus-in-expand" >
-            <li class="img"><img src="/static/images/locaIcon.png" alt=""></li>
+            <li class="img"><img src="/images/locaIcon.png" alt=""></li>
             <li>경상북도 김천시 구성면 남김천대로 2532 <br>
                 (구 주소 : 경상북도 김천시 구성면 송죽리 661-2번지 ) <span class="bold">문의전화: 054-420-0200 &nbsp;&nbsp;&nbsp;&nbsp; FAX: 054-420-0239</span></li>
         </ul>

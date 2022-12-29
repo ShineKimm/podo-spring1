@@ -75,7 +75,7 @@
 
 				if(fileName1 != "" && filePath1 != "") {
 					if(isImage(fileName1)) {
-						let img = String.format("<div class='viewContentBox'><img src='{0}/{1}' alt=''></div>", filePath1, fileName1);
+						let img = String.format("<div class='viewContentBox'><img src='/images/getfile?fullpath={0}/{1}' alt=''></div>", filePath1, fileName1);
 						imageContainer.show();
 						imageContainer.append(img);
 					}
@@ -83,14 +83,14 @@
 
 				if(fileName2 != "" && filePath2 != "") {
 					if(isImage(fileName2)) {
-						let img = String.format("<div class='viewContentBox'><img src='{0}/{1}' alt=''></div>", filePath2, fileName2);
+						let img = String.format("<div class='viewContentBox'><img src='/images/getfile?fullpath={0}/{1}' alt=''></div>", filePath2, fileName2);
 						imageContainer.show();
 						imageContainer.append(img);
 					}
 				}
 				if(fileName3 != "" && filePath3 != "") {
 					if(originFileName3.slice(-3)=="mp4") {
-						let img = String.format("<video muted autoplay loop controls width='370'><source src='{0}/{1}' type='video/mp4'></video>" ,filePath3, fileName3);
+						let img = String.format("<video muted autoplay loop controls width='370'><source src='/images/getfile?fullpath={0}/{1}' type='video/mp4'></video>" ,filePath3, fileName3);
 						imageContainer.show();
 						imageContainer.append(img);
 					}
@@ -146,7 +146,7 @@
 			</tbody>
 	</table>
 	<div class="btnBox">
-		<a href="/mobile/board/list?type=<%=Request("type")%>" class="cancel">목록</a>
+		<a href="/mobile/board/list?type=<%=request.getParameter("type")%>" class="cancel">목록</a>
 	</div>
 
 	
