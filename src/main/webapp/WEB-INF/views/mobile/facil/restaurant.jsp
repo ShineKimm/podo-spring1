@@ -29,4 +29,4 @@
 또한 조용하고 아늑한 분위기의 단체실은 소규모 모임이나 비즈니스 파트너와 미팅을 위한 장소로서 모던하고 깔끔한 환경을 제공하고 있습니다. 
 	</div>
 </div>
-<!-- #include virtual='/mobile/include/footer.jsp' -->
+<%@ include file="../include/footer.jsp" %>

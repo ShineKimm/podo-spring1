@@ -28,4 +28,4 @@
 		따뜻하게 마련된 온탕에서 자연의 경관을 즐기시면서 하루 동안의 피로를 깨끗이 풀고 가시기 바랍니다.
 	</div>
 </div>
-<!-- #include virtual='/mobile/include/footer.jsp' -->
+<%@ include file="../include/footer.jsp" %>

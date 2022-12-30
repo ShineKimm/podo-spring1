@@ -1,13 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
+<script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
 <script>
 
 	let mDate;
 	let mCos = "All";
 	let sYear, fYear;
 	let rowData;
+	let getIP;
+
+	//ip 가져오기
+	async function getClientIP() {
+		try {
+			const response = await axios.get('https://api.ipify.org?format=json');
+			getIP = response.data.ip;
+			// console.log(getIP);
+		} catch (error) {
+			console.error(error);
+		}
+	}
 
 	$(document).ready(function(data) {
+		getClientIP();
 		init();
 	});
 
@@ -30,10 +44,10 @@
 
 		let day = "<%=request.getParameter("BK_DAY")%>";
 		if (<%=request.getParameter("OLD_BK_DAY") != null%>) {
-			day = "<%=request.getParameter("OLD_BK_DAY")%>";
+			day = "<%=request.getParameter("OLD_BK_DAY")%>"
 		}
 
-		if(day != null) {
+		if(day != "null") {
 			mDate = day;
 			let dSel = getDateFormat(mDate);
 			$("#txtChooseDate").empty().append(String.format("{0}년 {1}월 {2}일 ({3}요일)", dSel.yyyy(), dSel.mm(), dSel.dd(), dSel.week()));
@@ -179,6 +193,7 @@
 		params["coDiv"] = globals.coDiv;
 		params["date"] = mDate;
 		params["cos"] = mCos;
+		params["msNum"] = "<%=session.getAttribute("MS_NUM")%>";
 
 		mAjax(sUrl, params, "POST", true, function(data) {
 			if(data.resultCode == "0000") {
@@ -239,10 +254,10 @@
 			return;
 		}
 
-		let sUrl = "/changeReservation";
+		let sUrl = "";
 		let params = {};
 
-		let msNum = <%=session.getAttribute("MS_NUM")%>;
+		let msNum = "<%=session.getAttribute("MS_NUM")%>";
 		let bkCharge = rowData[i].BK_B_CHARGE;
 		if(rowData[i].BK_S_CHARGE != "") {
 			bkCharge = rowData[i].BK_S_CHARGE;
@@ -250,20 +265,23 @@
 
 		if (<%=request.getParameter("OLD_BK_DAY") != null%>) {
 			//params["method"] = "changeReservation";
+			sUrl = "/changeReservation";
 			params["coDiv"] = globals.coDiv;
 			params["aday"] = rowData[i].BK_DAY;
 			params["acos"] = rowData[i].BK_COS;
 			params["atime"] = rowData[i].BK_TIME;
 			params["charge"] = bkCharge;
-			params["bDay"] = <%=request.getParameter("OLD_BK_DAY")%>;
-			params["bCos"] = <%=request.getParameter("OLD_BK_COS")%>;
-			params["bTime"] = <%=request.getParameter("OLD_BK_TIME")%>;
+			params["bDay"] = "<%=request.getParameter("OLD_BK_DAY")%>";
+			params["bCos"] = "<%=request.getParameter("OLD_BK_COS")%>";
+			params["bTime"] = "<%=request.getParameter("OLD_BK_TIME")%>";
 			params["msNum"] = msNum;
 			params["media"] = "M";
+			params["ip"] = getIP;
 			
 			ans = confirm("[변경 확인] " + rowData[i].BK_DAY.substring(0,4)+"-"+rowData[i].BK_DAY.substring(4,6)+"-"+rowData[i].BK_DAY.substring(6,8)+" 날짜의 \n\n"+rowData[i].BK_TIME.substring(0,2)+"시"+rowData[i].BK_TIME.substring(2,4)+"분 "+rowData[i].BK_COS_NM+" 예약으로 변경하시겠습니까?");
 		} else {
 			//params["method"] = "doReservation";
+			sUrl = "/doReservation";
 			params["coDiv"] = globals.coDiv;
 			params["day"] = rowData[i].BK_DAY;
 			params["cos"] = rowData[i].BK_COS;
@@ -271,6 +289,7 @@
 			params["charge"] = bkCharge;
 			params["msNum"] = msNum;
 			params["media"] = "M";
+			params["ip"] = getIP;
 
 			ans = confirm("[예약 확인] " + rowData[i].BK_DAY.substring(0,4)+"-"+rowData[i].BK_DAY.substring(4,6)+"-"+rowData[i].BK_DAY.substring(6,8)+" 날짜의 \n\n"+rowData[i].BK_TIME.substring(0,2)+"시"+rowData[i].BK_TIME.substring(2,4)+"분 "+rowData[i].BK_COS_NM+" 예약을 확정하시겠습니까?");
 		}

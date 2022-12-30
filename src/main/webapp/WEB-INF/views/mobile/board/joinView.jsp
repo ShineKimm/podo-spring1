@@ -1,12 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
+<script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
 
 <script>
 	let mType = "6";
 	let mIdx;
 	let re_rows;
+	let getIP;
+
+	//ip 가져오기
+	async function getClientIP() {
+		try {
+			const response = await axios.get('https://api.ipify.org?format=json');
+			getIP = response.data.ip;
+			//console.log(getIP);
+		} catch (error) {
+			console.error(error);
+		}
+	}
 
 	$(document).ready(function() {
+		getClientIP();
 		init();
 	});
 
@@ -170,7 +184,7 @@
 	}
 
 	function doUpdate() {
-		location.href = "/mobile/board/joinWrite.jsp?action=U&idx=" + mIdx;
+		location.href = "/mobile/board/joinWrite?action=U&idx=" + mIdx;
 	}
 
 	function writeReply() {
@@ -182,6 +196,7 @@
 		params["type"] = mType;
 		params["idx"] = mIdx;
 		params["content"] = $("#txtReContent").val();
+		params["ip"] = getIP;
 
 		mAjax(sUrl, params, "POST", true, function(data) {
 			if(data.resultCode == "0000") {
@@ -261,5 +276,5 @@
 		<ul class="listComment" id="replyContainer">
 		</ul>
 	
-</div>	
-<!-- #include virtual='/mobile/include/footer.jsp' -->
+</div>
+<%@ include file="../include/footer.jsp" %>

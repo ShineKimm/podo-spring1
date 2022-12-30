@@ -95,7 +95,7 @@
 		</div>
 		<div class="mainBtnWrap">
 			<ul>
-				<li class="on" onclick="location.href='./mobile/reservation/reservation'"><p><img src="/mobile/images/calendar_w.svg"></p>인터넷예약</li>
+				<li class="on" onclick="location.href='/mobile/reservation/reservation'"><p><img src="/mobile/images/calendar_w.svg"></p>인터넷예약</li>
 				<li onclick="location.href='/mobile/club/intro'"><p><img src="/mobile/images/m_icon1.svg"></p>클럽소개</li>
 				<li onclick="location.href='/mobile/guide/guide'"><p><img src="/mobile/images/m_icon2.svg"></p>이용안내</li>
 			</ul>

@@ -19,7 +19,7 @@ function init() {
 }
 
 function doSearch() {
-	let sUrl = "/controller/ReservationController";
+	let sUrl = "/getReservationList";
 	let params = {};
 
 	//params["method"] = "getReservationList";
@@ -85,14 +85,14 @@ function cantCancel() {
 function cantChange() {
 	alert("해당 예약은 위약일자에 포함되는 예약으로 예약변경이 불가능합니다.");
 }
-
+//TODO 사용안하는 기능 (구현된 기능 없음) 확인필요
 function blDeleteReservation(i) {
 
 	ans = confirm("[위약 확인] 해당건은 위약 일자에 포함되는 건으로 취소시 위약이 발생합니다. 취소를 진행 하시겠습니까?");
 
 	if (ans == true) {
 
-		let sUrl = "/controller/ReservationController";
+		let sUrl = "/blDeleteReservation";
 		let params = {};
 
 		//params["method"] = "blDeleteReservation";
@@ -169,10 +169,10 @@ function changeReservation(i) {
 <form id="form_change" action="/mobile/reservation/reservation" method="post">
 	<input type="hidden" name="OLD_BK_DAY" 					id="BK_DAY" >
 	<input type="hidden" name="OLD_BK_COS" 					id="BK_COS" >
-	<input type="hidden" name="OLD_BK_COS_NM" 			id="BK_COS_NM" >
+	<input type="hidden" name="OLD_BK_COS_NM" 				id="BK_COS_NM" >
 	<input type="hidden" name="OLD_BK_TIME" 				id="BK_TIME" >
 	<input type="hidden" name="OLD_BK_NAME" 				id="BK_NAME" >
-	<input type="hidden" name="OLD_BK_ROUNDF" 			id="BK_ROUNDF" >
+	<input type="hidden" name="OLD_BK_ROUNDF" 				id="BK_ROUNDF" >
 </form>
 <div class="menuTabBox">
 	<ul class="menuList">

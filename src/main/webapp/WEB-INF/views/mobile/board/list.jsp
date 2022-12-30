@@ -84,7 +84,7 @@
 						template += "<div class='galleryBox fadeBox fadeInUp'>			";
 						template += "	<div class='gallBoxCont'>																																						";
 						template += "	<a href='javascript:onClickRow({0})'>																																						";
-						template += "		<div class='galImg'><img src='{1}/{2}' onerror='this.src=\"/mobile/images/introImg1.jpg\"'></div>																															";
+						template += "		<div class='galImg'><img src='/images/getfile?fullpath={1}/{2}' onerror='this.src=\"/mobile/images/introImg1.jpg\"'></div>																															";
 						template += "			<div class='gallery'>																																						";
 						template += "				<div class='gallTitle'>{3}</div>																															";
 						template += "				<p class='gallDate'>{4}</p>																																		";
@@ -94,7 +94,7 @@
 						template += "	</div>																																															";
 						template += "</div>																																																";
 
-						eventList.append(String.format(template, i, rows[i].FILE_PATH3, rows[i].FILE_NAME3, rows[i].TITLE, rows[i].INPUT_DATETIME));
+						eventList.append(String.format(template, i, rows[i].FILE_PATH1, rows[i].FILE_NAME1, rows[i].TITLE, rows[i].INPUT_DATETIME, rows[0].FILE_PATH3, rows[0].FILE_NAME3));
 					} else {
 						let tr = $("<tr style='cursor:pointer' onclick='onClickRow(" + i + ")'></tr>");
 						let td1 = $("<td>" + rows[i].IDX + "</td>");

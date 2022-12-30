@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
-<!-- #include virtual='/mobile/include/menuList' 메뉴리스트 파일 없음 -->
+<%--TODO 사용하는페이지인지 확인필요--%>
 <div class="contents" style="padding-bottom:0;">
 	<ul class="commonTitle">
 		<li class="title">코스안내</li>

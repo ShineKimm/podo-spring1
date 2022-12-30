@@ -207,7 +207,7 @@
     let sUrl = "/getTeeList";
     let params = {};
 
-    if(mDate == null || mDate == '') {
+    if(mDate == null || mDate == '' || mDate == "null") {
       alert("날짜를 선택하세요.");
       return;
     }
