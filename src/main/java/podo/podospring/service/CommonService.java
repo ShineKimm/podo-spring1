@@ -17,4 +17,8 @@ public class CommonService {
 
         return commonDAO.getCommonCode(params);
     }
+
+    public void deviceIdentification(HashMap<String, Object> params) {
+        commonDAO.deviceIdentification(params);
+    }
 }

@@ -6,18 +6,18 @@
   });
 
   function init() {
-    var sUrl = "/getMainData";
-    var params = {};
+    let sUrl = "/getMainData";
+    let params = {};
 
     mAjax(sUrl, params, "GET", true, function(data) {
       if(data.resultCode == "0000") {
-        var connect = data.connect;
-        var member = data.member;
+        let connect = data.connect;
+        let member = data.member;
 
-        var tr = $("<tr></tr>");
-        var td1 = $("<td>WEB : " + connect[0].S_WEB_CNT + "</td>");
-        var td2 = $("<td>WEB : " + connect[1].S_WEB_CNT + "</td>");
-        var td3 = $("<td>WEB : " + connect[2].S_WEB_CNT + "</td>");
+        let tr = $("<tr></tr>");
+        let td1 = $("<td>WEB : " + connect[0].S_WEB_CNT + "</td>");
+        let td2 = $("<td>WEB : " + connect[1].S_WEB_CNT + "</td>");
+        let td3 = $("<td>WEB : " + connect[2].S_WEB_CNT + "</td>");
         $("#tbody_connect").append(tr.append(td1, td2, td3));
 
         tr = $("<tr></tr>");

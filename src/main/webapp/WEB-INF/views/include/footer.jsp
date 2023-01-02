@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!--textmotion-->
-<script src="/static/js/ScrollTrigger.js"></script>
+<script src="/js/ScrollTrigger.js"></script>
 <script>
   window.counter = function($) {
     // this refers to the html element with the data-scroll-showCallback tag
-    var span = this.querySelector('span');
-    var current = parseInt(span.textContent);
+    let span = this.querySelector('span');
+    let current = parseInt(span.textContent);
     span.textContent = current + 1;
   };
 
   document.addEventListener('DOMContentLoaded', function($){
-    var trigger = new ScrollTrigger({
+    let trigger = new ScrollTrigger({
       addHeight: true
     });
   });
@@ -18,7 +18,7 @@
 <!-- footer 영역 -->
 <div id="footerWrap">
     <div class="footerBox">
-        <img src="/static/images/f_logo.png" alt="" class="logo_g">
+        <img src="/images/f_logo.png" alt="" class="logo_g">
         <!--<ul class="snsLink">
             <li class=""><a href="javascript:alert('준비중입니다.')"><img src="/images/sns_f.png" alt=""></a></li>
             <li class=""><a href="javascript:alert('준비중입니다.')"><img src="/images/sns_t.png" alt=""></a></li>

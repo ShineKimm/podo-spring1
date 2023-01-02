@@ -3,11 +3,11 @@
 
 <script>
 
-  var stDate, edDate;
-  var startPage = 1;
-  var endPage = 1;
-  var currentPage = 1;
-  var pageCnt = 10;
+  let stDate, edDate;
+  let startPage = 1;
+  let endPage = 1;
+  let currentPage = 1;
+  let pageCnt = 10;
 
   $(document).ready(function() {
     init();
@@ -15,14 +15,14 @@
   });
 
   function init() {
-    if(<%=session.getAttribute("MS_NUM") == null%>) {
+    if(<%=session.getAttribute("MS_NUM") == null %>) {
       alert("로그인 후 이용 가능합니다.");
       location.href = "/member/login?page=/reservation/joinList";
       return;
     }
 
-    var date = new Date();
-    var date2 = addMonth(date.yyyymmdd(), 3);
+    let date = new Date();
+    let date2 = addMonth(date.yyyymmdd(), 3);
     if("<%=request.getParameter("date")%>".length == 8) {
       date = getDateFormat("<%=request.getParameter("date")%>");
       date2 = getDateFormat("<%=request.getParameter("date")%>");
@@ -38,8 +38,8 @@
   }
 
   function doSearch() {
-    var sUrl = "/getJoinList";
-    var params = {};
+    let sUrl = "/getJoinList";
+    let params = {};
 
     // params["method"] = "getJoinList";
 
@@ -50,8 +50,8 @@
     params["startCnt"] = (currentPage - 1) * pageCnt;
     params["pageCnt"] = pageCnt;
 
-    var text = $("#txtSearchText").val();
-    var opt = $("#selSearchOption").val();
+    let text = $("#txtSearchText").val();
+    let opt = $("#selSearchOption").val();
 
     if(text != "") {
       params["searchText"] = text;
@@ -62,7 +62,7 @@
       if(data.resultCode == "0000") {
         rows = data.rows;
 
-        var tbody = $("#tbody");
+        let tbody = $("#tbody");
         tbody.empty();
 
         if(rows.length == 0) {
@@ -70,14 +70,14 @@
         }
 
         for(i=0; i<rows.length; i++) {
-          var tr = $("<tr style='cursor:pointer' onclick='onClickRow(" + i + ")'></tr>");
-          var td1 = $("<td>" + rows[i].IDX + "</td>");
-          var td2 = $("<td class='bold red'>" + (rows[i].BOARD_DIV == "1" ? "조인" : rows[i].BOARD_DIV == "2" ? "초대" : "기타") + "</td>");
-          var td3 = $("<td>" + (rows[i].JOIN_STATUS == "1" ? "진행" : "마감") + "</td>");
-          var td4 = $("<td class='title'>" + rows[i].TITLE + "</td>");
-          var td5 = $("<td>" + rows[i].WRITER_NAME + "</td>");
-          var td6 = $("<td>" + rows[i].INPUT_DATETIME + "</td>");
-          var td7 = $("<td>" + rows[i].VIEW_CNT + "</td>");
+          let tr = $("<tr style='cursor:pointer' onclick='onClickRow(" + i + ")'></tr>");
+          let td1 = $("<td>" + rows[i].IDX + "</td>");
+          let td2 = $("<td class='bold red'>" + (rows[i].BOARD_DIV == "1" ? "조인" : rows[i].BOARD_DIV == "2" ? "초대" : "기타") + "</td>");
+          let td3 = $("<td>" + (rows[i].JOIN_STATUS == "1" ? "진행" : "마감") + "</td>");
+          let td4 = $("<td class='title'>" + rows[i].TITLE + "</td>");
+          let td5 = $("<td>" + rows[i].WRITER_NAME + "</td>");
+          let td6 = $("<td>" + rows[i].INPUT_DATETIME + "</td>");
+          let td7 = $("<td>" + rows[i].VIEW_CNT + "</td>");
 
           tr.append(td1, td2, td3, td4, td5, td6, td7).appendTo(tbody);
         }
@@ -101,11 +101,11 @@
   }
 
   function initPaging(totalCnt) {
-    var pageContainer = $("#pageContainer");
+    let pageContainer = $("#pageContainer");
     pageContainer.empty();
-    var page = startPage;
-    var prevBtn = "<a href='javascript:doSearchPaging10(" + (startPage - 10) + ")' class='pagebtn'>◀</a>";
-    var nextBtn = "<a href='javascript:doSearchPaging10(" + (startPage + 10) + ")' class='pagebtn'>▶</a>";
+    let page = startPage;
+    let prevBtn = "<a href='javascript:doSearchPaging10(" + (startPage - 10) + ")' class='pagebtn'>◀</a>";
+    let nextBtn = "<a href='javascript:doSearchPaging10(" + (startPage + 10) + ")' class='pagebtn'>▶</a>";
 
     endPage = Math.floor(totalCnt / pageCnt);
     if(totalCnt % pageCnt != 0) {
@@ -116,11 +116,11 @@
       pageContainer.append(prevBtn);
     }
 
-    var div = $("<div class='pageNumWrap'></div>");
+    let div = $("<div class='pageNumWrap'></div>");
 
     for(i=startPage; i<startPage+10; i++) {
       if(i > endPage) break;
-      var a = $(String.format("<a href='javascript:doSearchPaging({0})'>{1}</a>", i, (i < 10 ? "0" + i : i)));
+      let a = $(String.format("<a href='javascript:doSearchPaging({0})'>{1}</a>", i, (i < 10 ? "0" + i : i)));
 
       if(currentPage == i) {
         a.addClass("on")
@@ -137,9 +137,9 @@
   }
 
   function onClickRow(i) {
-    var type = rows[i].TYPE;
-    var idx = rows[i].IDX;
-    var seq = rows[i].SEQ;
+    let type = rows[i].TYPE;
+    let idx = rows[i].IDX;
+    let seq = rows[i].SEQ;
 
     location.href = String.format("/reservation/joinView?idx={0}&seq={1}", idx, seq);
   }
@@ -164,7 +164,7 @@
             <li class="on" onclick="location.href='/reservation/joinList'">조인게시판</li>
             <li class="" onclick="location.href='/board/list?type=7'">명예의 전당</li>
 
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 정보마당 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 조인게시판</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 정보마당 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 조인게시판</li>
         </ul>
     </div>
     <div class="contents">

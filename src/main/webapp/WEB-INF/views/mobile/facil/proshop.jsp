@@ -17,9 +17,9 @@
 
 	<div class="boardTxt">고객의 품위에 맞게 다양하고<br>엄선된 최상의 골프용품을 제공합니다.</div>
 
-<img src="/static/mobile/images/facil/proshop01.jpg" alt="프로샵" class="introImg">
-<img src="/static/mobile/images/facil/proshop02.jpg" alt="프로샵" class="introImg">
-<img src="/static/mobile/images/facil/proshop03.jpg" alt="프로샵" class="introImg">
+<img src="/mobile/images/facil/proshop01.jpg" alt="프로샵" class="introImg">
+<img src="/mobile/images/facil/proshop02.jpg" alt="프로샵" class="introImg">
+<img src="/mobile/images/facil/proshop03.jpg" alt="프로샵" class="introImg">
 
 	<div class="clubTxt">
 		최고의 품질로 엄선된 상품을 갖추고 있으며, 고객님들게 합리적인 가격으로 상품을 구입할실 수 있도록 항상 최선을 다하고 있습니다.

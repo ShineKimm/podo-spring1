@@ -3,15 +3,15 @@
 
 <script>
 
-	var stDate, edDate;
-	var startPage = 1;
-	var endPage = 1;
-	var currentPage = 1;
-	var pageCnt = 10;
+	let stDate, edDate;
+	let startPage = 1;
+	let endPage = 1;
+	let currentPage = 1;
+	let pageCnt = 10;
 
 	$(document).ready(function() {
 		init();
-		initListener();
+		// initListener();
 	});
 
 	function init() {
@@ -21,11 +21,11 @@
 			return;
 		}
 
-		var date = new Date();
-		var date2 = addMonth(date.yyyymmdd(), 3);
-		if(<%=request.getParameter("date")%>.length == 8) {
-			date = getDateFormat(<%=request.getParameter("date")%>);
-			date2 = getDateFormat(<%=request.getParameter("date")%>);
+		let date = new Date();
+		let date2 = addMonth(date.yyyymmdd(), 3);
+		if("<%=request.getParameter("date")%>".length == 8) {
+			date = getDateFormat("<%=request.getParameter("date")%>");
+			date2 = getDateFormat("<%=request.getParameter("date")%>");
 		}
 		sYear = date.yyyy();
 		sMonth = date.mm();
@@ -38,8 +38,8 @@
 	}
 
 	function doSearch() {
-		var sUrl = "/getJoinList";
-		var params = {};
+		let sUrl = "/getJoinList";
+		let params = {};
 
 		//params["method"] = "getJoinList";
 
@@ -50,8 +50,8 @@
 		params["startCnt"] = (currentPage - 1) * pageCnt;
 		params["pageCnt"] = pageCnt;
 
-		var text = $("#txtSearchText").val();
-		var opt = $("#selSearchOption").val();
+		let text = $("#txtSearchText").val();
+		let opt = $("#selSearchOption").val();
 
 		if(text != "") {
 			params["searchText"] = text;
@@ -62,7 +62,7 @@
 			if(data.resultCode == "0000") {
 				rows = data.rows;
 
-				var tbody = $("#tbody");
+				let tbody = $("#tbody");
 				tbody.empty();
 
 				if(rows.length == 0) {
@@ -70,11 +70,11 @@
 				}
 
 				for(i=0; i<rows.length; i++) {
-					var tr = $("<tr style='cursor:pointer' onclick='onClickRow(" + i + ")'></tr>");
-					var td1 = $("<td class='bold'>" + (rows[i].BOARD_DIV == "1" ? "조인" : rows[i].BOARD_DIV == "2" ? "초대" : "기타") + "</td>");
-					var td2 = $("<td class='" + (rows[i].JOIN_STATUS == "1" ? "orange" : "gray") + "'>" + (rows[i].JOIN_STATUS == "1" ? "진행" : "마감") + "</td>");
-					var td3 = $("<td class='title'>" + rows[i].TITLE + "</td>");
-					var td4 = $("<td>" + rows[i].INPUT_DATETIME + "</td>");
+					let tr = $("<tr style='cursor:pointer' onclick='onClickRow(" + i + ")'></tr>");
+					let td1 = $("<td class='bold'>" + (rows[i].BOARD_DIV == "1" ? "조인" : rows[i].BOARD_DIV == "2" ? "초대" : "기타") + "</td>");
+					let td2 = $("<td class='" + (rows[i].JOIN_STATUS == "1" ? "orange" : "gray") + "'>" + (rows[i].JOIN_STATUS == "1" ? "진행" : "마감") + "</td>");
+					let td3 = $("<td class='title'>" + rows[i].TITLE + "</td>");
+					let td4 = $("<td>" + rows[i].INPUT_DATETIME + "</td>");
 
 					tr.append(td1, td2, td3, td4).appendTo(tbody);
 				}
@@ -98,11 +98,11 @@
 	}
 
 	function initPaging(totalCnt) {
-	  var pageContainer = $("#pageContainer");
+	  let pageContainer = $("#pageContainer");
 	  pageContainer.empty();
-	  var page = startPage;
-	  var prevBtn = "<a href='javascript:doSearchPaging10(" + (startPage - 10) + ")' class='pagebtn'>◀</a>";
-	  var nextBtn = "<a href='javascript:doSearchPaging10(" + (startPage + 10) + ")' class='pagebtn'>▶</a>";
+	  let page = startPage;
+	  let prevBtn = "<a href='javascript:doSearchPaging10(" + (startPage - 10) + ")' class='pagebtn'>◀</a>";
+	  let nextBtn = "<a href='javascript:doSearchPaging10(" + (startPage + 10) + ")' class='pagebtn'>▶</a>";
 
 	  endPage = Math.floor(totalCnt / pageCnt);
 	  if(totalCnt % pageCnt != 0) {
@@ -113,11 +113,11 @@
 	    pageContainer.append(prevBtn);
 	  }
 
-	  var span = $("<span class='pageNumWrap'></span>");
+	  let span = $("<span class='pageNumWrap'></span>");
 
 	  for(i=startPage; i<startPage+10; i++) {
 	    if(i > endPage) break;
-	    var a = $(String.format("<a href='javascript:doSearchPaging({0})'>{1}</a>", i, (i < 10 ? "0" + i : i)));
+	    let a = $(String.format("<a href='javascript:doSearchPaging({0})'>{1}</a>", i, (i < 10 ? "0" + i : i)));
 
 	    if(currentPage == i) {
 	      a.addClass("on")
@@ -134,9 +134,9 @@
 	}
 
 	function onClickRow(i) {
-		var type = rows[i].TYPE;
-		var idx = rows[i].IDX;
-		var seq = rows[i].SEQ;
+		let type = rows[i].TYPE;
+		let idx = rows[i].IDX;
+		let seq = rows[i].SEQ;
 
 		location.href = String.format("/mobile/board/joinView?idx={0}&seq={1}", idx, seq);
 	}

@@ -22,4 +22,13 @@ public class CommonDAO extends AbstractDAO {
         }
         return resultMap;
     }
+
+    public void deviceIdentification(HashMap<String, Object> params) {
+        int dateCnt = selectCnt("common.deviceIdentification1",params);
+        if (dateCnt == 0) {
+            insert("common.deviceIdentification2",params);
+        } else {
+            update("common.deviceIdentification3",params);
+        }
+    }
 }

@@ -18,11 +18,11 @@
             <li class="" onclick="location.href='/guide/etiquette'">에티켓</li>
             <li class="on" onclick="location.href='/guide/inquiry'">예약/기타문의</li>
 
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 이용안내 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 예약/기타문의</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 이용안내 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 예약/기타문의</li>
         </ul>
     </div>
     <div class="contents">
-        <img src="/static/images/inqImg.jpg" alt="">
+        <img src="/images/inqImg.jpg" alt="">
 
         <p class="guideMiniTitle"> 카카오톡 상담 이용안내</p>
         <table class="inqTable" style="margin-top:10px;">
@@ -33,7 +33,7 @@
             <tbody>
             <tr>
                 <td class="none">
-                    <img src="/static/images/inqIcon.png" alt="" class="icon">
+                    <img src="/images/inqIcon.png" alt="" class="icon">
                     친구추가
                 </td>
                 <td class="left">
@@ -43,14 +43,14 @@
                             2) APP(앱) & PC 카카오톡 친구추가 방법
                         </li>
                         <li class="link sq" onclick="alert('준비중입니다.')">
-                            <img src="/static/images/kakao.jpg" alt="">&nbsp; 친구추가
+                            <img src="/images/kakao.jpg" alt="">&nbsp; 친구추가
                         </li>
                     </ul>
                 </td>
             </tr>
             <tr>
                 <td class="none">
-                    <img src="/static/images/inqIcon2.png" alt="" class="icon">
+                    <img src="/images/inqIcon2.png" alt="" class="icon">
                     상담내용 작성
                 </td>
                 <td class="left">
@@ -62,7 +62,7 @@
                             지금 바로 문의를 원하시면 톡상담을 클릭해주세요!
                         </li>
                         <li class="link sq margin" onclick="alert('준비중입니다.')">
-                            <img src="/static/images/kakao.jpg" alt="">&nbsp; 톡상담
+                            <img src="/images/kakao.jpg" alt="">&nbsp; 톡상담
                         </li>
                     </ul>
                 </td>

@@ -14,7 +14,7 @@
             <li class="" onclick="location.href='/member/login'">로그인</li>
             <li class="on" onclick="location.href='/member/join01'">회원가입</li>
             <li class="" onclick="location.href='/member/find'">아이디/비번찾기</li>
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 회원가입 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 회원가입</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 회원가입 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 회원가입</li>
         </ul>
     </div>
     <div class="contents">
@@ -38,8 +38,8 @@
         <div class="joinBox" style="margin-bottom:10px;">
             <h2 class="commonDot"> 회원인증 및 가입여부확인</h2>
             <div class="grayBgBox">
-                <a href="javascript:certification_phone()"><img src="/static/images/btn_self.png"></a>
-                <a href="javascript:certification_ipin()"><img src="/static/images/btn_ipin.png"></a>
+                <a href="javascript:certification_phone()"><img src="/images/btn_self.png"></a>
+                <a href="javascript:certification_ipin()"><img src="/images/btn_ipin.png"></a>
             </div>
             <div class="joinTextBox">
                 <p>• <span class="bold">기존에 실명인증을 받은 아이디가 있는 고객님은 추가로 아이디를 만드실 수 없습니다.</span></p>
@@ -69,8 +69,8 @@
 </div>	<!-- wrap End -->
 <!--layer popoup-->
 <div id="fpop1" class="f_contents1" style="display: none;">
-    <div class="popX"><a href="javascript:popupFClose(1)"><img src="/static/images/x-box.png"></a></div>
-    <p><img src="/static/images/allpopup.jpg"></p>
+    <div class="popX"><a href="javascript:popupFClose(1)"><img src="/images/x-box.png"></a></div>
+    <p><img src="/images/allpopup.jpg"></p>
     <div class="popText center bold">상기 두 가지 방법으로 설정하신 후에도 결제 창이 보이지 않으실 경우에는<br>
         <span class="red">[로그아웃>재로그인]</span>하신 후 다시 이용해 주시기 바랍니다.</div>
 </div>

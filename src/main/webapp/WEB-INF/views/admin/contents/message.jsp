@@ -11,15 +11,15 @@
   }
 
   function getMessage() {
-    var sUrl = "/controller/AdminController";
-    var params = {};
+    let sUrl = "/controller/AdminController";
+    let params = {};
 
     //params["method"] = "getMessage";
     params["coDiv"] = globals.coDiv;
 
     mAjax(sUrl, params, "POST", true, function(data) {
       if(data.resultCode == "0000") {
-        var rows = data.rows;
+        let rows = data.rows;
 
         for(i=0; i<rows.length; i++) {
           $("#txtMessage" + rows[i].HP_CODE).val(replaceAll(rows[i].HP_CONTENTS, "<br>", "\n"));
@@ -31,8 +31,8 @@
   }
 
   function doSave(code) {
-    var sUrl = "/controller/AdminController";
-    var params = {};
+    let sUrl = "/controller/AdminController";
+    let params = {};
 
     //params["method"] = "doSaveMessage";
     params["coDiv"] = globals.coDiv;

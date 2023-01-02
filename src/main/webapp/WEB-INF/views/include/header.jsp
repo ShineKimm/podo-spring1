@@ -6,9 +6,7 @@
     if(agent.indexOf(IS_MOBILE) > -1) {
         response.sendRedirect("/mobile/index");
     }
-
 %>
-
 <!DOCTYPE html>
 <html lang="ko" />
 <head>
@@ -26,26 +24,26 @@
     <meta property="og:description" content="포도CC, 포도 컨트리클럽">
     <meta property="og:url" content="">
     <title>포도 컨트리클럽</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/import.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/content.css?v=2">
+    <link rel="stylesheet" type="text/css" href="/css/import.css">
+    <link rel="stylesheet" type="text/css" href="/css/content.css?v=2">
 
-    <link rel="stylesheet" type="text/css" href="/static/css/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="/static/css/slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/slick-theme.css"/>
 
-    <script type="text/javascript" src="/static/js/jquery.js"></script>
-    <script type="text/javascript" src="/static/js/slick.js"></script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/slick.js"></script>
 
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/js/common.js"></script>
-    <script src="/static/js/jquery.preloaders.js"></script>
-    <script src="/static/js/tools.js"></script>
-    <script src="/static/js/globals.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script src="/js/jquery.preloaders.js"></script>
+    <script src="/js/tools.js"></script>
+    <script src="/js/globals.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-    <link rel="stylesheet" type="text/css" href="/static/css/motion.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/animate.css">
-    <script src="/static/js/wow.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/motion.css">
+    <link rel="stylesheet" type="text/css" href="/css/animate.css">
+    <script src="/js/wow.js"></script>
     <script type="text/javascript">
       /* 컨텐츠 fade in */
       wow = new WOW(
@@ -63,11 +61,12 @@
       $(document).ready(function() {
         //setProtocol();
         sessionCheck();
+        deviceIdentification();
       });
 
       function doLogout() {
-        var sUrl = "/doLogout";
-        var params = {};
+        let sUrl = "/doLogout";
+        let params = {};
 
         //params["method"] = "doLogout";
 
@@ -87,8 +86,8 @@
       }
 
       function sessionCheck() {
-        var sUrl = "/sessionConfirm";
-        var params = {/*"method" : "sessionConfirm"*/};
+        let sUrl = "/sessionConfirm";
+        let params = {/*"method" : "sessionConfirm"*/};
 
         mAjax(sUrl, params, "POST", false, function(data) {
           if(data.resultCode == "2000") {
@@ -106,12 +105,12 @@
           return;
         }
 
-        var sUrl = "/doDeleteMemeber";
-        var params = {};
+        let sUrl = "/doDeleteMemeber";
+        let params = {};
 
         //params["method"] = "doDeleteMemeber";
 
-        var con = confirm("회원님께서 확인 버튼을 누르면 탈퇴가 완료됩니다.\r\n그동안 포도CC를 이용해 주셔서 감사합니다..");
+        let con = confirm("회원님께서 확인 버튼을 누르면 탈퇴가 완료됩니다.\r\n그동안 포도CC를 이용해 주셔서 감사합니다..");
         if(con == true) {
           mAjax(sUrl, params, "POST", true, function(data) {
             if(data.resultCode == "0000") {
@@ -122,22 +121,59 @@
           });
         }
       }
+      function deviceIdentification() {
+        let web_cnt = "";
+        let mobile_cnt = "";
+        let android_cnt = "";
+        let ios_cnt = "";
+
+        let userAgent = navigator.userAgent.toLowerCase();
+        console.log(userAgent)
+
+        if (userAgent.indexOf("iphone") > -1) {
+          web_cnt = 0
+          mobile_cnt = 1
+          android_cnt = 0
+          ios_cnt = 1
+        }else if (userAgent.indexOf("android") > -1) {
+          web_cnt = 0
+          mobile_cnt = 1
+          android_cnt = 1
+          ios_cnt = 0
+        }else{
+          web_cnt = 1
+          mobile_cnt = 0
+          android_cnt = 0
+          ios_cnt = 0
+        }
+        let sUrl = "/deviceIdentification";
+        let params = {};
+
+        params["web_cnt"] = web_cnt;
+        params["mobile_cnt"] = mobile_cnt;
+        params["android_cnt"] = android_cnt;
+        params["ios_cnt"] = ios_cnt;
+
+        mAjax(sUrl, params, "POST", true, function(data) {
+          console.log("카운트 추가됨");
+        });
+      }
 
 
     </script>
     <!--textmotion-->
-    <script src="/static/js/ScrollTrigger.js"></script>
+    <script src="/js/ScrollTrigger.js"></script>
     <script>
       window.counter = function($) {
         // this refers to the html element with the data-scroll-showCallback tag
-        var span = this.querySelector('span');
-        var current = parseInt(span.textContent);
+        let span = this.querySelector('span');
+        let current = parseInt(span.textContent);
 
         span.textContent = current + 1;
       };
 
       document.addEventListener('DOMContentLoaded', function($){
-        var trigger = new ScrollTrigger({
+        let trigger = new ScrollTrigger({
           addHeight: true
         });
       });
@@ -145,9 +181,9 @@
     <!-- subTab Fixed js -->
     <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
 
-    <script src="/static/js/jquery.preloaders.js"></script>
-    <script src="/static/js/tools.js"></script>
-    <script src="/static/js/globals.js"></script>
+    <script src="/js/jquery.preloaders.js"></script>
+    <script src="/js/tools.js"></script>
+    <script src="/js/globals.js"></script>
 </head>
 <body />
 <div class="siteAll"><div class="toggleMenu"><span></span></div></div>

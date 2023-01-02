@@ -7,8 +7,8 @@
       location.href="/index";
     }
 
-    var chk = getCookie("chkSaveId");
-    var id = getCookie("loginId");
+    let chk = getCookie("chkSaveId");
+    let id = getCookie("loginId");
 
     if(chk != null && chk != "") {
       $("#chkSaveId").attr('checked', true);
@@ -32,12 +32,12 @@
   });
 
   function doLogin() {
-    var sUrl = "/doLogin";
-    var params = {};
-    var page = "<%=request.getParameter("page")%>";
+    let sUrl = "/doLogin";
+    let params = {};
+    let page = "<%=request.getParameter("page")%>";
 
-    var id = $("#txtId").val();
-    var pw = $("#txtPw").val();
+    let id = $("#txtId").val();
+    let pw = $("#txtPw").val();
 
     if(page == null || page == "" || page == "null") {
       page = "/index";
@@ -60,7 +60,7 @@
 
     mAjax(sUrl, params, "POST", true, function(data) {
       if(data.resultCode == "0000") {
-        var chkSaveId = $('input:checkbox[id="chkSaveId"]').is(":checked");
+        let chkSaveId = $('input:checkbox[id="chkSaveId"]').is(":checked");
 
         if(chkSaveId) {
           setCookie("loginId", $("#txtId").val(), 365);
@@ -92,12 +92,12 @@
             <li class="on" onclick="location.href='/member/login'">로그인</li>
             <li class="" onclick="location.href='/member/join01'">회원가입</li>
             <li class="" onclick="location.href='/member/find'">아이디/비번찾기</li>
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 로그인 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 로그인</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 로그인 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 로그인</li>
         </ul>
     </div>
     <div class="contents">
         <div class="grayBgBox" style="border:0;">
-            <img src="/static/images/logo.svg" alt="" class="endLogo">
+            <img src="/images/logo.svg" alt="" class="endLogo">
             <div class="loginCont">
                 <span class="loginTitle"></span>
                 <ul class="loginInput">

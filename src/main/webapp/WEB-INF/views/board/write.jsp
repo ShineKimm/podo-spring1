@@ -20,7 +20,7 @@
             <li class="" onclick="location.href='/reservation/joinList'">조인게시판</li>
             <li class="" onclick="location.href='/board/list'">명예의 전당</li>
 
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 정보마당 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 공지사항</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 정보마당 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 공지사항</li>
         </ul>
     </div>
     <div class="contents">

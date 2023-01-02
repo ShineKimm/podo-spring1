@@ -41,7 +41,7 @@ $(document).ready(function() {
 	}
 
 	function onChangeAllAgree() {
-		var val = $("input:checkbox[id='chkAgreeAll']").is(":checked") ? "Y" : "N";
+		let val = $("input:checkbox[id='chkAgreeAll']").is(":checked") ? "Y" : "N";
 
 		for(i=1; i<=5; i++) {
 			$("input:radio[name=chkAgree" + i + "]:input[value=" + val + "]").prop("checked", true).change();

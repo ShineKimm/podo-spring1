@@ -20,7 +20,7 @@
 		광활한 대자연 속에서 즐기는 도전과 건강 최고의 관리로 고객님들의 라운딩에 최고의 즐거움을 선사 하겠습니다.
 	</div> 	
 	<br>
-	<img src="/static/mobile/images/introImg1.jpg" alt="" class="introImg">
+	<img src="/mobile/images/introImg1.jpg" alt="" class="introImg">
 
 	<div class="calTxt">
 		오염되지 않은 공기로 때묻지 않은 청정한 자연을 느낄 수 있는 18홀 골프

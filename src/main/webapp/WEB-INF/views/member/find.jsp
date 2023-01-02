@@ -29,14 +29,14 @@
   }
 
   function doFindId() {
-    var sUrl = "/doFindId";
-    var params = {};
+    let sUrl = "/doFindId";
+    let params = {};
 
     //params["method"] = "doFindId";
     params["coDiv"] = globals.coDiv;
 
-    var name = $("#txtIdName").val();
-    var phone = $("#txtIdPhone").val();
+    let name = $("#txtIdName").val();
+    let phone = $("#txtIdPhone").val();
 
     if(name == "") {
       alert("이름을 입력하세요.");
@@ -57,14 +57,14 @@
   }
 
   function doFindPw() {
-    var sUrl = "/doFindPw";
-    var params = {};
+    let sUrl = "/doFindPw";
+    let params = {};
 
     //params["method"] = "doFindPw";
     params["coDiv"] = globals.coDiv;
 
-    var name = $("#txtPwName").val();
-    var id = $("#txtPwId").val();
+    let name = $("#txtPwName").val();
+    let id = $("#txtPwId").val();
 
     if(name == "") {
       alert("이름을 입력하세요.");
@@ -101,12 +101,12 @@
             <li class="on" onclick="location.href='/member/find'">아이디/비번찾기</li>
             <li class="" onclick="location.href='/member/modify'">정보수정</li>
             <li class="" onclick="deleteMember();">가입탈퇴</li>
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 회원가입 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 아이디/비번찾기</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 회원가입 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 아이디/비번찾기</li>
         </ul>
     </div>
     <div class="contents">
         <div class="grayBgBox" style="border:0;">
-            <img src="/static/images/findIcon.png" alt="그림" class="keyImg">
+            <img src="/images/findIcon.png" alt="그림" class="keyImg">
 
             <div class="findBox">
                 <div class="findId">
