@@ -6,9 +6,7 @@
     if(agent.indexOf(IS_MOBILE) > -1) {
         response.sendRedirect("/mobile/index");
     }
-
 %>
-
 <!DOCTYPE html>
 <html lang="ko" />
 <head>
@@ -63,6 +61,7 @@
       $(document).ready(function() {
         //setProtocol();
         sessionCheck();
+        deviceIdentification();
       });
 
       function doLogout() {
@@ -121,6 +120,43 @@
             }
           });
         }
+      }
+      function deviceIdentification() {
+        let web_cnt = "";
+        let mobile_cnt = "";
+        let android_cnt = "";
+        let ios_cnt = "";
+
+        let userAgent = navigator.userAgent.toLowerCase();
+        console.log(userAgent)
+
+        if (userAgent.indexOf("iphone") > -1) {
+          web_cnt = 0
+          mobile_cnt = 1
+          android_cnt = 0
+          ios_cnt = 1
+        }else if (userAgent.indexOf("android") > -1) {
+          web_cnt = 0
+          mobile_cnt = 1
+          android_cnt = 1
+          ios_cnt = 0
+        }else{
+          web_cnt = 1
+          mobile_cnt = 0
+          android_cnt = 0
+          ios_cnt = 0
+        }
+        let sUrl = "/deviceIdentification";
+        let params = {};
+
+        params["web_cnt"] = web_cnt;
+        params["mobile_cnt"] = mobile_cnt;
+        params["android_cnt"] = android_cnt;
+        params["ios_cnt"] = ios_cnt;
+
+        mAjax(sUrl, params, "POST", true, function(data) {
+          console.log("카운트 추가됨");
+        });
       }
 
 

@@ -13,77 +13,64 @@
 	  }
 
 	function getMainNotice(paraType) {
-		//
-		//
-		// let sUrl = "/controller/BoardController";
-		// let params = {};
-		//
-		// params["method"] = "getBoardList";
-		//
-		// params["coDiv"]    = globals.coDiv;
-		// params["type"]     = paraType;
-		// params["startCnt"] = 0;
-		// params["pageCnt"]  = 3;
-		//
-		// $("#type"+selectType).removeClass("on");
-		// $("#type"+paraType).addClass("on");
-		//
-		// selectType = paraType;
-		//
-		// mAjax(sUrl, params, "POST", false, function(data) {
-		// 	if(data.resultCode == "0000") {
-		//
-		// 		let rows = data.rows;
-		//
-		// 		if (rows.length == 0) {
-		//
-		// 			let notice = ""
-		// 		    notice += "<dl>	";
-		// 		    notice += " <dt>등록된 글이 없습니다.</dt>";
-		// 		    notice += " <dd>-</dd>	";
-		// 		    notice += " </dl>	";
-		//
-		// 		    $("#mainNotice").empty().append(notice);
-		// 			return;
-		// 		}
-		//
-		// 		$("#mainNotice").empty();
-		//
-		// 	    for(i=0; i<rows.length; i++) {
-		//
-		// 			let notice = ""
-		//
-		// 			let link = "/mobile/board/view?type=" + rows[i].TYPE + "&idx=" + rows[i].IDX;
-		// 			let title = rows[i].TITLE;
-		// 			let inputDate = rows[i].INPUT_DATETIME;
-		//
-		// 		    notice += "<dl onclick=\"location.href='" + link + "'\">	";
-		// 		    notice += " <dt>" + title + "</dt>";
-		// 		    notice += " <dd>" + inputDate + "</dd>	";
-		// 		    notice += " </dl>	";
-		// 			$("#mainNotice").append(notice);
-		//
-		// 	    }
-		// 	} else {
-		// 		alert(data.resultMessage);
-		// 	}
-		// });
+
+
+		let sUrl = "/getBoardList";
+		let params = {};
+
+		params["method"] = "getBoardList";
+
+		params["coDiv"]    = globals.coDiv;
+		params["type"]     = paraType;
+		params["startCnt"] = 0;
+		params["pageCnt"]  = 3;
+
+		$("#type"+selectType).removeClass("on");
+		$("#type"+paraType).addClass("on");
+
+		selectType = paraType;
+
+		mAjax(sUrl, params, "POST", false, function(data) {
+			if(data.resultCode == "0000") {
+
+				let rows = data.rows;
+
+				if (rows.length == 0) {
+
+					let notice = ""
+				    notice += "<dl>	";
+				    notice += " <dt>등록된 글이 없습니다.</dt>";
+				    notice += " <dd>-</dd>	";
+				    notice += " </dl>	";
+
+				    $("#mainNotice").empty().append(notice);
+					return;
+				}
+
+				$("#mainNotice").empty();
+
+			    for(i=0; i<rows.length; i++) {
+
+					let notice = ""
+
+					let link = "/mobile/board/view?type=" + rows[i].TYPE + "&idx=" + rows[i].IDX;
+					let title = rows[i].TITLE;
+					let inputDate = rows[i].INPUT_DATETIME;
+
+				    notice += "<dl onclick=\"location.href='" + link + "'\">	";
+				    notice += " <dt>" + title + "</dt>";
+				    notice += " <dd>" + inputDate + "</dd>	";
+				    notice += " </dl>	";
+					$("#mainNotice").append(notice);
+
+			    }
+			} else {
+				alert(data.resultMessage);
+			}
+		});
 	}
-</script>
-<!--
-<script>
-	/*main_top menu*/
-	$(window).on("scroll", function() {
-		console.log($(window).scrollTop())
-		if ($(window).scrollTop() >= 200) {
-			$(".topmenuWrap").addClass("white");
-		}else {
-				$(".topmenuWrap").removeClass("white");	
-		}
-	});
 
 </script>
--->
 
 	<div class="mainWrap">
 		<div class="topImgWrap">

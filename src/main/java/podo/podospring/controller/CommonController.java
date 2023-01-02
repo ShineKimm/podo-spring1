@@ -23,4 +23,11 @@ public class CommonController {
         Map<String, Object> resultMap = commonService.getCommonCode(params);
         return resultMap;
     }
+
+    @ResponseBody
+    @RequestMapping("/deviceIdentification")
+    public void deviceIdentification(@RequestParam HashMap<String, Object> params) {
+
+        commonService.deviceIdentification(params);
+    }
 }
