@@ -15,7 +15,7 @@
             <li class="on" onclick="location.href='/club/intro'">클럽소개</li>
             <li class="" onclick="location.href='/club/greeting'">인사말</li>
             <li class="" onclick="location.href='/club/location'">오시는길</li>
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 시설안내 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 클럽소개</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 시설안내 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 클럽소개</li>
         </ul>
     </div>
     <div class="clubContents">
@@ -59,7 +59,7 @@
     <div class="contents">
         <div class="padding30"></div>
         <div class="ciTitle fromTopIn" data-scroll="toggle(.fromTopIn, .fromTopOut)">CI 소개</div>
-        <img src="/static/images/ciImg.png" alt="" class="ciImg fromTopIn" data-scroll="toggle(.fromTopIn, .fromTopOut)">
+        <img src="/images/ciImg.png" alt="" class="ciImg fromTopIn" data-scroll="toggle(.fromTopIn, .fromTopOut)">
     </div>
 
 </div>	<!-- wrap End -->

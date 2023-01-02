@@ -52,14 +52,14 @@
         <% if (session.getAttribute("MS_NUM") == null) { %>
         <div class="subMenuLink">
             <ul class="menuLinkBox" onclick="location.href='/member/login'">
-                <li class="icon"><img src="/static/images/menuIcon01.png" alt=""></li>
+                <li class="icon"><img src="/images/menuIcon01.png" alt=""></li>
                 <li class="title">로그인</li>
                 <li class="txt">새로워진 포도CC를 <br>
                     만나보세요</li>
             </ul>
             <div class="line"></div>
             <ul class="menuLinkBox" onclick="location.href='/member/join01'">
-                <li class="icon"><img src="/static/images/menuIcon02.png" alt=""></li>
+                <li class="icon"><img src="/images/menuIcon02.png" alt=""></li>
                 <li class="title">회원가입</li>
                 <li class="txt">회원가입 하면 더 <br>
                     많은 혜택을</li>
@@ -68,14 +68,14 @@
         <% } else { %>
         <div class="subMenuLink">
             <ul class="menuLinkBox" onclick="doLogout()">
-                <li class="icon"><img src="/static/images/menuIcon01.png" alt=""></li>
+                <li class="icon"><img src="/images/menuIcon01.png" alt=""></li>
                 <li class="title">로그아웃</li>
                 <li class="txt">새로워진 포도CC를 <br>
                     만나보세요</li>
             </ul>
             <div class="line"></div>
             <ul class="menuLinkBox" onclick="location.href='/member/modify'">
-                <li class="icon"><img src="/static/images/menuIcon03.png" alt=""></li>
+                <li class="icon"><img src="/images/menuIcon03.png" alt=""></li>
                 <li class="title">정보수정</li>
                 <li class="txt">더 좋은 서비스로 <br>
                     보답 하겠습니다</li>

@@ -1295,3 +1295,34 @@ WHERE MS_NUM = '" & msNum & "'
 INSERT INTO podo.en_history
 (co_div, en_chkinno, en_day, en_cos, en_time, en_name, en_payclose, en_hole, en_round, en_locker, en_gpnum, en_charge, en_sale_charge, en_sale_div, en_sex, en_foreign, en_cart, en_msnum, en_ms_id, en_total, en_green_sum, en_green_cost, en_green_vat, en_spec_tax, en_edu_tax, en_sport_tax, en_farm_tax, en_soci_tax, en_other_tax, en_cart_sum, en_cart_cost, en_cart_vat, en_rent_sum, en_rent_cost, en_rent_vat, en_payment, en_billno, en_caddy_amount, en_cartno, en_caddynum, en_return, en_lock_prt, en_cert_no, en_agree_yn, en_caddy_prt, en_sun_payment, en_joy_yn, en_so_yn, en_cart_pass, en_chkin_yn, en_late_yn, input_staff, input_datetime, input_ip, update_staff, update_datetime, update_ip, en_old_green, en_discount_amt, en_sale_amount, jb_chkinno, en_label, en_msdiv, en_unsigned_yn, en_msclass, en_main_codiv, en_mslevel, EN_VISITID, EN_OLD_MC_COST, EN_OLD_LEVEL, EN_SUNBUL_YN, EN_CSALE_AMOUNT, EN_CSALE_DIV)
 VALUES('501', 'G40000332167', '20221231', 'B', '0612', '대니', NULL, 18, '1', '', '2020000001', 'P0015', '', '', '1', '1', NULL, '', '', 162500, 140000, 127273, 12727, 0, 0, 0, 0, 0, 0, 22500, 20455, 2045, 0, 0, 0, 'N', NULL, 0, NULL, '', 'N', 'N', '', '', 'N', '', '', 'N', '', 'N', 'N', 'TEST', '2022-10-25 09:54:09', '10.3.60.135', 'TEST', '2022-10-25 09:54:09', '10.3.60.135', 140000, 0, 0, NULL, NULL, '20', 'N', '01', '501', '10', NULL, NULL, NULL, 'N', 0, '');
+
+-- 디바이스 정보 가져오기
+-- 오늘 날짜 row 생성여부
+--deviceIdentification1
+Select * from web_statics WHERE S_DATE = DATE_FORMAT(NOW(),'%Y%m%d')
+
+--deviceIdentification2
+insert into web_statics (s_date, s_web_cnt, s_mobile_cnt, s_android_cnt, s_ios_cnt) 
+values (
+DATE_FORMAT(NOW(),'%Y%m%d')
+, & web_cnt &
+, & mobile_cnt &
+, & android_cnt &
+, & ios_cnt &
+)
+
+--deviceIdentification3
+update web_statics 
+set s_date = DATE_FORMAT(NOW(),'%Y%m%d')
+, s_web_cnt = s_web_cnt + & web_cnt &
+, s_mobile_cnt = s_mobile_cnt + & mobile_cnt &
+, s_android_cnt = s_android_cnt + & android_cnt &
+, s_ios_cnt = s_ios_cnt + & ios_cnt & 
+where s_date = DATE_FORMAT(NOW(),'%Y%m%d')
+
+
+
+
+
+
+

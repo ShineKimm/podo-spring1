@@ -6,16 +6,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>포도CC 관리자</title>
 
-    <link href="/static/admin/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/admin/css/style.css" rel="stylesheet" type="text/css">
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
-    <script src="/static/js/globals.js"></script>
-    <script src="/static/js/tools.js"></script>
-    <script src="/static/js/jquery.preloaders.js"></script>
+    <script src="/js/globals.js"></script>
+    <script src="/js/tools.js"></script>
+    <script src="/js/jquery.preloaders.js"></script>
 
     <script>
       $(document).ready(function() {
-        var staff = "<%=(String)session.getAttribute("USER_STAFF")%>";
+        let staff = "<%=(String)session.getAttribute("USER_STAFF")%>";
 
         if(staff == "") {
           location.href = "/admin/member/login";
@@ -28,8 +28,8 @@
       });
 
       function doLogout() {
-        var sUrl = "/adminDoLogout";
-        var params = {};
+        let sUrl = "/adminDoLogout";
+        let params = {};
 
         // params["method"] = "doLogout";
 

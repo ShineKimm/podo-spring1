@@ -3,11 +3,11 @@
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script>
 
-	var chkId = false;
-	var chkPw = false;
-	var chkPwConfirm = false;
-	var certifyYn = false;
-	var certifyKey = "";
+	let chkId = false;
+	let chkPw = false;
+	let chkPwConfirm = false;
+	let certifyYn = false;
+	let certifyKey = "";
 
 	$(document).ready(function() {
 		doSearchArea();
@@ -23,8 +23,8 @@
 		$("#txtPw").on("keyup", function() {
 			onCheckPw();
 
-			var pw = $("#txtPw").val();
-			var pwConfirm = $("#txtPwConfirm").val();
+			let pw = $("#txtPw").val();
+			let pwConfirm = $("#txtPwConfirm").val();
 
 			if(pwConfirm != "") {
 				if(pw != pwConfirm) {
@@ -38,8 +38,8 @@
 		});
 
 		$("#txtPwConfirm").on("keyup", function() {
-			var pw = $("#txtPw").val();
-			var pwConfirm = $("#txtPwConfirm").val();
+			let pw = $("#txtPw").val();
+			let pwConfirm = $("#txtPwConfirm").val();
 
 			if(pw != pwConfirm) {
 				chkPwConfirm = false;
@@ -52,32 +52,32 @@
 	
 		 $("#txtName").keyup(function(event) {
 			if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
-			   var inputVal = $(this).val();
+			   let inputVal = $(this).val();
 			   $(this).val(inputVal.replace(/[^(ㄱ-힣a-zA-Z\u318D\u119E\u11A2\u2022\u2025\u00B7\uFE55\u4E10\u3163\u3161)]/gi, ''));
 			}
 		 });
 	})
 
 	function doSignUp() {
-		var sUrl = "/doSignUp";
-		var params = {};
+		let sUrl = "/doSignUp";
+		let params = {};
 
 		//params["method"] = "doSignUp";
 
-		var name = $("#txtName").val();
-		var id = $("#txtId").val();
-		var pw = $("#txtPw").val();
-		var sex = $(':radio[name="chkSex"]:checked').val();
-		var sms = $(':radio[name="chkSms"]:checked').val();
-		var chkMail = $(':radio[name="chkMail"]:checked').val();
-		var chkBirth = $(':radio[name="chkBirth"]:checked').val();
-		var phone1 = $("#txtPhone").val().substring(0,3);
-		var phone2 = $("#txtPhone").val().substring(3,7);
-		var phone3 = $("#txtPhone").val().substring(7,11);
-		var homeAddress1 = $("#txtHomeAddress1").val();
-		var birth = $("#txtBirth").val();
+		let name = $("#txtName").val();
+		let id = $("#txtId").val();
+		let pw = $("#txtPw").val();
+		let sex = $(':radio[name="chkSex"]:checked').val();
+		let sms = $(':radio[name="chkSms"]:checked').val();
+		let chkMail = $(':radio[name="chkMail"]:checked').val();
+		let chkBirth = $(':radio[name="chkBirth"]:checked').val();
+		let phone1 = $("#txtPhone").val().substring(0,3);
+		let phone2 = $("#txtPhone").val().substring(3,7);
+		let phone3 = $("#txtPhone").val().substring(7,11);
+		let homeAddress1 = $("#txtHomeAddress1").val();
+		let birth = $("#txtBirth").val();
 
-		var pattern = /[~!@\#$%<>^&*]/;
+		let pattern = /[~!@\#$%<>^&*]/;
 
 		if(pattern.test(name)) {
 				alert("이름을 확인하세요.");
@@ -129,12 +129,12 @@
 		}
 		if ($("#txtMail1").val() != "") {
 			if ($("#txtMail3").val() == "9") {
-				var email = $("#txtMail1").val() + "@" + $("#txtMail2").val();
+				let email = $("#txtMail1").val() + "@" + $("#txtMail2").val();
 			} else {
-				var email = $("#txtMail1").val() + "@" + $("#txtMail3").val();
+				let email = $("#txtMail1").val() + "@" + $("#txtMail3").val();
 			}
 		} else {
-			var email = "";
+			let email = "";
 		}
 
 		params["coDiv"] = globals.coDiv;
@@ -167,17 +167,17 @@
 	}
 
 	function chkDuplicateId() {
-		var sUrl = "/chkDuplicateId";
-		var params = {};
+		let sUrl = "/chkDuplicateId";
+		let params = {};
 
 		//params["method"] = "chkDuplicateId";
 
-		var id = $("#txtId").val();
+		let id = $("#txtId").val();
 
-		var pattern1 = /[0-9]/;
-		var pattern2 = /[a-zA-Z]/;
+		let pattern1 = /[0-9]/;
+		let pattern2 = /[a-zA-Z]/;
 
-		var chkCnt = 0;
+		let chkCnt = 0;
 
 		if(pattern1.test(id)) chkCnt += 1;
 		if(pattern2.test(id)) chkCnt += 1;
@@ -221,14 +221,14 @@
 	}
 
 	function doCertification() {
-		var sUrl = "/controller/MemberController";
-		var params = {};
+		let sUrl = "/controller/MemberController";
+		let params = {};
 
 		//params["method"] = "doCertification";
 
-		var phone1 = $("#txtPhone").val().substring(0,3);
-		var phone2 = $("#txtPhone").val().substring(3,7);
-		var phone3 = $("#txtPhone").val().substring(7,11);
+		let phone1 = $("#txtPhone").val().substring(0,3);
+		let phone2 = $("#txtPhone").val().substring(3,7);
+		let phone3 = $("#txtPhone").val().substring(7,11);
 
 		if(phone1 == "" || phone1.length != 3) {
 			alert("휴대폰번호를 정확하게 입력하세요.");
@@ -265,7 +265,7 @@
 	}
 
 	function doConfirmCertification() {
-		var code = $("#txtCerCode").val();
+		let code = $("#txtCerCode").val();
 		
 		if (code == "") {
 			alert("인증번호를 먼저 입력해주세요.")
@@ -288,13 +288,13 @@
 	}
 
 	function onCheckPw() {
-		var pw = $("#txtPw").val();
+		let pw = $("#txtPw").val();
 
-		var pattern1 = /[0-9]/;
-		var pattern2 = /[a-zA-Z]/;
-		var pattern3 = /[~!@#$%^*?]/;
+		let pattern1 = /[0-9]/;
+		let pattern2 = /[a-zA-Z]/;
+		let pattern3 = /[~!@#$%^*?]/;
 
-		var chkCnt = 0;
+		let chkCnt = 0;
 
 		if(pattern1.test(pw)) chkCnt += 1;
 		if(pattern2.test(pw)) chkCnt += 1;
@@ -330,8 +330,8 @@
 	}
 
 	function doSearchArea() {
-		var sUrl = "/getCommonCode";
-		var params = {};
+		let sUrl = "/getCommonCode";
+		let params = {};
 
 		//params["method"] = "getCommonCode";
 		params["coDiv"] = globals.coDiv;
@@ -340,14 +340,14 @@
 		mAjax(sUrl, params, "POST", true, function(data) {
 			if(data.resultCode == "0000") {
 				rows = data.rows;
-				var tbody = $("#txtHomeAddress1");
+				let tbody = $("#txtHomeAddress1");
 				tbody.empty();
 				
 				tbody.append("<option value=''>지역선택</option>")
 
 				for(i=0; i<rows.length; i++) {
 
-					var col1 = $("<option value='" + rows[i].CD_CODE + "'>" + rows[i].CD_TITLE1 + "</option>");
+					let col1 = $("<option value='" + rows[i].CD_CODE + "'>" + rows[i].CD_TITLE1 + "</option>");
 
 					tbody.append(col1)
 				}
@@ -362,7 +362,7 @@
 		// yyyymmdd, yyyy-mm-dd, yyyy/mm/dd 
 		// output 
 		// 0: 정상, 1: 해당월의 날짜 넘음, 2: 존재하지 않는 달, 3: 포맷 안맞음, 4: -인 날짜 
-		var y, m, d; 
+		let y, m, d;
 		if (yyyymmdd.length == 8) { 
 			if (!yyyymmdd.match(/[0-9]{8}/g)) 
 				return 3; 
@@ -378,7 +378,7 @@
 		} else { 
 			return 3; 
 		} 
-		var limit_day; 
+		let limit_day;
 		switch (eval(m)) { 
 			case 1: 
 			case 3: 

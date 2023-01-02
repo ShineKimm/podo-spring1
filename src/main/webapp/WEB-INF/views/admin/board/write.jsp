@@ -8,12 +8,12 @@
     location.href = "/admin/index";
   }
 
-  var mFlag;
-  var mType;
-  var mIdx;
-  var getIP = "";
+  let mFlag;
+  let mType;
+  let mIdx;
+  let getIP = "";
 
-  var title = {
+  let title = {
     "1" : "공지사항",
     "2" : "이벤트",
     "3" : "보도자료",
@@ -50,12 +50,14 @@
 
     if(mType == 2 || mType == 5) {
       $("#fileContainer3").show();
+      $(".vFile").hide();
     }
     if(mType ==7){
       $("#fileContainer1").hide();
       $("#fileContainer2").hide();
       $("#fileContainer3").show();
       $(".imgFile").hide();
+      $(".vFile").show();
     }
     if(mType == 8) {
       $("#fileContainer4").show();
@@ -64,29 +66,26 @@
       $("#contentContainer").hide();
       $("#fileContainer2").hide();
     }
-    else{
-      $(".vFile").hide();
-    }
   }
 
   function initListener() {
     $('#fileUpload1').change(function (event) {
-      var fileValue = $("#fileUpload1").val().split("\\");
-      var fileName = fileValue[fileValue.length-1];
+      let fileValue = $("#fileUpload1").val().split("\\");
+      let fileName = fileValue[fileValue.length-1];
 
       $("#txtFileName1").val(fileName);
     });
 
     $('#fileUpload2').change(function () {
-      var fileValue = $("#fileUpload2").val().split("\\");
-      var fileName = fileValue[fileValue.length-1];
+      let fileValue = $("#fileUpload2").val().split("\\");
+      let fileName = fileValue[fileValue.length-1];
 
       $("#txtFileName2").val(fileName);
     });
 
     $('#fileUpload3').change(function () {
-      var fileValue = $("#fileUpload3").val().split("\\");
-      var fileName = fileValue[fileValue.length-1];
+      let fileValue = $("#fileUpload3").val().split("\\");
+      let fileName = fileValue[fileValue.length-1];
 
       if(fileName.slice(-3)!="mp4"){
         alert("mp4형식의 파일만 올려주세요");
@@ -96,8 +95,8 @@
       }
       if (this.files && this.files[0]) {
 
-        var maxSize = 900* 1024 * 1024;
-        var fileSize = this.files[0].size;
+        let maxSize = 900* 1024 * 1024;
+        let fileSize = this.files[0].size;
 
         if(fileSize > maxSize){
           alert("첨부파일 사이즈는 900MB 이내로 등록 가능합니다.");
@@ -137,8 +136,8 @@
   }
 
   function doSearchDetail() {
-    var sUrl = "/getBoardDetail";
-    var params = {};
+    let sUrl = "/getBoardDetail";
+    let params = {};
 
     //params["method"] = "getBoardDetail";
     params["coDiv"] = globals.coDiv;
@@ -149,18 +148,18 @@
       if(data.resultCode == "0000") {
         console.log()
         rows = data.rows;
-        var tbody = $("#tbody");
+        let tbody = $("#tbody");
         tbody.empty();
 
-        var title = rows[0].TITLE;
-        var content = rows[0].CONTENT;
-        var link = rows[0].LINK;
-        var boardDiv = rows[0].BOARD_DIV;
-        var fileName1 = rows[0].ORIGIN_FILE_NAME1;
-        var fileName2 = rows[0].ORIGIN_FILE_NAME2;
-        var fileName3 = rows[0].ORIGIN_FILE_NAME3;
-        var positionX = rows[0].POSITION_X;
-        var positionY = rows[0].POSITION_Y;
+        let title = rows[0].TITLE;
+        let content = rows[0].CONTENT;
+        let link = rows[0].LINK;
+        let boardDiv = rows[0].BOARD_DIV;
+        let fileName1 = rows[0].ORIGIN_FILE_NAME1;
+        let fileName2 = rows[0].ORIGIN_FILE_NAME2;
+        let fileName3 = rows[0].ORIGIN_FILE_NAME3;
+        let positionX = rows[0].POSITION_X;
+        let positionY = rows[0].POSITION_Y;
 
         $("#txtTitle").val(title);
         $("#txtContent").val(content);
@@ -178,7 +177,7 @@
   }
 
   function writeBoard() {
-    var sUrl = "/writeBoard";
+    let sUrl = "/writeBoard";
 
     // $("#method").val("writeBoard");
     $("#coDiv").val(globals.coDiv);
@@ -191,14 +190,14 @@
     $("#FileName2").val($("#txtFileName2").val());
     $("#FileName3").val($("#txtFileName3").val());
 
-    var title = $("#txtTitle").val();
+    let title = $("#txtTitle").val();
 
     if(title == "") {
       alert("제목을 입력하세요.");
       return;
     }
 
-    var formData = new FormData($("#fileForm")[0]);
+    let formData = new FormData($("#fileForm")[0]);
 
     progressStart();
 
@@ -220,7 +219,7 @@
     try {
       const response = await axios.get('https://api.ipify.org?format=json');
       getIP = response.data.ip;
-      console.log(getIP);
+      //console.log(getIP);
     } catch (error) {
       console.error(error);
     }

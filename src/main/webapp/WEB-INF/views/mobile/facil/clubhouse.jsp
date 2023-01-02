@@ -17,12 +17,12 @@
 
 	<div class="boardTxt">머무르고 싶고, 들여다보고 싶은 클럽하우스</div>
 
-<img src="/static/mobile/images/facil/clubhouse01.jpg" alt="클럽하우스" class="introImg">
-<img src="/static/mobile/images/facil/clubhouse02.jpg" alt="클럽하우스" class="introImg">
-<img src="/static/mobile/images/facil/clubhouse03.jpg" alt="클럽하우스" class="introImg">
-<img src="/static/mobile/images/facil/clubhouse04.jpg" alt="클럽하우스" class="introImg">
-<img src="/static/mobile/images/facil/clubhouse05.jpg" alt="클럽하우스" class="introImg">
-<img src="/static/mobile/images/facil/clubhouse06.jpg" alt="클럽하우스" class="introImg">
+<img src="/mobile/images/facil/clubhouse01.jpg" alt="클럽하우스" class="introImg">
+<img src="/mobile/images/facil/clubhouse02.jpg" alt="클럽하우스" class="introImg">
+<img src="/mobile/images/facil/clubhouse03.jpg" alt="클럽하우스" class="introImg">
+<img src="/mobile/images/facil/clubhouse04.jpg" alt="클럽하우스" class="introImg">
+<img src="/mobile/images/facil/clubhouse05.jpg" alt="클럽하우스" class="introImg">
+<img src="/mobile/images/facil/clubhouse06.jpg" alt="클럽하우스" class="introImg">
 
 	<div class="clubTxt">
 		클럽하우스는 마치 갤러리를 연상케 하는 모던 빈티지 디자인으로 되어 있으며, 탁 트인 시야를 통해 펼쳐지는 그린과 숲을 파노라마 전망으로 즐길 수 있습니다.

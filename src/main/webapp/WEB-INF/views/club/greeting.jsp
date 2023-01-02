@@ -14,7 +14,7 @@
             <li class="" onclick="location.href='/club/intro'">클럽소개</li>
             <li class="on" onclick="location.href='/club/greeting'">인사말</li>
             <li class="" onclick="location.href='/club/location'">오시는길</li>
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 시설안내 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 인사말</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 시설안내 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 인사말</li>
         </ul>
     </div>
     <div class="clubContents height">
@@ -42,7 +42,7 @@
                     <br>
                     감사합니다.
                 </li>
-                <li class="sign"><img src="/static/images/sign.png" alt=""></li>
+                <li class="sign"><img src="/images/sign.png" alt=""></li>
             </ul>
             <img src="" alt="" class="clubImg">
         </div>

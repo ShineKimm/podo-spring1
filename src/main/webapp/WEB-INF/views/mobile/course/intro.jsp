@@ -16,7 +16,7 @@
 
 	<div class="boardTxt">포도컨트리클럽의 High quality 코스로 여러분을 초대합니다.</div>
 
-	<img src="/static/mobile/images/course/courseToal.jpg" alt="" class="introImg">
+	<img src="/mobile/images/course/courseToal.jpg" alt="" class="introImg">
 	
 	<p class="clubTxt">
 		자연과 예술적인 감동은 설레임으로 다가오고, 매홀마다 새로운 기대와 아름다움을 보여 줍니다.<br>

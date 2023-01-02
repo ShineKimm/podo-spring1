@@ -18,25 +18,25 @@
     <meta property="og:url" content="">
     <title>포도 컨트리클럽</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-    <script type="text/javascript" src="/static/js/common.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
-    <link rel="stylesheet" type="text/css" href="/static/css/import.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/motion.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="/css/import.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/motion.css">
+    <link rel="stylesheet" type="text/css" href="/css/animate.css">
 
     <!-- 메인 배경 줌아웃 zoomOut -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
 
-    <script src="/static/js/jquery.preloaders.js"></script>
-    <script src="/static/js/tools.js"></script>
-    <script src="/static/js/globals.js"></script>
-    <script src="/static/js/wow.js"></script>
+    <script src="/js/jquery.preloaders.js"></script>
+    <script src="/js/tools.js"></script>
+    <script src="/js/globals.js"></script>
+    <script src="/js/wow.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.5/flickity.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.5/flickity.pkgd.min.js"></script>
@@ -56,14 +56,15 @@
       /*//컨텐츠 fade in */
     </script>
     <script>
-      var mDate;
-      var mYear, mMonth;
-      var rowData;
+      let mDate;
+      let mYear, mMonth;
+      let rowData;
 
       $(document).ready(function() {
         init();
         //setProtocol();
         sessionCheck();
+        deviceIdentification();
       });
 
       function init() {
@@ -116,7 +117,7 @@
           $("#mainPop").hide();
         }
 
-        var date = new Date();
+        let date = new Date();
         mYear = date.yyyy();
         mMonth = date.mm();
 
@@ -131,9 +132,9 @@
         }
       }
       function sessionCheck() {
-        var sUrl = "/sessionConfirm";
-        //var params = {"method" : "sessionConfirm"};
-        var params = {};
+        let sUrl = "/sessionConfirm";
+        //let params = {"method" : "sessionConfirm"};
+        let params = {};
 
         mAjax(sUrl, params, "POST", false, function(data) {
           if(data.resultCode == "2000") {
@@ -144,8 +145,8 @@
       }
 
       function initCalendar(selector, year, month) {
-        var sUrl = "/getCalendar";
-        var params = {};
+        let sUrl = "/getCalendar";
+        let params = {};
 
         //params["method"] = "getCalendar";
         params["coDiv"] = globals.coDiv;
@@ -155,27 +156,28 @@
           if(data.resultCode == "0000") {
             $(selector + " #calHeader").empty().append(month + "월");
 
-            var currentDay = new Date().yyyymmdd();
-            var tBody = $(selector + " #calendar-body");
+            let currentDay = new Date().yyyymmdd();
+            let tBody = $(selector + " #calendar-body");
             tBody.empty();
 
-            var rows = data.rows;
+            let rows = data.rows;
 
             if(rows.length > 0) {
-              var row = $("<tr></tr>");
+              let row = $("<tr></tr>");
 
-              var fWeek = rows[0].CL_DAYDIV - 1;
+              let fWeek = rows[0].CL_DAYDIV - 1;
 
               for(i=0; i<fWeek; i++) {
                 row.append($("<td></td>"));
               }
               for(i=0; i<rows.length; i++) {
+                let td = "";
                 if(rows[i].CL_SOLAR >= currentDay) {
                   if (rows[i].CL_SOLAR == currentDay) {
-                    var td = $("<td>"+ rows[i].DAYNUM + "</td>");
+                    td = $("<td>"+ rows[i].DAYNUM + "</td>");
                     td.addClass('today');
                   } else if(rows[i].BK_TEAM > 0) {
-                    var td = $("<td>" + rows[i].DAYNUM + "</td>");
+                    td = $("<td>" + rows[i].DAYNUM + "</td>");
                     if (rows[i].CL_BUSINESS == "2") {
                       td.addClass('sat');
                     } else if (rows[i].CL_BUSINESS == "3" || rows[i].CL_BUSINESS == "4") {
@@ -187,7 +189,7 @@
                       onClickDay($(this).data('date'));
                     });
                   } else {
-                    var td = $("<td>" + rows[i].DAYNUM + "</td>");
+                    td = $("<td>" + rows[i].DAYNUM + "</td>");
                     if (rows[i].CL_BUSINESS == "2") {
                       td.addClass('sat');
                     } else if (rows[i].CL_BUSINESS == "3" || rows[i].CL_BUSINESS == "4") {
@@ -196,7 +198,7 @@
                     td.addClass('impossible');
                   }
                 } else {
-                  var td = $("<td>" + rows[i].DAYNUM + "</td>");
+                  td = $("<td>" + rows[i].DAYNUM + "</td>");
                   if (rows[i].CL_BUSINESS == "2") {
                     td.addClass('sat');
                   } else if (rows[i].CL_BUSINESS == "3" || rows[i].CL_BUSINESS == "4") {
@@ -213,7 +215,7 @@
                 }
               }
 
-              var addTd = 7 - row.children("td").length;
+              let addTd = 7 - row.children("td").length;
 
               if(addTd != 7) {
                 for(i=0; i<addTd; i++) {
@@ -266,7 +268,7 @@
       }
 
       function bkSumit() {
-        if(mDate == "") {
+        if(mDate == "" || mDate == null) {
           alert("날짜를 선택해주세요.");
           return;
         }
@@ -279,15 +281,15 @@
         /*if (paraType == 1) {
             $(".btn1").addClass("on");
             $(".btn2").removeClass("on");
-            var bbsTitle = "공지사항";
+            let bbsTitle = "공지사항";
         } else {
             $(".btn2").addClass("on")
             $(".btn1").removeClass("on")
-            var bbsTitle = "이벤트";
+            let bbsTitle = "이벤트";
         }*/
 
-        var sUrl = "/getBoardList";
-        var params = {};
+        let sUrl = "/getBoardList";
+        let params = {};
 
         //params["method"] = "getBoardList";
 
@@ -299,13 +301,13 @@
         mAjax(sUrl, params, "POST", false, function(data) {
           if(data.resultCode == "0000") {
 
-            var rows = data.rows;
+            let rows = data.rows;
 
             if (rows.length == 0) {
 
-              var notice = ""
+              let notice = ""
               notice += "<li>	";
-              notice += " <img src='/static/images/main/bg_blank.png'>";
+              notice += " <img src='/images/main/bg_blank.png'>";
               notice += " <div class='slideText'>	";
               notice += " <h1> 등록된 공지사항이 없습니다. </h1>	";
               notice += " <h4> - </h4>	"
@@ -332,14 +334,14 @@
 
             for(i=0; i<rows.length; i++) {
 
-              var notice = ""
+              let notice = ""
 
-              var link = "/board/view?type=1&idx=" + rows[i].IDX;
-              var title = rows[i].TITLE;
-              var inputDate = rows[i].INPUT_DATETIME;
+              let link = "/board/view?type=1&idx=" + rows[i].IDX;
+              let title = rows[i].TITLE;
+              let inputDate = rows[i].INPUT_DATETIME;
 
               notice += "<li>	";
-              notice += " <img src='/static/images/main/bg_blank.png'>";
+              notice += " <img src='/images/main/bg_blank.png'>";
               notice += " <div class='slideText'>	";
               notice += " <h1> " + title + " </h1>	";
               notice += " <h4> " + inputDate + " </h4>	"
@@ -366,7 +368,7 @@
                 if(getCookie("main_popup"+rows[i].IDX) == "Y"){
                   continue;
                 }
-                var popup_html = ""
+                let popup_html = ""
                 popup_html += '<div id="main_popup'+rows[i].IDX+'" style="position: fixed; z-index: 10000000; top: '+rows[i].POSITION_Y+'px; left: '+rows[i].POSITION_X+'px;">';
                 popup_html += '<a href="'+rows[i].LINK+'">';
                 popup_html += '<img src="/images/getfile?fullpath='+rows[i].FILE_PATH1+'/'+rows[i].FILE_NAME1+'" height="400" width="400">';
@@ -389,8 +391,8 @@
       }
 
       function doLogout() {
-        var sUrl = "/doLogout";
-        var params = {};
+        let sUrl = "/doLogout";
+        let params = {};
 
         //params["method"] = "doLogout";
 
@@ -417,6 +419,42 @@
         $("#" + id).hide('fade');
       }
 
+      function deviceIdentification() {
+        let web_cnt = "";
+        let mobile_cnt = "";
+        let android_cnt = "";
+        let ios_cnt = "";
+        let userAgent = navigator.userAgent.toLowerCase();
+
+        if (userAgent.indexOf("iphone") > -1) {
+          web_cnt = 0
+          mobile_cnt = 1
+          android_cnt = 0
+          ios_cnt = 1
+        }else if (userAgent.indexOf("android") > -1) {
+          web_cnt = 0
+          mobile_cnt = 1
+          android_cnt = 1
+          ios_cnt = 0
+        }else{
+          web_cnt = 1
+          mobile_cnt = 0
+          android_cnt = 0
+          ios_cnt = 0
+        }
+        let sUrl = "/deviceIdentification";
+        let params = {};
+
+        params["web_cnt"] = web_cnt;
+        params["mobile_cnt"] = mobile_cnt;
+        params["android_cnt"] = android_cnt;
+        params["ios_cnt"] = ios_cnt;
+
+        mAjax(sUrl, params, "POST", true, function(data) {
+          // console.log("카운트 추가됨");
+        });
+      }
+
     </script>
 
     <form id="resv_info" method="POST" action="/reservation/reservation">
@@ -425,7 +463,7 @@
 
 <body>
 
-<%--TODO 팝업링크 --%>
+<%-- 팝업링크 --%>
 <div id="popup_modal"></div>
 
 <div class="siteAll"><div class="toggleMenu"><span class=""></span></div></div>
@@ -470,50 +508,50 @@
             <h4>포도CC 그린피 안내 및 이벤트</h4>
             <div class="slider2" height="400px">
                 <div>
-                    <p><a href="http://www.band.us/@podocc"><img src="/static/images/220805_밴드_bn.jpg" title="밴드오픈"></a></p>
-                    <p><a href="/board/view?type=2&idx=4"><img src="/static/images/220719_bn.jpg" title="홀인원이벤트"></a></p>
-                    <p><a href="/board/view?type=1&idx=63"><img src="/static/images/220627_bn.jpg" title="캐디피인상안내"></a></p>
+                    <p><a href="http://www.band.us/@podocc"><img src="/images/220805_밴드_bn.jpg" title="밴드오픈"></a></p>
+                    <p><a href="/board/view?type=2&idx=4"><img src="/images/220719_bn.jpg" title="홀인원이벤트"></a></p>
+                    <p><a href="/board/view?type=1&idx=63"><img src="/images/220627_bn.jpg" title="캐디피인상안내"></a></p>
                 </div>
                 <div>
-                    <p><a href="/board/view?type=1&idx=68"><img src="/static/images/220808_10월그린피_bn.jpg" title="10월 그린피"></a></p>
-                    <p><a href="/board/view?type=1&idx=69"><img src="/static/images/220808_10월패키지_bn.jpg" title="10월 1박2일"></a></p>
-                    <p><a href="/board/view?type=1&idx=70"><img src="/static/images/220808_10월골프대회_bn.jpg" title="10월골프대회"></a></p>
+                    <p><a href="/board/view?type=1&idx=68"><img src="/images/220808_10월그린피_bn.jpg" title="10월 그린피"></a></p>
+                    <p><a href="/board/view?type=1&idx=69"><img src="/images/220808_10월패키지_bn.jpg" title="10월 1박2일"></a></p>
+                    <p><a href="/board/view?type=1&idx=70"><img src="/images/220808_10월골프대회_bn.jpg" title="10월골프대회"></a></p>
                 </div>
                 <div>
-                    <p><a href="/board/view?type=1&idx=73"><img src="/static/images/221011_10월골프대회_bn.jpg" title="10월 골프대회"></a></p>
-                    <p><a href="/board/view?type=1&idx=71"><img src="/static/images/220913g_bn.jpg" title="11월 그린피"></a></p>
-                    <p><a href="/board/view?type=1&idx=72"><img src="/static/images/220913p_bn.jpg" title="11월 1박2일"></a></p>
+                    <p><a href="/board/view?type=1&idx=73"><img src="/images/221011_10월골프대회_bn.jpg" title="10월 골프대회"></a></p>
+                    <p><a href="/board/view?type=1&idx=71"><img src="/images/220913g_bn.jpg" title="11월 그린피"></a></p>
+                    <p><a href="/board/view?type=1&idx=72"><img src="/images/220913p_bn.jpg" title="11월 1박2일"></a></p>
                 </div>
                 <div>
-                    <p><a href="/board/view?type=1&idx=8"><img src="/static/images/210423_2.jpg" title="김천 포도CC 시행의건"></a></p>
-                    <p><a href="/board/view?type=1&idx=23"><img src="/static/images/210705_bn.jpg" alt="대체공휴일"></a></p>
-                    <p><a href="/board/view?type=1&idx=37"><img src="/static/images/211011_bn.jpg" alt="9홀추가"></a></p>
+                    <p><a href="/board/view?type=1&idx=8"><img src="/images/210423_2.jpg" title="김천 포도CC 시행의건"></a></p>
+                    <p><a href="/board/view?type=1&idx=23"><img src="/images/210705_bn.jpg" alt="대체공휴일"></a></p>
+                    <p><a href="/board/view?type=1&idx=37"><img src="/images/211011_bn.jpg" alt="9홀추가"></a></p>
                 </div>
                 <div>
-                    <p><a href="/board/view?type=1&idx=18"><img src="/static/images/210603_2_bn.jpg" alt="9홀코스오픈"></a></p>
-                    <p><a href="#"><img src="/static/images/no-img.jpg" title="이미지 없을때"></a>
-                    <p><a href="#"><img src="/static/images/no-img.jpg" title="이미지 없을때"></a>
+                    <p><a href="/board/view?type=1&idx=18"><img src="/images/210603_2_bn.jpg" alt="9홀코스오픈"></a></p>
+                    <p><a href="#"><img src="/images/no-img.jpg" title="이미지 없을때"></a>
+                    <p><a href="#"><img src="/images/no-img.jpg" title="이미지 없을때"></a>
                 </div>
             </div>
-            <div class="popX"><a href="javascript:closePopupNotToday();">오늘하루안보기</a><span onclick="$('#mainPop').hide()"><img src="/static/images/x-box.png"></span></div>
+            <div class="popX"><a href="javascript:closePopupNotToday();">오늘하루안보기</a><span onclick="$('#mainPop').hide()"><img src="/images/x-box.png"></span></div>
         </div>
         <!--메인팝업 end-->
 
         <div class="hero-slider">
             <div class="columns">
                 <div class="hero-image" >
-                    <img src="/static/images/main/mainBg01.jpg" alt="">
+                    <img src="/images/main/mainBg01.jpg" alt="">
                 </div>
             </div>
             <div class="columns">
                 <div class="hero-image" >
-                    <img src="/static/images/main/mainBg01.jpg" alt="">
+                    <img src="/images/main/mainBg01.jpg" alt="">
                 </div>
             </div>
         </div><!-- hero-slider End -->
         <div class="mainCont">
             <div class="leftTxtBox">
-                <img src="/static/images/main/mainTxt.png" alt="" class="leftTxt text-focus-in" >
+                <img src="/images/main/mainTxt.png" alt="" class="leftTxt text-focus-in" >
             </div>
             <div class="rightCalBox">
                 <div class="rightCal"></div>
@@ -574,13 +612,13 @@
         </div>
         <div class="secondRight">
             <div class="hero-slider2" data-carousel>
-                <div class="carousel-cell" style="background-image:url(/static/images/main/img01.jpg);">
+                <div class="carousel-cell" style="background-image:url(/images/main/img01.jpg);">
                     <div class="overlay"></div>
                     <div class="inner">
                         “지친 삶 속에서 자연과 함께하는 즐거운 시간”
                     </div>
                 </div>
-                <div class="carousel-cell" style="background-image:url(/static/images/main/img02.jpg);">
+                <div class="carousel-cell" style="background-image:url(/images/main/img02.jpg);">
                     <div class="overlay"></div>
                     <div class="inner">
                         “고객에게 감사의 마음으로 최고의 서비스를 약속합니다.”
@@ -596,7 +634,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.5/flickity.min.css">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.5/flickity.pkgd.min.js"></script>
             <script id="rendered-js" >
-              var options = {
+              let options = {
                 accessibility: true,
                 prevNextButtons: true,
                 pageDots: false,
@@ -609,14 +647,14 @@
                   y2: 45,
                   x3: 15 } };
 
-              var carousel = document.querySelector('[data-carousel]');
-              var slides = document.getElementsByClassName('carousel-cell');
-              var flkty = new Flickity(carousel, options);
+              let carousel = document.querySelector('[data-carousel]');
+              let slides = document.getElementsByClassName('carousel-cell');
+              let flkty = new Flickity(carousel, options);
 
               flkty.on('scroll', function () {
                 flkty.slides.forEach(function (slide, i) {
-                  var image = slides[i];
-                  var x = (slide.target + flkty.x) * -1 / 3;
+                  let image = slides[i];
+                  let x = (slide.target + flkty.x) * -1 / 3;
                   image.style.backgroundPosition = x + 'px';
                 });
               });
@@ -726,18 +764,18 @@
 
 
     <!--textmotion-->
-    <script src="/static/js/ScrollTrigger.js"></script>
+    <script src="/js/ScrollTrigger.js"></script>
     <script>
       window.counter = function($) {
         // this refers to the html element with the data-scroll-showCallback tag
-        var span = this.querySelector('span');
-        var current = parseInt(span.textContent);
+        let span = this.querySelector('span');
+        let current = parseInt(span.textContent);
 
         span.textContent = current + 1;
       };
 
       document.addEventListener('DOMContentLoaded', function($){
-        var trigger = new ScrollTrigger({
+        let trigger = new ScrollTrigger({
           addHeight: true
         });
       });

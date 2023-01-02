@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
-<link rel="stylesheet" type="text/css" href="/static/css/animate.css">
-<script src="/static/js/wow.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/animate.css">
+<script src="/js/wow.js"></script>
 <script>
   new WOW().init();
 </script>
@@ -25,7 +25,7 @@
             <li class="" onclick="location.href='/reservation/joinList'">조인게시판</li>
             <li class="" onclick="location.href='/board/list'">명예의 전당</li>
 
-            <li class="homeBox"><img src="/static/images/home.jpg" alt="">&nbsp; 정보마당 &nbsp;<img src="/static/images/mini_arw.jpg" alt="">&nbsp; 이벤트</li>
+            <li class="homeBox"><img src="/images/home.jpg" alt="">&nbsp; 정보마당 &nbsp;<img src="/images/mini_arw.jpg" alt="">&nbsp; 이벤트</li>
         </ul>
     </div>
     <div class="contents">
@@ -48,7 +48,7 @@
                 <div class="galleryListBox">
                     <div class="galleryBox wow fadeInUp">
                         <a href="">
-                            <div class="galImg"><img src="/static/images/main/mainBg01.jpg" alt=""></div>
+                            <div class="galImg"><img src="/images/main/mainBg01.jpg" alt=""></div>
                             <div class="gallery">																																					<div class="gallTitle">2021년도 라싸골프단(연단체)모집 안내</div>
                                 <p class="gallDate">2020.09.22</p>
                                 <span class="gallBtn">자세히보기</span>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="galleryBox wow fadeInUp">
                         <a href="">
-                            <div class="galImg"><img src="/static/images/main/mainBg01.jpg" alt=""></div>
+                            <div class="galImg"><img src="/images/main/mainBg01.jpg" alt=""></div>
                             <div class="gallery">																																					<div class="gallTitle">2021년도 라싸골프단(연단체)모집 안내</div>
                                 <p class="gallDate">2020.09.22</p>
                                 <span class="gallBtn">자세히보기</span>
@@ -66,7 +66,7 @@
                     </div>
                     <div class="galleryBox wow fadeInUp">
                         <a href="">
-                            <div class="galImg"><img src="/static/images/main/mainBg01.jpg" alt=""></div>
+                            <div class="galImg"><img src="/images/main/mainBg01.jpg" alt=""></div>
                             <div class="gallery">																																					<div class="gallTitle">2021년도 라싸골프단(연단체)모집 안내</div>
                                 <p class="gallDate">2020.09.22</p>
                                 <span class="gallBtn">자세히보기</span>
@@ -75,7 +75,7 @@
                     </div>
                     <div class="galleryBox wow fadeInUp">
                         <a href="">
-                            <div class="galImg"><img src="/static/images/main/mainBg01.jpg" alt=""></div>
+                            <div class="galImg"><img src="/images/main/mainBg01.jpg" alt=""></div>
                             <div class="gallery">																																					<div class="gallTitle">2021년도 라싸골프단(연단체)모집 안내</div>
                                 <p class="gallDate">2020.09.22</p>
                                 <span class="gallBtn">자세히보기</span>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="galleryBox wow fadeInUp">
                         <a href="">
-                            <div class="galImg"><img src="/static/images/main/mainBg01.jpg" alt=""></div>
+                            <div class="galImg"><img src="/images/main/mainBg01.jpg" alt=""></div>
                             <div class="gallery">																																					<div class="gallTitle">2021년도 라싸골프단(연단체)모집 안내</div>
                                 <p class="gallDate">2020.09.22</p>
                                 <span class="gallBtn">자세히보기</span>
@@ -93,7 +93,7 @@
                     </div>
                     <div class="galleryBox wow fadeInUp">
                         <a href="">
-                            <div class="galImg"><img src="/static/images/main/mainBg01.jpg" alt=""></div>
+                            <div class="galImg"><img src="/images/main/mainBg01.jpg" alt=""></div>
                             <div class="gallery">																																					<div class="gallTitle">2021년도 라싸골프단(연단체)모집 안내</div>
                                 <p class="gallDate">2020.09.22</p>
                                 <span class="gallBtn">자세히보기</span>
@@ -102,7 +102,7 @@
                     </div>
                     <div class="galleryBox wow fadeInUp">
                         <a href="">
-                            <div class="galImg"><img src="/static/images/main/mainBg01.jpg" alt=""></div>
+                            <div class="galImg"><img src="/images/main/mainBg01.jpg" alt=""></div>
                             <div class="gallery">																																					<div class="gallTitle">2021년도 라싸골프단(연단체)모집 안내</div>
                                 <p class="gallDate">2020.09.22</p>
                                 <span class="gallBtn">자세히보기</span>
@@ -111,7 +111,7 @@
                     </div>
                     <div class="galleryBox wow fadeInUp">
                         <a href="">
-                            <div class="galImg"><img src="/static/images/main/mainBg01.jpg" alt=""></div>
+                            <div class="galImg"><img src="/images/main/mainBg01.jpg" alt=""></div>
                             <div class="gallery">																																					<div class="gallTitle">2021년도 라싸골프단(연단체)모집 안내</div>
                                 <p class="gallDate">2020.09.22</p>
                                 <span class="gallBtn">자세히보기</span>

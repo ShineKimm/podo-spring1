@@ -2,10 +2,10 @@
 <%@ include file="../include/header.jsp" %>
 <script>
 
-	var chkPw = false;
-	var chkPwConfirm = false;
-	var certifyYn = false;
-	var certifyKey = "";
+	let chkPw = false;
+	let chkPwConfirm = false;
+	let certifyYn = false;
+	let certifyKey = "";
 
 	$(document).ready(function() {
 
@@ -28,8 +28,8 @@
 		$("#txtPw").on("keyup", function() {
 			onCheckPw();
 
-			var pw = $("#txtPw").val();
-			var pwConfirm = $("#txtPwConfirm").val();
+			let pw = $("#txtPw").val();
+			let pwConfirm = $("#txtPwConfirm").val();
 
 			if(pwConfirm != "") {
 				if(pw != pwConfirm) {
@@ -43,8 +43,8 @@
 		});
 
 		$("#txtPwConfirm").on("keyup", function() {
-			var pw = $("#txtPw").val();
-			var pwConfirm = $("#txtPwConfirm").val();
+			let pw = $("#txtPw").val();
+			let pwConfirm = $("#txtPwConfirm").val();
 
 			if(pw != pwConfirm) {
 				chkPwConfirm = false;
@@ -65,47 +65,47 @@
 			$("#txtMail2").val(msEmail[1]);
 		}
 
-		var sex = <%=session.getAttribute("MS_SEX")%>;
+		let sex = <%=session.getAttribute("MS_SEX")%>;
 		if(sex != "" || sex != null) {
 			$("input:radio[name=chkSex]:input[value=" + sex + "]").attr("checked", true);
 		}
 
-		var sms = <%=session.getAttribute("SMS_CHK1")%>;
+		let sms = <%=session.getAttribute("SMS_CHK1")%>;
 		if(sms != "" || sms != null) {
 			$("input:radio[name=chkSms]:input[value=" + sms + "]").attr("checked", true);
 		}
 
-		var email = <%=session.getAttribute("MS_EMAIL_YN")%>;
+		let email = <%=session.getAttribute("MS_EMAIL_YN")%>;
 		if(email != "" || email != null) {
 			$("input:radio[name=chkMail]:input[value=" + email + "]").attr("checked", true);
 		}
 
-		var birth = <%=session.getAttribute("MS_BIRTHYL")%>;
+		let birth = <%=session.getAttribute("MS_BIRTHYL")%>;
 		if(birth != "" || birth != null) {
 			$("input:radio[name=chkBirth]:input[value=" + birth + "]").attr("checked", true);
 		}
 	})
 
 	function doUpdateMemeber() {
-		var sUrl = "/doUpdateMemeber";
-		var params = {};
+		let sUrl = "/doUpdateMemeber";
+		let params = {};
 
 		//params["method"] = "doUpdateMemeber";
 
-		var pw = $("#txtPw").val();
-		var sex = $(':radio[name="chkSex"]:checked').val();
-		var sms = $(':radio[name="chkSms"]:checked').val();
-		var chkMail = $(':radio[name="chkMail"]:checked').val();
-		var chkBirth = $(':radio[name="chkBirth"]:checked').val();
-		var phone1 = $("#txtPhone").val().substring(0,3);
-		var phone2 = $("#txtPhone").val().substring(3,7);
-		var phone3 = $("#txtPhone").val().substring(7,11);
-		var homeAddress1 = $("#txtHomeAddress1").val();
-		var birth = $("#txtBirth").val();
+		let pw = $("#txtPw").val();
+		let sex = $(':radio[name="chkSex"]:checked').val();
+		let sms = $(':radio[name="chkSms"]:checked').val();
+		let chkMail = $(':radio[name="chkMail"]:checked').val();
+		let chkBirth = $(':radio[name="chkBirth"]:checked').val();
+		let phone1 = $("#txtPhone").val().substring(0,3);
+		let phone2 = $("#txtPhone").val().substring(3,7);
+		let phone3 = $("#txtPhone").val().substring(7,11);
+		let homeAddress1 = $("#txtHomeAddress1").val();
+		let birth = $("#txtBirth").val();
 
-		var bPhone1 = <%=session.getAttribute("MS_FIRST_PHONE1")%>;
-		var bPhone2 = <%=session.getAttribute("MS_MID_PHONE1")%>;
-		var bPhone3 = <%=session.getAttribute("MS_LAST_PHONE1")%>;
+		let bPhone1 = <%=session.getAttribute("MS_FIRST_PHONE1")%>;
+		let bPhone2 = <%=session.getAttribute("MS_MID_PHONE1")%>;
+		let bPhone3 = <%=session.getAttribute("MS_LAST_PHONE1")%>;
 
 		if(phone1 != bPhone1 || phone2 != bPhone2 || phone3 != bPhone3) {
 			if(!certifyYn) {
@@ -135,12 +135,12 @@
 		}
 		if ($("#txtMail1").val() != "") {
 			if ($("#txtMail3").val() == "9") {
-				var email = $("#txtMail1").val() + "@" + $("#txtMail2").val();
+				let email = $("#txtMail1").val() + "@" + $("#txtMail2").val();
 			} else {
-				var email = $("#txtMail1").val() + "@" + $("#txtMail3").val();
+				let email = $("#txtMail1").val() + "@" + $("#txtMail3").val();
 			}
 		} else {
-			var email = "";
+			let email = "";
 		}
 
 		params["coDiv"] = globals.coDiv;
@@ -168,14 +168,14 @@
 	}
 
 	function doCertification() {
-		var sUrl = "/controller/MemberController";
-		var params = {};
+		let sUrl = "/controller/MemberController";
+		let params = {};
 
 		//params["method"] = "doCertification";
 
-		var phone1 = $("#txtPhone").val().substr(0,3);
-		var phone2 = $("#txtPhone").val().substr(3,4);
-		var phone3 = $("#txtPhone").val().substr(7,4);
+		let phone1 = $("#txtPhone").val().substr(0,3);
+		let phone2 = $("#txtPhone").val().substr(3,4);
+		let phone3 = $("#txtPhone").val().substr(7,4);
 
 		if(phone1 == "" || phone1.length != 3) {
 			alert("휴대폰번호를 정확하게 입력하세요.");
@@ -211,7 +211,7 @@
 	}
 
 	function doConfirmCertification() {
-		var code = $("#txtCerCode").val();
+		let code = $("#txtCerCode").val();
 		
 		if (code == "") {
 			alert("인증번호를 먼저 입력해주세요.")
@@ -234,13 +234,13 @@
 	}
 
 	function onCheckPw() {
-		var pw = $("#txtPw").val();
+		let pw = $("#txtPw").val();
 
-		var pattern1 = /[0-9]/;
-		var pattern2 = /[a-zA-Z]/;
-		var pattern3 = /[~!@#$%^*?]/;
+		let pattern1 = /[0-9]/;
+		let pattern2 = /[a-zA-Z]/;
+		let pattern3 = /[~!@#$%^*?]/;
 
-		var chkCnt = 0;
+		let chkCnt = 0;
 
 		if(pattern1.test(pw)) chkCnt += 1;
 		if(pattern2.test(pw)) chkCnt += 1;
@@ -276,8 +276,8 @@
 	}
 
 	function doSearchArea() {
-		var sUrl = "/getCommonCode";
-		var params = {};
+		let sUrl = "/getCommonCode";
+		let params = {};
 
 		//params["method"] = "getCommonCode";
 		params["coDiv"] = globals.coDiv;
@@ -286,7 +286,7 @@
 		mAjax(sUrl, params, "POST", true, function(data) {
 			if(data.resultCode == "0000") {
 				rows = data.rows;
-				var tbody = $("#txtHomeAddress1");
+				let tbody = $("#txtHomeAddress1");
 				tbody.empty();
 				
 				tbody.append("<option value=''>지역선택</option>")
@@ -310,7 +310,7 @@
 		// yyyymmdd, yyyy-mm-dd, yyyy/mm/dd 
 		// output 
 		// 0: 정상, 1: 해당월의 날짜 넘음, 2: 존재하지 않는 달, 3: 포맷 안맞음, 4: -인 날짜 
-		var y, m, d; 
+		let y, m, d;
 		if (yyyymmdd.length == 8) { 
 			if (!yyyymmdd.match(/[0-9]{8}/g)) 
 				return 3; 
@@ -326,7 +326,7 @@
 		} else { 
 			return 3; 
 		} 
-		var limit_day; 
+		let limit_day;
 		switch (eval(m)) { 
 			case 1: 
 			case 3: 
@@ -391,7 +391,7 @@
 			</tr>
 			<tr>
 				<th>성별</th>
-				<td><label><input type="radio" name="chkSex" id="" title="남자 선택" value="1"> 남</label> &nbsp;&nbsp;<label><input type="radio" name="chkSex" id="" title="여자 선택" value="2"> 여</label></td>
+				<td><label><input type="radio" name="chkSex" title="남자 선택" value="1"> 남</label> &nbsp;&nbsp;<label><input type="radio" name="chkSex" title="여자 선택" value="2"> 여</label></td>
 			</tr>
 			<tr>
 				<th>아이디</th>
@@ -412,7 +412,7 @@
 				<th>생년월일</th>
 				<td>
 					<input type="input" name="txtBirth" id="txtBirth" title="연도 선택" class="phIp" maxlength="8" placeholder="ex)19810101" onkeydown="onlyNumber(this)">
-					<label><input type="radio" name="chkBirth" id="" title="양력 선택" value="1" checked> 양력</label> &nbsp;&nbsp;<label><input type="radio" name="chkBirth" id="" title="음성 선택" value="2"> 음력</label>
+					<label><input type="radio" name="chkBirth" id="" title="양력 선택" value="1" checked> 양력</label> &nbsp;&nbsp;<label><input type="radio" name="chkBirth" title="음성 선택" value="2"> 음력</label>
 				</td>
 			</tr>
 			<tr>
@@ -434,10 +434,10 @@
 			<tr>
 				<th>문자 메시지 수신여부</th>
 				<td>
-					<label for="chkSms"><input value="Y" name="chkSms" type="radio">
+					<label for="chkSms1"><input value="Y" id="chkSms1" name="chkSms" type="radio">
 					동의</label>
 					&nbsp;
-					<label for="chkSms"><input value="N" name="chkSms" type="radio">
+					<label for="chkSms2"><input value="N" id="chkSms2" name="chkSms" type="radio">
 					거부</label>
 					<p>* 수신거부할 경우 예약 확인을 제외한 모든 메시지(그린피 할인, 공지사항 등)를 수신할 수 없습니다.</p>
 				</td>
