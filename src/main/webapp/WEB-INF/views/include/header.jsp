@@ -128,7 +128,6 @@
         let ios_cnt = "";
 
         let userAgent = navigator.userAgent.toLowerCase();
-        console.log(userAgent)
 
         if (userAgent.indexOf("iphone") > -1) {
           web_cnt = 0
@@ -155,7 +154,7 @@
         params["ios_cnt"] = ios_cnt;
 
         mAjax(sUrl, params, "POST", true, function(data) {
-          console.log("카운트 추가됨");
+
         });
       }
 

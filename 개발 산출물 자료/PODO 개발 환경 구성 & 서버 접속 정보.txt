@@ -8,10 +8,7 @@ WAS -> Tomcat-embed-core:9.0.65
 IDE/에디터 -> IntelliJ IDEA
 형상관리 -> git
 뷰 템플릿 엔진 -> JSP
-테스트 프레임 워크 -> Junit
 DB -> mysql
-DBMS - > DBever
-배포툴 -> ATom
 -----------------------------------------
 
 web-was 접속정보

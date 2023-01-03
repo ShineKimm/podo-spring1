@@ -146,7 +146,6 @@
 
     mAjax(sUrl, params, "POST", true, function(data) {
       if(data.resultCode == "0000") {
-        console.log()
         rows = data.rows;
         let tbody = $("#tbody");
         tbody.empty();
