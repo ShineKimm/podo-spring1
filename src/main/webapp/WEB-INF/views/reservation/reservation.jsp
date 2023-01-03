@@ -281,7 +281,7 @@
 
     let comment = "";
     if (String(<%=session.getAttribute("MS_DIVISION")%>) == "48"){
-        console.log("MS_DIVISION == 48")
+        // console.log("MS_DIVISION == 48")
     }
     if (String(<%=session.getAttribute("MS_DIVISION")%>) != "21") {
           if (rowData[i].CL_BUSINESS == "1" && weekDayCnt >= <%=session.getAttribute("MS_WEEKDAY_CNT")%>) {
