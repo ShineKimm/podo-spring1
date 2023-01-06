@@ -3,18 +3,13 @@ package podo.podospring.service;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
-import podo.podospring.dao.SessionManagerDAO;
+import podo.podospring.common.dao.AbstractDAO;
 
 @Service
-public class SessionManagerService {
-
-    SessionManagerDAO sessionManagerDAO;
-
-    public SessionManagerService(SessionManagerDAO sessionManagerDAO) {
-        this.sessionManagerDAO = sessionManagerDAO;
-    }
-
+public class SessionManagerService extends AbstractDAO {
+    @SuppressWarnings("unchecked")
     public List<HashMap<String, Object>> sessionConfirm(HashMap<String, Object> params) {
-        return sessionManagerDAO.sessionConfirm(params);
+        List<HashMap<String, Object>> list = selectList("session.sessionConfirm", params);
+        return list;
     }
 }

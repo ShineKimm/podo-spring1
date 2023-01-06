@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import podo.podospring.common.ReturnException;
 import podo.podospring.service.MemberService;
 
 //' Member API (method)
@@ -110,8 +111,15 @@ public class MemberController {
             params.put("mkt3","Y");
         }
 
-        Map<String, Object> resultMap = memberService.doSignUp(params);
-        return resultMap;
+
+
+        try {
+            Map<String, Object> resultMap = memberService.doSignUp(params);
+            return resultMap;
+        } catch (ReturnException e) {
+            HashMap<String, Object> resultMap = (HashMap<String, Object>)e.getValue();
+            return resultMap;
+        }
     }
 
     @Transactional(rollbackFor = {Exception.class})

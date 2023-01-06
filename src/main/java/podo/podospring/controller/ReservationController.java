@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import podo.podospring.common.ReturnException;
 import podo.podospring.service.ReservationService;
 
 //' Reservation API (method)
@@ -80,10 +81,14 @@ public class ReservationController {
         params.put("phone",(String)session.getAttribute("MS_FIRST_PHONE1")+(String)session.getAttribute("MS_FIRST_PHONE1")+(String)session.getAttribute("MS_LAST_PHONE1"));
         params.put("ip",params.get("ip"));
 
-        HashMap<String, Object> result = reservationService.changeReservation(params);
+        try {
+            return reservationService.changeReservation(params);
+        } catch (ReturnException e) {
+            HashMap<String, Object> resultMap = (HashMap<String, Object>)e.getValue();
+            return resultMap;
+        }
 
-
-        return result;
+//        return result;
     }
 
     @ResponseBody
@@ -140,8 +145,13 @@ public class ReservationController {
         params.put("msName",session.getAttribute("MS_NAME"));
         params.put("phone",(String)session.getAttribute("MS_FIRST_PHONE1") + session.getAttribute("MS_MID_PHONE1") + session.getAttribute("MS_LAST_PHONE1"));
 
-        HashMap<String, Object> result = reservationService.cancelReservation(params);
-        return result;
+        try {
+            HashMap<String, Object> result = reservationService.cancelReservation(params);
+            return result;
+        } catch (ReturnException e) {
+            HashMap<String, Object> resultMap = (HashMap<String, Object>)e.getValue();
+            return resultMap;
+        }
     }
 
 

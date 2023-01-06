@@ -63,6 +63,8 @@
         $(this).val(inputVal.replace(/[^(ㄱ-힣a-zA-Z\u318D\u119E\u11A2\u2022\u2025\u00B7\uFE55\u4E10\u3163\u3161)]/gi, ''));
       }
     });
+
+    $("#txtId").val();
   })
 
   function doSignUp() {
@@ -135,14 +137,15 @@
       alert("지역을 선택해주세요.");
       return;
     }
+    let email = "";
     if ($("#txtMail1").val() != "") {
       if ($("#txtMail3").val() == "9") {
-        let email = $("#txtMail1").val() + "@" + $("#txtMail2").val();
+        email = $("#txtMail1").val() + "@" + $("#txtMail2").val();
       } else {
-        let email = $("#txtMail1").val() + "@" + $("#txtMail3").val();
+        email = $("#txtMail1").val() + "@" + $("#txtMail3").val();
       }
     } else {
-      let email = "";
+      email = "";
     }
 
     params["coDiv"] = globals.coDiv;

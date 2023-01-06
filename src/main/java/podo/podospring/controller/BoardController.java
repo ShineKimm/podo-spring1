@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import podo.podospring.common.ReturnException;
 import podo.podospring.service.BoardService;
 
 @Controller
@@ -141,8 +142,12 @@ public class BoardController {
             }
             index++;
         }
-
-        boardService.writeBoard(params);
+        try {
+            params = boardService.writeBoard(params);
+        } catch (ReturnException e) {
+            HashMap<String, Object> resultMap = (HashMap<String, Object>)e.getValue();
+            return resultMap;
+        }
         return params;
     }
 
@@ -214,10 +219,14 @@ public class BoardController {
         params.put("content",params.get("content"));
         params.put("content",params.get("content"));
         params.put("ipAddr",params.get("ip"));
-
         params.put("MS_NUM", session.getAttribute("MS_NUM"));
 
-        params = boardService.writeReply(params);
+        try {
+            params = boardService.writeReply(params);
+        } catch (ReturnException e) {
+            HashMap<String, Object> resultMap = (HashMap<String, Object>)e.getValue();
+            return resultMap;
+        }
         return params;
     }
 
