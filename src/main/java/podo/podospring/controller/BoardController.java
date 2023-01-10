@@ -111,7 +111,6 @@ public class BoardController {
             }
 
             //TODO 파일 업로드경로 서버경로로 설정
-            //String filePath = "C:\\web\\podo\\uploads";
             String filePath = "C:\\uploads";
             LocalDate now = LocalDate.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");

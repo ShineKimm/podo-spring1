@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%
+    String IS_MOBILE = "MOBI";
+    String IS_PC = "PC";
+    String agent = request.getHeader("User-Agent").toUpperCase();
+    if(agent.indexOf(IS_MOBILE) > -1) {
+        response.sendRedirect("/mobile/index");
+    }
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -381,9 +388,6 @@
                 $("#popup_modal").append(popup_html);
               }
             }
-
-
-
           } else {
             alert(data.resultMessage);
           }

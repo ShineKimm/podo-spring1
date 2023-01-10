@@ -1,0 +1,35 @@
+서버사양
+web-was 접속정보
+포도CC ( http://119.205.217.251:8023 )
+- FTP
+IP : 119.205.217.251
+PORT : 8024
+ID : GREENIT
+PW : greenit01!
+
+DB 접속정보
+- DB
+IP: 112.175.17.155
+USER : podo
+PW : podocc1!
+DB : podo
+PORT : 3306
+
+관리자 아이디
+ID : GZ00000001
+PW : 9876
+
+ID : admin
+PW : admin01
+-------------------------------------------------------------------
+
+1. 로그 파일 경로 -> logback-local.xml 6라인 C:\Users\김대영\logs\app
+2. 파일 업로드/다운로드 경로 -> BoardController 144라인 C:\uploads
+3. Static 폴더위치 -> C:\dev\podo-spring\src\main\webapp - 변경예정
+
+---------------------------
+1. boot war 배포
+C:\dev\web_was\apache-tomcat-9.0.65\bin
+tomcat9.exe 실행
+
+http://localhost:8088/

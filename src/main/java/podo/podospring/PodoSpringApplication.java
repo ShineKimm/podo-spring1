@@ -11,6 +11,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @SpringBootApplication
 public class PodoSpringApplication extends SpringBootServletInitializer {
 
+	private static Logger logger = LoggerFactory.getLogger(PodoSpringApplication.class);
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -19,8 +20,7 @@ public class PodoSpringApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(PodoSpringApplication.class, args);
 
-		Logger logger = LoggerFactory.getLogger(Test.class);
-		logger.debug("slf4j TEST TEST");
+		logger.info("========== PodoSpringApplication log ==========");
 	}
 
 }
